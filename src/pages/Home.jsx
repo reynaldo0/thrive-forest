@@ -4,6 +4,7 @@ import Piring from "./home/Piring";
 import Farm from "./home/Farm";
 import Food from "./home/Food";
 import PetaSekolah from "./home/PetaSekolah";
+import Cerita from "./home/Cerita";
 
 const Home = () => {
   return (
@@ -12,7 +13,8 @@ const Home = () => {
       <Piring />
       <Farm />
       <Food />
-      <PetaSekolah/>
+      <PetaSekolah />
+      <Cerita />
     </>
   );
 };

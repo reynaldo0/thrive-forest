@@ -1,90 +1,92 @@
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import { motion } from "framer-motion";
+import "leaflet/dist/leaflet.css";
 
-// Dummy data sekolah
+// Dummy data
 const schools = [
   {
     id: 1,
-    name: "SMA Negeri 1 Jakarta",
+    name: "SMA 1 Jakarta",
     lat: -6.2,
     lng: 106.816,
-    students: 80,
+    studentsActive: 85,
+    treesPlanted: 420,
   },
   {
     id: 2,
-    name: "SMA Negeri 3 Bandung",
+    name: "SMA 3 Bandung",
     lat: -6.9147,
     lng: 107.6098,
-    students: 40,
+    studentsActive: 42,
+    treesPlanted: 200,
   },
   {
     id: 3,
-    name: "SMA Negeri 5 Surabaya",
+    name: "SMA 5 Surabaya",
     lat: -7.2575,
     lng: 112.7521,
-    students: 95,
+    studentsActive: 120,
+    treesPlanted: 1000,
   },
 ];
 
-export default function PetaSekolah() {
+export default function SchoolForestMap() {
   const [selectedSchool, setSelectedSchool] = useState(null);
 
-  // Hitung level hutan berdasarkan jumlah siswa
-  const getForestLevel = (students) => {
-    if (students <= 20) return "🌱 Hutan kecil (kering)";
-    if (students <= 50) return "🌿 Hutan sedang (mulai hijau)";
-    return "🌳 Hutan lebat (subur)";
+  const getForestLevel = (s) => {
+    if (s <= 20) return "🌱 Hutan kecil";
+    if (s <= 50) return "🌿 Hutan sedang";
+    if (s <= 100) return "🌳 Hutan lebat";
+    return "🌳🌳 Hutan super";
   };
 
-  // Ranking sekolah berdasarkan jumlah siswa
-  const leaderboard = [...schools].sort((a, b) => b.students - a.students);
+  const leaderboard = [...schools].sort(
+    (a, b) => b.studentsActive - a.studentsActive
+  );
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-green-100 to-green-200">
+    <div className="h-screen flex flex-col md:flex-row bg-gradient-to-br from-green-100 to-green-200">
       {/* Sidebar Leaderboard */}
-      <div className="w-1/4 bg-white/70 backdrop-blur-lg p-4 overflow-y-auto shadow-xl">
-        <h2 className="text-2xl font-bold text-green-700 mb-4">
+      <div className="w-full md:w-1/4 bg-white/80 backdrop-blur-md p-4 shadow-xl overflow-y-auto order-2 md:order-1">
+        <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">
           🏆 Leaderboard
         </h2>
-        {leaderboard.map((school, index) => (
+        {leaderboard.map((school, i) => (
           <motion.div
             key={school.id}
-            className="p-3 mb-2 rounded-lg bg-green-50 hover:bg-green-100 cursor-pointer"
             whileHover={{ scale: 1.05 }}
+            className="p-3 mb-2 rounded-lg bg-green-50 hover:bg-green-100 cursor-pointer"
             onClick={() => setSelectedSchool(school)}
           >
-            <p className="font-semibold">
-              #{index + 1} {school.name}
+            <p className="font-semibold text-sm md:text-base">
+              #{i + 1} {school.name}
             </p>
-            <p className="text-sm text-gray-600">
-              {school.students} siswa aktif
+            <p className="text-xs md:text-sm text-gray-600">
+              {school.studentsActive} siswa aktif
             </p>
           </motion.div>
         ))}
       </div>
 
       {/* Map */}
-      <div className="flex-1 relative">
+      <div className="flex-1 relative order-1 md:order-2">
         <MapContainer
-          center={[-2.5, 118]} // tengah Indonesia
+          center={[-2.5, 118]}
           zoom={5}
           style={{ height: "100%", width: "100%" }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {schools.map((school) => (
+          {schools.map((s) => (
             <Marker
-              key={school.id}
-              position={[school.lat, school.lng]}
-              eventHandlers={{
-                click: () => setSelectedSchool(school),
-              }}
+              key={s.id}
+              position={[s.lat, s.lng]}
+              eventHandlers={{ click: () => setSelectedSchool(s) }}
             >
               <Popup>
-                <b>{school.name}</b>
+                <b>{s.name}</b>
                 <br />
-                {school.students} siswa aktif
+                {s.studentsActive} siswa aktif
               </Popup>
             </Marker>
           ))}
@@ -94,36 +96,46 @@ export default function PetaSekolah() {
       {/* Detail Sekolah */}
       {selectedSchool && (
         <motion.div
-          className="w-1/4 bg-white/80 backdrop-blur-md p-6 shadow-lg flex flex-col"
-          initial={{ x: 200 }}
+          initial={{ x: 300 }}
           animate={{ x: 0 }}
-          exit={{ x: 200 }}
+          className="w-full md:w-1/4 bg-white/90 backdrop-blur-md p-6 shadow-lg flex flex-col order-3"
         >
-          <h3 className="text-xl font-bold text-green-800 mb-2">
+          <h3 className="text-lg md:text-xl font-bold text-green-800 mb-2">
             {selectedSchool.name}
           </h3>
-          <p className="text-gray-700 mb-4">
-            Jumlah siswa aktif:{" "}
-            <span className="font-semibold">{selectedSchool.students}</span>
+          <p className="text-gray-700 mb-2">
+            Siswa aktif:{" "}
+            <span className="font-semibold">
+              {selectedSchool.studentsActive}
+            </span>
           </p>
-          <p className="text-lg font-medium mb-4">
-            {getForestLevel(selectedSchool.students)}
+          <p className="text-gray-700 mb-2">
+            Pohon ditanam:{" "}
+            <span className="font-semibold">{selectedSchool.treesPlanted}</span>
+          </p>
+          <p className="text-base md:text-lg font-medium mb-4">
+            {getForestLevel(selectedSchool.studentsActive)}
           </p>
 
-          {/* Progress bar hutan */}
-          <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
+          {/* Progress bar */}
+          <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
             <div
-              className="bg-green-600 h-4 rounded-full"
+              className="bg-green-600 h-3 rounded-full"
               style={{
-                width: `${Math.min(selectedSchool.students, 100)}%`,
+                width: `${Math.min(selectedSchool.studentsActive, 100)}%`,
               }}
             ></div>
           </div>
 
-          {/* Tombol join */}
-          <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold transition">
-            🌱 Ikut Tanam Pohon
-          </button>
+          {/* Buttons */}
+          <div className="flex flex-col gap-2">
+            <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold transition">
+              🌱 Join Tanam Pohon
+            </button>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold transition">
+              🤝 Gabung Aliansi
+            </button>
+          </div>
         </motion.div>
       )}
     </div>

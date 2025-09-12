@@ -57,7 +57,7 @@ export default function Food() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-50 to-yellow-100 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-50 to-green-300 p-6">
       {/* Title */}
       <h1 className="text-4xl md:text-5xl font-extrabold text-green-800 drop-shadow mb-4">
         ♻️ Food Rescue Mission
