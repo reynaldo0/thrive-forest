@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { motion } from "framer-motion";
 import "leaflet/dist/leaflet.css";
 
 // Dummy data
@@ -31,7 +30,7 @@ const schools = [
   },
 ];
 
-export default function SchoolForestMap() {
+export default function PetaSekolah() {
   const [selectedSchool, setSelectedSchool] = useState(null);
 
   const getForestLevel = (s) => {
@@ -53,10 +52,9 @@ export default function SchoolForestMap() {
           🏆 Leaderboard
         </h2>
         {leaderboard.map((school, i) => (
-          <motion.div
+          <div
             key={school.id}
-            whileHover={{ scale: 1.05 }}
-            className="p-3 mb-2 rounded-lg bg-green-50 hover:bg-green-100 cursor-pointer"
+            className="p-3 mb-2 rounded-lg bg-green-50 hover:bg-green-100 cursor-pointer transform transition duration-200 hover:scale-105"
             onClick={() => setSelectedSchool(school)}
           >
             <p className="font-semibold text-sm md:text-base">
@@ -65,7 +63,7 @@ export default function SchoolForestMap() {
             <p className="text-xs md:text-sm text-gray-600">
               {school.studentsActive} siswa aktif
             </p>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -95,10 +93,9 @@ export default function SchoolForestMap() {
 
       {/* Detail Sekolah */}
       {selectedSchool && (
-        <motion.div
-          initial={{ x: 300 }}
-          animate={{ x: 0 }}
-          className="w-full md:w-1/4 bg-white/90 backdrop-blur-md p-6 shadow-lg flex flex-col order-3"
+        <div
+          className="w-full md:w-1/4 bg-white/90 backdrop-blur-md p-6 shadow-lg flex flex-col order-3 
+          transform transition-transform duration-500 translate-x-0 md:translate-x-0"
         >
           <h3 className="text-lg md:text-xl font-bold text-green-800 mb-2">
             {selectedSchool.name}
@@ -120,7 +117,7 @@ export default function SchoolForestMap() {
           {/* Progress bar */}
           <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
             <div
-              className="bg-green-600 h-3 rounded-full"
+              className="bg-green-600 h-3 rounded-full transition-all"
               style={{
                 width: `${Math.min(selectedSchool.studentsActive, 100)}%`,
               }}
@@ -136,7 +133,7 @@ export default function SchoolForestMap() {
               🤝 Gabung Aliansi
             </button>
           </div>
-        </motion.div>
+        </div>
       )}
     </div>
   );
