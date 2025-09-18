@@ -21,6 +21,7 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
+        "@heroicons/react": "^2.2.0",
         "@react-three/drei": "^9.122.0",
         "@react-three/fiber": "^8.18.0",
         "react": "^18.3.1",
