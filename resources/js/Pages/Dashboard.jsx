@@ -72,9 +72,15 @@ export default function Dashboard() {
                 >
                     {/* Sidebar Header */}
                     <div className="flex items-center justify-between p-4 border-b border-green-600">
-                        <h2 className="font-extrabold text-xl tracking-wide brutal-gradient bg-gradient-to-r from-green-400 via-lime-500 to-green-200 text-transparent bg-clip-text">
-                            🌱 EduForest
+                        <h2 className="flex items-center gap-2 font-extrabold text-2xl tracking-wide brutal-gradient bg-gradient-to-r from-green-400 via-lime-500 to-green-200 text-transparent bg-clip-text">
+                            <img
+                                src="/icon/logo.png"
+                                alt="Nutriverse Logo"
+                                className="w-12 h-12 object-contain hover:scale-125 transition-transform duration-300"
+                            />
+                            Nutriverse
                         </h2>
+
                         {/* Close btn for mobile */}
                         <button
                             onClick={() => setSidebarOpen(false)}
