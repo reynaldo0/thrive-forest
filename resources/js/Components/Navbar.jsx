@@ -25,9 +25,8 @@ const Navbar = () => {
                     <img
                         src="/icon/logo.png"
                         alt="Logo"
-                        className="w-8 h-8 object-contain"
+                        className="h-12 object-contain"
                     />
-                    <span className="font-extrabold text-black">Cashilo</span>
                 </div>
 
                 {/* Menu Desktop */}
@@ -50,7 +49,14 @@ const Navbar = () => {
                             <Link
                                 key={item.name}
                                 href={item.path}
-                                className="px-4 py-2 rounded-full bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200 transition duration-300"
+                                className="px-4 py-2 rounded-full bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200 transition duration-300 "
+                            >
+                                {item.name}
+                            </Link>
+                        ) : item.name === "Sign In" ? (
+                            <Link
+                                href={item.path}
+                                className="px-4 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white transition duration-300"
                             >
                                 {item.name}
                             </Link>
