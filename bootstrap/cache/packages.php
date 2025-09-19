@@ -69,6 +69,13 @@
       0 => 'Pest\\Laravel\\PestServiceProvider',
     ),
   ),
+  'phiki/phiki' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Phiki\\Adapters\\Laravel\\PhikiServiceProvider',
+    ),
+  ),
   'tightenco/ziggy' => 
   array (
     'providers' => 
