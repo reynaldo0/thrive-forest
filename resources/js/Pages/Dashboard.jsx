@@ -26,29 +26,6 @@ export default function Dashboard() {
         <AuthenticatedLayout>
             <Head title="Dashboard" />
 
-            <style>
-                {`
-                @keyframes brutal-bounce {
-                    0%, 100% { transform: scale(1) rotate(0deg); }
-                    25% { transform: scale(1.1) rotate(1deg); }
-                    50% { transform: scale(0.95) rotate(-1deg); }
-                    75% { transform: scale(1.05) rotate(0.5deg); }
-                }
-                @keyframes gradient-shift {
-                    0% { background-position: 0% 50%; }
-                    50% { background-position: 100% 50%; }
-                    100% { background-position: 0% 50%; }
-                }
-                .brutal-card:hover {
-                    animation: brutal-bounce 0.6s ease-in-out;
-                }
-                .brutal-gradient {
-                    background-size: 300% 300%;
-                    animation: gradient-shift 5s ease infinite;
-                }
-                `}
-            </style>
-
             <div className="flex min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
                 {/* Overlay for mobile */}
                 {isSidebarOpen && (
@@ -153,7 +130,7 @@ export default function Dashboard() {
                                 />
                                 <div className="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition transform scale-95 group-hover:scale-100 overflow-hidden">
                                     <a
-                                        href="#profile"
+                                        href="profile"
                                         className="block px-4 py-2 text-sm hover:bg-green-100"
                                     >
                                         Profile

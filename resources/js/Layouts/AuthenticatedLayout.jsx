@@ -1,9 +1,7 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link, usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { useState } from "react";
+import Navbar from "./Dashboard/Navbar";
+import Sidebar from "./Dashboard/Sidebar";
 
 export default function AuthenticatedLayout({ children }) {
     const user = usePage().props.auth.user;
@@ -12,12 +10,14 @@ export default function AuthenticatedLayout({ children }) {
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-            {/* Navbar */}
-           
-
+        <div className="flex min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
+            {/* Sidebar */}
+            <Sidebar />
             {/* Main content langsung tanpa header */}
-            <main>{children}</main>
+            <main className="flex-1 flex flex-col">
+                <Navbar />
+                <div className="flex-1 p-8 space-y-10">{children}</div>
+            </main>
         </div>
     );
 }

@@ -14,20 +14,20 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/about', function(){
+Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
-Route::get('/article', function(){
+Route::get('/article', function () {
     return Inertia::render('Article');
 })->name('article');
 
-Route::get('/product', function(){
+Route::get('/product', function () {
     return Inertia::render('Product');
 })->name('product');
 
 Route::get('/dashboard', function () {
-return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard/Overview');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -36,4 +36,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
