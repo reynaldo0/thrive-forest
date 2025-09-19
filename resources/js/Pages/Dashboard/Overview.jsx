@@ -1,19 +1,8 @@
 import Earth from "@/Components/Earth";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { BarChart2, Settings, TreePine, Users } from "lucide-react";
-import { useState } from "react";
 
 export default function Dashboard() {
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-    const menuItems = [
-        { label: "Overview", icon: <Users size={20} /> },
-        { label: "Analytics", icon: <BarChart2 size={20} /> },
-        { label: "Pohon", icon: <TreePine size={20} /> },
-        { label: "Settings", icon: <Settings size={20} /> },
-    ];
-
     return (
         <AuthenticatedLayout>
             <Head title="Dashboard" />
