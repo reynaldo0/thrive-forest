@@ -5,9 +5,16 @@ import { Link } from "@inertiajs/react";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const menuItems = [
+    const mainMenu = [
         { name: "Beranda", path: route("home") },
+        { name: "Tentang", path: route("about") },
+        { name: "Artikel", path: route("article") },
         { name: "Produk", path: route("product") },
+    ];
+
+    const authMenu = [
+        { name: "Login", path: route("login") },
+        { name: "Sign In", path: route("register") },
     ];
 
     return (
@@ -16,35 +23,54 @@ const Navbar = () => {
                 {/* Logo */}
                 <div className="flex items-center space-x-2">
                     <img
-                        src="/logo.png"
+                        src="/icon/logo.png"
                         alt="Logo"
-                        className="w-8 h-8 object-contain"
+                        className="h-12 object-contain"
                     />
-                    <span className="font-extrabold text-black">Cashilo</span>
                 </div>
 
                 {/* Menu Desktop */}
-                <ul className="hidden md:flex space-x-6 text-gray-900 font-medium items-center">
-                    {menuItems.map((item) => (
-                        <li key={item.name}>
-                            {item.name === "Download" ? (
-                                <Link
-                                    href={item.path}
-                                    className="px-4 py-2 rounded-full bg-primary-100 text-white font-bold shadow-md hover:bg-primary-200 transition duration-300"
-                                >
-                                    {item.name}
-                                </Link>
-                            ) : (
-                                <Link
-                                    href={item.path}
-                                    className="relative transition duration-300 hover:text-primary-100 font-bold text-black"
-                                >
-                                    {item.name}
-                                </Link>
-                            )}
-                        </li>
+                <div className="hidden md:flex flex-1 items-center justify-center space-x-6 text-gray-900 font-medium">
+                    {mainMenu.map((item) => (
+                        <Link
+                            key={item.name}
+                            href={item.path}
+                            className="relative transition duration-300 hover:text-primary-100 font-bold text-black"
+                        >
+                            {item.name}
+                        </Link>
                     ))}
-                </ul>
+                </div>
+
+                {/* Auth Menu Desktop */}
+                <div className="hidden md:flex items-center space-x-4">
+                    {authMenu.map((item) =>
+                        item.name === "Login" ? (
+                            <Link
+                                key={item.name}
+                                href={item.path}
+                                className="px-4 py-2 rounded-full bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200 transition duration-300 "
+                            >
+                                {item.name}
+                            </Link>
+                        ) : item.name === "Sign In" ? (
+                            <Link
+                                href={item.path}
+                                className="px-4 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white transition duration-300"
+                            >
+                                {item.name}
+                            </Link>
+                        ) : (
+                            <Link
+                                key={item.name}
+                                href={item.path}
+                                className="px-4 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white transition duration-300"
+                            >
+                                {item.name}
+                            </Link>
+                        )
+                    )}
+                </div>
 
                 {/* Hamburger (Mobile) */}
                 <button
@@ -67,14 +93,16 @@ const Navbar = () => {
                         : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
                 }`}
             >
-                {menuItems.map((item) => (
+                {[...mainMenu, ...authMenu].map((item) => (
                     <Link
                         key={item.name}
                         href={item.path}
                         onClick={() => setIsOpen(false)}
                         className={`${
-                            item.name === "Download"
-                                ? "w-full text-center px-4 py-2 rounded-full bg-primary-100 text-white font-bold shadow-md hover:bg-primary-200"
+                            item.name === "Login"
+                                ? "w-full text-center px-4 py-2 rounded-full bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200"
+                                : item.name === "Sign In"
+                                ? "w-full text-center px-4 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white"
                                 : "text-gray-900 font-medium hover:text-primary-100 transition"
                         }`}
                     >
