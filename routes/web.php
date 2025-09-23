@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\FarmController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,12 +39,32 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Farm Manage
-    Route::get('/farm', [FarmController::class, 'index'])->name('farm.index');
-    Route::post('/farm/add', [FarmController::class, 'addFarm'])->name('farm.add');
-    Route::post('/farm/{farm}/plant', [FarmController::class, 'plant'])->name('farm.plant');
-    Route::post('/farm/{farm}/water', [FarmController::class, 'water'])->name('farm.water');
-    Route::post('/farm/{farm}/harvest', [FarmController::class, 'harvest'])->name('farm.harvest');
-    Route::post('/farm/donate', [FarmController::class, 'donate'])->name('farm.donate');
+    // Route::get('/farm', [FarmController::class, 'index'])->name('farm.index');
+    // Route::post('/farm/add', [FarmController::class, 'addFarm'])->name('farm.add');
+    // Route::post('/farm/{farm}/plant', [FarmController::class, 'plant'])->name('farm.plant');
+    // Route::post('/farm/{farm}/water', [FarmController::class, 'water'])->name('farm.water');
+    // Route::post('/farm/{farm}/harvest', [FarmController::class, 'harvest'])->name('farm.harvest');
+    // Route::post('/farm/donate', [FarmController::class, 'donate'])->name('farm.donate');
+
+    // game manage
+    Route::get('/game', [GameController::class, 'index']);
+    Route::post('/plant', [GameController::class, 'plant']);
+    Route::post('/harvest/{plant}', [GameController::class, 'harvest']);
+
+    Route::get('/schools', [SchoolController::class, 'index'])->name('schools.index');
+    Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store');
+
+    // join teamcode
+    Route::get('/join-school', [SchoolController::class, 'joinTeamcode'])
+        ->middleware('auth')
+        ->name('schools.join.form');
+
+    Route::post('/leave-school', [SchoolController::class, 'leaveSchool'])
+        ->name('schools.leave');
+
+    Route::post('/join-school', [SchoolController::class, 'joinSchool'])
+        ->name('schools.join');
+    Route::get('/leaderboard', [SchoolController::class, 'leaderboard']);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
