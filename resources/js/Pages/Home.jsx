@@ -1,6 +1,7 @@
 import React from "react";
 import HeroHome from "./Home/Hero";
 import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 import { Head } from "@inertiajs/react";
 import NutiIntro from "./Home/Nuti";
 import TujuanSection from "./Home/Tujuan";
@@ -16,7 +17,7 @@ const Home = () => {
             <NutiIntro/>
             <TujuanSection/>
             <FiturWebsite/>
-            <FormFooter animateForm={true}/>
+            <Footer/>
         </>
     );
 };

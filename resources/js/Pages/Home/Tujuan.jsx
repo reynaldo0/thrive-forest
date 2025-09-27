@@ -8,6 +8,9 @@ export default function Tujuan() {
   useEffect(() => {
     setTimeout(() => setAnimateText(true), 200);
 
+    let animationFrameId;
+    let currentX = 0;
+
     const handleScroll = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
@@ -16,26 +19,37 @@ export default function Tujuan() {
       // Hitung jarak scroll dari bawah section ke atas viewport
       const scrollPassed = windowHeight - rect.top;
 
-      // Jika user sudah scroll melewati section, mulai gerakkan rumput
-      if (scrollPassed > 0) {
-        setOffsetX(scrollPassed * 0.2);
-      } else {
-        setOffsetX(0); // tetap stay saat belum scroll melewati section
-      }
+      const targetX = scrollPassed > 0 ? scrollPassed * 0.2 : 0; // kecepatan sama seperti sebelumnya
+
+      const animate = () => {
+        // lerp → biar transisi smooth
+        currentX += (targetX - currentX) * 0.15;
+        setOffsetX(currentX);
+
+        if (Math.abs(targetX - currentX) > 0.5) {
+          animationFrameId = requestAnimationFrame(animate);
+        }
+      };
+
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col items-center justify-center w-full py-20 relative bg-[#F0FCD7] overflow-hidden"
+      className="w-full min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] flex flex-col md:flex-row items-center justify-center gap-12 py-16 relative overflow-hidden px-6"
     >
       {/* Card Tujuan */}
       <div
-        className={`relative bg-[#FFFFFF] rounded-2xl shadow-lg max-w-3xl px-8 py-10 relative z-10 transition-all duration-700 ease-out ${
+        className={`bg-[#FFFFFF] rounded-2xl shadow-lg max-w-3xl px-8 py-10 relative z-10 transition-all duration-700 ease-out ${
           animateText ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       >

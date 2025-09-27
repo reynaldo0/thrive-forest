@@ -53,7 +53,7 @@ export default function HeroArticle() {
           transition: "transform 0.1s linear",
         }}
       >
-        <h1 className="text-3xl md:text-5xl font-bold drop-shadow-lg">
+        <h1 className="text-3xl md:text-5xl font-bold drop-shadow-lg text-white">
           NEBULARIA JAYA JAYA
         </h1>
         <p className="mt-4 text-lg md:text-xl max-w-xl drop-shadow-md">
