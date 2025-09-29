@@ -1,7 +1,11 @@
 import React from "react";
 import HeroArticle from "./Article/Hero";
-import FiturWebsite from "./Home/Fitur"; //buat nyoba doang
+import ProdukUnggul from "./Article/ProdukUnggul";
+import BukuTerpadu from "./Article/BukuTerpadu";
+import ArtikelBerita from "./Article/Artikel";
+import Video from "./Article/VideoPembelajaran";
 import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 import { Head } from "@inertiajs/react";
 
 const Article = () => {
@@ -10,7 +14,11 @@ const Article = () => {
             <Head title="Welcome" />
             <Navbar />
             <HeroArticle />
-            <FiturWebsite/>
+            <ProdukUnggul/>
+            <BukuTerpadu/>
+            <ArtikelBerita/>
+            <Video />
+            <Footer/>
         </>
     );
 };

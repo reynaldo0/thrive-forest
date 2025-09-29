@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function HeroKomunitas() {
+export default function HeroGames() {
     const [offsetY, setOffsetY] = useState(0);
 
     useEffect(() => {
@@ -54,13 +54,13 @@ export default function HeroKomunitas() {
                 }}
             >
                 <h1 className="text-3xl md:text-5xl font-bold drop-shadow-lg">
-                    KOMUNITAS
+                    GAMES
                 </h1>
                 <p className="mt-4 text-lg md:text-xl max-w-xl drop-shadow-md">
-                    Mari bersama sama membuat maju sektor pertanian pada Era Digital ini
+                    Permainan yang seru yang pasti dinantikan kamu 
                 </p>
                 <button className="mt-6 px-6 py-3 bg-[#EDFFCD] hover:bg-[#EDFFCD]/90 rounded-lg font-semibold shadow-lg text-black">
-                    Jelajahi
+                    Mulai 
                 </button>
             </div>
         </section>

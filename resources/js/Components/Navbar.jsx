@@ -9,7 +9,8 @@ const Navbar = () => {
         { name: "Beranda", path: route("home") },
         { name: "Tentang", path: route("about") },
         { name: "Artikel", path: route("article") },
-        { name: "Produk", path: route("product") },
+        { name: "Komunitas", path: route("product") },
+        { name: "Games", path: route("games") },
     ];
 
     const authMenu = [

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "@inertiajs/react";
 
-export default function NutiIntro() {
+export default function KomuIntro() {
   const [animateText, setAnimateText] = useState(false);
   const [animateImage, setAnimateImage] = useState(false);
 
@@ -21,7 +22,8 @@ export default function NutiIntro() {
               : "opacity-0 -translate-y-6"
           }`}
         >
-          Kenalan Yuk Sama <span className="text-green-600">Nuti</span>
+          Bangun relasi baik melalui{" "}
+          <span className="text-green-600">komunitas</span>
         </h1>
 
         {/* Card */}
@@ -40,16 +42,10 @@ export default function NutiIntro() {
                 : "opacity-0 -translate-x-6"
             }`}
           >
-            Hai namaku adalah{" "}
-            <span className="text-green-600 font-semibold animate-pulse">
-              Nuti
-            </span>
-            , aku adalah{" "}
-            <span className="text-green-600 font-semibold">maskot</span>{" "}
-            <span className="text-green-600 font-semibold">website</span>{" "}
-            Nutriverse. <br />
-            <br />
-            Penasaran dengan website ini? Yuk, kita pelajari bareng-bareng.
+            Hunger is discomfort or pain caused by a lack of food. <br />
+            It is different from food insecurity, which means lack <br />
+            of regular access to safe and nutritious food for proper <br />
+            development and an active and healthy life.
           </p>
 
           {/* Gambar */}
@@ -74,6 +70,14 @@ export default function NutiIntro() {
           </div>
         </div>
 
+        {/* Menuju Komunitas */}
+        <a
+          href="#forum-komunitas"
+          className="mt-8 bg-[#3F3313] text-white font-semibold py-2 px-6 rounded-full hover:bg-[#33691e] transition"
+        >
+          Menuju Komunitas
+        </a>
+
         {/* Style Animasi Custom */}
         <style jsx>{`
           @keyframes float {
@@ -90,6 +94,9 @@ export default function NutiIntro() {
           .animate-float {
             animation: float 3s ease-in-out infinite;
           }
+          html {
+            scroll-behavior: smooth;
+          }
         `}</style>
       </section>
 
@@ -101,15 +108,6 @@ export default function NutiIntro() {
         </h2>
         <p className="text-green-100">Yuk simak di sini!!</p>
       </section>
-
-       {/* Maskot pojok kanan bawah */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
-        <img
-          src="/icon/maskot.png"
-          alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
-        />
-      </div>
     </>
   );
 }

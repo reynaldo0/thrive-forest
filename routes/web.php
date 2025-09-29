@@ -29,6 +29,14 @@ Route::get('/product', function () {
     return Inertia::render('Product');
 })->name('product');
 
+Route::get('/games', function () {
+    return Inertia::render('Games');
+})->name('games');
+
+// Route::get('/forum-komunitas', function () {
+//     return Inertia::render('Product/ForumKomunitas');
+// });
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Overview');
 })->middleware(['auth', 'verified'])->name('dashboard');
