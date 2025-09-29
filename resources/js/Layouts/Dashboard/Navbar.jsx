@@ -1,14 +1,6 @@
-import React from "react";
 import {
-    Menu,
-    BarChart2,
-    Settings,
-    LogOut,
-    Users,
-    TreePine,
-    X,
+    Menu
 } from "lucide-react";
-import Earth from "@/Components/Earth";
 
 const Navbar = () => {
     return (

@@ -31,7 +31,7 @@ export default function Tujuan() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col items-center justify-center w-full py-20 relative bg-[#F0FCD7] overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center w-full py-20 relative bg-[#3B5B1E] overflow-hidden"
     >
       {/* Card Tujuan */}
       <div
