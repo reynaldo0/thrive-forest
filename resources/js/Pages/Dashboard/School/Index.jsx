@@ -35,7 +35,7 @@ export default function Index({ schools }) {
                         🏆 Peringkat Sekolah
                     </h2>
 
-                    <div className="overflow-x-auto">
+                    <div>
                         <table className="w-full divide-y divide-green-200">
                             {/* Header */}
                             <thead className="bg-gradient-to-r from-green-200 via-green-300 to-green-400">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FarmController;
+use App\Http\Controllers\FruitController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
@@ -37,7 +38,7 @@ Route::get('/games', function () {
 //     return Inertia::render('Product/ForumKomunitas');
 // });
 
-Route::get('/dashboard', function () {
+Route::get('/overview', function () {
     return Inertia::render('Dashboard/Overview');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -53,6 +54,13 @@ Route::middleware('auth')->group(function () {
     // Route::post('/farm/{farm}/water', [FarmController::class, 'water'])->name('farm.water');
     // Route::post('/farm/{farm}/harvest', [FarmController::class, 'harvest'])->name('farm.harvest');
     // Route::post('/farm/donate', [FarmController::class, 'donate'])->name('farm.donate');
+
+    Route::get('/fruits', [FruitController::class, 'index'])->name('fruits.index');       // list data
+    Route::get('/fruits/create', [FruitController::class, 'create'])->name('fruits.create'); // form tambah
+    Route::post('/fruits/store', [FruitController::class, 'store'])->name('fruits.store');   // simpan data
+    Route::get('/fruits/{fruit}/edit', [FruitController::class, 'edit'])->name('fruits.edit'); // form edit
+    Route::put('/fruits/{fruit}/update', [FruitController::class, 'update'])->name('fruits.update'); // update data
+    Route::delete('/fruits/{fruit}/delete', [FruitController::class, 'destroy'])->name('fruits.destroy');
 
     // game manage
     Route::get('/game', [GameController::class, 'index']);
@@ -75,4 +83,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/leaderboard', [SchoolController::class, 'leaderboard']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

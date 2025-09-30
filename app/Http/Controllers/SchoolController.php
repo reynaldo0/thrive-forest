@@ -63,7 +63,7 @@ class SchoolController extends Controller
         $user->school_id = $school->id;
         $user->save();
 
-        return redirect()->back()->with('success', 'Berhasil bergabung dengan sekolah '.$school->name);
+        return redirect()->back()->with('success', 'Berhasil bergabung dengan sekolah ' . $school->name);
     }
 
     public function leaveSchool()
@@ -87,19 +87,7 @@ class SchoolController extends Controller
      */
     public function leaderboard()
     {
-        $schools = DB::table('schools')
-            ->leftJoin('users', 'users.school_id', '=', 'schools.id')
-            ->leftJoin('user_points', 'user_points.user_id', '=', 'users.id')
-            ->select(
-                'schools.id',
-                'schools.name',
-                DB::raw('COUNT(DISTINCT users.id) as users_count'),
-                DB::raw('COALESCE(SUM(user_points.points), 0) as total_points')
-            )
-            ->groupBy('schools.id', 'schools.name')
-            ->orderByDesc('total_points')
-            ->limit(10)
-            ->get();
+        $schools = School::orderBy('points', 'desc')->get();
 
         return Inertia::render('Dashboard/School/Leaderboard', [
             'schools' => $schools,
