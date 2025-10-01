@@ -65,40 +65,31 @@ const Form = () => {
     };
 
     return (
-        <section className="bg-white relative min-h-screen py-24 flex lg:pb-40">
-            <div
-                className="absolute inset-0 bg-[url('/wave/bg.svg')] bg-cover bg-center opacity-10"
-                style={{ backgroundAttachment: "fixed" }}
-            />
-
+        <section className="relative min-h-screen flex items-center justify-center bg-[#F0FCD7] px-6 py-24">
+            {/* Card Container */}
             <form
                 onSubmit={handleSubmit}
-                className="flex flex-col-reverse xl:flex-row xl:gap-20 items-center justify-between px-8 md:px-24 xl:px-20 z-10 w-full"
+                className="relative flex flex-col-reverse xl:flex-row items-center gap-10 md:bg-white/80 md:backdrop-blur-xl md:rounded-3xl md:shadow-2xl md:px-8 md:px-16 py-12 w-full md:max-w-7xl z-10"
+                data-aos="zoom-in"
             >
                 {/* Form Inputs */}
-                <div
-                    className="space-y-6 flex-1 pt-16 xl:pt-0"
-                    data-aos="zoom-in"
-                >
-                    <h1
-                        className="font-bold text-3xl mb-4"
-                        data-aos="fade-down"
-                    >
+                <div className="space-y-6 flex-1">
+                    <h1 className="font-bold text-3xl mb-6 text-gray-800">
                         Dari kamu untuk
                         <span
                             ref={typedRef}
-                            className="text-white bg-secondary-300 mx-1 lg:px-2"
+                            className="bg-[#3F3313] text-white mx-2 px-2 py-1 rounded-md"
                         ></span>
                     </h1>
 
                     {/* Nama */}
-                    <div className="flex items-center border border-gray-300 rounded-full px-4 py-3 bg-white shadow-lg">
+                    <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm focus-within:ring-2 focus-within:ring-green-400">
                         <input
                             type="text"
                             placeholder="Nama Lengkap"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className="flex-grow focus:outline-none text-gray-600"
+                            className="flex-grow border-none bg-transparent appearance-none focus:outline-none text-gray-700 placeholder-gray-400 focus:ring-0"
                             required
                         />
                         <User className="text-gray-400 w-5 h-5" />
@@ -109,7 +100,7 @@ const Form = () => {
 
                     {/* Email & Asal */}
                     <div className="flex flex-wrap gap-4">
-                        <div className="flex items-center border border-gray-300 rounded-full px-4 py-3 bg-white shadow-lg flex-1">
+                        <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm flex-1 focus-within:ring-2 focus-within:ring-green-400">
                             <input
                                 type="email"
                                 placeholder="Email Aktif"
@@ -117,18 +108,13 @@ const Form = () => {
                                 onChange={(e) =>
                                     setData("email", e.target.value)
                                 }
-                                className="flex-grow focus:outline-none text-gray-600"
+                                className="flex-grow bg-transparent border-0 focus:outline-none text-gray-700 placeholder-gray-400 focus:ring-0"
                                 required
                             />
                             <Mail className="text-gray-400 w-5 h-5" />
                         </div>
-                        {errors.email && (
-                            <p className="text-red-500 text-sm">
-                                {errors.email}
-                            </p>
-                        )}
 
-                        <div className="flex items-center border border-gray-300 rounded-full px-4 py-3 bg-white shadow-lg flex-1">
+                        <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm flex-1 focus-within:ring-2 focus-within:ring-green-400">
                             <input
                                 type="text"
                                 placeholder="Asal Daerah"
@@ -136,16 +122,11 @@ const Form = () => {
                                 onChange={(e) =>
                                     setData("address", e.target.value)
                                 }
-                                className="flex-grow focus:outline-none text-gray-600"
+                                className="flex-grow bg-transparent border-0 focus:outline-none text-gray-700 placeholder-gray-400 focus:ring-0"
                                 required
                             />
                             <MapPin className="text-gray-400 w-5 h-5" />
                         </div>
-                        {errors.address && (
-                            <p className="text-red-500 text-sm">
-                                {errors.address}
-                            </p>
-                        )}
                     </div>
 
                     {/* Description */}
@@ -153,47 +134,40 @@ const Form = () => {
                         placeholder="Apa fitur yang ingin ditambahkan?"
                         value={data.description}
                         onChange={(e) => setData("description", e.target.value)}
-                        className="w-full border border-gray-300 rounded-2xl px-4 py-3 bg-white focus:outline-none resize-none text-gray-600 shadow-lg"
-                        rows="4"
+                        className="w-full rounded-2xl bg-gray-100 px-5 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-700 placeholder-gray-400 shadow-sm resize-none border-0"
+                        rows="3"
                     />
-                    {errors.description && (
-                        <p className="text-red-500 text-sm">
-                            {errors.description}
-                        </p>
-                    )}
 
                     {/* Upload */}
                     <div className="flex gap-4 items-start">
-                        <div className="flex items-center h-40 md:h-36 justify-center border border-gray-300 rounded-2xl bg-white shadow-lg flex-[1]">
+                        <div className="flex items-center justify-center h-36 border border-gray-200 rounded-2xl bg-gray-50 shadow-inner flex-[1] overflow-hidden">
                             {previewImage ? (
                                 <img
                                     src={previewImage}
                                     alt="Preview"
-                                    className="object-contain w-full h-full rounded-2xl"
+                                    className="object-cover w-full h-full rounded-2xl"
                                 />
                             ) : (
-                                <div className="w-full h-40 md:h-36 flex items-center justify-center rounded-2xl bg-gray-100 text-gray-400">
-                                    <span className="text-sm">No file</span>
-                                </div>
+                                <span className="text-sm text-gray-400">
+                                    No file
+                                </span>
                             )}
                         </div>
 
                         <label
                             htmlFor="fileUpload"
-                            className="cursor-pointer border-2 border-dashed border-gray-300 rounded-2xl bg-transparent flex flex-col items-center justify-center p-6 flex-[2]"
+                            className="cursor-pointer border-2 border-dashed border-gray-300 rounded-2xl bg-gray-50 hover:bg-gray-100 flex flex-col items-center justify-center p-6 flex-[2] transition"
                         >
-                            <div className="text-center">
-                                <UploadCloud className="w-10 h-10 text-gray-400 mb-2" />
-                                <p className="text-gray-600">
-                                    <span className="underline">
-                                        Click to upload
-                                    </span>{" "}
-                                    or drag and drop
-                                </p>
-                                <p className="text-sm text-gray-400">
-                                    PNG, JPG, JPEG, PDF, DOC, MP4 supported
-                                </p>
-                            </div>
+                            <UploadCloud className="w-10 h-10 text-gray-400 mb-2" />
+                            <p className="text-gray-600">
+                                <span className="underline">
+                                    Click to upload
+                                </span>{" "}
+                                or drag & drop
+                            </p>
+                            <p className="text-sm text-gray-400">
+                                PNG, JPG, JPEG, PDF, DOC, MP4 supported
+                            </p>
                             <input
                                 id="fileUpload"
                                 type="file"
@@ -202,53 +176,43 @@ const Form = () => {
                             />
                         </label>
                     </div>
-                    {errors.media && (
-                        <p className="text-red-500 text-sm">{errors.media}</p>
-                    )}
 
                     {/* Story */}
                     <textarea
                         placeholder="Ceritakan pengalamanmu..."
                         value={data.story}
                         onChange={(e) => setData("story", e.target.value)}
-                        className="w-full border border-gray-300 rounded-2xl px-4 py-3 bg-white focus:outline-none resize-none text-gray-600 shadow-lg"
+                        className="w-full rounded-2xl bg-gray-100 px-5 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-700 placeholder-gray-400 shadow-sm resize-none border-0"
                         rows="4"
                     />
-                    {errors.story && (
-                        <p className="text-red-500 text-sm">{errors.story}</p>
-                    )}
 
                     <button
                         type="submit"
                         disabled={processing}
-                        className="w-full bg-secondary-300 text-white font-semibold py-3 rounded-full hover:bg-secondary-300/90 transition disabled:opacity-50"
+                        className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-4 rounded-full shadow-lg hover:opacity-90 transition disabled:opacity-50"
                     >
                         {processing ? "Mengirim..." : "Kirim"}
                     </button>
                 </div>
 
                 {/* Illustration */}
-                <div
-                    className="flex justify-center items-center relative"
-                    data-aos="zoom-in"
-                >
+                <div className="flex justify-center items-center">
                     <img
                         src="/illustrasi/form.png"
-                        alt="Tari Nusantara"
-                        className="w-80 md:w-[600px] h-auto object-contain hover:scale-105 transition-transform duration-300"
+                        alt="Nuti Love"
+                        className="w-72 md:w-[500px] object-contain hover:scale-105 transition-transform duration-300"
                     />
                 </div>
             </form>
 
-            {/* Modal Alert */}
+            {/* Modal */}
             {modalOpen && (
                 <div
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
                     onClick={() => setModalOpen(false)}
                 >
                     <div
-                        className="bg-white rounded-3xl p-8 max-w-xl w-full text-center relative"
-                        data-aos="zoom-in"
+                        className="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl animate-fadeIn"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <CheckCircle2 className="text-green-500 w-12 h-12 mx-auto mb-4 animate-bounce" />
@@ -261,7 +225,7 @@ const Form = () => {
                         </p>
                         <button
                             onClick={() => setModalOpen(false)}
-                            className="bg-secondary-300 text-white px-6 py-2 rounded-full font-semibold hover:bg-secondary-400 transition"
+                            className="bg-gradient-to-r from-green-400 to-green-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition"
                         >
                             Tutup
                         </button>

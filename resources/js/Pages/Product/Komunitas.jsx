@@ -13,10 +13,10 @@ export default function KomuIntro() {
   return (
     <>
       {/* Bagian Nuti */}
-      <section className="min-h-screen w-full bg-[#FEFFF5] flex flex-col items-center px-6 pt-12 pb-8">
+      <section className="min-h-screen w-full justify-center items-center bg-[#FEFFF5] flex flex-col items-center px-6 pt-12 pb-8">
         {/* Judul */}
         <h1
-          className={`text-4xl md:text-5xl font-extrabold text-[#3B3B0E] mb-6 tracking-wide transition-all duration-700 ease-out ${
+          className={`text-4xl md:text-5xl font-extrabold text-[#3B3B0E] mb-6 tracking-wide transition-all duration-700 ease-out pb-10 ${
             animateText
               ? "opacity-100 translate-y-0"
               : "opacity-0 -translate-y-6"
@@ -98,15 +98,6 @@ export default function KomuIntro() {
             scroll-behavior: smooth;
           }
         `}</style>
-      </section>
-
-      {/* Bagian Informasi Tambahan */}
-      <section className="w-full bg-[#3B5B1E] py-6 px-4 text-center -mt-4 rounded-md shadow-md">
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-          Butuh informasi lebih lanjut tentang{" "}
-          <span className="text-green-300">NutriTree??</span>
-        </h2>
-        <p className="text-green-100">Yuk simak di sini!!</p>
       </section>
     </>
   );
