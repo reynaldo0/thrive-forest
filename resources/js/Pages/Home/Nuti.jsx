@@ -12,7 +12,7 @@ export default function NutiIntro() {
   return (
     <>
       {/* Bagian Nuti */}
-      <section className="min-h-screen items-center justify-center w-full flex flex-col items-center px-6 pt-12 pb-8">
+      <section className="min-h-screen items-center justify-center w-full flex flex-col items-center px-6 pt-12 pb-8 relative">
         {/* Judul */}
         <h1
           className={`text-4xl md:text-5xl font-extrabold text-[#3B3B0E] mb-6 tracking-wide transition-all duration-700 ease-out ${
