@@ -3,6 +3,7 @@
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\FruitController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use Illuminate\Foundation\Application;
@@ -81,6 +82,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/join-school', [SchoolController::class, 'joinSchool'])
         ->name('schools.join');
     Route::get('/leaderboard', [SchoolController::class, 'leaderboard']);
+
+    // mail manage
+    Route::get('/mails', [MailController::class, 'index'])->name('mails.index');
+    Route::post('/mails', [MailController::class, 'store'])->name('mails.store');
 });
 
 require __DIR__ . '/auth.php';

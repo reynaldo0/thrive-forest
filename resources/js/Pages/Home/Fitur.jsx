@@ -1,13 +1,13 @@
 export default function FiturWebsite() {
   return (
-    <section className="w-full max-w-5xl mx-auto py-16 px-6">
+    <section className="w-full py-16 px-6 ">
       {/* Judul */}
       <h2 className="text-3xl font-extrabold text-[#3B3B0E] text-center mb-12">
         Fitur Website
       </h2>
 
       {/* Card Utama */}
-      <div className="relative bg-[#F0FCD7] rounded-xl shadow-lg p-10 flex justify-center">
+      <div className="relative bg-[#F0FCD7] rounded-xl shadow-lg p-10 flex justify-center max-w-5xl mx-auto">
         {/* Garis Tengah */}
         <div className="absolute left-1/2 top-8 bottom-8 w-[2px] bg-green-200"></div>
 

@@ -12,7 +12,7 @@ export default function NutiIntro() {
   return (
     <>
       {/* Bagian Nuti */}
-      <section className="min-h-screen w-full bg-[#FEFFF5] flex flex-col items-center px-6 pt-12 pb-8">
+      <section className="min-h-screen items-center justify-center w-full flex flex-col items-center px-6 pt-12 pb-8">
         {/* Judul */}
         <h1
           className={`text-4xl md:text-5xl font-extrabold text-[#3B3B0E] mb-6 tracking-wide transition-all duration-700 ease-out ${
@@ -93,23 +93,6 @@ export default function NutiIntro() {
         `}</style>
       </section>
 
-      {/* Bagian Informasi Tambahan */}
-      <section className="w-full bg-[#3B5B1E] py-6 px-4 text-center -mt-4 rounded-md shadow-md">
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-          Butuh informasi lebih lanjut tentang{" "}
-          <span className="text-green-300">NutriTree??</span>
-        </h2>
-        <p className="text-green-100">Yuk simak di sini!!</p>
-      </section>
-
-       {/* Maskot pojok kanan bawah */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
-        <img
-          src="/icon/maskot.png"
-          alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
-        />
-      </div>
     </>
   );
 }

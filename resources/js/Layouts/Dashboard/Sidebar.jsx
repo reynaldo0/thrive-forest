@@ -7,6 +7,8 @@ import {
     ChevronDown,
     ChevronRight,
     X,
+    Gamepad,
+    Mail,
 } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "@inertiajs/react";
@@ -37,6 +39,16 @@ const Sidebar = () => {
                 { label: "Join Kode Sekolah", href: "/join-school" },
                 { label: "Leaderboard", href: "/leaderboard" },
             ],
+        },
+        {
+            label: "Game",
+            icon: <Gamepad size={20} />,
+            href: "/game",
+        },
+        {
+            label: "Pesan",
+            icon: <Mail size={20} />,
+            href: "/mails",
         },
         {
             label: "Settings",

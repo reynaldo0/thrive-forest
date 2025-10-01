@@ -6,6 +6,7 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class SchoolController extends Controller
@@ -24,12 +25,14 @@ class SchoolController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'team_code' => 'required|string|unique:schools,team_code',
         ]);
+
+        // generate random team code (8 karakter)
+        $validated['team_code'] = strtoupper(Str::random(8));
 
         School::create($validated);
 
-        return redirect()->route('schools.index');
+        return redirect()->route('schools.index')->with('success', 'Sekolah berhasil ditambahkan dengan kode tim: ' . $validated['team_code']);
     }
 
     public function joinTeamcode()
