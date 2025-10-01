@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Hero() {
+export default function HeroHome() {
     const [offsetY, setOffsetY] = useState(0);
 
     useEffect(() => {
