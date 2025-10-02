@@ -1,0 +1,22 @@
+import React from "react";
+import HeroGamess from "./Games/Hero";
+import RulesLeaderboard from "./Games/Leaderboard";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
+import Ai from "@/Components/Ai";
+import { Head } from "@inertiajs/react";
+
+const Games = ({fruits}) => {
+    return (
+        <>
+            <Head title="Games" />
+            <Navbar />
+            <HeroGamess />
+            <RulesLeaderboard/>
+            <Footer/>
+            <Ai/>
+        </>
+    );
+};
+
+export default Games;

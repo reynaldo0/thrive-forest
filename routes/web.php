@@ -33,6 +33,10 @@ Route::get('/product', function () {
     return Inertia::render('Product');
 })->name('product');
 
+Route::get('/gamess', function () {
+    return Inertia::render('Gamess');
+})->name('gamess');
+
 Route::get('/games', [FruitController::class, 'publicIndex'])->name('games');
 
 Route::get('/product', [SeminarController::class, 'publicIndex'])
