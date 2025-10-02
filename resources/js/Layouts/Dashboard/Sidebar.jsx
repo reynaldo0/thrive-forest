@@ -32,6 +32,14 @@ const Sidebar = () => {
             ],
         },
         {
+            label: "Manajemen Seminar",
+            icon: <BarChart2 size={20} />,
+            children: [
+                { label: "Daftar Seminar", href: "/admin/seminars" },
+                { label: "Tambah Seminar", href: "/admin/seminars/create" },
+            ],
+        },
+        {
             label: "Kolaborasi Tanaman",
             icon: <BarChart2 size={20} />,
             children: [
