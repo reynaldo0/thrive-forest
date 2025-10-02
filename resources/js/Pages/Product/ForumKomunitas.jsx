@@ -1,48 +1,66 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 export default function ForumKomunitas() {
+  const [animateForm, setAnimateForm] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setAnimateForm(true), 200);
+  }, []);
+
   return (
-    <section id="forum-komunitas" className="min-h-screen w-full bg-[#f9fce9] relative px-6 py-12">
+    <section className="min-h-screen flex flex-col items-center w-full px-6 pt-16 pb-12 bg-[#f9fce9] relative">
       {/* Judul */}
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-[#3B3B0E] mb-12 animate-bounce">
+      <h2
+        className={`text-6xl md:text-7xl font-bold text-center text-[#3B3B0E] mb-12 tracking-wide transition-all duration-700 ease-out ${
+          animateForm ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
+        }`}
+      >
         Forum Komunitas
       </h2>
 
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-5xl w-full space-y-6">
         {/* Form Posting */}
-        <div className="bg-[#EDFFCD] border border-green-200 rounded-xl p-4 shadow hover:shadow-lg transition duration-300">
+        <div
+          className={`bg-[#EDFFCD] border border-green-200 rounded-3xl p-8 shadow-2xl transition-all duration-700 ease-out ${
+            animateForm ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <textarea
             placeholder="Tulis sesuatu..."
-            className="w-full h-20 resize-none border-none rounded-lg bg-white focus:ring-2 focus:ring-green-400 p-3 outline-none text-sm"
+            className="w-full h-28 resize-none border-none rounded-xl bg-white focus:ring-2 focus:ring-green-400 p-4 outline-none text-base"
           ></textarea>
-          <div className="flex justify-end mt-2">
-            <button className="px-5 py-2 rounded-lg bg-green-600 text-white text-sm hover:bg-green-700 active:scale-95 transition">
+          <div className="flex justify-end mt-4">
+            <button className="px-6 py-3 rounded-xl bg-green-600 text-white text-base hover:bg-green-700 active:scale-95 transition">
               Kirim
             </button>
           </div>
         </div>
 
         {/* Postingan */}
-        <div className="bg-[#EDFFCD] border border-green-200 rounded-xl p-4 shadow hover:shadow-lg transition duration-300">
+        <div
+          className={`bg-[#EDFFCD] border border-green-200 rounded-3xl p-8 shadow-2xl transition-all duration-700 ease-out ${
+            animateForm ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           {/* Header user */}
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-4 h-4 rounded-full bg-green-600 animate-pulse"></span>
-            <p className="font-semibold text-sm text-gray-800">Andi</p>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-5 h-5 rounded-full bg-green-600 animate-pulse"></span>
+            <p className="font-semibold text-lg text-gray-800">Andi</p>
           </div>
 
           {/* Isi postingan */}
-          <p className="text-gray-700 text-sm leading-relaxed mb-4">
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
             Menciptakan generasi yang lebih baik dengan tujuan Zero Hunger
           </p>
 
           {/* Balasan */}
           <div>
-            <label className="block text-sm font-medium text-gray-600 mb-1">
+            <label className="block text-lg font-medium text-gray-600 mb-2">
               Balas
             </label>
             <textarea
               placeholder="Tulis balasan..."
-              className="w-full h-20 resize-none border-none rounded-lg bg-white focus:ring-2 focus:ring-green-400 p-3 outline-none text-sm"
+              className="w-full h-28 resize-none border-none rounded-xl bg-white focus:ring-2 focus:ring-green-400 p-4 outline-none text-base"
             ></textarea>
           </div>
         </div>

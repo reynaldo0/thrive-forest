@@ -1,4 +1,3 @@
-// resources/js/Pages/Ai.jsx
 import React from "react";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
@@ -7,12 +6,11 @@ import { Head } from "@inertiajs/react";
 export default function Ai() {
   return (
     <>
-      {/* Floating Maskot di pojok */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
+      <div className="fixed bottom-4 right-4 animate-bounce hover:scale-110 transition-transform duration-300">
         <img
           src="/icon/maskot.png"
           alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
+          className="w-28 md:w-36 drop-shadow-xl"
         />
       </div>
     </>
