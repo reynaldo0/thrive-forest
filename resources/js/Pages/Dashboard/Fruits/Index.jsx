@@ -51,6 +51,9 @@ export default function Index({ fruits = [] }) {
                                     Nama
                                 </th>
                                 <th className="p-3 text-sm font-semibold text-gray-600">
+                                    Poin
+                                </th>
+                                <th className="p-3 text-sm font-semibold text-gray-600">
                                     Icon
                                 </th>
                                 <th className="p-3 text-sm font-semibold text-gray-600">
@@ -74,6 +77,9 @@ export default function Index({ fruits = [] }) {
                                         </td>
                                         <td className="p-3 text-sm font-medium text-gray-900">
                                             {fruit.name}
+                                        </td>
+                                        <td className="p-3 text-sm font-medium text-gray-900">
+                                            {fruit.points}
                                         </td>
                                         <td className="p-3">
                                             <img

@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
         name: "",
+        points: 1,
         img: null,
         stages: [null, null, null, null, null],
     });
@@ -48,6 +49,25 @@ export default function Create() {
                         {errors.name && (
                             <div className="text-red-500 mt-1 text-sm">
                                 {errors.name}
+                            </div>
+                        )}
+                    </div>
+                    {/* Points */}
+                    <div>
+                        <label className="block font-semibold mb-1">
+                            Points
+                        </label>
+                        <input
+                            type="number"
+                            min="1"
+                            value={data.points}
+                            onChange={(e) => setData("points", e.target.value)}
+                            className="border p-2 w-full rounded"
+                            placeholder="Masukkan jumlah poin untuk buah ini"
+                        />
+                        {errors.points && (
+                            <div className="text-red-500 mt-1 text-sm">
+                                {errors.points}
                             </div>
                         )}
                     </div>

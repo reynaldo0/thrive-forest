@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('fruits', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('img');           
+            $table->string('img');
             $table->json('stages');
+            $table->integer('points')->default(1);
             $table->timestamps();
         });
     }

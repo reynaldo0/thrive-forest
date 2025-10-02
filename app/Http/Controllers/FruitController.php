@@ -8,6 +8,23 @@ use Inertia\Inertia;
 
 class FruitController extends Controller
 {
+    public function publicIndex()
+    {
+        $fruits = Fruit::all()->map(function ($fruit) {
+            return [
+                'id' => $fruit->id,
+                'name' => $fruit->name,
+                'points' => $fruit->points,
+                'img' => $fruit->img,
+                'stages' => is_string($fruit->stages) ? json_decode($fruit->stages, true) : $fruit->stages,
+            ];
+        });
+
+        return Inertia::render('Games', [
+            'fruits' => $fruits,
+        ]);
+    }
+
     public function index()
     {
         $fruits = Fruit::all();
@@ -26,33 +43,33 @@ class FruitController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:100',
+            'points' => 'required|integer|min:1',
             'img' => 'required|file|image|max:2048',
             'stages.*' => 'required|file|image|max:2048',
         ]);
 
-        // simpan icon utama
         $imgPath = $request->file('img')->store('fruits', 'public');
 
-        // Simpan stages
         $stages = [];
         if ($request->hasFile('stages')) {
             foreach ($request->file('stages') as $stage) {
                 if ($stage) {
                     $path = $stage->store('fruits/stages', 'public');
-                    $stages[] = '/storage/' . $path; // cukup tambahkan sekali
+                    $stages[] = '/storage/' . $path;
                 }
             }
         }
 
         Fruit::create([
             'name' => $request->name,
+            'points' => $request->points,
             'img' => '/storage/' . $imgPath,
             'stages' => json_encode($stages),
         ]);
 
-
         return redirect()->route('fruits.index')->with('success', 'Buah berhasil ditambahkan!');
     }
+
 
 
     public function edit(Fruit $fruit)
@@ -66,12 +83,14 @@ class FruitController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'points' => 'required|integer|min:1',
             'img' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
             'stages.*' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
         ]);
 
         // update nama
         $fruit->name = $request->name;
+        $fruit->points = $request->points;
 
         // update icon jika ada file baru
         if ($request->hasFile('img')) {

@@ -23,6 +23,7 @@ export default function Edit({ fruit }) {
     const { data, setData, post, processing, errors } = useForm({
         _method: "PUT",
         name: fruit.name || "",
+        points: fruit.points || 1,
         img: null,
         stages: [null, null, null, null, null],
     });
@@ -82,6 +83,22 @@ export default function Edit({ fruit }) {
                         {errors.name && (
                             <div className="text-red-600 text-sm mt-1">
                                 {errors.name}
+                            </div>
+                        )}
+                    </div>
+
+                    <div>
+                        <label className="block font-medium mb-1">Points</label>
+                        <input
+                            type="number"
+                            min="1"
+                            value={data.points}
+                            onChange={(e) => setData("points", e.target.value)}
+                            className="border rounded-lg p-2 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                        {errors.points && (
+                            <div className="text-red-600 text-sm mt-1">
+                                {errors.points}
                             </div>
                         )}
                     </div>
