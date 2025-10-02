@@ -46,23 +46,10 @@ Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'sto
 //     return Inertia::render('Product/ForumKomunitas');
 // });
 
-<<<<<<< HEAD
 Route::get('/buku-terpadu', fn() => Inertia::render('Article/BukuTerpadu'))->name('buku-terpadu');
 Route::get('/produk-unggul', fn() => Inertia::render('Product/ProdukUnggul'))->name('produk-unggul');
 Route::get('/komunitas', fn() => Inertia::render('Product/Komunitas'))->name('komunitas');
 Route::get('/ai', fn() => Inertia::render('Ai'))->name('ai');
-
-Route::get('/buku-terpadu', fn() => Inertia::render('Article/BukuTerpadu'))->name('buku-terpadu');
-Route::get('/produk-unggul', fn() => Inertia::render('Product/ProdukUnggul'))->name('produk-unggul');
-Route::get('/komunitas', fn() => Inertia::render('Product/Komunitas'))->name('komunitas');
-Route::get('/ai', fn() => Inertia::render('Ai'))->name('ai');
-=======
-// Route::get('/buku-terpadu', fn() => Inertia::render('Article/BukuTerpadu'))->name('buku-terpadu');
-// Route::get('/produk-unggul', fn() => Inertia::render('Product/ProdukUnggul'))->name('produk-unggul');
-// Route::get('/komunitas', fn() => Inertia::render('Product/Komunitas'))->name('komunitas');
-// Route::get('/games', fn() => Inertia::render('Games/Hero'))->name('games');
-// Route::get('/ai', fn() => Inertia::render('Ai'))->name('ai');
->>>>>>> 87f9e87 (update fe)
 
 Route::get('/admin/overview', function () {
     return Inertia::render('Dashboard/Overview');
