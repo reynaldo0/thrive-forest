@@ -20,7 +20,7 @@ const Home = () => {
             <FiturWebsite/>
             <Footer/>
             <Ai/>
-        </>
+        </div>
     );
 };
 
