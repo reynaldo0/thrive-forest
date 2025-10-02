@@ -82,19 +82,18 @@ export default function BukuTerpadu() {
             </div>
 
             {/* Deskripsi */}
-            <div className="relative max-w-2xl bg-white shadow-xl rounded-2xl p-10 border border-[#D8EBC5] z-10 text-center">
-                <h3 className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#3B3B0E] text-white px-8 py-3 rounded-full text-2xl font-bold shadow-md">
-                    Buku Terpadu
-                </h3>
-                <p className="mt-10 text-[#3B3B0E] text-lg md:text-xl leading-relaxed">
-                    Nutriverse menjawab tantangan “Zero Hunger” dengan
-                    memberikan pengetahuan mengenai “Sintesis” kepada
-                    siswa-siswa untuk mengembangkan berbagai jenis tanaman
-                    unggulan dengan proses tertentu sehingga menghasilkan
-                    berbagai jenis tanaman dan hewan yang memiliki kuantitas dan
-                    kualitas yang baik.
-                </p>
+            <div className="relative w-full max-w-5xl bg-white shadow-xl rounded-2xl p-12 border border-[#D8EBC5] z-10 text-center">
+            <h3 className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#3B3B0E] text-white px-10 py-3 rounded-full text-2xl font-bold shadow-md">
+                Buku Terpadu
+            </h3>
+            <p className="mt-10 text-[#3B3B0E] text-lg md:text-xl leading-relaxed">
+                Nutriverse menjawab tantangan “Zero Hunger” dengan memberikan pengetahuan
+                mengenai “Sintesis” kepada siswa-siswa untuk mengembangkan berbagai jenis
+                tanaman unggulan dengan proses tertentu sehingga menghasilkan berbagai
+                jenis tanaman dan hewan yang memiliki kuantitas dan kualitas yang baik.
+            </p>
             </div>
+
 
             {/* Rumput Parallax */}
             <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">

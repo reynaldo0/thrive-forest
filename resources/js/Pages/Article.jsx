@@ -1,12 +1,16 @@
 import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
+import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 import ArtikelBerita from "./Article/Artikel";
 import BukuTerpadu from "./Article/BukuTerpadu";
 import HeroArticle from "./Article/Hero";
 import ProdukUnggul from "./Article/ProdukUnggul";
 import Video from "./Article/VideoPembelajaran";
+<<<<<<< HEAD
 import Ai from "@/Components/Ai";
+=======
+>>>>>>> 87f9e87 (update fe)
 
 const Article = () => {
     return (
