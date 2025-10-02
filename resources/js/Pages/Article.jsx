@@ -1,5 +1,6 @@
 import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
+import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 import ArtikelBerita from "./Article/Artikel";
 import BukuTerpadu from "./Article/BukuTerpadu";

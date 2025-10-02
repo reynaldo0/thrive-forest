@@ -16,6 +16,7 @@ const Home = () => {
             <NutiIntro/>
             <TujuanSection/>
             <FiturWebsite/>
+            <Form/>
             <Footer/>
             <Ai/>
         </div>
