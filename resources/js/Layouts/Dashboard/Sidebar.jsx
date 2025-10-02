@@ -21,39 +21,39 @@ const Sidebar = () => {
         {
             label: "Overview",
             icon: <Users size={20} />,
-            href: "/overview",
+            href: "/admin/overview",
         },
         {
             label: "Manajemen Tanaman",
             icon: <TreePine size={20} />,
             children: [
-                { label: "Lihat Tanaman", href: "/fruits" },
-                { label: "Buat Tanaman", href: "/fruits/create" },
+                { label: "Lihat Tanaman", href: "/admin/fruits" },
+                { label: "Buat Tanaman", href: "/admin/fruits/create" },
             ],
         },
         {
             label: "Kolaborasi Tanaman",
             icon: <BarChart2 size={20} />,
             children: [
-                { label: "Buat Kode Sekolah", href: "/schools" },
-                { label: "Join Kode Sekolah", href: "/join-school" },
-                { label: "Leaderboard", href: "/leaderboard" },
+                { label: "Buat Kode Sekolah", href: "/admin/schools" },
+                { label: "Join Kode Sekolah", href: "/admin/join-school" },
+                { label: "Leaderboard", href: "/admin/leaderboard" },
             ],
         },
         {
             label: "Game",
             icon: <Gamepad size={20} />,
-            href: "/game",
+            href: "/admin/game",
         },
         {
             label: "Pesan",
             icon: <Mail size={20} />,
-            href: "/mails",
+            href: "/admin/mails",
         },
         {
             label: "Settings",
             icon: <Settings size={20} />,
-            href: "/settings",
+            href: "/admin/settings",
         },
     ];
 

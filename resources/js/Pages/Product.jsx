@@ -8,14 +8,14 @@ import Footer from "@/Components/Footer";
 import { Head } from "@inertiajs/react";
 import KomuIntro from "./Product/Komunitas";
 
-const Product = () => {
+const Product = ({seminars}) => {
     return (
         <>
             <Head title="Komunitas" />
             <Navbar />
             <HeroKomunitas />
             <KomuIntro/>
-            <Seminar/>
+            <Seminar seminars={seminars}/>
             <ForumKomunitas/>
             <Footer/>
         </>

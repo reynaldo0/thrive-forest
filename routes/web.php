@@ -5,7 +5,9 @@ use App\Http\Controllers\FruitController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\SeminarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,19 +37,26 @@ Route::get('/games', function () {
     return Inertia::render('Games');
 })->name('games');
 
+Route::get('/product', [SeminarController::class, 'publicIndex'])
+    ->name('product');
+
+Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'store'])
+    ->name('seminars.register');
+
+
 // Route::get('/forum-komunitas', function () {
 //     return Inertia::render('Product/ForumKomunitas');
 // });
 
-Route::get('/overview', function () {
+Route::get('/admin/overview', function () {
     return Inertia::render('Dashboard/Overview');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+
+Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     // Farm Manage
     // Route::get('/farm', [FarmController::class, 'index'])->name('farm.index');
     // Route::post('/farm/add', [FarmController::class, 'addFarm'])->name('farm.add');
@@ -86,6 +95,9 @@ Route::middleware('auth')->group(function () {
     // mail manage
     Route::get('/mails', [MailController::class, 'index'])->name('mails.index');
     Route::post('/mails', [MailController::class, 'store'])->name('mails.store');
+
+    Route::resource('seminars', SeminarController::class);
+    Route::post('/registrations', [RegistrationController::class, 'store'])->name('registrations.store');
 });
 
 require __DIR__ . '/auth.php';
