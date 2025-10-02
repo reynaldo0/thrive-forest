@@ -28,7 +28,7 @@ const Form = () => {
     useEffect(() => {
         if (typedRef.current) {
             const typed = new Typed(typedRef.current, {
-                strings: ["Nusantara", "Indonesia", "Budaya"],
+                strings: ["Nutriverse", "Bumi Kita", "Alam Semesta"],
                 typeSpeed: 60,
                 backSpeed: 30,
                 backDelay: 2000,

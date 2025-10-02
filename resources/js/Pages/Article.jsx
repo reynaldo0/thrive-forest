@@ -7,7 +7,6 @@ import BukuTerpadu from "./Article/BukuTerpadu";
 import HeroArticle from "./Article/Hero";
 import ProdukUnggul from "./Article/ProdukUnggul";
 import Video from "./Article/VideoPembelajaran";
-import Ai from "@/Components/Ai";
 
 const Article = () => {
     return (
