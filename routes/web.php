@@ -83,6 +83,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // game manage
     Route::get('/game', [GameController::class, 'index']);
     Route::post('/plant', [GameController::class, 'plant']);
+    Route::post('/harvest', [FruitController::class, 'harvest'])->name('harvest');
     Route::post('/harvest/{plant}', [GameController::class, 'harvest']);
 
     Route::get('/schools', [SchoolController::class, 'index'])->name('schools.index');

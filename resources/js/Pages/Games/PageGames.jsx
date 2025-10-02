@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
+import { usePage, router } from "@inertiajs/react";
 
 export default function PageGames({ fruits }) {
+    const [harvesting, setHarvesting] = useState([false, false, false, false]);
+    const { points: backendPoints = 0, added: backendAdded = null } =
+        usePage().props;
+
     const [inventory, setInventory] = useState([]);
     const [donation, setDonation] = useState(0);
-    const [totalPoints, setTotalPoints] = useState(0);
-    const [lastHarvest, setLastHarvest] = useState(null);
+    const [totalPoints, setTotalPoints] = useState(backendPoints);
+    const [lastHarvest, setLastHarvest] = useState(
+        backendAdded ? { name: null, points: backendAdded } : null
+    );
 
     const [plots, setPlots] = useState([
         { fruit: null, stage: 0 },
@@ -16,37 +23,16 @@ export default function PageGames({ fruits }) {
     const [offsetX, setOffsetX] = useState(0);
     const sectionRef = useRef(null);
 
+    // Sinkronisasi totalPoints setiap kali props dari backend berubah
     useEffect(() => {
-        let animationFrameId;
-        let currentX = 0;
-
-        const handleScroll = () => {
-            if (!sectionRef.current) return;
-            const rect = sectionRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            const scrollPassed = windowHeight - rect.top;
-            const targetX = scrollPassed > 0 ? scrollPassed * 0.2 : 0;
-
-            const animate = () => {
-                currentX += (targetX - currentX) * 0.15;
-                setOffsetX(currentX);
-
-                if (Math.abs(targetX - currentX) > 0.5) {
-                    animationFrameId = requestAnimationFrame(animate);
-                }
-            };
-
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = requestAnimationFrame(animate);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            cancelAnimationFrame(animationFrameId);
-        };
-    }, []);
+        setTotalPoints(backendPoints); // selalu update poin dari backend
+        if (backendAdded) {
+            setLastHarvest({
+                name: lastHarvest?.name ?? "buah",
+                points: backendAdded,
+            });
+        }
+    }, [backendPoints, backendAdded]);
 
     // Tanam
     const plantFruit = (fruit) => {
@@ -72,26 +58,59 @@ export default function PageGames({ fruits }) {
     // Panen
     const harvestFruit = (index) => {
         const newPlots = [...plots];
-        if (newPlots[index].stage === 4) {
+        if (newPlots[index].stage === 4 && !harvesting[index]) {
+            // cek kalau belum sedang harvesting
             if (inventory.length < 3) {
                 const harvestedFruit = newPlots[index].fruit;
 
-                // tambah ke inventory
-                setInventory([...inventory, harvestedFruit]);
+                // Disable tombol panen sementara
+                const newHarvesting = [...harvesting];
+                newHarvesting[index] = true;
+                setHarvesting(newHarvesting);
 
-                // reset lahan
-                newPlots[index] = { fruit: null, stage: 0 };
-                setPlots(newPlots);
+                router.post(
+                    "/admin/harvest",
+                    { fruit_id: harvestedFruit.id },
+                    {
+                        preserveScroll: true,
+                        preserveState: true,
+                        only: ["points", "added"],
+                        onSuccess: (page) => {
+                            setTotalPoints(page.props.points);
+                            setLastHarvest({
+                                name: harvestedFruit.name,
+                                points: harvestedFruit.points,
+                            });
 
-                // tambahkan poin (pastikan angka)
-                const fruitPoints = Number(harvestedFruit.points) || 0;
-                setTotalPoints((prev) => prev + fruitPoints);
+                            setInventory([...inventory, harvestedFruit]);
 
-                // simpan info panen terakhir
-                setLastHarvest({
-                    name: harvestedFruit.name,
-                    points: fruitPoints,
-                });
+                            // Reset lahan
+                            const updatedPlots = [...plots];
+                            updatedPlots[index] = { fruit: null, stage: 0 };
+                            setPlots(updatedPlots);
+
+                            // Update poin
+                            setTotalPoints(page.props.points);
+
+                            // Update last harvest
+                            setLastHarvest({
+                                name: harvestedFruit.name,
+                                points: harvestedFruit.points,
+                            });
+
+                            // Enable tombol panen kembali (meskipun lahan kosong, safe)
+                            const resetHarvesting = [...harvesting];
+                            resetHarvesting[index] = false;
+                            setHarvesting(resetHarvesting);
+                        },
+                        onError: () => {
+                            // Kalau error, tombol kembali aktif
+                            const resetHarvesting = [...harvesting];
+                            resetHarvesting[index] = false;
+                            setHarvesting(resetHarvesting);
+                        },
+                    }
+                );
             } else {
                 alert("Inventori penuh! Donasikan dulu.");
             }
@@ -203,22 +222,21 @@ export default function PageGames({ fruits }) {
                     </button>
 
                     {/* Total Poin */}
-                    <div className="flex items-center justify-center">
-                        <div className="bg-yellow-100 items-center justify-center align-items-center mt-5 rounded-2xl shadow-md flex flex-col items-center px-6 py-4 w-[90%] max-w-3xl mb-6">
-                            <p className="font-semibold text-[#3A2E17]">
-                                Total Poin Kamu
-                            </p>
-                            <p className="text-2xl font-bold text-[#3A2E17]">
-                                {totalPoints} pts
-                            </p>
+                    <div className="bg-yellow-100 mt-5 rounded-2xl shadow-md flex flex-col items-center px-6 py-4 w-[90%] max-w-3xl mb-6">
+                        <p className="font-semibold text-[#3A2E17]">
+                            Total Poin Kamu
+                        </p>
+                        <p className="text-2xl font-bold text-[#3A2E17]">
+                            {totalPoints} pts
+                        </p>
 
-                            {lastHarvest && (
-                                <p className="mt-2 text-green-700 text-sm">
-                                    🎉 Baru saja panen <b>{lastHarvest.name}</b>{" "}
-                                    +{lastHarvest.points} pts
-                                </p>
-                            )}
-                        </div>
+                        {lastHarvest && (
+                            <p className="mt-2 text-green-700 text-sm">
+                                🎉 Baru saja panen{" "}
+                                <b>{lastHarvest.name ?? "buah"}</b> +
+                                {lastHarvest.points} pts
+                            </p>
+                        )}
                     </div>
                 </div>
 

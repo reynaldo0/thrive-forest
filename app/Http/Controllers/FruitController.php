@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Fruit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class FruitController extends Controller
 {
     public function publicIndex()
     {
+        $user = Auth::user();
+
         $fruits = Fruit::all()->map(function ($fruit) {
             return [
                 'id' => $fruit->id,
                 'name' => $fruit->name,
-                'points' => $fruit->points,
+                'points' => (int) $fruit->points,
                 'img' => $fruit->img,
                 'stages' => is_string($fruit->stages) ? json_decode($fruit->stages, true) : $fruit->stages,
             ];
@@ -22,6 +26,8 @@ class FruitController extends Controller
 
         return Inertia::render('Games', [
             'fruits' => $fruits,
+            'points' => $user ? $user->points : 0,
+            'added' => null,
         ]);
     }
 
@@ -128,5 +134,47 @@ class FruitController extends Controller
     {
         $fruit->delete();
         return redirect()->route('fruits.index')->with('success', 'Buah berhasil dihapus!');
+    }
+
+    public function harvest(Request $request)
+    {
+        $request->validate([
+            'fruit_id' => 'required|exists:fruits,id',
+        ]);
+
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        $fruit = Fruit::findOrFail($request->fruit_id);
+        $points = (int) $fruit->points;
+
+        DB::transaction(function () use ($user, $points) {
+            $user->increment('points', $points);
+
+            if ($user->school_id) {
+                $user->school()->increment('points', $points);
+            }
+        });
+
+        $user->refresh();
+
+        // Ambil semua buah (atau bisa dikirim props yang dibutuhkan saja)
+        $fruits = Fruit::all()->map(function ($f) {
+            return [
+                'id'     => $f->id,
+                'name'   => $f->name,
+                'img'    => $f->img,
+                'stages' => is_string($f->stages) ? json_decode($f->stages, true) : $f->stages,
+                'points' => (int) $f->points,
+            ];
+        });
+
+        return Inertia::render('Games', [
+            'fruits' => $fruits,
+            'points' => $user->points,
+            'added'  => $points,
+        ]);
     }
 }

@@ -63,11 +63,19 @@ class SchoolController extends Controller
 
         $school = School::where('team_code', $request->team_code)->first();
 
+        // Simpan sekolah ke user
         $user->school_id = $school->id;
         $user->save();
 
+        // 🚨 Tambahkan poin user yang sudah ada ke poin sekolah
+        if ($user->points > 0) {
+            $school->points += $user->points;
+            $school->save();
+        }
+
         return redirect()->back()->with('success', 'Berhasil bergabung dengan sekolah ' . $school->name);
     }
+
 
     public function leaveSchool()
     {
@@ -79,11 +87,23 @@ class SchoolController extends Controller
             ]);
         }
 
+        $school = $user->school;
+
+        // 🚨 Kurangi poin sekolah dengan poin user saat keluar
+        if ($school && $user->points > 0) {
+            $school->points -= $user->points;
+            if ($school->points < 0) {
+                $school->points = 0; // biar ga minus
+            }
+            $school->save();
+        }
+
         $user->school_id = null;
         $user->save();
 
         return back()->with('success', 'Kamu telah keluar dari sekolah.');
     }
+
 
     /**
      * Leaderboard sekolah
