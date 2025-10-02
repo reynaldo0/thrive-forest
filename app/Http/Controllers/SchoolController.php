@@ -6,6 +6,7 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class SchoolController extends Controller
@@ -24,12 +25,14 @@ class SchoolController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'team_code' => 'required|string|unique:schools,team_code',
         ]);
+
+        // generate random team code (8 karakter)
+        $validated['team_code'] = strtoupper(Str::random(8));
 
         School::create($validated);
 
-        return redirect()->route('schools.index');
+        return redirect()->route('schools.index')->with('success', 'Sekolah berhasil ditambahkan dengan kode tim: ' . $validated['team_code']);
     }
 
     public function joinTeamcode()
@@ -63,7 +66,7 @@ class SchoolController extends Controller
         $user->school_id = $school->id;
         $user->save();
 
-        return redirect()->back()->with('success', 'Berhasil bergabung dengan sekolah '.$school->name);
+        return redirect()->back()->with('success', 'Berhasil bergabung dengan sekolah ' . $school->name);
     }
 
     public function leaveSchool()
@@ -87,19 +90,7 @@ class SchoolController extends Controller
      */
     public function leaderboard()
     {
-        $schools = DB::table('schools')
-            ->leftJoin('users', 'users.school_id', '=', 'schools.id')
-            ->leftJoin('user_points', 'user_points.user_id', '=', 'users.id')
-            ->select(
-                'schools.id',
-                'schools.name',
-                DB::raw('COUNT(DISTINCT users.id) as users_count'),
-                DB::raw('COALESCE(SUM(user_points.points), 0) as total_points')
-            )
-            ->groupBy('schools.id', 'schools.name')
-            ->orderByDesc('total_points')
-            ->limit(10)
-            ->get();
+        $schools = School::orderBy('points', 'desc')->get();
 
         return Inertia::render('Dashboard/School/Leaderboard', [
             'schools' => $schools,
