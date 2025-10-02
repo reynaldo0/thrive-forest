@@ -4,6 +4,7 @@ import Vismis from "./About/Vismis";
 import ZeroHunger from "./About/Zero";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 import VisiMisi from "./About/Vismis";
 import TeamNutriverse from "./About/Team";
@@ -18,6 +19,7 @@ const About = () => {
             <ZeroHunger/>
             <TeamNutriverse/>
             <Footer/>
+            <Ai/>
         </>
     );
 };

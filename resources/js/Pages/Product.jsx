@@ -5,6 +5,7 @@ import Seminar from "./Product/Seminar";
 import ForumKomunitas from "./Product/ForumKomunitas";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 import KomuIntro from "./Product/Komunitas";
 
@@ -18,6 +19,7 @@ const Product = () => {
             <Seminar/>
             <ForumKomunitas/>
             <Footer/>
+            <Ai/>
         </>
     );
 };

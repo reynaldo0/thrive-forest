@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react";
+
 export default function FiturWebsite() {
   return (
     <section className="w-full max-w-5xl mx-auto py-16 px-6">
@@ -15,7 +17,7 @@ export default function FiturWebsite() {
           {/* Kiri */}
           <div className="flex flex-col items-end justify-center gap-20">
             {/* Buku Terpadu */}
-            <div className="flex flex-col items-center text-center group">
+            <Link href="/buku-terpadu" className="flex flex-col items-center text-center group cursor-pointer">
               <img
                 src="/icon/nuti2.png "
                 alt="Buku Terpadu"
@@ -24,10 +26,10 @@ export default function FiturWebsite() {
               <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
                 Buku Terpadu
               </span>
-            </div>
+            </Link>
 
             {/* Produk Unggul */}
-            <div className="flex flex-col items-center text-center group">
+            <Link href="/produk-unggul" className="flex flex-col items-center text-center group cursor-pointer">
               <img
                 src="/icon/nuti3.png"
                 alt="Produk Unggul"
@@ -36,13 +38,13 @@ export default function FiturWebsite() {
               <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
                 Produk Unggul
               </span>
-            </div>
+            </Link>
           </div>
 
           {/* Kanan */}
           <div className="flex flex-col items-start justify-center gap-20">
             {/* AI Interaktif */}
-            <div className="flex flex-col items-center text-center group">
+            <Link href="/ai" className="flex flex-col items-center text-center group cursor-pointer">
               <img
                 src="/icon/nuti1.png"
                 alt="AI Interaktif"
@@ -51,10 +53,10 @@ export default function FiturWebsite() {
               <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
                 AI Interaktif
               </span>
-            </div>
+            </Link>
 
             {/* Komunitas */}
-            <div className="flex flex-col items-center text-center group">
+            <Link href="/komunitas" className="flex flex-col items-center text-center group cursor-pointer">
               <img
                 src="/icon/nuti1.png"
                 alt="Komunitas"
@@ -63,10 +65,10 @@ export default function FiturWebsite() {
               <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
                 Komunitas
               </span>
-            </div>
+            </Link>
 
             {/* Games */}
-            <div className="flex flex-col items-center text-center group">
+            <Link href="/games" className="flex flex-col items-center text-center group cursor-pointer">
               <img
                 src="/icon/nuti4.png"
                 alt="Games"
@@ -75,7 +77,7 @@ export default function FiturWebsite() {
               <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
                 Games
               </span>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

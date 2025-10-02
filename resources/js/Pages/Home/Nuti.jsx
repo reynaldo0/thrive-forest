@@ -103,13 +103,13 @@ export default function NutiIntro() {
       </section>
 
        {/* Maskot pojok kanan bawah */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
+      {/* <div className="fixed bottom-4 right-4 animate-bounce">
         <img
           src="/icon/maskot.png"
           alt="maskot"
           className="w-20 md:w-24 drop-shadow-xl"
         />
-      </div>
+      </div> */}
     </>
   );
 }

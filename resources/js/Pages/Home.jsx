@@ -2,6 +2,7 @@ import React from "react";
 import HeroHome from "./Home/Hero";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 import NutiIntro from "./Home/Nuti";
 import TujuanSection from "./Home/Tujuan";
@@ -18,6 +19,7 @@ const Home = () => {
             <TujuanSection/>
             <FiturWebsite/>
             <Footer/>
+            <Ai/>
         </>
     );
 };

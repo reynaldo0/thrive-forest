@@ -61,28 +61,6 @@ export default function FormFooter({ animateForm = true }) {
           Kirim
         </button>
       </form>
-
-       {/* Maskot pojok kanan bawah */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
-        <img
-          src="/icon/maskot.png"
-          alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
-        />
-      </div>
-
-      {/* Footer */}
-      {/* <div className="mt-16 flex flex-col md:flex-row justify-between items-center text-white">
-        <p className="font-bold">EduForest .......................</p>
-        <div className="flex gap-4 mt-4 md:mt-0">
-          <FaFacebookF />
-          <FaTwitter />
-          <FaInstagram />
-          <FaLinkedinIn />
-          <FaYoutube />
-        </div>
-      </div> */}
-
     </section>
   );
 }

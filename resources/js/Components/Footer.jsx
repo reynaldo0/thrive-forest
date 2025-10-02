@@ -34,7 +34,7 @@ export default function Footer() {
             <li><a href="#" className="hover:underline">Syarat dan Ketentuan</a></li>
             <li><a href="#" className="hover:underline">Emergency Service</a></li>
             <li><a href="#" className="hover:underline">Tentang Kami</a></li>
-            <li><a href="#" className="hover:underline">Bergabung dengan HatiPlong</a></li>
+            <li><a href="#" className="hover:underline">Bergabung dengan Nutriverse</a></li>
           </ul>
         </div>
 

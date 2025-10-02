@@ -4,6 +4,7 @@ import RulesLeaderboard from "./Games/Leaderboard";
 import PageGames from "./Games/PageGames";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 
 const Games = () => {
@@ -15,6 +16,7 @@ const Games = () => {
             <RulesLeaderboard/>
             <PageGames/>
             <Footer/>
+            <Ai/>
         </>
     );
 };
