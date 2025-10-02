@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react";
+
 export default function FiturWebsite() {
   return (
     <section className="w-full min-h-screen flex items-center justify-center py-16 px-6">
@@ -12,72 +14,71 @@ export default function FiturWebsite() {
           {/* Garis Tengah */}
           <div className="absolute left-1/2 top-8 bottom-8 w-[2px] bg-green-200"></div>
 
-          <div className="grid grid-cols-2 gap-16 md:gap-24 w-full max-w-4xl md:max-w-5xl lg:max-w-6xl">
-            {/* Kiri */}
-            <div className="flex flex-col items-end justify-center gap-20 md:gap-28">
-              {/* Buku Terpadu */}
-              <div className="flex flex-col items-center text-center group">
-                <img
-                  src="/icon/nuti2.png"
-                  alt="Buku Terpadu"
-                  className="w-28 md:w-40 lg:w-48 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:animate-bounce"
-                />
-                <span className="mt-3 text-[#3B3B0E] text-lg md:text-xl lg:text-2xl font-medium">
-                  Buku Terpadu
-                </span>
-              </div>
+        <div className="grid grid-cols-2 gap-16 w-full max-w-4xl">
+          {/* Kiri */}
+          <div className="flex flex-col items-end justify-center gap-20">
+            {/* Buku Terpadu */}
+            <Link href="/buku-terpadu" className="flex flex-col items-center text-center group cursor-pointer">
+              <img
+                src="/icon/nuti2.png "
+                alt="Buku Terpadu"
+                className="w-28 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:animate-bounce"
+              />
+              <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
+                Buku Terpadu
+              </span>
+            </Link>
 
-              {/* Produk Unggul */}
-              <div className="flex flex-col items-center text-center group">
-                <img
-                  src="/icon/nuti3.png"
-                  alt="Produk Unggul"
-                  className="w-28 md:w-40 lg:w-48 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-bounce"
-                />
-                <span className="mt-3 text-[#3B3B0E] text-lg md:text-xl lg:text-2xl font-medium">
-                  Produk Unggul
-                </span>
-              </div>
-            </div>
+            {/* Produk Unggul */}
+            <Link href="/produk-unggul" className="flex flex-col items-center text-center group cursor-pointer">
+              <img
+                src="/icon/nuti3.png"
+                alt="Produk Unggul"
+                className="w-28 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-bounce"
+              />
+              <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
+                Produk Unggul
+              </span>
+            </Link>
+          </div>
 
-            {/* Kanan */}
-            <div className="flex flex-col items-start justify-center gap-20 md:gap-28">
-              {/* AI Interaktif */}
-              <div className="flex flex-col items-center text-center group">
-                <img
-                  src="/icon/nuti1.png"
-                  alt="AI Interaktif"
-                  className="w-28 md:w-40 lg:w-48 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-bounce"
-                />
-                <span className="mt-3 text-[#3B3B0E] text-lg md:text-xl lg:text-2xl font-medium">
-                  AI Interaktif
-                </span>
-              </div>
+          {/* Kanan */}
+          <div className="flex flex-col items-start justify-center gap-20">
+            {/* AI Interaktif */}
+            <Link href="/ai" className="flex flex-col items-center text-center group cursor-pointer">
+              <img
+                src="/icon/nuti1.png"
+                alt="AI Interaktif"
+                className="w-28 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-bounce"
+              />
+              <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
+                AI Interaktif
+              </span>
+            </Link>
 
-              {/* Komunitas */}
-              <div className="flex flex-col items-center text-center group">
-                <img
-                  src="/icon/nuti1.png"
-                  alt="Komunitas"
-                  className="w-28 md:w-40 lg:w-48 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:animate-bounce"
-                />
-                <span className="mt-3 text-[#3B3B0E] text-lg md:text-xl lg:text-2xl font-medium">
-                  Komunitas
-                </span>
-              </div>
+            {/* Komunitas */}
+            <Link href="/komunitas" className="flex flex-col items-center text-center group cursor-pointer">
+              <img
+                src="/icon/nuti1.png"
+                alt="Komunitas"
+                className="w-28 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:animate-bounce"
+              />
+              <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
+                Komunitas
+              </span>
+            </Link>
 
-              {/* Games */}
-              <div className="flex flex-col items-center text-center group">
-                <img
-                  src="/icon/nuti4.png"
-                  alt="Games"
-                  className="w-28 md:w-40 lg:w-48 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-bounce"
-                />
-                <span className="mt-3 text-[#3B3B0E] text-lg md:text-xl lg:text-2xl font-medium">
-                  Games
-                </span>
-              </div>
-            </div>
+            {/* Games */}
+            <Link href="/games" className="flex flex-col items-center text-center group cursor-pointer">
+              <img
+                src="/icon/nuti4.png"
+                alt="Games"
+                className="w-28 drop-shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-bounce"
+              />
+              <span className="mt-3 text-[#3B3B0E] text-lg font-medium">
+                Games
+              </span>
+            </Link>
           </div>
         </div>
       </div>

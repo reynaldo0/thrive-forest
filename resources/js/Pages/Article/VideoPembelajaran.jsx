@@ -74,34 +74,6 @@ export default function Video() {
           className="rounded-xl w-full h-full object-cover"
         />
       </div>
-
-      {/* Maskot pojok kanan bawah */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
-        <img
-          src="/icon/maskot.png"
-          alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
-        />
-      </div>
-
-      {/* Footer */}
-      {/* <footer className="mt-auto w-full bg-green-900 text-white py-6 px-8 flex justify-between items-center">
-        <p className="text-sm font-medium tracking-wide">EduForest ....................</p>
-        <div className="flex space-x-4">
-          {[
-            { src: "https://cdn-icons-png.flaticon.com/512/733/733579.png", alt: "twitter" },
-            { src: "https://cdn-icons-png.flaticon.com/512/733/733547.png", alt: "facebook" },
-            { src: "https://cdn-icons-png.flaticon.com/512/733/733561.png", alt: "instagram" },
-            { src: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", alt: "linkedin" },
-            { src: "https://cdn-icons-png.flaticon.com/512/1384/1384060.png", alt: "youtube" },
-            { src: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png", alt: "tiktok" },
-          ].map((icon, i) => (
-            <a key={i} href="#" className="hover:scale-110 transition-transform duration-300">
-              <img src={icon.src} alt={icon.alt} className="w-6 h-6" />
-            </a>
-          ))}
-        </div>
-      </footer> */}
     </div>
   );
 }

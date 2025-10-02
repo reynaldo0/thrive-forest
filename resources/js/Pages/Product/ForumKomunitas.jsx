@@ -47,15 +47,6 @@ export default function ForumKomunitas() {
           </div>
         </div>
       </div>
-
-      {/* Maskot di luar card, pojok kanan bawah layar */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
-        <img
-          src="/icon/maskot.png"
-          alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
-        />
-      </div>
     </section>
   );
 }

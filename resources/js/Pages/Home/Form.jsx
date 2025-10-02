@@ -185,15 +185,15 @@ const Form = () => {
                         className="w-full rounded-2xl bg-gray-100 px-5 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-700 placeholder-gray-400 shadow-sm resize-none border-0"
                         rows="4"
                     />
-
-                    <button
+                     <button
                         type="submit"
                         disabled={processing}
                         className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-4 rounded-full shadow-lg hover:opacity-90 transition disabled:opacity-50"
                     >
                         {processing ? "Mengirim..." : "Kirim"}
-                    </button>
-                </div>
+                   </button>
+            </div>
+      </form>
 
                 {/* Illustration */}
                 <div className="flex justify-center items-center">
@@ -203,7 +203,6 @@ const Form = () => {
                         className="w-72 md:w-[500px] object-contain hover:scale-105 transition-transform duration-300"
                     />
                 </div>
-            </form>
 
             {/* Modal */}
             {modalOpen && (

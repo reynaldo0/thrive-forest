@@ -77,24 +77,42 @@ export default function NutiIntro() {
                     </div>
                 </div>
 
-                {/* Style Animasi Custom */}
-                <style jsx>{`
-                    @keyframes float {
-                        0% {
-                            transform: translateY(0px);
-                        }
-                        50% {
-                            transform: translateY(-14px);
-                        }
-                        100% {
-                            transform: translateY(0px);
-                        }
-                    }
-                    .animate-float {
-                        animation: float 3s ease-in-out infinite;
-                    }
-                `}</style>
-            </section>
-        </>
-    );
+        {/* Style Animasi Custom */}
+        <style jsx>{`
+          @keyframes float {
+            0% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-10px);
+            }
+            100% {
+              transform: translateY(0px);
+            }
+          }
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
+          }
+        `}</style>
+      </section>
+
+      {/* Bagian Informasi Tambahan */}
+      <section className="w-full bg-[#3B5B1E] py-6 px-4 text-center -mt-4 rounded-md shadow-md">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+          Butuh informasi lebih lanjut tentang{" "}
+          <span className="text-green-300">NutriTree??</span>
+        </h2>
+        <p className="text-green-100">Yuk simak di sini!!</p>
+      </section>
+
+       {/* Maskot pojok kanan bawah */}
+      {/* <div className="fixed bottom-4 right-4 animate-bounce">
+        <img
+          src="/icon/maskot.png"
+          alt="maskot"
+          className="w-20 md:w-24 drop-shadow-xl"
+        />
+      </div> */}
+    </>
+  );
 }

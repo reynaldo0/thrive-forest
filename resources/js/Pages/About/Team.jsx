@@ -89,34 +89,6 @@ export default function TeamNutriverse() {
         ))}
       </div>
 
-       {/* Maskot pojok kanan bawah */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
-        <img
-          src="/icon/maskot.png"
-          alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
-        />
-      </div>
-
-      {/* Footer (seperti Code B) */}
-      {/* <footer className="mt-auto w-full bg-green-900 text-white py-8 px-9 flex justify-between items-center">
-        <p className="text-sm font-medium tracking-wide">EduForest ....................</p>
-        <div className="flex space-x-4">
-          {[
-            { icon: <FaTwitter />, alt: "twitter" },
-            { icon: <FaFacebookF />, alt: "facebook" },
-            { icon: <FaInstagram />, alt: "instagram" },
-            { icon: <FaLinkedinIn />, alt: "linkedin" },
-            { icon: <FaYoutube />, alt: "youtube" },
-          ].map((social, i) => (
-            <a key={i} href="#" className="hover:scale-110 transition-transform duration-300">
-              {social.icon}
-            </a>
-          ))}
-        </div>
-      </footer> */}
-
-      {/* Animasi */}
       <style>{`
         .animate-fadeInUp {
           opacity: 0;

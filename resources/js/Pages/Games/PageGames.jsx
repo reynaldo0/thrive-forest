@@ -246,15 +246,6 @@ export default function PageGames() {
         <p className="font-bold text-[#3A2E17]">{donation}x Buah</p>
       </div>
 
-      {/* Maskot */}
-      <div className="fixed bottom-4 right-4 animate-bounce">
-        <img
-          src="/icon/maskot.png"
-          alt="maskot"
-          className="w-20 md:w-24 drop-shadow-xl"
-        />
-      </div>
-
       {/* Rumput Parallax */}
       <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">
         <img
