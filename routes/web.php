@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SeminarController;
+use App\Http\Controllers\TebakGiziController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -106,6 +107,23 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::resource('seminars', SeminarController::class);
     Route::post('/registrations', [RegistrationController::class, 'store'])->name('registrations.store');
+
+    // Game Items CRUD
+    Route::get('/gizi', [TebakGiziController::class, 'index'])->name('gizi.index'); // list semua item
+    Route::get('/gizi/create', [TebakGiziController::class, 'create'])->name('gizi.create'); // form tambah
+    Route::post('/gizi', [TebakGiziController::class, 'store'])->name('gizi.store'); // simpan item baru
+    Route::get('/gizi/{item}/edit', [TebakGiziController::class, 'edit'])->name('gizi.edit'); // form edit
+    Route::put('/gizi/{item}', [TebakGiziController::class, 'update'])->name('gizi.update'); // update item
+    Route::delete('/gizi/{item}', [TebakGiziController::class, 'destroy'])->name('gizi.destroy'); // hapus item
+
+    // Questions per Item
+    Route::get('/gizi/{item}/questions', [TebakGiziController::class, 'questions'])->name('gizi.questions.index'); // list pertanyaan
+    Route::get('/gizi/{item}/questions/create', [TebakGiziController::class, 'createQuestion'])->name('gizi.questions.create'); // form tambah pertanyaan
+    Route::post('/gizi/{item}/questions', [TebakGiziController::class, 'storeQuestion'])->name('gizi.questions.store'); // simpan pertanyaan
+    Route::get('/gizi/{item}/questions/{question}/edit', [TebakGiziController::class, 'editQuestion'])->name('gizi.questions.edit'); // form edit pertanyaan
+    Route::put('/gizi/{item}/questions/{question}', [TebakGiziController::class, 'updateQuestion'])->name('gizi.questions.update'); // update pertanyaan
+    Route::delete('/gizi/{item}/questions/{question}', [TebakGiziController::class, 'destroyQuestion'])->name('gizi.questions.destroy'); // hapus pertanyaan
+
 });
 
 require __DIR__ . '/auth.php';
