@@ -1,6 +1,7 @@
 import React from "react";
-import HeroGamess from "./Games/Hero";
-import RulesLeaderboard from "./Games/Leaderboard";
+import HeroGamess from "./Gamess/Hero";
+import RulesLeaderboard from "./Gamess/Rules";
+import PageGamess from "./Gamess/PageGamess";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import Ai from "@/Components/Ai";
@@ -13,6 +14,7 @@ const Games = ({fruits}) => {
             <Navbar />
             <HeroGamess />
             <RulesLeaderboard/>
+            <PageGamess/>
             <Footer/>
             <Ai/>
         </>

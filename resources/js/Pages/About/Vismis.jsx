@@ -11,10 +11,14 @@ export default function VisiMisi() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#fafbe9] font-sans px-6 pt-16 pb-12 relative">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#f6fbe9] to-[#e8f5d4] font-sans px-6 pt-20 pb-16 overflow-hidden">
+      {/* Background dekoratif */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-green-200/40 rounded-full blur-3xl"></div>
+      <div className="absolute top-40 -right-32 w-96 h-96 bg-yellow-200/40 rounded-full blur-3xl"></div>
+
       {/* Judul */}
       <h1
-        className={`text-5xl md:text-6xl font-extrabold text-[#3B3B0E] mb-12 tracking-wide transition-all duration-700 ease-out ${
+        className={`text-4xl md:text-6xl font-extrabold text-[#2F3E1E] mb-12 tracking-wide transition-all duration-700 ease-out z-10 ${
           animateText ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
         }`}
       >
@@ -23,30 +27,30 @@ export default function VisiMisi() {
 
       {/* Card */}
       <div
-        className={`bg-[#F0FCD7] rounded-3xl shadow-2xl border-2 border-green-200 p-10 md:p-14 flex flex-col gap-10 max-w-5xl w-full transition-all duration-700 ease-out ${
+        className={`relative bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-green-200/50 p-10 md:p-14 flex flex-col gap-10 max-w-5xl w-full transition-all duration-700 ease-out z-10 ${
           animateCard
             ? "opacity-100 translate-y-0 scale-100"
-            : "opacity-0 translate-y-8 scale-90"
+            : "opacity-0 translate-y-8 scale-95"
         }`}
       >
         {/* Tabs */}
-        <div className="flex justify-center gap-8">
+        <div className="flex justify-center gap-6 relative">
           <button
             onClick={() => setActiveTab("visi")}
-            className={`px-8 py-2 rounded-md font-bold shadow-md transition-all text-lg ${
+            className={`px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 relative ${
               activeTab === "visi"
-                ? "bg-[#3B3B0E] text-white scale-105"
-                : "bg-[#3B3B0E]/70 text-white/80 hover:scale-105"
+                ? "bg-green-600 text-white shadow-md scale-105"
+                : "bg-green-200/50 text-green-800 hover:bg-green-300/70"
             }`}
           >
             Visi
           </button>
           <button
             onClick={() => setActiveTab("misi")}
-            className={`px-8 py-2 rounded-md font-bold shadow-md transition-all text-lg ${
+            className={`px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 relative ${
               activeTab === "misi"
-                ? "bg-[#3B3B0E] text-white scale-105"
-                : "bg-[#3B3B0E]/70 text-white/80 hover:scale-105"
+                ? "bg-green-600 text-white shadow-md scale-105"
+                : "bg-green-200/50 text-green-800 hover:bg-green-300/70"
             }`}
           >
             Misi
@@ -54,7 +58,7 @@ export default function VisiMisi() {
         </div>
 
         {/* Isi card */}
-        <div className="text-[#2C2C2C] text-xl md:text-2xl leading-relaxed transition-all duration-700 ease-out">
+        <div className="text-[#2C2C2C] text-lg md:text-2xl leading-relaxed transition-all duration-700 ease-out">
           {activeTab === "visi" ? (
             <p
               className={`italic text-justify transition-all duration-700 ${
@@ -64,13 +68,14 @@ export default function VisiMisi() {
               }`}
             >
               Menjadi{" "}
-              <span className="font-semibold">
+              <span className="font-semibold text-green-700">
                 platform edukasi digital
               </span>{" "}
               yang inovatif dan terpercaya dalam memberikan pengetahuan praktis
               dan ilmiah tentang cara menanam tumbuhan yang baik, benar, dan
               berkelanjutan, guna mewujudkan masyarakat sehat, mandiri pangan,
-              serta berkontribusi pada tercapainya Zero Hunger.
+              serta berkontribusi pada tercapainya{" "}
+              <span className="font-bold text-green-800">Zero Hunger</span>.
             </p>
           ) : (
             <ol
@@ -80,13 +85,26 @@ export default function VisiMisi() {
                   : "opacity-0 translate-x-8"
               }`}
             >
-              <li>Menyediakan konten edukatif agar masyarakat sadar lingkungan.</li>
-              <li>Memberikan informasi praktis terkait cara bercocok tanam.</li>
-              <li>Membentuk komunitas peduli kelestarian hutan.</li>
-              <li>Menyediakan media pembelajaran interaktif.</li>
               <li>
-                Mengedukasi generasi muda tentang pentingnya SDGs Zero Hunger &
-                Climate Action.
+                <span className="font-semibold text-green-700">Menyediakan</span>{" "}
+                konten edukatif agar masyarakat sadar lingkungan.
+              </li>
+              <li>
+                <span className="font-semibold text-green-700">Memberikan</span>{" "}
+                informasi praktis terkait cara bercocok tanam.
+              </li>
+              <li>
+                <span className="font-semibold text-green-700">Membentuk</span>{" "}
+                komunitas peduli kelestarian hutan.
+              </li>
+              <li>
+                <span className="font-semibold text-green-700">Menyediakan</span>{" "}
+                media pembelajaran interaktif.
+              </li>
+              <li>
+                <span className="font-semibold text-green-700">Mengedukasi</span>{" "}
+                generasi muda tentang pentingnya SDGs Zero Hunger & Climate
+                Action.
               </li>
             </ol>
           )}

@@ -37,9 +37,10 @@ export default function HeroGamess() {
                 <p className="mt-4 text-gray-600 max-w-2xl z-20 font-nunito font-bold pt-2 md:pt-5 text-xl md:text-4xl text-white md:pb-10">
                     Yuk bermain game tanaman yang seru!!
                 </p>
-                <button className="mt-6 px-8 md:px-14 py-4 md:py-6 bg-[#EDFFCD] text-[#3F3313] rounded-full shadow-md hover:bg-blue-700 transition z-20 text-2xl md:text-4xl font-nunito font-extrabold">
+                <button className="mt-6 px-8 md:px-14 py-4 md:py-6 bg-[#EDFFCD] text-[#3F3313] rounded-full shadow-md hover:bg-[#90C444] hover:text-white transition z-20 text-2xl md:text-4xl font-nunito font-extrabold">
                     Mulai
                 </button>
+
 
                 {/* Ilustrasi utama */}
                 <div className="mt-10 absolute bottom-0 ">

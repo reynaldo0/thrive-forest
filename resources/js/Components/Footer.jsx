@@ -16,9 +16,11 @@ export default function Footer() {
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <img src="/icon/logo-t.png" alt="Nutriverse" className="w-14" />
-            <span className="font-bold text-lg text-white">Nutriverse</span>
+            <span className="font-bold text-xl md:text-2xl text-white">
+              Nutriverse
+            </span>
           </div>
-          <p className="text-sm text-black">
+          <p className="text-base text-black leading-relaxed">
             PT. Resanoma Inovasi Sehat <br />
             Gedung AD Premier lt 9 <br />
             Jl TB. Simatupang No. 5 <br />
@@ -28,8 +30,10 @@ export default function Footer() {
 
         {/* Tautan Penting */}
         <div className="space-y-3">
-          <h3 className="font-bold text-black">Tautan Penting</h3>
-          <ul className="space-y-2 text-sm text-black">
+          <h3 className="font-bold text-lg md:text-xl text-black">
+            Tautan Penting
+          </h3>
+          <ul className="space-y-2 text-base text-black">
             <li><a href="#" className="hover:underline">Kebijakan Privasi</a></li>
             <li><a href="#" className="hover:underline">Syarat dan Ketentuan</a></li>
             <li><a href="#" className="hover:underline">Emergency Service</a></li>
@@ -40,27 +44,27 @@ export default function Footer() {
 
         {/* Follow Us */}
         <div className="space-y-3">
-          <h3 className="font-bold text-black">Follow Us</h3>
+          <h3 className="font-bold text-lg md:text-xl text-black">Follow Us</h3>
           <div className="flex gap-3">
-            <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-[#1DA1F2] text-white hover:scale-110 transition">
+            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1DA1F2] text-white hover:scale-110 transition">
               <FaTwitter />
             </a>
-            <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-[#1877F2] text-white hover:scale-110 transition">
+            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1877F2] text-white hover:scale-110 transition">
               <FaFacebookF />
             </a>
-            <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-[#E1306C] text-white hover:scale-110 transition">
+            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#E1306C] text-white hover:scale-110 transition">
               <FaInstagram />
             </a>
-            <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-[#0077B5] text-white hover:scale-110 transition">
+            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#0077B5] text-white hover:scale-110 transition">
               <FaLinkedinIn />
             </a>
-            <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-[#BD081C] text-white hover:scale-110 transition">
+            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#BD081C] text-white hover:scale-110 transition">
               <FaPinterestP />
             </a>
-            <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-[#FF0000] text-white hover:scale-110 transition">
+            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#FF0000] text-white hover:scale-110 transition">
               <FaYoutube />
             </a>
-            <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-[#010101] text-white hover:scale-110 transition">
+            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#010101] text-white hover:scale-110 transition">
               <FaTiktok />
             </a>
           </div>

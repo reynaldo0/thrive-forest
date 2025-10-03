@@ -37,10 +37,7 @@ export default function HeroAbout() {
                 <p className="mt-4 text-gray-600 max-w-2xl z-20 font-nunito font-bold pt-2 md:pt-5 text-xl md:text-4xl text-white md:pb-10">
                     Ingin tahu lebih dalam mengenai Nutriverse? Yuk simak halaman ini
                 </p>
-                <button className="mt-6 px-8 md:px-14 py-4 md:py-6 bg-[#EDFFCD] text-[#3F3313] rounded-full shadow-md hover:bg-blue-700 transition z-20 text-2xl md:text-4xl font-nunito font-extrabold">
-                    Mulai
-                </button>
-
+                
                 {/* Ilustrasi utama */}
                 <div className="mt-10 absolute bottom-0 ">
                     <img

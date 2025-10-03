@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function HeroHome() {
     const [offsetY, setOffsetY] = useState(0);
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => setOffsetY(window.scrollY);
@@ -37,7 +38,16 @@ export default function HeroHome() {
                 <p className="mt-4 text-gray-600 max-w-2xl z-20 font-nunito font-bold pt-2 md:pt-5 text-xl md:text-4xl text-white md:pb-10">
                     TIngkatkan literasi kamu dengan pemanfaatan tumbuhan
                 </p>
-                <button className="mt-6 px-8 md:px-14 py-4 md:py-6 bg-[#EDFFCD] text-[#3F3313] rounded-full shadow-md hover:bg-blue-700 transition z-20 text-2xl md:text-4xl font-nunito font-extrabold">
+                <button
+                    onClick={() => setClicked(true)}
+                    className={`mt-6 px-8 md:px-14 py-4 md:py-6 rounded-full shadow-md transition z-20 text-2xl md:text-4xl font-nunito font-extrabold 
+                        ${
+                            clicked
+                                ? "bg-[#90C444] text-white"
+                                : "bg-[#EDFFCD] text-[#3F3313] hover:bg-[#90C444] hover:text-white"
+                        }
+                    `}
+                >
                     Mulai
                 </button>
 

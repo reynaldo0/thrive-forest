@@ -31,12 +31,12 @@ const Navbar = () => {
                 </div>
 
                 {/* Menu Desktop */}
-                <div className="hidden md:flex flex-1 items-center justify-center space-x-6 text-gray-900 font-medium">
+                <div className="hidden md:flex flex-1 items-center justify-center space-x-6 text-gray-900 font-bold text-xl">
                     {mainMenu.map((item) => (
                         <Link
                             key={item.name}
                             href={item.path}
-                            className="relative transition duration-300 hover:text-primary-100 font-bold text-black"
+                            className="relative transition duration-300 hover:text-primary-100"
                         >
                             {item.name}
                         </Link>
@@ -44,20 +44,20 @@ const Navbar = () => {
                 </div>
 
                 {/* Auth Menu Desktop */}
-                <div className="hidden md:flex items-center space-x-4">
+                <div className="hidden md:flex items-center space-x-4 text-lg">
                     {authMenu.map((item) =>
                         item.name === "Login" ? (
                             <Link
                                 key={item.name}
                                 href={item.path}
-                                className="px-4 py-2 rounded-full bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200 transition duration-300 "
+                                className="px-5 py-2 rounded-full bg-secondary-200 text-white font-bold text-lg shadow-md hover:bg-primary-200 transition duration-300"
                             >
                                 {item.name}
                             </Link>
                         ) : item.name === "Sign In" ? (
                             <Link
                                 href={item.path}
-                                className="px-4 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white transition duration-300"
+                                className="px-5 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold text-lg hover:bg-primary-200 hover:text-white transition duration-300"
                             >
                                 {item.name}
                             </Link>
@@ -65,7 +65,7 @@ const Navbar = () => {
                             <Link
                                 key={item.name}
                                 href={item.path}
-                                className="px-4 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white transition duration-300"
+                                className="px-5 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold text-lg hover:bg-primary-200 hover:text-white transition duration-300"
                             >
                                 {item.name}
                             </Link>
@@ -88,7 +88,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             <div
-                className={`md:hidden fixed top-20 right-4 w-56 bg-white/80 backdrop-blur-md shadow-lg rounded-xl px-6 py-4 flex flex-col items-center space-y-4 transition-all duration-300 transform origin-top-right ${
+                className={`md:hidden fixed top-20 right-4 w-64 bg-white/80 backdrop-blur-md shadow-lg rounded-xl px-6 py-5 flex flex-col items-center space-y-4 transition-all duration-300 transform origin-top-right ${
                     isOpen
                         ? "opacity-100 scale-100 translate-y-0"
                         : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
@@ -99,12 +99,12 @@ const Navbar = () => {
                         key={item.name}
                         href={item.path}
                         onClick={() => setIsOpen(false)}
-                        className={`${
+                        className={`text-lg ${
                             item.name === "Login"
-                                ? "w-full text-center px-4 py-2 rounded-full bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200"
+                                ? "w-full text-center px-5 py-2 rounded-full bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200"
                                 : item.name === "Sign In"
-                                ? "w-full text-center px-4 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white"
-                                : "text-gray-900 font-medium hover:text-primary-100 transition"
+                                ? "w-full text-center px-5 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white"
+                                : "text-gray-900 font-semibold hover:text-primary-100 transition"
                         }`}
                     >
                         {item.name}
