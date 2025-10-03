@@ -27,7 +27,12 @@ export default function ArtikelCarousel() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 py-16 bg-[#f9fbe7]">
+    <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 py-16 bg-[#FCFFEC] relative">
+        <div
+                className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center opacity-50"
+                style={{ backgroundAttachment: "fixed" }}
+            />
+
       <h2 className="text-5xl md:text-6xl font-extrabold text-[#3B3B0E] mb-12 tracking-wide">
         Artikel Umum
       </h2>

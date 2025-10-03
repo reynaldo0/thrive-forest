@@ -60,6 +60,12 @@ export default function BukuTerpadu() {
             ref={sectionRef}
             className="w-full min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] flex flex-col md:flex-col items-center justify-center gap-12 py-16 relative overflow-hidden px-6"
         >
+            <div
+                className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center opacity-50"
+                style={{ backgroundAttachment: "fixed" }}
+            />
+
+
             {/* 3D Object */}
             <div className="flex-1 flex justify-center relative w-full">
                 <div
