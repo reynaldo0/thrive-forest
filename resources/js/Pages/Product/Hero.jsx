@@ -13,7 +13,7 @@ export default function HeroKomunitas() {
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#90C444] to-[#FCFFEC]">
             <div
-                className="absolute inset-0 bg-[url('/background/herohome.png')] bg-cover bg-center opacity-50"
+                className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center opacity-50"
                 style={{ backgroundAttachment: "fixed" }}
             />
 
@@ -41,7 +41,7 @@ export default function HeroKomunitas() {
                 {/* Ilustrasi utama */}
                 <div className="mt-10 absolute bottom-0 ">
                     <img
-                        src="/illustrasi/herohome.png"
+                        src="/illustrasi/herokomunitas.png"
                         alt="ASN"
                         className="w-72 md:w-full mx-auto opacity-70 -z-10"
                     />

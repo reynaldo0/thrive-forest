@@ -8,7 +8,12 @@ export default function ForumKomunitas() {
   }, []);
 
   return (
-    <section className="min-h-screen flex flex-col items-center w-full px-6 pt-16 pb-12 bg-[#f9fce9] relative">
+    <section className="min-h-screen flex flex-col items-center w-full px-6 pt-16 pb-12 bg-[#FCFFEC] relative">
+        <div
+                className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center opacity-50"
+                style={{ backgroundAttachment: "fixed" }}
+            />
+
       {/* Judul */}
       <h2
         className={`text-6xl md:text-7xl font-bold text-center text-[#3B3B0E] mb-12 tracking-wide transition-all duration-700 ease-out ${

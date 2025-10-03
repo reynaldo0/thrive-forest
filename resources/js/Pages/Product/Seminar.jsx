@@ -6,13 +6,18 @@ export default function Seminar({ seminars }) {
     const [selectedEvent, setSelectedEvent] = useState(null);
 
     return (
-        <section className="min-h-screen flex flex-col items-center justify-start px-6 pt-16 pb-12 bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444]">
+        <section className="min-h-screen flex flex-col items-center justify-start px-6 pt-16 pb-12 bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] relative">
+            <div
+                className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center opacity-50"
+                style={{ backgroundAttachment: "fixed" }}
+            />
+
             <h2 className="text-5xl md:text-6xl font-extrabold text-center text-[#3B3B0E] mb-12">
                 Seminar
             </h2>
 
             {/* List Seminar */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl w-full z-10">
                 {seminars && seminars.length > 0 ? (
                     seminars.map((item) => (
                         <div
