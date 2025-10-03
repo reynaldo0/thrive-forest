@@ -15,6 +15,7 @@ export default function ArtikelCarousel() {
 
   const [current, setCurrent] = useState(0);
   const [isListView, setIsListView] = useState(false);
+
   const itemsPerPage = 3;
   const totalPages = Math.ceil(articles.length / itemsPerPage);
 
@@ -26,123 +27,122 @@ export default function ArtikelCarousel() {
     if (current < totalPages - 1) setCurrent(current + 1);
   };
 
+  // Card Component biar carousel dan list konsisten
+  const ArticleCard = ({ article }) => (
+    <div className="bg-white rounded-3xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all w-80 md:w-96 flex-shrink-0">
+      <div className="relative">
+        <img src={article.img} alt={article.title} className="rounded-t-3xl h-52 w-full object-cover" />
+        <span className="absolute bottom-3 right-3 bg-[#3B3B0E] text-white text-sm px-4 py-1 rounded-full">
+          {article.tag}
+        </span>
+      </div>
+      <div className="p-6 flex flex-col">
+        <h3 className="text-lg font-bold text-[#33691e] mb-3 bg-[#dcedc8] inline-block px-3 py-1 rounded-xl">
+          {article.title}
+        </h3>
+        <p className="text-base text-gray-700 flex-grow leading-relaxed">
+          {article.desc}
+        </p>
+        <button className="mt-6 bg-[#3B3B0E] text-white text-base py-3 rounded-xl hover:bg-[#2C2C0E] transition-all">
+          Baca Selengkapnya
+        </button>
+      </div>
+    </div>
+  );
+
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 py-16 bg-[#FCFFEC] relative">
-        <div
-                className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center opacity-50"
-                style={{ backgroundAttachment: "fixed" }}
-            />
+    <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 py-16 bg-[#FCFFEC] relative overflow-hidden">
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-top opacity-50"
+        style={{ backgroundAttachment: "fixed", zIndex: 0 }}
+      />
 
-      <h2 className="text-5xl md:text-6xl font-extrabold text-[#3B3B0E] mb-12 tracking-wide">
-        Artikel Umum
-      </h2>
+      <div className="relative z-10 flex flex-col items-center w-full">
+        <h2 className="text-5xl md:text-6xl font-extrabold text-[#3B3B0E] mb-12 tracking-wide">
+          Artikel Umum
+        </h2>
 
-      {!isListView ? (
-        <>
-          {/* Carousel */}
-          <div className="relative w-full max-w-6xl overflow-hidden">
-            <div
-              className="flex transition-transform duration-700 ease-out gap-6 px-4"
-              style={{
-                transform: `translateX(-${current * 100}%)`,
-                width: `${(articles.length / itemsPerPage) * 100}%`
-              }}
-            >
-              {articles.map((article) => (
+        {!isListView ? (
+          <>
+            {/* Carousel */}
+            <div className="relative w-full max-w-6xl overflow-hidden">
+              <div
+                className="flex transition-transform duration-700 ease-out gap-6 px-4"
+                style={{
+                  transform: `translateX(-${current * (100 / totalPages)}%)`,
+                  width: `${totalPages * 100}%`,
+                }}
+              >
+                {articles.map((article, idx) => (
+                  <div
+                    key={article.id}
+                    className="basis-1/3 flex justify-center"
+                  >
+                    <ArticleCard article={article} />
+                  </div>
+                ))}
+              </div>
+
+              {/* Tombol Navigasi */}
+              <button
+                onClick={prevSlide}
+                disabled={current === 0}
+                className="absolute top-1/2 left-1 transform -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full border-2 border-[#88A825] bg-white text-[#3B3B0E] shadow-lg z-20 disabled:opacity-40 hover:bg-[#88A825] hover:text-white hover:shadow-xl transition"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+
+              <button
+                onClick={nextSlide}
+                disabled={current === totalPages - 1}
+                className="absolute top-1/2 right-1 transform -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full border-2 border-[#88A825] bg-white text-[#3B3B0E] shadow-lg z-20 disabled:opacity-40 hover:bg-[#88A825] hover:text-white hover:shadow-xl transition"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Indicators */}
+            <div className="flex mt-8 gap-3">
+              {Array.from({ length: totalPages }).map((_, i) => (
                 <div
-                  key={article.id}
-                  className="bg-white rounded-3xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all w-80 md:w-96 flex-shrink-0"
-                >
-                  <div className="relative">
-                    <img src={article.img} alt={article.title} className="rounded-t-3xl h-52 w-full object-cover" />
-                    <span className="absolute bottom-3 right-3 bg-[#3B3B0E] text-white text-sm px-4 py-1 rounded-full">
-                      {article.tag}
-                    </span>
-                  </div>
-                  <div className="p-6 flex flex-col">
-                    <h3 className="text-lg font-bold text-[#33691e] mb-3 bg-[#dcedc8] inline-block px-3 py-1 rounded-xl">
-                      {article.title}
-                    </h3>
-                    <p className="text-base text-gray-700 flex-grow leading-relaxed">
-                      {article.desc}
-                    </p>
-                    <button className="mt-6 bg-[#3B3B0E] text-white text-base py-3 rounded-xl hover:bg-[#2C2C0E] transition-all">
-                      Baca Selengkapnya
-                    </button>
-                  </div>
-                </div>
+                  key={i}
+                  className={`w-4 h-4 rounded-full transition-all ${i === current ? "bg-[#4b830d]" : "bg-gray-300"}`}
+                />
               ))}
             </div>
 
-            {/* Tombol Navigasi Baru */}
+            {/* Tombol Lihat Selengkapnya */}
             <button
-              onClick={prevSlide}
-              disabled={current === 0}
-              className="absolute top-1/2 left-1 transform -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full border-2 border-[#88A825] bg-white text-[#3B3B0E] shadow-lg z-20 disabled:opacity-40 hover:bg-[#88A825] hover:text-white hover:shadow-xl transition"
+              onClick={() => setIsListView(true)}
+              className="mt-12 bg-[#4b830d] text-white font-semibold py-3 px-8 rounded-3xl hover:bg-[#33691e] transition-all"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-              </svg>
+              Lihat Selengkapnya
             </button>
+          </>
+        ) : (
+          <>
+            {/* LIST VIEW */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+              {articles.map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))}
+            </div>
 
+            {/* Tombol kembali */}
             <button
-              onClick={nextSlide}
-              disabled={current === totalPages - 1}
-              className="absolute top-1/2 right-1 transform -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full border-2 border-[#88A825] bg-white text-[#3B3B0E] shadow-lg z-20 disabled:opacity-40 hover:bg-[#88A825] hover:text-white hover:shadow-xl transition"
+              onClick={() => setIsListView(false)}
+              className="mt-12 bg-[#4b830d] text-white font-semibold py-3 px-8 rounded-3xl hover:bg-[#33691e] transition-all"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
+              Kembali
             </button>
-          </div>
-
-          {/* Indicators */}
-          <div className="flex mt-8 gap-3">
-            {Array.from({ length: totalPages }).map((_, i) => (
-              <div
-                key={i}
-                className={`w-4 h-4 rounded-full transition-all ${i === current ? "bg-[#4b830d]" : "bg-gray-300"}`}
-              />
-            ))}
-          </div>
-
-          {/* Tombol Lihat Selengkapnya */}
-          <button
-            onClick={() => setIsListView(true)}
-            className="mt-12 bg-[#4b830d] text-white font-semibold py-3 px-8 rounded-3xl hover:bg-[#33691e] transition-all"
-          >
-            Lihat Selengkapnya
-          </button>
-        </>
-      ) : (
-        <>
-          {/* LIST VIEW */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
-            {articles.map((article) => (
-              <div
-                key={article.id}
-                className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all"
-              >
-                <img src={article.img} alt={article.title} className="h-48 w-full object-cover" />
-                <div className="p-5">
-                  <span className="text-sm text-blue-600 font-medium">{article.tag}</span>
-                  <h3 className="text-lg font-semibold text-gray-800 mt-2 mb-2">{article.title}</h3>
-                  <p className="text-gray-600 text-sm">{article.desc}</p>
-                  <button className="mt-4 text-blue-600 hover:underline">Baca selengkapnya</button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Tombol kembali */}
-          <button
-            onClick={() => setIsListView(false)}
-            className="mt-12 bg-gray-600 text-white font-semibold py-3 px-8 rounded-3xl hover:bg-gray-800 transition-all"
-          >
-            Kembali
-          </button>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </section>
   );
 }

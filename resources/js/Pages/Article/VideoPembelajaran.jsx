@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Video() {
   const [videos] = useState([
@@ -13,10 +13,24 @@ export default function Video() {
   const [animateButtons, setAnimateButtons] = useState(false);
   const [animateCard, setAnimateCard] = useState(false);
 
+  const buttonsRef = useRef(null);
+
   useEffect(() => {
     setTimeout(() => setAnimateTitle(true), 200);
-    setTimeout(() => setAnimateButtons(true), 600);
-    setTimeout(() => setAnimateCard(true), 1000);
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimateButtons(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 } // animasi muncul saat 30% terlihat
+    );
+    if (buttonsRef.current) observer.observe(buttonsRef.current);
+
+    // Animasi card muncul setelah tombol
+    setTimeout(() => setAnimateCard(true), 1200);
   }, []);
 
   const handleClick = (video) => {
@@ -25,11 +39,11 @@ export default function Video() {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#c4e196] to-[#90c444] relative overflow-hidden px-6 pt-16 pb-16">
+      {/* Background */}
       <div
-                className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center opacity-50"
-                style={{ backgroundAttachment: "fixed" }}
-            />
-
+        className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center opacity-40"
+        style={{ backgroundAttachment: "fixed" }}
+      />
 
       {/* Custom Animations */}
       <style>{`
@@ -43,25 +57,31 @@ export default function Video() {
       {/* Title */}
       <h1 className={`text-4xl md:text-6xl font-extrabold mb-12 text-center tracking-wide drop-shadow-lg transition-all duration-700 ease-out
         ${animateTitle ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-        Video Pembelajaran <span className="text-green-600">Nutriverse</span>
+        Video Pembelajaran <span className="text-green-700">Nutriverse</span>
       </h1>
 
       {/* Navigation Buttons */}
-      <div className={`flex flex-wrap gap-4 justify-center mb-12 max-w-5xl transition-all duration-700 ease-out
-        ${animateButtons ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        {videos.map((video) => (
-          <button
-            key={video.id}
-            onClick={() => handleClick(video)}
-            className={`px-6 py-3 md:px-8 md:py-4 rounded-2xl font-semibold text-sm md:text-base transition-all duration-500 transform
-              ${video.id === activeVideo.id
-                ? "bg-gradient-to-r from-green-400 to-green-600 text-white scale-105 animate-glow shadow-lg"
-                : "bg-white/40 backdrop-blur-md border border-green-300 text-green-900 hover:bg-gradient-to-r hover:from-green-200 hover:to-green-400 hover:text-white hover:scale-105 hover:shadow-md"
-              }`}
-          >
-            {video.title}
-          </button>
-        ))}
+      <div
+        ref={buttonsRef}
+        className={`flex justify-center mb-12 max-w-5xl transition-all duration-700 ease-out relative`}
+      >
+      {videos.map((video, index) => (
+        <button
+          key={video.id}
+          onClick={() => handleClick(video)}
+          style={{ zIndex: videos.length - index, marginLeft: index === 0 ? 0 : -30 }}
+          className={`px-6 py-3 md:px-8 md:py-4 rounded-2xl font-semibold text-sm md:text-base transition-all duration-500 transform
+            ${
+              video.id === activeVideo.id
+                ? "bg-[#7ED957] text-white scale-105 animate-glow shadow-lg hover:bg-[#6CD44D]" // warna tombol aktif sesuai gambar
+                : "bg-[#558B2F] text-white hover:bg-[#669933] scale-100 hover:scale-105 shadow-md" // warna tombol non-aktif sesuai gambar
+            }
+            ${animateButtons ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}
+          `}
+        >
+          {video.title}
+        </button>
+      ))}
       </div>
 
       {/* Video Card */}
@@ -77,7 +97,7 @@ export default function Video() {
       {/* Footer */}
       <div className="mt-12 text-center text-green-900 transition-all duration-700 ease-out">
         <p className={`text-lg md:text-xl ${animateCard ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          Selamat menonton! Pelajari nutrisi dengan seru & interaktif 🌱
+          Selamat menonton! Pelajari nutrisi dengan seru & interaktif!
         </p>
       </div>
     </div>
