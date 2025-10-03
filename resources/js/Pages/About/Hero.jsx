@@ -13,7 +13,7 @@ export default function HeroAbout() {
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#90C444] to-[#FCFFEC]">
             <div
-                className="absolute inset-0 bg-[url('/background/herohome.png')] bg-cover bg-center opacity-50"
+                className="absolute inset-0 bg-[url('/background/heroabout.png')] bg-cover bg-center opacity-50"
                 style={{ backgroundAttachment: "fixed" }}
             />
 
@@ -37,11 +37,11 @@ export default function HeroAbout() {
                 <p className="mt-4 text-gray-600 max-w-2xl z-20 font-nunito font-bold pt-2 md:pt-5 text-xl md:text-4xl text-white md:pb-10">
                     Ingin tahu lebih dalam mengenai Nutriverse? Yuk simak halaman ini
                 </p>
-                
+
                 {/* Ilustrasi utama */}
                 <div className="mt-10 absolute bottom-0 ">
                     <img
-                        src="/illustrasi/herohome.png"
+                        src="/illustrasi/nutiabout.png"
                         alt="ASN"
                         className="w-72 md:w-full mx-auto opacity-70 -z-10"
                     />
