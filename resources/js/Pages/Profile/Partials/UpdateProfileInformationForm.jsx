@@ -1,14 +1,15 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { Transition } from "@headlessui/react";
+import { Link, router, useForm, usePage } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
-    className = '',
+    className = "",
 }) {
     const user = usePage().props.auth.user;
 
@@ -16,52 +17,116 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            avatar: null,
         });
+
+    const [preview, setPreview] = useState(user.avatar_url || null);
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+
+        if (data.avatar) {
+            formData.append("avatar", data.avatar);
+        }
+
+        // penting: override PATCH dengan _method
+        formData.append("_method", "patch");
+
+        // gunakan post, bukan patch
+        router.post(route("profile.update"), formData, {
+            preserveScroll: true,
+        });
     };
 
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                <h2 className="text-lg font-medium text-gray-900">
                     Profile Information
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
+                <p className="mt-1 text-sm text-gray-600">
+                    Update your account's profile information, email address and
+                    profile photo.
                 </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
+                {/* Avatar Section */}
+                <div>
+                    <InputLabel htmlFor="avatar" value="Profile Photo" />
+
+                    <div className="flex items-center gap-4 mt-2">
+                        <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                            {preview ? (
+                                <img
+                                    src={preview}
+                                    alt="Profile Preview"
+                                    className="object-cover w-full h-full"
+                                />
+                            ) : (
+                                <span className="text-gray-600 font-bold text-lg">
+                                    {user.name?.charAt(0).toUpperCase()}
+                                </span>
+                            )}
+                        </div>
+
+                        <input
+                            id="avatar"
+                            name="avatar"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                setData("avatar", file);
+
+                                if (file) {
+                                    setPreview(URL.createObjectURL(file));
+                                }
+                            }}
+                            className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4
+                                       file:rounded-md file:border-0
+                                       file:text-sm file:font-semibold
+                                       file:bg-indigo-50 file:text-indigo-700
+                                       hover:file:bg-indigo-100"
+                        />
+                    </div>
+
+                    <InputError className="mt-2" message={errors.avatar} />
+                </div>
+
+                {/* Name */}
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
                     <TextInput
                         id="name"
+                        name="name"
                         className="mt-1 block w-full"
                         value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData("name", e.target.value)}
                         required
-                        isFocused
                         autoComplete="name"
                     />
 
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
+                {/* Email */}
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
                         id="email"
+                        name="email"
                         type="email"
                         className="mt-1 block w-full"
                         value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => setData("email", e.target.value)}
                         required
                         autoComplete="username"
                     />
@@ -69,22 +134,23 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
+                {/* Email Verification */}
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
-                        <p className="mt-2 text-sm text-gray-800 dark:text-gray-200">
+                        <p className="mt-2 text-sm text-gray-800">
                             Your email address is unverified.
                             <Link
-                                href={route('verification.send')}
+                                href={route("verification.send")}
                                 method="post"
                                 as="button"
-                                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 Click here to re-send the verification email.
                             </Link>
                         </p>
 
-                        {status === 'verification-link-sent' && (
-                            <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
+                        {status === "verification-link-sent" && (
+                            <div className="mt-2 text-sm font-medium text-green-600">
                                 A new verification link has been sent to your
                                 email address.
                             </div>
@@ -92,6 +158,7 @@ export default function UpdateProfileInformation({
                     </div>
                 )}
 
+                {/* Save Button */}
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
 
@@ -102,9 +169,7 @@ export default function UpdateProfileInformation({
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Saved.
-                        </p>
+                        <p className="text-sm text-gray-600">Saved.</p>
                     </Transition>
                 </div>
             </form>

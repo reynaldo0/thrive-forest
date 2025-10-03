@@ -41,19 +41,22 @@ const Navbar = () => {
                 </div>
 
                 {/* Menu Desktop */}
-                <div className="hidden md:flex flex-1 items-center justify-center space-x-6 text-gray-900 font-bold text-xl">
+                <div className="hidden md:flex flex-1 items-center justify-center space-x-6 font-bold text-xl">
                     {mainMenu.map((item) =>
                         !item.children ? (
                             <Link
                                 key={item.name}
                                 href={item.path}
-                                className="relative transition duration-300 hover:text-primary-100"
+                                className="relative text-secondary-200 transition duration-300
+                  after:content-[''] after:absolute after:left-0 after:-bottom-1
+                  after:h-[2px] after:w-0 after:bg-secondary-200 after:transition-all
+                  after:duration-300 hover:after:w-full hover:text-secondary-200"
                             >
                                 {item.name}
                             </Link>
                         ) : (
                             <div key={item.name} className="relative group">
-                                <button className="flex items-center space-x-1 transition duration-300 hover:text-primary-100">
+                                <button className="flex items-center space-x-1 text-secondary-200 font-bold cursor-pointer transition duration-300 hover:text-secondary-200">
                                     <span>{item.name}</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +73,8 @@ const Navbar = () => {
                                         />
                                     </svg>
                                 </button>
+
+                                {/* Dropdown menu */}
                                 <div className="absolute top-full left-0 mt-2 w-40 bg-white shadow-lg rounded-xl opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-200">
                                     {item.children.map((child) => (
                                         <Link
@@ -88,43 +93,25 @@ const Navbar = () => {
 
                 {/* Auth / User Menu Desktop */}
                 <div className="hidden md:flex items-center space-x-4 text-lg relative">
-                    {!user ? (
-                        authMenu.map((item) =>
-                            item.name === "Login" ? (
-                                <Link
-                                    key={item.name}
-                                    href={item.path}
-                                    className="px-5 py-2 rounded-full bg-secondary-200 text-white font-bold text-lg shadow-md hover:bg-primary-200 transition duration-300"
-                                >
-                                    {item.name}
-                                </Link>
-                            ) : (
-                                <Link
-                                    key={item.name}
-                                    href={item.path}
-                                    className="px-5 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold text-lg hover:bg-primary-200 hover:text-white transition duration-300"
-                                >
-                                    {item.name}
-                                </Link>
-                            )
-                        )
-                    ) : (
+                    {user ? (
                         <div className="relative">
                             <button
                                 onClick={() => setProfileOpen(!profileOpen)}
                                 className="flex items-center space-x-2 focus:outline-none"
                             >
-                                <img
-                                    src={
-                                        user.avatar ||
-                                        "/icon/default-avatar.png"
-                                    }
-                                    alt="Profile"
-                                    className="h-10 w-10 rounded-full border-2 border-primary-200"
-                                />
                                 <span className="font-bold text-gray-900">
                                     {user.name}
                                 </span>
+                                <img
+                                    src={
+                                        user.avatar_url ||
+                                        `https://ui-avatars.com/api/?name=${
+                                            user.name?.[0] || "U"
+                                        }`
+                                    }
+                                    alt="Profile"
+                                    className="h-10 w-10 rounded-full border border-black"
+                                />
                             </button>
                             {profileOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-xl py-2 z-50">
@@ -151,6 +138,26 @@ const Navbar = () => {
                                 </div>
                             )}
                         </div>
+                    ) : (
+                        authMenu.map((item) =>
+                            item.name === "Login" ? (
+                                <Link
+                                    key={item.name}
+                                    href={item.path}
+                                    className="px-5 py-2 rounded-full bg-secondary-200 text-white font-bold text-lg shadow-md hover:bg-primary-200 transition duration-300"
+                                >
+                                    {item.name}
+                                </Link>
+                            ) : (
+                                <Link
+                                    key={item.name}
+                                    href={item.path}
+                                    className="px-5 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold text-lg hover:bg-primary-200 hover:text-white transition duration-300"
+                                >
+                                    {item.name}
+                                </Link>
+                            )
+                        )
                     )}
                 </div>
 
@@ -179,7 +186,12 @@ const Navbar = () => {
                 {user && (
                     <div className="flex items-center space-x-3 border-b border-gray-200 pb-3">
                         <img
-                            src={user.avatar || "/icon/default-avatar.png"}
+                            src={
+                                user.avatar_url ||
+                                `https://ui-avatars.com/api/?name=${
+                                    user.name?.[0] || "U"
+                                }`
+                            }
                             alt="Profile"
                             className="h-10 w-10 rounded-full border-2 border-primary-200"
                         />
@@ -201,7 +213,9 @@ const Navbar = () => {
                             key={item.name}
                             href={item.path}
                             onClick={() => setIsOpen(false)}
-                            className="w-full text-gray-900 font-semibold hover:text-primary-100 transition"
+                            className="w-full text-gray-900 font-semibold hover:text-secondary-200 transition relative
+                after:content-[''] after:absolute after:left-0 after:-bottom-1
+                after:h-[2px] after:w-0 after:bg-secondary-200 after:transition-all after:duration-300 hover:after:w-full"
                         >
                             {item.name}
                         </Link>
@@ -210,7 +224,7 @@ const Navbar = () => {
                             key={item.name}
                             className="w-full flex flex-col space-y-2"
                         >
-                            <span className="font-bold text-gray-900">
+                            <span className="font-bold text-secondary-200">
                                 {item.name}
                             </span>
                             {item.children.map((child) => (
@@ -218,7 +232,7 @@ const Navbar = () => {
                                     key={child.name}
                                     href={child.path}
                                     onClick={() => setIsOpen(false)}
-                                    className="pl-4 text-gray-700 hover:text-primary-100 transition"
+                                    className="pl-4 text-gray-700 hover:text-secondary-200 transition"
                                 >
                                     {child.name}
                                 </Link>
@@ -228,24 +242,7 @@ const Navbar = () => {
                 )}
 
                 {/* Auth / User Actions */}
-                {!user ? (
-                    <div className="flex flex-col w-full space-y-2 pt-2 border-t border-gray-200">
-                        {authMenu.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.path}
-                                onClick={() => setIsOpen(false)}
-                                className={`w-full text-center px-5 py-2 rounded-full ${
-                                    item.name === "Login"
-                                        ? "bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200"
-                                        : "border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white"
-                                }`}
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
-                    </div>
-                ) : (
+                {user ? (
                     <div className="flex flex-col w-full space-y-2 pt-2 border-t border-gray-200">
                         <Link
                             href={route("dashboard")}
@@ -270,6 +267,23 @@ const Navbar = () => {
                         >
                             Logout
                         </Link>
+                    </div>
+                ) : (
+                    <div className="flex flex-col w-full space-y-2 pt-2 border-t border-gray-200">
+                        {authMenu.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.path}
+                                onClick={() => setIsOpen(false)}
+                                className={`w-full text-center px-5 py-2 rounded-full ${
+                                    item.name === "Login"
+                                        ? "bg-secondary-200 text-white font-bold shadow-md hover:bg-primary-200"
+                                        : "border-2 border-primary-200 text-primary-200 font-bold hover:bg-primary-200 hover:text-white"
+                                }`}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
                     </div>
                 )}
             </div>

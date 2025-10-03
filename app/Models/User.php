@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'school_id',
+        'avatar'
     ];
 
     /**
@@ -61,5 +62,16 @@ class User extends Authenticatable
     public function getTotalPointsAttribute()
     {
         return $this->points()->sum('points');
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+
+        // default avatar dari inisial nama
+        $initials = strtoupper(substr($this->name, 0, 1));
+        return "https://ui-avatars.com/api/?name={$initials}&background=random";
     }
 }
