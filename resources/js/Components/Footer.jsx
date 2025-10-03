@@ -1,3 +1,4 @@
+import React from "react";
 import {
   FaTwitter,
   FaFacebookF,
@@ -10,65 +11,82 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#4C7A09] text-black py-10 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-        {/* Logo + Alamat */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <img src="/icon/logo-t.png" alt="Nutriverse" className="w-14" />
-            <span className="font-bold text-xl md:text-2xl text-white">
-              Nutriverse
-            </span>
-          </div>
-          <p className="text-base text-black leading-relaxed">
-            PT. Resanoma Inovasi Sehat <br />
-            Gedung AD Premier lt 9 <br />
-            Jl TB. Simatupang No. 5 <br />
-            Jakarta Selatan
+    <footer
+      className="relative text-white"
+      style={{
+        backgroundColor: "#F0FCD7",
+        backgroundImage: "url('/background/footerr.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover", // biar full ke bawah
+        backgroundPosition: "top center", // gambar lebih ke atas
+      }}
+    >
+      {/* Konten Footer */}
+      <div className="relative z-10 container mx-auto px-6 lg:px-16 pt-40 pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        {/* Hubungi Kami */}
+        <div className="flex flex-col space-y-4">
+          <img src="/icon/logo-t.png" alt="NutriVerse" className="w-32 mb-2" />
+          <h3 className="text-lg font-semibold">Hubungi kami</h3>
+          <p className="flex items-center gap-2">
+            <span className="text-xl">📍</span> Universitas Negeri Jakarta (UNJ)
           </p>
-        </div>
+          <p className="flex items-center gap-2">
+            <span className="text-xl">✉️</span> Nutinutriverse@gmail.com
+          </p>
 
-        {/* Tautan Penting */}
-        <div className="space-y-3">
-          <h3 className="font-bold text-lg md:text-xl text-black">
-            Tautan Penting
-          </h3>
-          <ul className="space-y-2 text-base text-black">
-            <li><a href="#" className="hover:underline">Kebijakan Privasi</a></li>
-            <li><a href="#" className="hover:underline">Syarat dan Ketentuan</a></li>
-            <li><a href="#" className="hover:underline">Emergency Service</a></li>
-            <li><a href="#" className="hover:underline">Tentang Kami</a></li>
-            <li><a href="#" className="hover:underline">Bergabung dengan Nutriverse</a></li>
-          </ul>
-        </div>
-
-        {/* Follow Us */}
-        <div className="space-y-3">
-          <h3 className="font-bold text-lg md:text-xl text-black">Follow Us</h3>
-          <div className="flex gap-3">
-            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1DA1F2] text-white hover:scale-110 transition">
-              <FaTwitter />
-            </a>
-            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1877F2] text-white hover:scale-110 transition">
-              <FaFacebookF />
-            </a>
-            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#E1306C] text-white hover:scale-110 transition">
-              <FaInstagram />
-            </a>
-            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#0077B5] text-white hover:scale-110 transition">
-              <FaLinkedinIn />
-            </a>
-            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#BD081C] text-white hover:scale-110 transition">
-              <FaPinterestP />
-            </a>
-            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#FF0000] text-white hover:scale-110 transition">
-              <FaYoutube />
-            </a>
-            <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-[#010101] text-white hover:scale-110 transition">
-              <FaTiktok />
-            </a>
+          {/* Sosial Media */}
+          <div className="flex space-x-3 mt-3">
+            {[
+              { icon: <FaTwitter />, href: "#" },
+              { icon: <FaFacebookF />, href: "#" },
+              { icon: <FaInstagram />, href: "#" },
+              { icon: <FaLinkedinIn />, href: "#" },
+              { icon: <FaPinterestP />, href: "#" },
+              { icon: <FaYoutube />, href: "#" },
+              { icon: <FaTiktok />, href: "#" },
+            ].map((s, i) => (
+              <a
+                key={i}
+                href={s.href}
+                className="p-2 text-[#4C7C18] rounded-full hover:bg-yellow-200 transition transform hover:scale-110"
+              >
+                {s.icon}
+              </a>
+            ))}
           </div>
         </div>
+
+        {/* Akses Konten */}
+        <div className="flex flex-col space-y-3">
+          <h3 className="text-lg font-semibold">Akses konten</h3>
+          <a href="#" className="hover:text-yellow-200 transition">Beranda</a>
+          <a href="#" className="hover:text-yellow-200 transition">Tentang</a>
+          <a href="#" className="hover:text-yellow-200 transition">Artikel</a>
+          <a href="#" className="hover:text-yellow-200 transition">Komunitas</a>
+          <a href="#" className="hover:text-yellow-200 transition">Games</a>
+        </div>
+
+        {/* Sumber Data */}
+        <div className="flex flex-col space-y-3">
+          <h3 className="text-lg font-semibold">Sumber data</h3>
+          <a href="#" className="hover:text-yellow-200 transition">Kemendikbud.go.id</a>
+          <a href="#" className="hover:text-yellow-200 transition">IPB University</a>
+          <a href="#" className="hover:text-yellow-200 transition">PGpradjeka</a>
+          <a href="#" className="hover:text-yellow-200 transition">Univ. Brawijaya</a>
+          <a href="#" className="hover:text-yellow-200 transition">UGM</a>
+          <a href="#" className="hover:text-yellow-200 transition">BBC</a>
+        </div>
+
+        {/* Credit */}
+        <div className="flex flex-col space-y-3">
+          <h3 className="text-lg font-semibold">Credit</h3>
+          <p>Pinterest</p>
+        </div>
+      </div>
+
+      {/* Footer Bawah */}
+      <div className="relative z-10 text-center text-sm py-4 bg-[#2F4F12] -mt-4">
+        © 2025 NutriVerse. All rights reserved.
       </div>
     </footer>
   );

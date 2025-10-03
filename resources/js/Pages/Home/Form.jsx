@@ -199,8 +199,8 @@ const Form = () => {
                 <div className="flex justify-center items-center">
                     <img
                         src="/illustrasi/form.png"
-                        alt="Nuti Love"
-                        className="w-72 md:w-[500px] object-contain hover:scale-105 transition-transform duration-300"
+                        alt="Nuti Ayunan"
+                        className="w-46 md:w-[300px] object-contain hover:scale-105 transition-transform duration-300"
                     />
                 </div>
             </form>
