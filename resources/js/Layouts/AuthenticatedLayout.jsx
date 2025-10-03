@@ -8,15 +8,17 @@ export default function AuthenticatedLayout({ children }) {
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
+
 
     return (
         <div className="flex bg-gradient-to-br from-green-50 via-white to-green-100">
             {/* Sidebar tetap fix */}
-            <Sidebar />
+            <Sidebar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             {/* Main content bisa discroll */}
             <main className="flex-1 flex flex-col h-screen overflow-y-auto">
-                <Navbar />
+                <Navbar setSidebarOpen={setSidebarOpen} />
                 <div className="flex-1 p-8 space-y-10">{children}</div>
             </main>
         </div>
