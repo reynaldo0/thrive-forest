@@ -104,13 +104,13 @@ export default function BukuTerpadu() {
             {/* Rumput Parallax */}
             <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">
                 <img
-                    src="/icon/rumput2.png"
+                    src="/icon/rumput-kiri.png"
                     alt="rumput kiri"
                     className="absolute bottom-0 left-0 w-1/3 object-contain"
                     style={{ transform: `translateX(-${offsetX}px)` }}
                 />
                 <img
-                    src="/icon/rumput1.png"
+                    src="/icon/rumput-kanan.png"
                     alt="rumput kanan"
                     className="absolute bottom-0 right-0 w-1/3 object-contain"
                     style={{ transform: `translateX(${offsetX}px)` }}

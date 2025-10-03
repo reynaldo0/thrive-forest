@@ -38,7 +38,7 @@ export default function Video() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#c4e196] to-[#90c444] relative overflow-hidden px-6 pt-16 pb-16">
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#c4e196] to-[#90c444] relative overflow-hidden px-6 pt-16 pb-40">
       {/* Background */}
       <div
         className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center opacity-40"
@@ -92,13 +92,6 @@ export default function Video() {
           controls
           className="rounded-2xl w-full h-full object-cover shadow-lg"
         />
-      </div>
-
-      {/* Footer */}
-      <div className="mt-12 text-center text-green-900 transition-all duration-700 ease-out">
-        <p className={`text-lg md:text-xl ${animateCard ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          Selamat menonton! Pelajari nutrisi dengan seru & interaktif!
-        </p>
       </div>
     </div>
   );

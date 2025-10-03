@@ -65,7 +65,7 @@ const Form = () => {
     };
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center bg-[#F0FCD7] px-6 py-24">
+        <section className="relative min-h-screen flex items-center justify-center bg-[#F0FCD7] px-6 py-24 pb-60">
             <div
                 className="absolute inset-0 bg-[url('/background/herohome.png')] bg-cover bg-center opacity-50"
                 style={{ backgroundAttachment: "fixed" }}

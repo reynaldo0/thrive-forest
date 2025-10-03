@@ -13,9 +13,12 @@ import {
     Presentation,
     LayoutDashboard,
     Apple,
+    User2,
+    PresentationIcon,
 } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "@inertiajs/react";
+import { PresenceContext } from "framer-motion";
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     const [openMenu, setOpenMenu] = useState(null);
@@ -44,6 +47,14 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
             ],
         },
         {
+            label: "Manajemen Artikel",
+            icon: <User2 size={20} />,
+            children: [
+                { label: "Daftar Artikel", href: "/admin/artikels" }, //masih belum bisa
+                { label: "Tambah Artikel", href: "/admin/artikels/create" },
+            ],
+        },
+        {
             label: "Kolaborasi Tanaman",
             icon: <Users size={20} />,
             children: [
@@ -54,7 +65,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         },
         {
             label: "Gizi",
-            icon: <Apple size={20} />, // bisa ganti icon sesuai kebutuhan
+            icon: <Apple size={20} />, 
             children: [
                 { label: "Tebak Gizi Item", href: "/admin/gizi" },
                 { label: "Tambah Item", href: "/admin/gizi/create" },

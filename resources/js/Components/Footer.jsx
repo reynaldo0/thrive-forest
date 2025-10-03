@@ -140,9 +140,9 @@ export default function Footer() {
                 </div>
 
                 {/* Footer Bawah */}
-                <div className="relative z-10 text-center text-sm py-4 bg-[#2F4F12] -mt-4">
+                {/* <div className="relative z-10 text-center text-sm py-4 bg-[#2F4F12] -mt-4">
                     © 2025 NutriVerse. All rights reserved.
-                </div>
+                </div> */}
             </footer>
         </>
     );

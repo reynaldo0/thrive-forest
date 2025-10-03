@@ -8,7 +8,7 @@ export default function ForumKomunitas() {
   }, []);
 
   return (
-    <section className="min-h-screen flex flex-col items-center w-full px-6 pt-16 pb-12 bg-[#FCFFEC] relative">
+    <section className="min-h-screen flex flex-col items-center w-full px-6 pt-16 pb-12 bg-[#FCFFEC] relative pb-60">
         <div
                 className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center opacity-50"
                 style={{ backgroundAttachment: "fixed" }}

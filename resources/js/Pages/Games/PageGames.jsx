@@ -166,7 +166,7 @@ export default function PageGames({ fruits }) {
     return (
         <section
             ref={sectionRef}
-            className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] px-6 py-12 relative overflow-hidden"
+            className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] px-6 py-12 relative overflow-hidden pb-60"
         >
             {/* Card utama */}
             <div className="bg-[#F1FFE2] rounded-3xl shadow-2xl border-2 border-green-200 p-10 md:p-16 flex flex-col gap-8 max-w-5xl w-full relative z-10">

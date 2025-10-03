@@ -33,7 +33,7 @@ export default function TeamNutriverse() {
     ];
 
     return (
-        <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 py-20 relative bg-[#FCFFEC] overflow-hidden">
+        <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 py-20 relative bg-[#FCFFEC] overflow-hidden pb-60">
             <div
                 className="absolute inset-0 bg-[url('/background/heroabout.png')] bg-cover bg-center opacity-50"
                 style={{ backgroundAttachment: "fixed" }}

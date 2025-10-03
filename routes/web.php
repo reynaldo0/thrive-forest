@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SeminarController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\TebakGiziController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -106,6 +107,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('/mails', [MailController::class, 'store'])->name('mails.store');
 
     Route::resource('seminars', SeminarController::class);
+    // Route::resource('artikels', ArtikelController::class);
+    Route::resource('artikels', ArtikelController::class)->except(['show']);
     Route::post('/registrations', [RegistrationController::class, 'store'])->name('registrations.store');
 
     // Game Items CRUD

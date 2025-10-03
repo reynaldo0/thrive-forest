@@ -298,7 +298,7 @@ export default function PageGamess() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-16 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-16 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-hidden pb-60"
     >
       <h1 className="text-5xl md:text-6xl font-extrabold text-green-800 mb-4">
         Games <span className="text-green-600">Edukasi</span>
