@@ -117,14 +117,14 @@ class TebakGiziController extends Controller
 
         $question->update($validated);
 
-        return redirect()->route('gizi.questions', $item->id)
+        return redirect()->route('gizi.questions.index', $item->id)
             ->with('success', 'Pertanyaan berhasil diperbarui!');
     }
 
     public function destroyQuestion(ItemGame $item, Questation $question)
     {
         $question->delete();
-        return redirect()->route('gizi.questions', $item->id)
+        return redirect()->route('gizi.questions.index', $item->id)
             ->with('success', 'Pertanyaan berhasil dihapus!');
     }
     // Form Create Question

@@ -113,7 +113,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/gizi/create', [TebakGiziController::class, 'create'])->name('gizi.create'); // form tambah
     Route::post('/gizi', [TebakGiziController::class, 'store'])->name('gizi.store'); // simpan item baru
     Route::get('/gizi/{item}/edit', [TebakGiziController::class, 'edit'])->name('gizi.edit'); // form edit
-    Route::put('/gizi/{item}', [TebakGiziController::class, 'update'])->name('gizi.update'); // update item
+    Route::patch('/gizi/{item}', [TebakGiziController::class, 'update'])->name('gizi.update'); // update item
     Route::delete('/gizi/{item}', [TebakGiziController::class, 'destroy'])->name('gizi.destroy'); // hapus item
 
     // Questions per Item

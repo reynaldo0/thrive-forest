@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { usePage, Link } from "@inertiajs/react";
+import { usePage, Link, Head, router } from "@inertiajs/react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 export default function QuestionForm() {
     const { item, question } = usePage().props;
@@ -14,7 +15,6 @@ export default function QuestionForm() {
         newOptions[index] = value;
         setOptions(newOptions);
 
-        // Jika jawaban sebelumnya sudah tidak ada di options, reset
         if (!newOptions.includes(answer)) {
             setAnswer("");
         }
@@ -27,124 +27,132 @@ export default function QuestionForm() {
     const removeOption = (index) => {
         const newOptions = options.filter((_, i) => i !== index);
         setOptions(newOptions);
-
-        // Reset jawaban jika opsi yang dipilih dihapus
-        if (!newOptions.includes(answer)) {
-            setAnswer("");
-        }
+        if (!newOptions.includes(answer)) setAnswer("");
     };
 
-    const actionUrl = question
-        ? route("gizi.questions.update", [item.id, question.id])
-        : route("gizi.questions.store", item.id);
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    const method = question ? "put" : "post";
+        const formData = new FormData();
+        formData.append("_method", question ? "patch" : "post");
+        formData.append("question", qText);
+        options.forEach((opt, idx) => formData.append(`options[${idx}]`, opt));
+        formData.append("answer", answer);
+
+        const url = question
+            ? route("gizi.questions.update", [item.id, question.id])
+            : route("gizi.questions.store", item.id);
+
+        router.post(url, formData, { preserveScroll: true });
+    };
 
     return (
-        <div className="p-6 max-w-lg mx-auto">
-            <h1 className="text-2xl font-bold mb-4">
-                {question
-                    ? "Edit Pertanyaan"
-                    : `Tambah Pertanyaan - ${item.name}`}
-            </h1>
-
-            <form
-                action={actionUrl}
-                method="POST"
-                className="flex flex-col gap-4"
-            >
-                <input type="hidden" name="_method" value={method} />
-                <input
-                    type="hidden"
-                    name="_token"
-                    value={document
-                        .querySelector('meta[name="csrf-token"]')
-                        .getAttribute("content")}
-                />
-
-                {/* Pertanyaan */}
-                <input
-                    type="text"
-                    name="question"
-                    placeholder="Pertanyaan"
-                    value={qText}
-                    onChange={(e) => setQText(e.target.value)}
-                    className="border px-3 py-2 rounded"
-                    required
-                />
-
-                {/* Opsi jawaban */}
-                <div>
-                    <p className="font-semibold mb-2">Opsi Jawaban:</p>
-                    {options.map((opt, idx) => (
-                        <div key={idx} className="flex gap-2 mb-2">
+        <AuthenticatedLayout>
+            <Head title={question ? "Edit Pertanyaan" : "Tambah Pertanyaan"} />
+            <div className="p-6 max-w-xl mx-auto">
+                <div className="bg-white shadow-lg rounded-xl p-6">
+                    <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                        {question
+                            ? "Edit Pertanyaan"
+                            : `Tambah Pertanyaan - ${item.name}`}
+                    </h1>
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-5"
+                    >
+                        {/* Pertanyaan */}
+                        <div className="flex flex-col">
+                            <label className="mb-2 font-medium text-gray-700">
+                                Pertanyaan
+                            </label>
                             <input
                                 type="text"
-                                name={`options[${idx}]`}
-                                value={opt}
-                                onChange={(e) =>
-                                    handleOptionChange(idx, e.target.value)
-                                }
-                                className="border px-3 py-2 rounded flex-1"
+                                placeholder="Tulis pertanyaan..."
+                                value={qText}
+                                onChange={(e) => setQText(e.target.value)}
+                                className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none shadow-sm"
                                 required
                             />
-                            {options.length > 2 && (
+                        </div>
+
+                        {/* Opsi jawaban */}
+                        <div className="flex flex-col">
+                            <p className="font-semibold mb-2">Opsi Jawaban:</p>
+                            {options.map((opt, idx) => (
+                                <div key={idx} className="flex gap-2 mb-2">
+                                    <input
+                                        type="text"
+                                        value={opt}
+                                        onChange={(e) =>
+                                            handleOptionChange(
+                                                idx,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="border border-gray-300 rounded-lg px-3 py-2 flex-1 focus:ring-2 focus:ring-green-400 focus:outline-none shadow-sm"
+                                        placeholder={`Option ${idx + 1}`}
+                                        required
+                                    />
+                                    {options.length > 2 && (
+                                        <button
+                                            type="button"
+                                            onClick={() => removeOption(idx)}
+                                            className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                                        >
+                                            X
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+                            {options.length < 5 && (
                                 <button
                                     type="button"
-                                    onClick={() => removeOption(idx)}
-                                    className="px-3 py-1 bg-red-500 text-white rounded"
+                                    onClick={addOption}
+                                    className="px-4 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition w-fit"
                                 >
-                                    X
+                                    + Tambah Opsi
                                 </button>
                             )}
                         </div>
-                    ))}
-                    {options.length < 5 && (
-                        <button
-                            type="button"
-                            onClick={addOption}
-                            className="px-3 py-1 bg-green-500 text-white rounded"
-                        >
-                            + Tambah Opsi
-                        </button>
-                    )}
-                </div>
 
-                {/* Jawaban benar */}
-                <div>
-                    <p className="font-semibold mb-1">Jawaban Benar:</p>
-                    <select
-                        name="answer"
-                        value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}
-                        className="border px-3 py-2 rounded w-full"
-                        required
-                    >
-                        <option value="">-- Pilih Jawaban --</option>
-                        {options.map((opt, idx) => (
-                            <option key={idx} value={opt}>
-                                {opt || `Option ${idx + 1}`}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                        {/* Jawaban benar */}
+                        <div className="flex flex-col">
+                            <label className="mb-2 font-medium text-gray-700">
+                                Jawaban Benar
+                            </label>
+                            <select
+                                value={answer}
+                                onChange={(e) => setAnswer(e.target.value)}
+                                className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none shadow-sm"
+                                required
+                            >
+                                <option value="">-- Pilih Jawaban --</option>
+                                {options.map((opt, idx) => (
+                                    <option key={idx} value={opt}>
+                                        {opt || `Option ${idx + 1}`}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                {/* Tombol */}
-                <div className="flex gap-2 mt-4">
-                    <button
-                        type="submit"
-                        className="px-4 py-2 bg-green-600 text-white rounded"
-                    >
-                        Simpan
-                    </button>
-                    <Link
-                        href={route("gizi.questions.index", item.id)}
-                        className="px-4 py-2 bg-gray-400 text-white rounded"
-                    >
-                        Batal
-                    </Link>
+                        {/* Buttons */}
+                        <div className="flex gap-3 justify-center mt-4">
+                            <button
+                                type="submit"
+                                className="px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow hover:from-green-600 hover:to-green-700 transition-all font-semibold"
+                            >
+                                Simpan
+                            </button>
+                            <Link
+                                href={route("gizi.questions.index", item.id)}
+                                className="px-6 py-2 bg-gray-400 text-white rounded-lg shadow hover:bg-gray-500 transition-all font-semibold"
+                            >
+                                Batal
+                            </Link>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
+            </div>
+        </AuthenticatedLayout>
     );
 }

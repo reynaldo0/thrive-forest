@@ -12,6 +12,7 @@ import {
     Mail,
     Presentation,
     LayoutDashboard,
+    Apple,
 } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "@inertiajs/react";
@@ -49,6 +50,14 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 { label: "Buat Kode Sekolah", href: "/admin/schools" },
                 { label: "Join Kode Sekolah", href: "/admin/join-school" },
                 { label: "Leaderboard", href: "/admin/leaderboard" },
+            ],
+        },
+        {
+            label: "Gizi",
+            icon: <Apple size={20} />, // bisa ganti icon sesuai kebutuhan
+            children: [
+                { label: "Tebak Gizi Item", href: "/admin/gizi" },
+                { label: "Tambah Item", href: "/admin/gizi/create" },
             ],
         },
         { label: "Game", icon: <Gamepad size={20} />, href: "/admin/game" },
