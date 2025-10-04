@@ -101,10 +101,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('user.profile.destroy');
 
+    Route::post('/harvest', [FruitController::class, 'harvest'])->name('harvest');
+
     // join/leave sekolah di profile
     Route::post('/profile/join-school', [SchoolController::class, 'joinSchool'])->name('profile.join-school');
     Route::post('/profile/leave-school', [SchoolController::class, 'leaveSchool'])->name('profile.leave-school');
-    
 });
 
 

@@ -96,7 +96,7 @@ export default function PageGames({ fruits }) {
                 setHarvesting(newHarvesting);
 
                 router.post(
-                    "/admin/harvest",
+                    "/harvest",
                     { fruit_id: harvestedFruit.id },
                     {
                         preserveScroll: true,
