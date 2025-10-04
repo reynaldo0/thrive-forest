@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
         if ($user->role === 'admin') {
             return redirect()->route('dashboard'); // /admin/overview
         } else {
-            return redirect()->route('user.dashboard'); // /dashboard
+            return redirect()->route('user.profile.edit'); // /dashboard
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\School;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,10 +19,20 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+        $user = $request->user();
+
+        if ($user->role === 'admin') {
+            return Inertia::render('Profile/Edit', [
+                'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+                'status' => session('status'),
+            ]);
+        }
+
+        return Inertia::render('Profile/EditUser', [
+            'mustVerifyEmail' => $user instanceof MustVerifyEmail,
             'status' => session('status'),
-            'user' => $request->user()->append('avatar_url'),
+            'schools' => School::all(),
+            'userSchool' => $user->school ?? null,
         ]);
     }
 
@@ -48,9 +59,11 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // Redirect berdasarkan role
+        return $user->role === 'admin'
+            ? Redirect::route('profile.edit')->with('status', 'profile-updated')
+            : Redirect::route('user.profile.edit')->with('status', 'profile-updated');
     }
-
 
     /**
      * Delete the user's account.
@@ -64,12 +77,14 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        // Redirect setelah delete akun
+        return $user->role === 'admin'
+            ? Redirect::to('/admin/login')
+            : Redirect::to('/login');
     }
 }

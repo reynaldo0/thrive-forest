@@ -6,9 +6,9 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\TebakGiziController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -94,19 +94,20 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     });
 });
 
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('user.dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('user.profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('user.profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('user.profile.destroy');
 
-
-    // User bisa join/leave sekolah
-    Route::get('/join-school', [SchoolController::class, 'joinTeamcode'])->name('schools.join.form');
-    Route::post('/join-school', [SchoolController::class, 'joinSchool'])->name('schools.join');
-    Route::post('/leave-school', [SchoolController::class, 'leaveSchool'])->name('schools.leave');
-
+    // join/leave sekolah di profile
+    Route::post('/profile/join-school', [SchoolController::class, 'joinSchool'])->name('profile.join-school');
+    Route::post('/profile/leave-school', [SchoolController::class, 'leaveSchool'])->name('profile.leave-school');
     // User bisa akses permainan/game
     Route::get('/games', [FruitController::class, 'publicIndex'])->name('games');
 });
+
 
 require __DIR__ . '/auth.php';
