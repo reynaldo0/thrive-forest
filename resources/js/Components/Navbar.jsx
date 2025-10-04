@@ -28,6 +28,16 @@ const Navbar = () => {
         { name: "Sign In", path: route("register") },
     ];
 
+    // Ambil route profile & logout sesuai role
+    const profileRoute =
+        user?.role === "admin"
+            ? route("profile.edit")
+            : route("user.profile.edit");
+
+    const logoutRoute =
+        user?.role === "admin" ? route("logout") : route("logout");
+
+    const dashboardRoute = route("dashboard"); // khusus admin
     return (
         <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-[80%]">
             <div className="flex items-center justify-between bg-white/30 backdrop-blur-lg border border-white/20 rounded-full shadow-lg px-6 py-3">
@@ -115,20 +125,22 @@ const Navbar = () => {
                             </button>
                             {profileOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-xl py-2 z-50">
+                                    {user.role === "admin" && (
+                                        <Link
+                                            href={dashboardRoute}
+                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                                        >
+                                            Dashboard
+                                        </Link>
+                                    )}
                                     <Link
-                                        href={route("dashboard")}
-                                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-                                    >
-                                        Dashboard
-                                    </Link>
-                                    <Link
-                                        href={route("profile.edit")}
+                                        href={profileRoute}
                                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
                                     >
                                         Edit Profil
                                     </Link>
                                     <Link
-                                        href={route("logout")}
+                                        href={logoutRoute}
                                         method="post"
                                         as="button"
                                         className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg"
@@ -200,7 +212,7 @@ const Navbar = () => {
                                 {user.name}
                             </p>
                             <span className="text-sm text-gray-500">
-                                Member
+                                {user.role}
                             </span>
                         </div>
                     </div>
@@ -244,22 +256,24 @@ const Navbar = () => {
                 {/* Auth / User Actions */}
                 {user ? (
                     <div className="flex flex-col w-full space-y-2 pt-2 border-t border-gray-200">
+                        {user.role === "admin" && (
+                            <Link
+                                href={dashboardRoute}
+                                onClick={() => setIsOpen(false)}
+                                className="w-full text-center px-5 py-2 rounded-full bg-primary-200 text-white font-bold hover:bg-primary-300"
+                            >
+                                Dashboard
+                            </Link>
+                        )}
                         <Link
-                            href={route("dashboard")}
-                            onClick={() => setIsOpen(false)}
-                            className="w-full text-center px-5 py-2 rounded-full bg-primary-200 text-white font-bold hover:bg-primary-300"
-                        >
-                            Dashboard
-                        </Link>
-                        <Link
-                            href={route("profile.edit")}
+                            href={profileRoute}
                             onClick={() => setIsOpen(false)}
                             className="w-full text-center px-5 py-2 rounded-full border-2 border-gray-300 text-gray-700 hover:bg-gray-100"
                         >
                             Edit Profil
                         </Link>
                         <Link
-                            href={route("logout")}
+                            href={logoutRoute}
                             method="post"
                             as="button"
                             onClick={() => setIsOpen(false)}
