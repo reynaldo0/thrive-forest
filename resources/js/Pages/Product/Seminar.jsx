@@ -22,7 +22,7 @@ export default function Seminar({ seminars }) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col items-center justify-start px-6 pt-24 pb-28 min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-hidden"
+      className="relative flex flex-col items-center justify-start px-6 pt-24 pb-28 min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-visible"
     >
       {/* Background motif */}
       <div className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center opacity-40 pointer-events-none" />
@@ -40,12 +40,10 @@ export default function Seminar({ seminars }) {
               key={item.id}
               className="rounded-3xl overflow-hidden shadow-[0_8px_20px_rgba(0,0,0,0.08)] bg-[#F7FFF0] border border-[#E0F0C2] transition-transform duration-500 hover:scale-[1.02]"
             >
-              {/* Judul Card */}
               <div className="bg-[#3B3B0E] text-white font-semibold text-lg md:text-[17px] px-6 py-3 rounded-t-3xl">
                 {item.title}
               </div>
 
-              {/* Isi Card */}
               <div className="p-6 text-gray-800 text-[15px] leading-relaxed space-y-3">
                 <p>
                   <span className="font-semibold text-[#3B3B0E]">Tanggal :</span>{" "}
@@ -76,17 +74,17 @@ export default function Seminar({ seminars }) {
       </div>
 
       {/* Rumput Parallax */}
-      <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">
+      <div className="absolute left-0 w-full flex justify-between pointer-events-none -bottom-10">
         <img
           src="/icon/rumput-kiri.png"
           alt="rumput kiri"
-          className="absolute bottom-0 left-0 w-1/3 object-contain"
+          className="w-1/3 object-contain"
           style={{ transform: `translateX(-${offsetX}px)` }}
         />
         <img
           src="/icon/rumput-kanan.png"
           alt="rumput kanan"
-          className="absolute bottom-0 right-0 w-1/3 object-contain"
+          className="w-1/3 object-contain"
           style={{ transform: `translateX(${offsetX}px)` }}
         />
       </div>
@@ -108,11 +106,8 @@ function Modal({ event, onClose }) {
       onClick={(e) => e.target.id === "overlay" && onClose()}
     >
       <div className="w-full max-w-2xl relative rounded-3xl overflow-hidden shadow-2xl">
-        {/* Judul form seperti card seminar */}
         <div className="bg-[#3B3B0E] text-white font-semibold text-lg md:text-xl px-6 py-3 relative">
           Daftar untuk {event.title}
-
-          {/* Tombol close warna putih */}
           <button
             onClick={onClose}
             className="absolute right-6 top-2 text-white text-3xl hover:text-gray-200 transition"
@@ -121,7 +116,6 @@ function Modal({ event, onClose }) {
           </button>
         </div>
 
-        {/* Body form */}
         <div className="bg-[#F7FFF0] p-8">
           <RegistrationForm seminarId={event.id} onClose={onClose} />
         </div>

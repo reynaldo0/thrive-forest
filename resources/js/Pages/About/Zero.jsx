@@ -64,7 +64,7 @@ export default function ZeroHunger() {
             Zero Hunger
           </h2>
         </div>
-        <p className="max-w-3xl mx-auto text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed">
+        <p className="max-w-3xl mx-auto text-gray-700 text-lg md:text-xl lg:text-2xl leading-relaxed">
           Tujuan Pembangunan berkelanjutan (SDGs) kedua dari PBB yang bertujuan untuk{" "}
           <span style={{ color: "#DDA73A" }}>mengakhiri kelaparan global</span> pada tahun 2030,{" "}
           <span style={{ color: "#DDA73A" }}>mencapai ketahanan pangan</span>,{" "}
