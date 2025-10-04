@@ -47,7 +47,7 @@ export default function TeamNutriverse() {
                         : "opacity-0 -translate-y-8"
                 }`}
             >
-                Team <span className="text-green-600">Nutriverse</span>
+                Team <span className="text-[#90C444]">Nutriverse</span>
             </h2>
 
             {/* Cards */}

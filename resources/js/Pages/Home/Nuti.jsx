@@ -27,7 +27,7 @@ export default function NutiIntro() {
           }`}
         >
           Kenalan Yuk Sama{" "}
-          <span className="text-green-600">Nuti</span>
+          <span className="text-[#90C444]">Nuti</span>
         </h1>
 
         {/* Card */}
