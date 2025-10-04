@@ -10,7 +10,7 @@ import Video from "./Article/VideoPembelajaran";
 
 const Article = () => {
     return (
-        <>
+        <div className="overflow-x-hidden">
             <Head title="Welcome" />
             <Navbar />
             <HeroArticle />
@@ -20,7 +20,7 @@ const Article = () => {
             <Video />
             <Footer/>
             <Ai/>
-        </>
+        </div>
     );
 };
 

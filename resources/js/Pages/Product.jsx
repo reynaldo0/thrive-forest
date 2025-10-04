@@ -11,7 +11,7 @@ import KomuIntro from "./Product/Komunitas";
 
 const Product = ({seminars}) => {
     return (
-        <>
+        <div className="overflow-x-hidden">
             <Head title="Komunitas" />
             <Navbar />
             <HeroKomunitas />
@@ -20,7 +20,7 @@ const Product = ({seminars}) => {
             <ForumKomunitas/>
             <Footer/>
             <Ai/>
-        </>
+        </div>
     );
 };
 
