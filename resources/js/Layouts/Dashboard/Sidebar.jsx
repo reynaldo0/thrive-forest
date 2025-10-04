@@ -103,109 +103,148 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                     lg:translate-x-0
                     transition-all duration-500 ease-in-out
                     ${isCollapsed ? "lg:w-20" : "lg:w-72"}
-                    w-72 bg-gradient-to-b from-green-700 to-green-900 text-white
-                    shadow-2xl flex flex-col overflow-y-auto h-screen`}
+                    w-72 bg-[url('/background/sidebar.png')] bg-cover bg-center bg-no-repeat text-white
+                    shadow-2xl flex flex-col h-screen`}
             >
-                {/* Sidebar Header */}
-                <div className="flex items-center justify-between p-4 border-b border-green-600">
-                    {!isCollapsed && (
-                        <h2 className="flex items-center gap-2 font-extrabold text-2xl tracking-wide bg-gradient-to-r from-green-400 via-lime-500 to-green-200 text-transparent bg-clip-text">
-                            <img
-                                src="/icon/logo.png"
-                                alt="Nutriverse Logo"
-                                className="w-12 h-12 object-contain hover:scale-125 transition-transform duration-300"
-                            />
-                            Nutriverse
-                        </h2>
-                    )}
-
-                    {/* Tombol Close Mobile */}
-                    <button
-                        onClick={() => setSidebarOpen(false)}
-                        className="p-2 rounded-lg hover:bg-green-800 transition lg:hidden"
-                    >
-                        <X size={22} />
-                    </button>
-
-                    {/* Tombol Collapse Desktop */}
-                    <button
-                        onClick={() => setIsCollapsed(!isCollapsed)}
-                        className="hidden lg:flex p-2 rounded-lg hover:bg-green-800 transition"
-                    >
-                        {isCollapsed ? (
-                            <ChevronRight size={22} />
-                        ) : (
-                            <ChevronLeft size={22} />
+                <div className="absolute inset-0 h-auto bg-black/30"></div>
+                <div className="relative z-10 flex flex-col h-full overflow-y-auto">
+                    {/* Sidebar Header */}
+                    <div className="flex items-center justify-between p-4 border-b border-white">
+                        {!isCollapsed && (
+                            <h2 className="flex items-center gap-2 font-extrabold text-2xl tracking-wide text-white">
+                                <img
+                                    src="/icon/logo.png"
+                                    alt="Nutriverse Logo"
+                                    className="w-12 h-12 object-contain hover:scale-125 transition-transform duration-300"
+                                />
+                                Nutriverse
+                            </h2>
                         )}
-                    </button>
-                </div>
 
-                {/* Menu */}
-                <nav className="flex-1 px-3 space-y-2 mt-6">
-                    {menuItems.map((item) => (
-                        <div key={item.label}>
-                            {item.children ? (
-                                <>
-                                    <button
-                                        onClick={() =>
-                                            toggleSubmenu(item.label)
-                                        }
-                                        className="flex items-center justify-between w-full px-3 py-3 rounded-xl hover:bg-green-800 transition"
+                        {/* Tombol Close Mobile */}
+                        <button
+                            onClick={() => setSidebarOpen(false)}
+                            className="p-2 lg:hidden rounded-full bg-white/10
+             hover:bg-red-500/80 hover:text-white
+             transition-colors duration-200
+             focus:outline-none focus:ring-2 focus:ring-red-400"
+                            aria-label="Tutup Sidebar"
+                        >
+                            <X size={22} />
+                        </button>
+
+                        {/* Tombol Collapse Desktop */}
+                        <div className="hidden lg:flex relative group">
+                            <button
+                                onClick={() => setIsCollapsed(!isCollapsed)}
+                                className="p-2 rounded-full bg-white/10
+               hover:bg-primary-100/80 hover:text-white
+               transition-colors duration-200
+               focus:outline-none focus:ring-2 focus:ring-primary-100"
+                                aria-label={
+                                    isCollapsed
+                                        ? "Perbesar Sidebar"
+                                        : "Perkecil Sidebar"
+                                }
+                            >
+                                {isCollapsed ? (
+                                    <ChevronRight size={22} />
+                                ) : (
+                                    <ChevronLeft size={22} />
+                                )}
+                            </button>
+
+                        </div>
+                    </div>
+
+                    {/* Menu */}
+                    <nav className="flex-1 px-2 mt-6 space-y-1">
+                        {menuItems.map((item) => (
+                            <div key={item.label}>
+                                {item.children ? (
+                                    <>
+                                        <button
+                                            onClick={() =>
+                                                toggleSubmenu(item.label)
+                                            }
+                                            className="group relative flex items-center justify-between w-full pl-4 pr-3 py-3 rounded-md transition-all duration-300"
+                                        >
+                                            {/* garis kiri */}
+                                            <span className="absolute left-0 top-0 h-full w-1 bg-primary-100 scale-y-0 group-hover:scale-y-100 origin-top transition-transform rounded-r"></span>
+
+                                            {/* icon + label */}
+                                            <div className="flex items-center space-x-3 text-white group-hover:text-primary-100 hover:font-medium">
+                                                {item.icon}
+                                                {!isCollapsed && (
+                                                    <span>{item.label}</span>
+                                                )}
+                                            </div>
+
+                                            {!isCollapsed &&
+                                                (openMenu === item.label ? (
+                                                    <ChevronDown
+                                                        size={18}
+                                                        className="text-white group-hover:text-primary-100 hover:font-medium"
+                                                    />
+                                                ) : (
+                                                    <ChevronRight
+                                                        size={18}
+                                                        className="text-white group-hover:text-primary-100 hover:font-medium"
+                                                    />
+                                                ))}
+                                        </button>
+
+                                        {/* Submenu */}
+                                        {openMenu === item.label &&
+                                            !isCollapsed && (
+                                                <div className="ml-8 mt-1 space-y-1">
+                                                    {item.children.map(
+                                                        (sub) => (
+                                                            <Link
+                                                                key={sub.label}
+                                                                href={sub.href}
+                                                                className="block px-3 py-2 text-sm text-white/80 hover:text-primary-100 hover:font-medium transition-colors"
+                                                            >
+                                                                {sub.label}
+                                                            </Link>
+                                                        )
+                                                    )}
+                                                </div>
+                                            )}
+                                    </>
+                                ) : (
+                                    <Link
+                                        href={item.href}
+                                        className="group relative flex items-center w-full pl-4 pr-3 py-3 rounded-md transition-all duration-300 text-white hover:text-primary-100 hover:font-medium"
                                     >
+                                        {/* garis kiri */}
+                                        <span className="absolute left-0 top-0 h-full w-1 bg-primary-100 scale-y-0 group-hover:scale-y-100 origin-top transition-transform rounded-r"></span>
+
+                                        {/* icon + label */}
                                         <div className="flex items-center space-x-3">
                                             {item.icon}
                                             {!isCollapsed && (
                                                 <span>{item.label}</span>
                                             )}
                                         </div>
-                                        {!isCollapsed &&
-                                            (openMenu === item.label ? (
-                                                <ChevronDown size={18} />
-                                            ) : (
-                                                <ChevronRight size={18} />
-                                            ))}
-                                    </button>
+                                    </Link>
+                                )}
+                            </div>
+                        ))}
+                    </nav>
 
-                                    {/* Submenu */}
-                                    {openMenu === item.label &&
-                                        !isCollapsed && (
-                                            <div className="ml-10 mt-2 space-y-2">
-                                                {item.children.map((sub) => (
-                                                    <Link
-                                                        key={sub.label}
-                                                        href={sub.href}
-                                                        className="block px-3 py-2 rounded-lg text-sm hover:bg-green-700 transition"
-                                                    >
-                                                        {sub.label}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        )}
-                                </>
-                            ) : (
-                                <Link
-                                    href={item.href}
-                                    className="flex items-center space-x-3 w-full px-3 py-3 rounded-xl hover:bg-green-800 transition"
-                                >
-                                    {item.icon}
-                                    {!isCollapsed && <span>{item.label}</span>}
-                                </Link>
-                            )}
-                        </div>
-                    ))}
-                </nav>
-
-                {/* Logout */}
-                <div className="p-4 border-t border-green-600">
-                    <Link
-                        href="/logout"
-                        method="post"
-                        as="button"
-                        className="flex items-center space-x-3 px-3 py-3 w-full text-left rounded-xl hover:bg-red-600 transition"
-                    >
-                        <LogOut size={20} />
-                        {!isCollapsed && <span>Logout</span>}
-                    </Link>
+                    {/* Logout */}
+                    <div className="p-4 border-t border-white">
+                        <Link
+                            href="/logout"
+                            method="post"
+                            as="button"
+                            className="flex items-center space-x-3 px-3 py-3 w-full text-left rounded-xl hover:bg-red-600 transition"
+                        >
+                            <LogOut size={20} />
+                            {!isCollapsed && <span>Logout</span>}
+                        </Link>
+                    </div>
                 </div>
             </aside>
         </>
