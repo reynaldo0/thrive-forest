@@ -12,19 +12,12 @@ const pictures = [
     "8",
     "9",
     "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
 ];
 
 export const pageAtom = atom(0);
 export const pages = [
     {
-        front: "budaya",
+        front: "cover",
         back: pictures[0],
     },
 ];
@@ -37,7 +30,7 @@ for (let i = 1; i < pictures.length - 1; i += 2) {
 
 pages.push({
     front: pictures[pictures.length - 1],
-    back: "belakang",
+    back: "back-cover",
 });
 
 export const UI = () => {

@@ -60,10 +60,15 @@ export default function BukuTerpadu() {
                 className="w-full min-h-[120vh] bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] flex flex-col items-center justify-start gap-12 py-12 relative overflow-visible px-6"
             >
                 {/* Background */}
+                <div className="absolute inset-0">
+                {/* Gambar background */}
                 <div
-                    className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center opacity-50"
+                    className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center blur-sm"
                     style={{ backgroundAttachment: "fixed" }}
                 />
+                {/* Overlay hitam transparan */}
+                <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
+                </div>
 
                 {/* 3D Object */}
                 <div className="flex-1 flex justify-center relative w-full">
