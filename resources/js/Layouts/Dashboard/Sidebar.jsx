@@ -71,7 +71,6 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 { label: "Tambah Item", href: "/admin/gizi/create" },
             ],
         },
-        { label: "Game", icon: <Gamepad size={20} />, href: "/admin/game" },
         { label: "Pesan", icon: <Mail size={20} />, href: "/admin/mails" },
         {
             label: "Settings",

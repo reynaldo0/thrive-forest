@@ -33,8 +33,8 @@ export default function Index({ artikels }) {
                     </Link>
                 </div>
 
-                {/* Card Table */}
-                <div className="bg-white shadow-lg rounded-2xl border border-primary-100 overflow-x-auto">
+                {/* Desktop Table */}
+                <div className="hidden md:block bg-white shadow-lg rounded-2xl border border-primary-100 overflow-x-auto">
                     {artikels.data.length === 0 ? (
                         <p className="p-4 text-gray-500">Tidak ada artikel</p>
                     ) : (
@@ -109,6 +109,53 @@ export default function Index({ artikels }) {
                             </tbody>
                         </table>
                     )}
+                </div>
+
+                {/* Mobile Cards */}
+                <div className="md:hidden flex flex-col gap-4">
+                    {artikels.data.length === 0 && (
+                        <p className="p-4 text-gray-500 text-center">
+                            Tidak ada artikel
+                        </p>
+                    )}
+                    {artikels.data.map((artikel, index) => (
+                        <div
+                            key={artikel.id}
+                            className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition transform"
+                        >
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="font-bold text-gray-800">
+                                    {index +
+                                        1 +
+                                        (artikels.current_page - 1) *
+                                            artikels.per_page}
+                                    . {artikel.title}
+                                </span>
+                            </div>
+                            <p className="text-gray-600 mb-2">{artikel.desc}</p>
+                            {artikel.img && (
+                                <img
+                                    src={getImageUrl(artikel.img)}
+                                    alt={artikel.title}
+                                    className="h-40 w-full object-cover rounded mb-2"
+                                />
+                            )}
+                            <div className="flex flex-col gap-2">
+                                <Link
+                                    href={route("artikels.edit", artikel.id)}
+                                    className="w-full px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-white rounded-xl shadow-md font-medium text-center transition"
+                                >
+                                    Edit
+                                </Link>
+                                <button
+                                    onClick={() => handleDelete(artikel.id)}
+                                    className="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl shadow-md font-medium transition"
+                                >
+                                    Hapus
+                                </button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
                 {/* Pagination */}

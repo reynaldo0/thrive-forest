@@ -5,7 +5,7 @@ import Sidebar from "./Dashboard/Sidebar";
 import { Toaster, toast } from "react-hot-toast";
 
 export default function AuthenticatedLayout({ children }) {
-    const { props, url } = usePage(); // ✅ ambil url langsung di sini
+    const { props, url } = usePage();
     const { flash } = props;
     const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -34,10 +34,10 @@ export default function AuthenticatedLayout({ children }) {
     }, [flash]);
 
     // Generate breadcrumb dari url
-    const segments = url.split("/").filter(Boolean); // ✅ sekarang aman
+    const segments = url.split("/").filter(Boolean);
 
     return (
-        <div className="flex bg-gradient-to-br from-green-50 via-white to-green-100 h-screen overflow-hidden">
+        <div className="flex h-screen overflow-hidden bg-green-50">
             {/* Sidebar tetap fixed */}
             <Sidebar
                 isSidebarOpen={isSidebarOpen}
@@ -45,14 +45,14 @@ export default function AuthenticatedLayout({ children }) {
             />
 
             {/* Main content */}
-            <main className="flex-1 flex flex-col h-screen overflow-y-auto">
+            <main className="flex-1 flex flex-col overflow-y-auto relative">
                 <Navbar setSidebarOpen={setSidebarOpen} />
 
                 {/* Toast container */}
                 <Toaster position="top-right" reverseOrder={false} />
 
                 {/* Breadcrumb */}
-                <div className="px-8 py-3 bg-white/70 backdrop-blur-sm border-b border-green-200 shadow-sm flex items-center gap-2 text-sm text-gray-600">
+                <div className="px-8 py-3 bg-white/70 backdrop-blur-sm border-b border-green-200 shadow-sm flex items-center gap-2 text-sm text-gray-600 z-20 relative">
                     <span className="text-green-600 font-semibold">Home</span>
                     {segments.map((seg, idx) => {
                         const path = "/" + segments.slice(0, idx + 1).join("/");
@@ -77,8 +77,20 @@ export default function AuthenticatedLayout({ children }) {
                     })}
                 </div>
 
-                {/* Konten utama */}
-                <div className="flex-1 p-8 space-y-10">{children}</div>
+                {/* Kontainer utama dengan background & overlay */}
+                {/* Kontainer utama dengan background & overlay */}
+                <div className="relative flex-1">
+                    {/* Background image */}
+                    <div className="absolute inset-0 top-0 bg-[url('/background/dashboard.png')] bg-cover bg-center bg-no-repeat"></div>
+
+                    {/* Overlay dengan blur */}
+                    <div className="absolute inset-0 top-0 bg-black/10 backdrop-blur-md"></div>
+
+                    {/* Konten utama */}
+                    <div className="relative z-10 p-8 space-y-10">
+                        {children}
+                    </div>
+                </div>
             </main>
         </div>
     );
