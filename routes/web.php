@@ -14,6 +14,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+/**
+ * ROUTE PUBLIK
+ */
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
@@ -23,112 +26,87 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-})->name('about');
-
-Route::get('/article', function () {
-    return Inertia::render('Article');
-})->name('article');
-
-Route::get('/product', function () {
-    return Inertia::render('Product');
-})->name('product');
-
-Route::get('/gamess', function () {
-    return Inertia::render('Gamess');
-})->name('gamess');
+Route::get('/about', fn() => Inertia::render('About'))->name('about');
+Route::get('/article', fn() => Inertia::render('Article'))->name('article');
+Route::get('/product', fn() => Inertia::render('Product'))->name('product');
+Route::get('/gamess', fn() => Inertia::render('Gamess'))->name('gamess');
 
 Route::get('/games', [FruitController::class, 'publicIndex'])->name('games');
-
-Route::get('/product', [SeminarController::class, 'publicIndex'])
-    ->name('product');
+Route::get('/product', [SeminarController::class, 'publicIndex'])->name('product');
 
 Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'store'])
     ->name('seminars.register');
 
+/**
+ * ROUTE ADMIN (role: admin)
+ */
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
-// Route::get('/forum-komunitas', function () {
-//     return Inertia::render('Product/ForumKomunitas');
-// });
+    Route::get('/overview', fn() => Inertia::render('Dashboard/Overview'))->name('dashboard');
 
-// Route::get('/buku-terpadu', fn() => Inertia::render('Article/BukuTerpadu'))->name('buku-terpadu');
-// Route::get('/produk-unggul', fn() => Inertia::render('Product/ProdukUnggul'))->name('produk-unggul');
-// Route::get('/komunitas', fn() => Inertia::render('Product/Komunitas'))->name('komunitas');
-// Route::get('/ai', fn() => Inertia::render('Ai'))->name('ai');
-
-Route::get('/admin/overview', function () {
-    return Inertia::render('Dashboard/Overview');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::middleware('auth')->prefix('admin')->group(function () {
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Farm Manage
-    // Route::get('/farm', [FarmController::class, 'index'])->name('farm.index');
-    // Route::post('/farm/add', [FarmController::class, 'addFarm'])->name('farm.add');
-    // Route::post('/farm/{farm}/plant', [FarmController::class, 'plant'])->name('farm.plant');
-    // Route::post('/farm/{farm}/water', [FarmController::class, 'water'])->name('farm.water');
-    // Route::post('/farm/{farm}/harvest', [FarmController::class, 'harvest'])->name('farm.harvest');
-    // Route::post('/farm/donate', [FarmController::class, 'donate'])->name('farm.donate');
 
-    Route::get('/fruits', [FruitController::class, 'index'])->name('fruits.index');       // list data
-    Route::get('/fruits/create', [FruitController::class, 'create'])->name('fruits.create'); // form tambah
-    Route::post('/fruits/store', [FruitController::class, 'store'])->name('fruits.store');   // simpan data
-    Route::get('/fruits/{fruit}/edit', [FruitController::class, 'edit'])->name('fruits.edit'); // form edit
-    Route::put('/fruits/{fruit}/update', [FruitController::class, 'update'])->name('fruits.update'); // update data
+    // Fruits CRUD
+    Route::get('/fruits', [FruitController::class, 'index'])->name('fruits.index');
+    Route::get('/fruits/create', [FruitController::class, 'create'])->name('fruits.create');
+    Route::post('/fruits/store', [FruitController::class, 'store'])->name('fruits.store');
+    Route::get('/fruits/{fruit}/edit', [FruitController::class, 'edit'])->name('fruits.edit');
+    Route::put('/fruits/{fruit}/update', [FruitController::class, 'update'])->name('fruits.update');
     Route::delete('/fruits/{fruit}/delete', [FruitController::class, 'destroy'])->name('fruits.destroy');
 
-    // game manage
-    Route::get('/game', [GameController::class, 'index']);
-    Route::post('/plant', [GameController::class, 'plant']);
-    Route::post('/harvest', [FruitController::class, 'harvest'])->name('harvest');
-    Route::post('/harvest/{plant}', [GameController::class, 'harvest']);
-
+    // Schools CRUD + join/leave
     Route::get('/schools', [SchoolController::class, 'index'])->name('schools.index');
     Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store');
     Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
     Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
 
-    // join teamcode
-    Route::get('/join-school', [SchoolController::class, 'joinTeamcode'])
-        ->middleware('auth')
-        ->name('schools.join.form');
+    Route::get('/join-school', [SchoolController::class, 'joinTeamcode'])->name('schools.join.form');
+    Route::post('/join-school', [SchoolController::class, 'joinSchool'])->name('schools.join');
+    Route::post('/leave-school', [SchoolController::class, 'leaveSchool'])->name('schools.leave');
 
-    Route::post('/leave-school', [SchoolController::class, 'leaveSchool'])
-        ->name('schools.leave');
-
-    Route::post('/join-school', [SchoolController::class, 'joinSchool'])
-        ->name('schools.join');
-    Route::get('/leaderboard', [SchoolController::class, 'leaderboard']);
-
-    // mail manage
+    // Mail
     Route::get('/mails', [MailController::class, 'index'])->name('mails.index');
     Route::post('/mails', [MailController::class, 'store'])->name('mails.store');
 
+    // Seminars & Articles
     Route::resource('seminars', SeminarController::class);
-    // Route::resource('artikels', ArtikelController::class);
     Route::resource('artikels', ArtikelController::class)->except(['show']);
-    Route::post('/registrations', [RegistrationController::class, 'store'])->name('registrations.store');
 
-    // Game Items CRUD
-    Route::get('/gizi', [TebakGiziController::class, 'index'])->name('gizi.index'); // list semua item
-    Route::get('/gizi/create', [TebakGiziController::class, 'create'])->name('gizi.create'); // form tambah
-    Route::post('/gizi', [TebakGiziController::class, 'store'])->name('gizi.store'); // simpan item baru
-    Route::get('/gizi/{item}/edit', [TebakGiziController::class, 'edit'])->name('gizi.edit'); // form edit
-    Route::patch('/gizi/{item}', [TebakGiziController::class, 'update'])->name('gizi.update'); // update item
-    Route::delete('/gizi/{item}', [TebakGiziController::class, 'destroy'])->name('gizi.destroy'); // hapus item
+    // Game Items (TebakGizi)
+    Route::get('/gizi', [TebakGiziController::class, 'index'])->name('gizi.index');
+    Route::get('/gizi/create', [TebakGiziController::class, 'create'])->name('gizi.create');
+    Route::post('/gizi', [TebakGiziController::class, 'store'])->name('gizi.store');
+    Route::get('/gizi/{item}/edit', [TebakGiziController::class, 'edit'])->name('gizi.edit');
+    Route::patch('/gizi/{item}', [TebakGiziController::class, 'update'])->name('gizi.update');
+    Route::delete('/gizi/{item}', [TebakGiziController::class, 'destroy'])->name('gizi.destroy');
 
     // Questions per Item
-    Route::get('/gizi/{item}/questions', [TebakGiziController::class, 'questions'])->name('gizi.questions.index'); // list pertanyaan
-    Route::get('/gizi/{item}/questions/create', [TebakGiziController::class, 'createQuestion'])->name('gizi.questions.create'); // form tambah pertanyaan
-    Route::post('/gizi/{item}/questions', [TebakGiziController::class, 'storeQuestion'])->name('gizi.questions.store'); // simpan pertanyaan
-    Route::get('/gizi/{item}/questions/{question}/edit', [TebakGiziController::class, 'editQuestion'])->name('gizi.questions.edit'); // form edit pertanyaan
-    Route::put('/gizi/{item}/questions/{question}', [TebakGiziController::class, 'updateQuestion'])->name('gizi.questions.update'); // update pertanyaan
-    Route::delete('/gizi/{item}/questions/{question}', [TebakGiziController::class, 'destroyQuestion'])->name('gizi.questions.destroy'); // hapus pertanyaan
+    Route::prefix('/gizi/{item}/questions')->name('gizi.questions.')->group(function () {
+        Route::get('/', [TebakGiziController::class, 'questions'])->name('index');
+        Route::get('/create', [TebakGiziController::class, 'createQuestion'])->name('create');
+        Route::post('/', [TebakGiziController::class, 'storeQuestion'])->name('store');
+        Route::get('/{question}/edit', [TebakGiziController::class, 'editQuestion'])->name('edit');
+        Route::put('/{question}', [TebakGiziController::class, 'updateQuestion'])->name('update');
+        Route::delete('/{question}', [TebakGiziController::class, 'destroyQuestion'])->name('destroy');
+    });
+});
 
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('user.dashboard');
+
+
+    // User bisa join/leave sekolah
+    Route::get('/join-school', [SchoolController::class, 'joinTeamcode'])->name('schools.join.form');
+    Route::post('/join-school', [SchoolController::class, 'joinSchool'])->name('schools.join');
+    Route::post('/leave-school', [SchoolController::class, 'leaveSchool'])->name('schools.leave');
+
+    // User bisa akses permainan/game
+    Route::get('/games', [FruitController::class, 'publicIndex'])->name('games');
 });
 
 require __DIR__ . '/auth.php';

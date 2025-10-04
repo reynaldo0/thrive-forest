@@ -21,7 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'school_id',
-        'avatar'
+        'avatar',
+        'role',
     ];
 
     /**
@@ -73,5 +74,14 @@ class User extends Authenticatable
         // default avatar dari inisial nama
         $initials = strtoupper(substr($this->name, 0, 1));
         return "https://ui-avatars.com/api/?name={$initials}&background=random";
+    }
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser(): bool
+    {
+        return $this->role === 'user';
     }
 }
