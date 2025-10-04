@@ -7,6 +7,8 @@ import {
     FaPinterestP,
     FaYoutube,
     FaTiktok,
+    FaMapMarkerAlt,
+    FaEnvelope,
 } from "react-icons/fa";
 import Cta from "./Cta";
 
@@ -25,29 +27,59 @@ export default function Footer() {
                             className="w-32 mb-2"
                         />
                         <h3 className="text-lg font-semibold">Hubungi kami</h3>
-                        <p className="flex items-center gap-2">
-                            <span className="text-xl">📍</span> Universitas
-                            Negeri Jakarta (UNJ)
+
+                        <p className="flex items-center gap-3">
+                            <FaMapMarkerAlt className="text-xl text-white" />
+                            <span>Universitas Negeri Jakarta (UNJ)</span>
                         </p>
-                        <p className="flex items-center gap-2">
-                            <span className="text-xl">✉️</span>{" "}
-                            Nutinutriverse@gmail.com
+
+                        <p className="flex items-center gap-3">
+                            <FaEnvelope className="text-xl text-white" />
+                            <a
+                                href="mailto:Nutinutriverse@gmail.com"
+                                className="hover:text-yellow-200 transition"
+                            >
+                                Nutinutriverse@gmail.com
+                            </a>
                         </p>
 
                         {/* Sosial Media */}
                         <div className="flex space-x-3 mt-3">
                             {[
-                                { icon: <FaTwitter />, href: "#" },
-                                { icon: <FaFacebookF />, href: "#" },
-                                { icon: <FaInstagram />, href: "#" },
-                                { icon: <FaLinkedinIn />, href: "#" },
-                                { icon: <FaPinterestP />, href: "#" },
-                                { icon: <FaYoutube />, href: "#" },
-                                { icon: <FaTiktok />, href: "#" },
+                                {
+                                    icon: <FaTwitter />,
+                                    href: "https://twitter.com/youraccount",
+                                },
+                                {
+                                    icon: <FaFacebookF />,
+                                    href: "https://facebook.com/yourpage",
+                                },
+                                {
+                                    icon: <FaInstagram />,
+                                    href: "https://instagram.com/youraccount",
+                                },
+                                {
+                                    icon: <FaLinkedinIn />,
+                                    href: "https://linkedin.com/in/yourprofile",
+                                },
+                                {
+                                    icon: <FaPinterestP />,
+                                    href: "https://pinterest.com/yourpage",
+                                },
+                                {
+                                    icon: <FaYoutube />,
+                                    href: "https://youtube.com/@yourchannel",
+                                },
+                                {
+                                    icon: <FaTiktok />,
+                                    href: "https://tiktok.com/@youraccount",
+                                },
                             ].map((s, i) => (
                                 <a
                                     key={i}
                                     href={s.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="p-2 bg-white text-[#4C7C18] rounded-full hover:bg-yellow-200 transition transform hover:scale-110"
                                 >
                                     {s.icon}
@@ -60,34 +92,40 @@ export default function Footer() {
                     <div className="flex flex-col space-y-3">
                         <h3 className="text-lg font-semibold">Akses konten</h3>
                         <a
-                            href="#"
+                            href="/"
                             className="hover:text-yellow-200 transition"
                         >
                             Beranda
                         </a>
                         <a
-                            href="#"
+                            href="/about"
                             className="hover:text-yellow-200 transition"
                         >
                             Tentang
                         </a>
                         <a
-                            href="#"
+                            href="/article"
                             className="hover:text-yellow-200 transition"
                         >
                             Artikel
                         </a>
                         <a
-                            href="#"
+                            href="/product"
                             className="hover:text-yellow-200 transition"
                         >
                             Komunitas
                         </a>
                         <a
-                            href="#"
+                            href="/games"
                             className="hover:text-yellow-200 transition"
                         >
-                            Games
+                            Games 1
+                        </a>
+                        <a
+                            href="/gamess"
+                            className="hover:text-yellow-200 transition"
+                        >
+                            Games 2
                         </a>
                     </div>
 
@@ -95,37 +133,49 @@ export default function Footer() {
                     <div className="flex flex-col space-y-3">
                         <h3 className="text-lg font-semibold">Sumber data</h3>
                         <a
-                            href="#"
+                            href="https://www.kemdikbud.go.id/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="hover:text-yellow-200 transition"
                         >
                             Kemendikbud.go.id
                         </a>
                         <a
-                            href="#"
+                            href="https://ipb.ac.id/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="hover:text-yellow-200 transition"
                         >
                             IPB University
                         </a>
                         <a
-                            href="#"
+                            href="https://pgpradjeka.co.id/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="hover:text-yellow-200 transition"
                         >
-                            PGpradjeka
+                            PG Pradjeka
                         </a>
                         <a
-                            href="#"
+                            href="https://ub.ac.id/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="hover:text-yellow-200 transition"
                         >
                             Univ. Brawijaya
                         </a>
                         <a
-                            href="#"
+                            href="https://ugm.ac.id/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="hover:text-yellow-200 transition"
                         >
                             UGM
                         </a>
                         <a
-                            href="#"
+                            href="https://www.bbc.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="hover:text-yellow-200 transition"
                         >
                             BBC
@@ -135,14 +185,21 @@ export default function Footer() {
                     {/* Credit */}
                     <div className="flex flex-col space-y-3">
                         <h3 className="text-lg font-semibold">Credit</h3>
-                        <p>Pinterest</p>
+                        <a
+                            href="https://www.pinterest.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-yellow-200 transition"
+                        >
+                            Pinterest
+                        </a>
                     </div>
                 </div>
 
                 {/* Footer Bawah */}
-                {/* <div className="relative z-10 text-center text-sm py-4 bg-[#2F4F12] -mt-4">
+                <div className="relative z-10 text-center text-sm py-4 bg-[#2F4F12] -mt-4">
                     © 2025 NutriVerse. All rights reserved.
-                </div> */}
+                </div>
             </footer>
         </>
     );

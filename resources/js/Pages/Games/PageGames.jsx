@@ -24,7 +24,6 @@ export default function PageGames({ fruits }) {
     const [offsetX, setOffsetX] = useState(0);
     const sectionRef = useRef(null);
 
-    // Animasi parallax mirip Code B
     useEffect(() => {
         let animationFrameId;
         let currentX = 0;
@@ -34,14 +33,11 @@ export default function PageGames({ fruits }) {
             const rect = sectionRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
 
-            // Hitung scroll masuk section
             const scrollPassed = windowHeight - rect.top;
-
-            // targetX = jarak horizontal
             const targetX = scrollPassed > 0 ? scrollPassed * 0.2 : 0;
 
             const animate = () => {
-                currentX += (targetX - currentX) * 0.15; // lerp biar smooth
+                currentX += (targetX - currentX) * 0.15;
                 setOffsetX(currentX);
 
                 if (Math.abs(targetX - currentX) > 0.5) {
@@ -60,7 +56,6 @@ export default function PageGames({ fruits }) {
         };
     }, []);
 
-    // Sinkronisasi totalPoints
     useEffect(() => {
         setTotalPoints(backendPoints);
         if (backendAdded) {
@@ -149,7 +144,7 @@ export default function PageGames({ fruits }) {
                 <img
                     src="/gameicon/tanah1.png"
                     alt="tanah"
-                    className="w-12 h-12"
+                    className="w-16 h-16"
                 />
             );
         }
@@ -158,7 +153,7 @@ export default function PageGames({ fruits }) {
             <img
                 src={stageImg}
                 alt={`${plot.fruit.name} stage ${plot.stage}`}
-                className="w-14 h-14"
+                className="w-20 h-20"
             />
         );
     };
@@ -166,52 +161,56 @@ export default function PageGames({ fruits }) {
     return (
         <section
             ref={sectionRef}
-            className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] px-6 py-12 relative overflow-hidden pb-60"
+            className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] px-6 py-16 relative overflow-hidden pb-60"
         >
-            {/* Card utama */}
-            <div className="bg-[#F1FFE2] rounded-3xl shadow-2xl border-2 border-green-200 p-10 md:p-16 flex flex-col gap-8 max-w-5xl w-full relative z-10">
-                <h1 className="text-5xl md:text-6xl font-extrabold text-[#3A2E17] mb-4 text-center">
-                    Games
-                </h1>
+            {/* Judul & Subjudul di luar card */}
+            <h1 className="text-6xl md:text-7xl font-extrabold text-[#3A2E17] text-center mb-6">
+                Games 1
+            </h1><br></br>
+            <p className="text-center text-2xl md:text-3xl font-bold text-white mb-10 bg-[#3A2E17] py-3 px-10 rounded-full shadow-lg">
+                Pilih Buah yang ingin kamu tanam
+            </p>
 
+            {/* Card utama */}
+            <div className="bg-[#F1FFE2] rounded-3xl shadow-2xl border-2 border-green-200 p-10 md:p-16 flex flex-col gap-10 max-w-6xl w-full relative z-10">
                 {/* Pilih Buah */}
                 <div className="flex justify-center gap-8 flex-wrap">
                     {fruits.map((fruit) => (
                         <button
                             key={fruit.id}
                             onClick={() => plantFruit(fruit)}
-                            className="bg-white w-28 h-28 rounded-full flex items-center justify-center shadow-md hover:scale-110 transition duration-300"
+                            className="bg-white w-32 h-32 rounded-full flex items-center justify-center shadow-md hover:scale-110 transition duration-300"
                         >
                             <img
                                 src={fruit.img}
                                 alt={fruit.name}
-                                className="w-16 h-16"
+                                className="w-20 h-20"
                             />
                         </button>
                     ))}
                 </div>
 
                 {/* Inventori + Lahan */}
-                <div className="flex flex-col md:flex-row gap-6 w-full">
+                <div className="flex flex-col md:flex-row gap-8 w-full">
                     {/* Inventori */}
-                    <div className="p-6 rounded-2xl shadow-md flex-1 bg-white/40 backdrop-blur-md border border-white/20">
-                        <p className="font-semibold text-[#3A2E17] mb-3">
+                    <div className="p-8 rounded-2xl shadow-md flex-1 bg-white/60 backdrop-blur-md border border-white/20">
+                        <p className="font-bold text-2xl text-[#3A2E17] mb-4">
                             Inventori kamu
                         </p>
-                        <div className="grid grid-cols-3 gap-4 mb-4">
+                        <div className="grid grid-cols-3 gap-4 mb-6">
                             {Array.from({ length: 3 }).map((_, i) => (
                                 <div
                                     key={i}
-                                    className="w-20 h-20 bg-white/50 rounded-lg flex items-center justify-center shadow-md"
+                                    className="w-24 h-24 bg-white/70 rounded-lg flex items-center justify-center shadow-md"
                                 >
                                     {inventory[i] ? (
                                         <img
                                             src={inventory[i].img}
                                             alt={inventory[i].name}
-                                            className="w-14 h-14"
+                                            className="w-16 h-16"
                                         />
                                     ) : (
-                                        <span className="text-gray-400 text-xl">
+                                        <span className="text-gray-400 text-2xl">
                                             +
                                         </span>
                                     )}
@@ -221,7 +220,7 @@ export default function PageGames({ fruits }) {
                         <button
                             onClick={donateFruit}
                             disabled={inventory.length === 0}
-                            className={`px-6 py-2 rounded-lg text-white font-semibold shadow-md w-full ${
+                            className={`px-8 py-3 rounded-lg text-lg text-white font-bold shadow-md w-full ${
                                 inventory.length > 0
                                     ? "bg-green-600 hover:bg-green-700"
                                     : "bg-gray-400 cursor-not-allowed"
@@ -231,15 +230,15 @@ export default function PageGames({ fruits }) {
                         </button>
 
                         {/* Total Poin */}
-                        <div className="bg-yellow-100 mt-5 rounded-2xl shadow-md flex flex-col items-center px-6 py-4">
-                            <p className="font-semibold text-[#3A2E17]">
+                        <div className="bg-yellow-100 mt-6 rounded-2xl shadow-md flex flex-col items-center px-8 py-6">
+                            <p className="font-bold text-xl text-[#3A2E17]">
                                 Total Poin Kamu
                             </p>
-                            <p className="text-2xl font-bold text-[#3A2E17]">
+                            <p className="text-3xl font-extrabold text-[#3A2E17]">
                                 {totalPoints} pts
                             </p>
                             {lastHarvest && (
-                                <p className="mt-2 text-green-700 text-sm">
+                                <p className="mt-2 text-green-700 text-lg">
                                     🎉 Baru saja panen{" "}
                                     <b>{lastHarvest.name ?? "buah"}</b> +
                                     {lastHarvest.points} pts
@@ -249,21 +248,21 @@ export default function PageGames({ fruits }) {
                     </div>
 
                     {/* Lahan */}
-                    <div className="p-6 rounded-2xl shadow-md flex-1 bg-white/40 backdrop-blur-md border border-white/20">
-                        <p className="font-semibold text-[#3A2E17] mb-3">
+                    <div className="p-8 rounded-2xl shadow-md flex-1 bg-white/60 backdrop-blur-md border border-white/20">
+                        <p className="font-bold text-2xl text-[#3A2E17] mb-4">
                             Lahan Tanam
                         </p>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-6">
                             {plots.map((plot, i) => (
                                 <div
                                     key={i}
-                                    className="w-24 h-32 rounded-lg flex flex-col items-center justify-center shadow-md p-2 bg-white/50 border border-white/20"
+                                    className="w-28 h-36 rounded-lg flex flex-col items-center justify-center shadow-md p-3 bg-white/70 border border-white/20"
                                 >
                                     {renderStageImage(plot)}
                                     {plot.fruit && plot.stage < 4 && (
                                         <button
                                             onClick={() => waterPlant(i)}
-                                            className="mt-2 text-xs bg-blue-400 text-white px-2 py-1 rounded hover:bg-blue-500"
+                                            className="mt-3 text-sm bg-blue-500 text-white px-3 py-1.5 rounded hover:bg-blue-600"
                                         >
                                             Siram
                                         </button>
@@ -271,7 +270,7 @@ export default function PageGames({ fruits }) {
                                     {plot.stage === 4 && (
                                         <button
                                             onClick={() => harvestFruit(i)}
-                                            className="mt-2 text-xs bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600"
+                                            className="mt-3 text-sm bg-orange-500 text-white px-3 py-1.5 rounded hover:bg-orange-600"
                                         >
                                             Panen
                                         </button>
@@ -283,9 +282,11 @@ export default function PageGames({ fruits }) {
                 </div>
 
                 {/* Donasi */}
-                <div className="bg-white rounded-2xl shadow-md flex items-center justify-between px-6 py-3 w-full">
-                    <p className="font-semibold text-[#3A2E17]">Poin & Donasi Kamu</p>
-                    <p className="font-bold text-[#3A2E17]">
+                <div className="bg-white rounded-2xl shadow-md flex items-center justify-between px-8 py-4 w-full">
+                    <p className="font-bold text-xl text-[#3A2E17]">
+                        Poin & Donasi Kamu
+                    </p>
+                    <p className="font-extrabold text-2xl text-[#3A2E17]">
                         {donation}x Buah
                     </p>
                 </div>

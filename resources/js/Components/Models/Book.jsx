@@ -90,7 +90,7 @@ pages.forEach((page) => {
     useTexture.preload(`/textures/${page.back}.jpg`);
     useTexture.preload(`/textures/tekstur.jpg`);
 });
-
+    
 const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
     const [picture, picture2, pictureRoughness] = useTexture([
         `/textures/${front}.jpg`,
