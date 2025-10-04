@@ -133,7 +133,7 @@ export default function Create() {
                     {/* Stages */}
                     <div>
                         <label className="block text-gray-700 font-medium mb-2">
-                            Stages (5 gambar)
+                            Tahapan (5 gambar)
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                             {data.stages.map((stage, i) => (
@@ -172,7 +172,7 @@ export default function Create() {
                                             />
                                         ) : (
                                             <span className="text-gray-400 text-sm">
-                                                Stage {i + 1}
+                                                Tahapan {i + 1}
                                             </span>
                                         )}
                                     </label>

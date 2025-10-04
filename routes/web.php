@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\FarmController;
 use App\Http\Controllers\FruitController;
-use App\Http\Controllers\GameController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
@@ -66,6 +64,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/join-school', [SchoolController::class, 'joinTeamcode'])->name('schools.join.form');
     Route::post('/join-school', [SchoolController::class, 'joinSchool'])->name('schools.join');
     Route::post('/leave-school', [SchoolController::class, 'leaveSchool'])->name('schools.leave');
+    Route::get('/leaderboard', [SchoolController::class, 'leaderboard'])->name('schools.leaderboard');
 
     // Mail
     Route::get('/mails', [MailController::class, 'index'])->name('mails.index');
@@ -105,8 +104,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // join/leave sekolah di profile
     Route::post('/profile/join-school', [SchoolController::class, 'joinSchool'])->name('profile.join-school');
     Route::post('/profile/leave-school', [SchoolController::class, 'leaveSchool'])->name('profile.leave-school');
-    // User bisa akses permainan/game
-    Route::get('/games', [FruitController::class, 'publicIndex'])->name('games');
+    
 });
 
 

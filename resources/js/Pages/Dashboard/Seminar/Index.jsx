@@ -28,8 +28,8 @@ export default function Index({ seminars }) {
                     </Link>
                 </div>
 
-                {/* Table */}
-                <div className="overflow-x-auto bg-white shadow-md rounded-xl border border-gray-200">
+                {/* Desktop Table */}
+                <div className="hidden md:block overflow-x-auto bg-white shadow-md rounded-xl border border-gray-200">
                     <table className="min-w-full text-sm">
                         <thead className="bg-primary-100/10 text-left">
                             <tr className="text-gray-700 font-semibold">
@@ -91,6 +91,51 @@ export default function Index({ seminars }) {
                             ))}
                         </tbody>
                     </table>
+                </div>
+
+                {/* Mobile Cards */}
+                <div className="md:hidden flex flex-col gap-4">
+                    {seminars.data.map((seminar) => (
+                        <div
+                            key={seminar.id}
+                            className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition transform"
+                        >
+                            <h2 className="text-lg font-bold text-gray-800 mb-2">
+                                {seminar.title}
+                            </h2>
+                            <p className="text-gray-600 mb-1">
+                                <span className="font-semibold">Tanggal:</span>{" "}
+                                {seminar.date}
+                            </p>
+                            <p className="text-gray-600 mb-1">
+                                <span className="font-semibold">Lokasi:</span>{" "}
+                                {seminar.location}
+                            </p>
+                            <p className="text-gray-600 mb-2">
+                                {seminar.description}
+                            </p>
+                            <div className="flex flex-col gap-2">
+                                <button
+                                    onClick={() => setSelectedSeminar(seminar)}
+                                    className="w-full bg-primary-100 hover:bg-primary-100/90 text-white px-4 py-2 rounded-xl shadow font-medium transition"
+                                >
+                                    Peserta
+                                </button>
+                                <Link
+                                    href={route("seminars.edit", seminar.id)}
+                                    className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl shadow font-medium transition text-center"
+                                >
+                                    Edit
+                                </Link>
+                                <button
+                                    onClick={() => handleDelete(seminar.id)}
+                                    className="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl shadow font-medium transition"
+                                >
+                                    Hapus
+                                </button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
                 {/* Modal Peserta */}

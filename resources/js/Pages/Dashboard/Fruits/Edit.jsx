@@ -104,7 +104,7 @@ export default function Edit({ fruit }) {
 
                     {/* Points */}
                     <div>
-                        <label className="block font-medium mb-1">Points</label>
+                        <label className="block font-medium mb-1">Poin</label>
                         <input
                             type="number"
                             min="1"
@@ -123,7 +123,7 @@ export default function Edit({ fruit }) {
                     {/* Icon */}
                     <div>
                         <label className="block font-medium mb-1">
-                            Icon Tanaman
+                            Hasil Jadi Tanaman
                         </label>
                         <DragDropArea
                             preview={previewIcon}
@@ -136,7 +136,7 @@ export default function Edit({ fruit }) {
                     {/* Stages */}
                     <div>
                         <label className="block font-medium mb-1">
-                            Stages (1–5)
+                            Tahapan (1–5)
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                             {previewStages.map((stage, i) => (
@@ -170,7 +170,7 @@ export default function Edit({ fruit }) {
                             disabled={processing}
                             className="bg-secondary-200 hover:bg-secondary-200/90 text-white px-5 py-2 rounded-xl shadow-md transition disabled:opacity-50"
                         >
-                            {processing ? "Menyimpan..." : "Simpan Perubahan"}
+                            {processing ? "Menyimpan..." : "Simpan"}
                         </button>
                     </div>
                 </form>
