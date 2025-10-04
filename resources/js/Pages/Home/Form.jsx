@@ -194,7 +194,7 @@ const Form = () => {
                     <button
                         type="submit"
                         disabled={processing}
-                        className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-4 rounded-full shadow-lg hover:opacity-90 transition disabled:opacity-50"
+                        className="w-full bg-[#90C444] text-white font-semibold shadow-md hover:bg-[#88A825] text-white font-semibold py-4 rounded-full shadow-lg hover:opacity-90 transition disabled:opacity-50"
                     >
                         {processing ? "Mengirim..." : "Kirim"}
                     </button>

@@ -2,11 +2,36 @@ import React, { useState, useEffect } from "react";
 
 export default function ProdukUnggul() {
     const products = [
-        { icon: "https://img.icons8.com/color/96/dna-helix.png", alt: "DNA", label: "Rekayasa Genetik" },
-        { icon: "https://img.icons8.com/color/96/organic-food.png", alt: "Botol", label: "Nutrisi Organik" },
-        { icon: "https://img.icons8.com/color/96/broccoli.png", alt: "Tanaman", label: "Tanaman Sehat" },
-        { icon: "https://img.icons8.com/color/96/plant-under-sun.png", alt: "Plant", label: "Energi Hijau" },
-        { icon: "https://img.icons8.com/color/96/corn.png", alt: "Jagung", label: "Pangan Unggul" },
+        { 
+            icon: "/produk-unggul/kultur.png", 
+            alt: "Kultur", 
+            label: "Kultur Jaringan", 
+            desc: "Kultur jaringan adalah teknik bioteknologi untuk memperbanyak tanaman dengan mengambil bagian kecil dari tanaman (sel, jaringan, atau organ) dan menumbuhkannya di lingkungan laboratorium yang steril dan terkontrol (in vitro)." 
+        },
+        { 
+            icon: "/produk-unggul/rekayasa.png", 
+            alt: "DNA", 
+            label: "Rekayasa Genetika", 
+            desc: "Rekayasa Genetika adalah proses memodifikasi DNA untuk menghasilkan sifat baru yang diinginkan, seperti ketahanan terhadap hama atau peningkatan nilai gizi. Proses ini melibatkan ekstraksi DNA, contoh nya penggunaan bakteri Agrobacterium." 
+        },
+        { 
+            icon: "/produk-unggul/botol.png", 
+            alt: "Botol", 
+            label: "Bioteknologi", 
+            desc: "Bioteknologi adalah ilmu dan teknologi yang memanfaatkan sistem biologis, organisme hidup, atau bagian-bagiannya untuk mengembangkan atau menciptakan produk dan proses yang bermanfaat bagi manusia dan lingkungan." 
+        },
+        { 
+            icon: "/produk-unggul/seleksi.png", 
+            alt: "Seleksi", 
+            label: "Seleksi Masal", 
+            desc: "Seleksi massa adalah metode yang bertujuan meningkatkan populasi campuran dengan memilih individu berdasarkan penampilan fenotipik, kemudian benihnya dikumpulkan dan ditanam pada generasi berikutnya untuk meningkatkan frekuensi gen." 
+        },
+        { 
+            icon: "/produk-unggul/okulasi.png", 
+            alt: "Okulasi", 
+            label: "Okulasi Tanaman", 
+            desc: "Okulasi adalah teknik menggabungkan sifat unggul dari kedua bagian tanaman, seperti sistem perakaran yang kuat dari batang bawah dan kualitas buah atau bunga yang baik dari batang atas, untuk menghasilkan varietas tanaman yang lebih baik dan unggul" 
+        },
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,22 +44,29 @@ export default function ProdukUnggul() {
     }, [currentIndex]);
 
     const handleNext = () => {
-        if (currentIndex < products.length - 1) setCurrentIndex(currentIndex + 1);
+        if (currentIndex < products.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+            setShowDetail(false);      // otomatis tutup konten detail
+            setSelectedProduct(null);  // reset produk yang dipilih
+        }
     };
 
     const handlePrev = () => {
-        if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+            setShowDetail(false);      // otomatis tutup konten detail
+            setSelectedProduct(null);  // reset produk yang dipilih
+        }
     };
 
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center w-full px-6 pt-24 pb-16 bg-[#FCFFEC] overflow-hidden">
-            {/* Background biar gak terpotong */}
+            {/* Background */}
             <div
                 className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-no-repeat bg-cover bg-top"
                 style={{ backgroundAttachment: "fixed", zIndex: 0 }}
             />
 
-            {/* Konten */}
             <div className="relative z-10 flex flex-col items-center w-full">
                 {/* Judul */}
                 <h2 className="text-6xl md:text-7xl font-extrabold text-[#3B3B0E] mb-12 tracking-wide">
@@ -53,7 +85,11 @@ export default function ProdukUnggul() {
                                         ? "bg-[#88A825] scale-125 shadow-lg"
                                         : "bg-[#3B3B0E]"
                                 }`}
-                                onClick={() => setCurrentIndex(i)}
+                                onClick={() => {
+                                    setCurrentIndex(i);
+                                    setShowDetail(false);      // tutup detail saat klik indikator
+                                    setSelectedProduct(null);
+                                }}
                             ></div>
                         ))}
                     </div>
@@ -76,6 +112,7 @@ export default function ProdukUnggul() {
                                     <div className="w-56 h-56 rounded-full bg-white shadow-2xl border-2 border-[#E0EBD2] flex items-center justify-center hover:scale-110 transition-transform duration-500">
                                         <img src={p.icon} alt={p.alt} className="w-24 h-24" />
                                     </div>
+
                                     {/* Label */}
                                     <p className="mt-6 text-2xl md:text-3xl font-semibold text-[#3B3B0E]">
                                         {p.label}
@@ -87,7 +124,7 @@ export default function ProdukUnggul() {
                                             setSelectedProduct(p);
                                             setShowDetail(true);
                                         }}
-                                        className="mt-6 px-6 py-2 rounded-full bg-[#88A825] text-white font-semibold shadow-md hover:bg-[#6e881f] transition"
+                                        className="mt-6 px-8 py-5 rounded-full bg-[#88A825] text-white font-semibold shadow-md hover:bg-[#6e881f] transition"
                                     >
                                         Jelajahi
                                     </button>
@@ -119,24 +156,21 @@ export default function ProdukUnggul() {
 
                 {/* Konten Detail */}
                 {showDetail && selectedProduct && (
-                    <div className="mt-12 max-w-3xl w-full bg-[#F6FFE5] rounded-xl shadow-lg p-8 flex flex-col md:flex-row items-center gap-8">
+                    <div className="mt-12 max-w-4xl w-full bg-[#F6FFE5] rounded-3xl shadow-xl p-10 flex flex-col md:flex-row items-center gap-8">
                         <div className="flex-1 text-left">
-                            <h3 className="text-2xl font-bold text-[#3B3B0E] mb-4">{selectedProduct.label}</h3>
-                            <p className="text-gray-700 leading-relaxed mb-6">
-                                Hunger is discomfort or pain caused by a lack of food. It is different from food insecurity,
-                                which means lack of regular access to safe and nutritious food for proper development and an
-                                active and healthy life.
+                            <h3 className="text-3xl font-bold text-[#3B3B0E] mb-4">{selectedProduct.label}</h3>
+                            <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                                {selectedProduct.desc}
                             </p>
-                            {/* Tombol kembali */}
                             <button
                                 onClick={() => setShowDetail(false)}
-                                className="px-6 py-2 bg-[#3B3B0E] text-white rounded-full font-semibold shadow-md hover:bg-[#2e2e0a] transition"
+                                className="px-6 py-3 bg-[#A6E272] text-[#224C14] font-semibold rounded-full shadow-md hover:bg-[#94D45E] transition"
                             >
                                 Kembali
                             </button>
                         </div>
                         <div className="flex-shrink-0">
-                            <img src={selectedProduct.icon} alt={selectedProduct.alt} className="w-28 h-28 md:w-36 md:h-36" />
+                            <img src={selectedProduct.icon} alt={selectedProduct.alt} className="w-32 h-32 md:w-40 md:h-40" />
                         </div>
                     </div>
                 )}

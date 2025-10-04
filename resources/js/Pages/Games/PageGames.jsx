@@ -284,7 +284,7 @@ export default function PageGames({ fruits }) {
 
                 {/* Donasi */}
                 <div className="bg-white rounded-2xl shadow-md flex items-center justify-between px-6 py-3 w-full">
-                    <p className="font-semibold text-[#3A2E17]">Donasi Kamu</p>
+                    <p className="font-semibold text-[#3A2E17]">Poin & Donasi Kamu</p>
                     <p className="font-bold text-[#3A2E17]">
                         {donation}x Buah
                     </p>

@@ -29,7 +29,7 @@ export default function VisiMisi() {
                         : "opacity-0 -translate-y-8"
                 }`}
             >
-                Visi dan <span className="text-green-600">Misi</span>
+                Visi dan Misi
             </h1>
 
             {/* Card */}
@@ -46,7 +46,7 @@ export default function VisiMisi() {
                         onClick={() => setActiveTab("visi")}
                         className={`px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 relative ${
                             activeTab === "visi"
-                                ? "bg-green-600 text-white shadow-md scale-105"
+                                ? "bg-[#90C444] text-white font-semibold shadow-md hover:bg-[#88A825]"
                                 : "bg-green-200/50 text-green-800 hover:bg-green-300/70"
                         }`}
                     >
@@ -56,7 +56,7 @@ export default function VisiMisi() {
                         onClick={() => setActiveTab("misi")}
                         className={`px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 relative ${
                             activeTab === "misi"
-                                ? "bg-green-600 text-white shadow-md scale-105"
+                                ? "bg-[#90C444] text-white font-semibold shadow-md hover:bg-[#88A825]"
                                 : "bg-green-200/50 text-green-800 hover:bg-green-300/70"
                         }`}
                     >
