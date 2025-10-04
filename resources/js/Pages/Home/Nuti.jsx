@@ -56,8 +56,7 @@ export default function NutiIntro() {
                         </span>{" "}
                         Nutriverse. <br />
                         <br />
-                        Penasaran dengan website ini? Yuk, kita pelajari
-                        bareng-bareng.
+                        Penasaran dengan website ini? Yuk, kita pelajari bersama.
                     </p>
 
                     {/* Gambar */}

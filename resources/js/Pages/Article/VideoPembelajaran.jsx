@@ -57,7 +57,7 @@ export default function Video() {
       {/* Title */}
       <h1 className={`text-4xl md:text-6xl font-extrabold mb-12 text-center tracking-wide drop-shadow-lg transition-all duration-700 ease-out
         ${animateTitle ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-        Video Pembelajaran <span className="text-green-700">Nutriverse</span>
+        <span className="text-5xl md:text-6xl font-extrabold text-[#3B3B0E] mb-12 tracking-wide">Video Pembelajaran</span>
       </h1>
 
       {/* Navigation Buttons */}

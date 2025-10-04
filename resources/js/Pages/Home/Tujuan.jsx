@@ -16,13 +16,10 @@ export default function Tujuan() {
             const rect = sectionRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
 
-            // Hitung jarak scroll dari bawah section ke atas viewport
             const scrollPassed = windowHeight - rect.top;
-
-            const targetX = scrollPassed > 0 ? scrollPassed * 0.2 : 0; // kecepatan sama seperti sebelumnya
+            const targetX = scrollPassed > 0 ? scrollPassed * 0.2 : 0;
 
             const animate = () => {
-                // lerp → biar transisi smooth
                 currentX += (targetX - currentX) * 0.15;
                 setOffsetX(currentX);
 
@@ -64,12 +61,16 @@ export default function Tujuan() {
                     </span>
                 </h2>
                 <p className="text-gray-700 md:text-2xl text-justify text-center md:px-10 leading-relaxed">
-                    Nutriverse menjawab tantangan <b>“Zero Hunger”</b> dengan
-                    memberikan pengetahuan mengenai <b>“Sintesis”</b> kepada
-                    siswa-siswa untuk mengembangkan berbagai jenis tanaman
-                    unggulan dengan proses tertentu sehingga menghasilkan
-                    berbagai jenis tanaman dan hewan yang memiliki kuantitas dan
-                    kualitas yang baik.
+                    Nutriverse menjawab tantangan{" "}
+                    <span className="text-[#90C444] font-semibold">"Zero Hunger"</span>{" "}
+                    dengan memberikan pengetahuan mengenai{" "}
+                    <span className="text-[#90C444] font-semibold">"Sintetis"</span>{" "}
+                    kepada siswa-siswa untuk{" "}
+                    <span className="text-[#90C444] font-semibold">mengembangkan</span>{" "}
+                    berbagai jenis tanaman{" "}
+                    <span className="text-[#90C444] font-semibold">unggulan</span>{" "}
+                    dengan proses tertentu sehingga menghasilkan berbagai jenis tanaman dan hewan yang memiliki kuantitas dan kualitas yang unggulan.
+        
                 </p>
             </div>
 

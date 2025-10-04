@@ -57,17 +57,19 @@ export default function ZeroHunger() {
       {/* Judul */}
       <div className="relative text-center mb-12 z-10">
         <div className="flex justify-center items-center gap-3 mb-4">
-          <div className="bg-[#f5d77f] w-10 h-10 flex items-center justify-center rounded">
-            <span className="text-[#3B3B0E] font-bold">2</span>
+          <div className="bg-[#f5d77f] w-12 h-12 flex items-center justify-center rounded">
+            <span className="text-[#3B3B0E] font-bold text-xl md:text-2xl">2</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#3B3B0E]">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#3B3B0E]">
             Zero Hunger
           </h2>
         </div>
-        <p className="max-w-3xl mx-auto text-gray-700 text-sm md:text-base leading-relaxed">
-          Hunger is discomfort or pain caused by a lack of food. It is different
-          from food insecurity, which means lack of regular access to safe and
-          nutritious food for proper development and an active and healthy life.
+        <p className="max-w-3xl mx-auto text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed">
+          Tujuan Pembangunan berkelanjutan (SDGs) kedua dari PBB yang bertujuan untuk{" "}
+          <span style={{ color: "#DDA73A" }}>mengakhiri kelaparan global</span> pada tahun 2030,{" "}
+          <span style={{ color: "#DDA73A" }}>mencapai ketahanan pangan</span>,{" "}
+          <span style={{ color: "#DDA73A" }}>memperbaiki gizi</span>, dan{" "}
+          <span style={{ color: "#DDA73A" }}>pertanian yang berkelanjutan</span>.
         </p>
       </div>
 
@@ -75,27 +77,27 @@ export default function ZeroHunger() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto relative z-10">
         {/* Hunger stat */}
         <div className="bg-white rounded-3xl shadow-lg p-8 relative">
-          <h3 className="bg-[#3B3B0E] text-white px-6 py-2 rounded-t-xl absolute -top-6 left-1/2 -translate-x-1/2 font-semibold">
-            Hunger Stat
+          <h3 className="bg-[#3B3B0E] text-white px-6 py-3 rounded-t-xl absolute -top-7 left-1/2 -translate-x-1/2 font-semibold text-lg md:text-xl lg:text-2xl">
+            Statistik Kelaparan
           </h3>
 
-          <div className="grid grid-cols-3 text-center gap-4 mt-6">
+          <div className="grid grid-cols-3 text-center gap-4 mt-8">
             <div>
-              <p className="text-3xl font-extrabold text-green-700">319</p>
-              <p className="text-xs mt-1 text-gray-600">Million People</p>
+              <p className="text-4xl md:text-5xl font-extrabold text-green-700">{hungerData[0].value}</p>
+              <p className="text-sm md:text-base mt-1 text-gray-600">{hungerData[0].name}</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-green-600">67</p>
-              <p className="text-xs mt-1 text-gray-600">Countries</p>
+              <p className="text-3xl md:text-4xl font-bold text-green-600">{hungerData[1].value}</p>
+              <p className="text-sm md:text-base mt-1 text-gray-600">{hungerData[1].name}</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-green-800">98</p>
-              <p className="text-xs mt-1 text-gray-600">Million Children</p>
+              <p className="text-3xl md:text-4xl font-bold text-green-800">{hungerData[2].value}</p>
+              <p className="text-sm md:text-base mt-1 text-gray-600">{hungerData[2].name}</p>
             </div>
           </div>
 
           {/* Pie Chart */}
-          <div className="mt-8 w-full h-64">
+          <div className="mt-10 w-full h-64 md:h-80 lg:h-96">
             <ResponsiveContainer>
               <PieChart>
                 <Pie
@@ -104,7 +106,7 @@ export default function ZeroHunger() {
                   cy="50%"
                   outerRadius={90}
                   dataKey="value"
-                  label
+                  label={{ fontSize: 14, fill: "#3B3B0E" }}
                 >
                   {hungerData.map((entry, index) => (
                     <Cell
@@ -113,8 +115,8 @@ export default function ZeroHunger() {
                     />
                   ))}
                 </Pie>
-                <Tooltip />
-                <Legend />
+                <Tooltip wrapperStyle={{ fontSize: "14px" }} />
+                <Legend wrapperStyle={{ fontSize: "14px" }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -122,11 +124,11 @@ export default function ZeroHunger() {
 
         {/* Definition of famine */}
         <div className="bg-white rounded-3xl shadow-lg p-8 relative">
-          <h3 className="bg-[#3B3B0E] text-white px-6 py-2 rounded-t-xl absolute -top-6 left-1/2 -translate-x-1/2 font-semibold">
-            Definition of Famine
+          <h3 className="bg-[#3B3B0E] text-white px-6 py-3 rounded-t-xl absolute -top-7 left-1/2 -translate-x-1/2 font-semibold text-lg md:text-xl lg:text-2xl">
+            Definisi Kelaparan
           </h3>
 
-          <div className="mt-8 w-full h-64">
+          <div className="mt-10 w-full h-64 md:h-80 lg:h-96">
             <ResponsiveContainer>
               <BarChart
                 data={famineData}
@@ -134,10 +136,10 @@ export default function ZeroHunger() {
                 margin={{ top: 10, right: 30, left: 30, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" domain={[0, 100]} />
-                <YAxis type="category" dataKey="name" />
-                <Tooltip />
-                <Legend />
+                <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 14 }} />
+                <YAxis type="category" dataKey="name" tick={{ fontSize: 14 }} />
+                <Tooltip wrapperStyle={{ fontSize: "14px" }} />
+                <Legend wrapperStyle={{ fontSize: "14px" }} />
                 <Bar dataKey="value" fill="#16a34a" barSize={30}>
                   <Cell fill="#16a34a" />
                   <Cell fill="#166534" />

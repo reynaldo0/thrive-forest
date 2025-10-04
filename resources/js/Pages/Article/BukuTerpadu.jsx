@@ -90,13 +90,11 @@ export default function BukuTerpadu() {
             {/* Deskripsi */}
             <div className="relative w-full max-w-5xl bg-white shadow-xl rounded-2xl p-12 border border-[#D8EBC5] z-10 text-center">
             <h3 className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#3B3B0E] text-white px-10 py-3 rounded-full text-2xl font-bold shadow-md">
-                Buku Terpadu
+                Nutibook
             </h3>
             <p className="mt-10 text-[#3B3B0E] text-lg md:text-xl leading-relaxed">
-                Nutriverse menjawab tantangan “Zero Hunger” dengan memberikan pengetahuan
-                mengenai “Sintesis” kepada siswa-siswa untuk mengembangkan berbagai jenis
-                tanaman unggulan dengan proses tertentu sehingga menghasilkan berbagai
-                jenis tanaman dan hewan yang memiliki kuantitas dan kualitas yang baik.
+                Nutibook adalah sebuah buku mengenai produk produk dari tanaman yang menjelaskan
+                khasiatnya, nilai gizi, dan lainnya sebagai wadah untuk literasi semua pihak.
             </p>
             </div>
 
