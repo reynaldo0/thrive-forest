@@ -10,7 +10,7 @@ import TujuanSection from "./Home/Tujuan";
 
 const Home = () => {
     return (
-        <div>
+        <div className="overflow-x-hidden">
             <Head title="Home" />
             <Navbar />
             <HeroHome />
