@@ -65,7 +65,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         },
         {
             label: "Gizi",
-            icon: <Apple size={20} />, 
+            icon: <Apple size={20} />,
             children: [
                 { label: "Tebak Gizi Item", href: "/admin/gizi" },
                 { label: "Tambah Item", href: "/admin/gizi/create" },

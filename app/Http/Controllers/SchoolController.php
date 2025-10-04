@@ -35,6 +35,31 @@ class SchoolController extends Controller
         return redirect()->route('schools.index')->with('success', 'Sekolah berhasil ditambahkan dengan kode tim: ' . $validated['team_code']);
     }
 
+    public function update(Request $request, School $school)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $school->update($validated);
+
+        return redirect()->route('schools.index')->with('success', 'Nama sekolah berhasil diperbarui.');
+    }
+
+    public function destroy(School $school)
+    {
+        // Opsional: cek apakah sekolah punya user yang tergabung
+        if ($school->users()->count() > 0) {
+            return back()->withErrors([
+                'error' => 'Sekolah ini masih memiliki anggota, hapus anggota terlebih dahulu.'
+            ]);
+        }
+
+        $school->delete();
+
+        return redirect()->route('schools.index')->with('success', 'Sekolah berhasil dihapus.');
+    }
+
     public function joinTeamcode()
     {
         $user = Auth::user();
