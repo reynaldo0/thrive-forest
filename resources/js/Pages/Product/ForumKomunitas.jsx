@@ -35,7 +35,7 @@ export default function ForumKomunitas() {
             className="w-full h-28 resize-none border-none rounded-xl bg-white focus:ring-2 focus:ring-green-400 p-4 outline-none text-base"
           ></textarea>
           <div className="flex justify-end mt-4">
-            <button className="px-6 py-3 rounded-xl bg-green-600 text-white text-base hover:bg-green-700 active:scale-95 transition">
+            <button className="px-6 py-3 rounded-xl bg-[#A6E272] text-[#224C14] text-base hover:bg-[#94D45E] active:scale-95 transition">
               Kirim
             </button>
           </div>

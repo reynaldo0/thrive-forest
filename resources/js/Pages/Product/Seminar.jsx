@@ -24,8 +24,16 @@ export default function Seminar({ seminars }) {
       ref={sectionRef}
       className="relative flex flex-col items-center justify-start px-6 pt-24 pb-28 min-h-screen bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-visible"
     >
-      {/* Background motif */}
-      <div className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center opacity-40 pointer-events-none" />
+      {/* Background */}
+      <div className="absolute inset-0">
+        {/* Gambar background */}
+        <div
+          className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center blur-sm"
+          style={{ backgroundAttachment: "fixed" }}
+        />
+        {/* Overlay hitam transparan */}
+          <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
+      </div>
 
       {/* Heading */}
       <h2 className="text-5xl md:text-6xl font-extrabold text-[#3B3B0E] text-center mb-14 z-10">

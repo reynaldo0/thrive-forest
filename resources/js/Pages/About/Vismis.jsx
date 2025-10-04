@@ -75,7 +75,7 @@ export default function VisiMisi() {
                             }`}
                         >
                             Menjadi{" "}
-                            <span className="font-semibold text-green-700">
+                            <span className="text-[#90C444] font-semibold">
                                 platform edukasi digital
                             </span>{" "}
                             yang inovatif dan terpercaya dalam memberikan
@@ -83,7 +83,7 @@ export default function VisiMisi() {
                             tumbuhan yang baik, benar, dan berkelanjutan, guna
                             mewujudkan masyarakat sehat, mandiri pangan, serta
                             berkontribusi pada tercapainya{" "}
-                            <span className="font-bold text-green-800">
+                            <span className="text-[#90C444] font-semibold">
                                 Zero Hunger
                             </span>
                             .
@@ -97,36 +97,38 @@ export default function VisiMisi() {
                             }`}
                         >
                             <li>
-                                <span className="font-semibold text-green-700">
-                                    Menyediakan
+                                <span className="text-[#90C444] font-semibold">
+                                    Memberikan 
                                 </span>{" "}
-                                konten edukatif agar masyarakat sadar
-                                lingkungan.
+                                edukasi digital berbasis riset tentang cara menanam yang baik dan berkelanjutan.
                             </li>
                             <li>
-                                <span className="font-semibold text-green-700">
-                                    Memberikan
+                                <span className="text-[#90C444] font-semibold">
+                                    Mengembangkan
                                 </span>{" "}
-                                informasi praktis terkait cara bercocok tanam.
+                                pembelajaran interaktif untuk meningkatkan keterampilan bercocok tanam masyarakat.
                             </li>
                             <li>
-                                <span className="font-semibold text-green-700">
-                                    Membentuk
+                                <span className="text-[#90C444] font-semibold">
+                                    Mendorong
                                 </span>{" "}
-                                komunitas peduli kelestarian hutan.
+                                praktik pertanian ramah lingkungan menuju kemandirian pangan.
                             </li>
                             <li>
-                                <span className="font-semibold text-green-700">
-                                    Menyediakan
+                                <span className="text-[#90C444] font-semibold">
+                                    Membangun
                                 </span>{" "}
-                                media pembelajaran interaktif.
+                                komunitas petani dan pembelajar yang inovatif serta peduli lingkungan.
                             </li>
                             <li>
-                                <span className="font-semibold text-green-700">
-                                    Mengedukasi
+                                <span className="text-[#90C444] font-semibold">
+                                    Berkontribusi
                                 </span>{" "}
-                                generasi muda tentang pentingnya SDGs Zero
-                                Hunger & Climate Action.
+                                pada tercapainya{" "}
+                                <span className="text-[#90C444] font-semibold">
+                                    Zero Hunger
+                                </span>{" "}
+                                melalui penyebaran pengetahuan dan aksi nyata.
                             </li>
                         </ol>
                     )}

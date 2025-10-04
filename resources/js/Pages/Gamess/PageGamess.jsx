@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { FaUtensils, FaRedo, FaArrowRight, FaStar } from "react-icons/fa";
 
+// --- Data Buah & Sayur ---
 const items = [
   {
     id: "tomato",
@@ -12,46 +14,42 @@ const items = [
         answer: "Vitamin A",
       },
       {
-        question: "Tomat adalah sumber utama dari zat apa yang memberi warna merah?",
-        options: ["Likopen", "Kalsium", "Zat Besi", "Vitamin B12"],
+        question:
+          "Tomat adalah sumber utama dari zat apa yang memberi warna merah?",
+        options: ["Kalsium", "Likopen", "Vitamin B12", "Zat Besi"],
         answer: "Likopen",
       },
       {
         question: "Manfaat lain tomat bagi tubuh adalah ...",
         options: [
-          "Menurunkan risiko kanker",
-          "Meningkatkan kolesterol jahat",
           "Meningkatkan gula darah",
+          "Menurunkan risiko kanker",
           "Menyebabkan dehidrasi",
+          "Meningkatkan kolesterol jahat",
         ],
         answer: "Menurunkan risiko kanker",
       },
     ],
   },
   {
-    id: "kedelai",
-    name: "Kedelai",
+    id: "ubi",
+    name: "Ubi",
     img: "/gamesicon/ubi.png",
     questions: [
       {
-        question: "Kedelai merupakan sumber utama dari zat gizi apa?",
-        options: ["Protein Nabati", "Karbohidrat", "Vitamin C", "Air"],
-        answer: "Protein Nabati",
+        question: "Ubi termasuk dalam kelompok sumber gizi apa?",
+        options: ["Protein", "Karbohidrat", "Lemak", "Vitamin D"],
+        answer: "Karbohidrat",
       },
       {
-        question: "Salah satu manfaat kedelai ialah ...",
-        options: [
-          "Membantu pembentukan otot",
-          "Menambah gula darah cepat",
-          "Mengurangi serat",
-          "Meningkatkan lemak jahat",
-        ],
-        answer: "Membantu pembentukan otot",
+        question: "Kandungan apa pada ubi yang bermanfaat untuk kesehatan mata?",
+        options: ["Beta-karoten", "Vitamin K", "Zat Besi", "Omega-3"],
+        answer: "Beta-karoten",
       },
       {
-        question: "Produk olahan dari kedelai adalah ...",
-        options: ["Tahu & Tempe", "Roti & Keju", "Susu Sapi", "Minyak Zaitun"],
-        answer: "Tahu & Tempe",
+        question: "Olahan makanan populer dari ubi adalah ...",
+        options: ["Tempe & Tahu", "Singkong goreng", "Kolak ubi", "Kerupuk ikan"],
+        answer: "Kolak ubi",
       },
     ],
   },
@@ -63,21 +61,21 @@ const items = [
       {
         question: "Kacang panjang kaya akan serat, bermanfaat untuk apa?",
         options: [
-          "Melancarkan pencernaan",
           "Membentuk otot",
-          "Meningkatkan penglihatan",
+          "Melancarkan pencernaan",
           "Menambah energi",
+          "Meningkatkan penglihatan",
         ],
         answer: "Melancarkan pencernaan",
       },
       {
         question: "Vitamin apa yang banyak terdapat pada kacang panjang?",
-        options: ["Vitamin C", "Vitamin D", "Vitamin B12", "Vitamin K"],
+        options: ["Vitamin D", "Vitamin C", "Vitamin K", "Vitamin B12"],
         answer: "Vitamin C",
       },
       {
         question: "Kacang panjang sering dikonsumsi sebagai ...",
-        options: ["Sayur lalapan", "Minuman energi", "Buah segar", "Makanan instan"],
+        options: ["Minuman energi", "Sayur lalapan", "Buah segar", "Makanan instan"],
         answer: "Sayur lalapan",
       },
     ],
@@ -90,22 +88,22 @@ const items = [
       {
         question:
           "Zat apa yang ada pada jagung yang membantu menjaga rasa kenyang lebih lama?",
-        options: ["Karbohidrat", "Vitamin C", "Protein", "Serat"],
+        options: ["Protein", "Karbohidrat", "Serat", "Vitamin C"],
         answer: "Karbohidrat",
       },
       {
         question: "Jagung sering jadi sumber energi karena ...",
         options: [
+          "Kaya kalsium",
           "Kandungan karbohidratnya",
           "Kandungan vitamin D",
           "Kandungan protein tinggi",
-          "Kaya kalsium",
         ],
         answer: "Kandungan karbohidratnya",
       },
       {
         question: "Vitamin yang ada di jagung adalah ...",
-        options: ["Vitamin B kompleks", "Vitamin K", "Vitamin D", "Vitamin A"],
+        options: ["Vitamin A", "Vitamin B kompleks", "Vitamin D", "Vitamin K"],
         answer: "Vitamin B kompleks",
       },
     ],
@@ -117,17 +115,17 @@ const items = [
     questions: [
       {
         question: "Zat apa yang ada pada pisang yang membuatnya kaya energi?",
-        options: ["Karbohidrat", "Protein", "Lemak", "Vitamin D"],
+        options: ["Protein", "Karbohidrat", "Vitamin D", "Lemak"],
         answer: "Karbohidrat",
       },
       {
         question: "Pisang juga kaya mineral apa yang membantu fungsi otot?",
-        options: ["Kalium", "Zat Besi", "Selenium", "Yodium"],
+        options: ["Yodium", "Zat Besi", "Kalium", "Selenium"],
         answer: "Kalium",
       },
       {
         question: "Pisang dapat membantu pencernaan karena mengandung ...",
-        options: ["Serat", "Protein", "Vitamin D", "Lemak"],
+        options: ["Lemak", "Serat", "Protein", "Vitamin D"],
         answer: "Serat",
       },
     ],
@@ -138,18 +136,19 @@ const items = [
     img: "/gamesicon/semangka.png",
     questions: [
       {
-        question: "Apa kandungan utama dalam semangka yang membuatnya menyegarkan?",
-        options: ["Air", "Protein", "Vitamin B12", "Lemak"],
+        question:
+          "Apa kandungan utama dalam semangka yang membuatnya menyegarkan?",
+        options: ["Protein", "Air", "Vitamin B12", "Lemak"],
         answer: "Air",
       },
       {
         question: "Vitamin apa yang ada dalam semangka?",
-        options: ["Vitamin C", "Vitamin D", "Vitamin K2", "Vitamin B12"],
+        options: ["Vitamin D", "Vitamin C", "Vitamin K2", "Vitamin B12"],
         answer: "Vitamin C",
       },
       {
         question: "Semangka baik dikonsumsi di musim ...",
-        options: ["Panas", "Dingin", "Hujan", "Gugur"],
+        options: ["Panas", "Gugur", "Hujan", "Dingin"],
         answer: "Panas",
       },
     ],
@@ -161,17 +160,17 @@ const items = [
     questions: [
       {
         question: "Zat apa yang membuat sawi baik untuk sistem imun?",
-        options: ["Vitamin C", "Zat Besi", "Karbohidrat", "Protein"],
+        options: ["Zat Besi", "Vitamin C", "Karbohidrat", "Protein"],
         answer: "Vitamin C",
       },
       {
         question: "Sawi termasuk kelompok sayur ...",
-        options: ["Cruciferous", "Umbi-umbian", "Buah", "Legum"],
+        options: ["Umbi-umbian", "Cruciferous", "Buah", "Legum"],
         answer: "Cruciferous",
       },
       {
         question: "Sawi juga mengandung ...",
-        options: ["Antioksidan", "Kolesterol tinggi", "Asam urat", "Lemak trans"],
+        options: ["Asam urat", "Antioksidan", "Kolesterol tinggi", "Lemak trans"],
         answer: "Antioksidan",
       },
     ],
@@ -183,17 +182,17 @@ const items = [
     questions: [
       {
         question: "Buah jeruk dikenal kaya akan vitamin apa?",
-        options: ["Vitamin C", "Vitamin A", "Vitamin D", "Vitamin K"],
+        options: ["Vitamin A", "Vitamin D", "Vitamin C", "Vitamin K"],
         answer: "Vitamin C",
       },
       {
         question: "Selain vitamin C, jeruk memiliki antioksidan bernama ...",
-        options: ["Flavonoid", "Lemak jenuh", "Kolesterol", "Asam urat"],
+        options: ["Lemak jenuh", "Kolesterol", "Flavonoid", "Asam urat"],
         answer: "Flavonoid",
       },
       {
         question: "Jeruk biasanya dikonsumsi dalam bentuk ...",
-        options: ["Jus", "Gorengan", "Roti", "Bubur"],
+        options: ["Roti", "Bubur", "Jus", "Gorengan"],
         answer: "Jus",
       },
     ],
@@ -217,7 +216,7 @@ export default function PageGamess() {
     setQuestionLocked(false);
   }, [plateItem]);
 
-  // Parallax
+  // Parallax rumput bawah
   useEffect(() => {
     let animationFrameId;
     let currentX = 0;
@@ -253,7 +252,14 @@ export default function PageGamess() {
     e.preventDefault();
     const itemId = e.dataTransfer.getData("itemId");
     const foundItem = items.find((i) => i.id === itemId);
-    if (foundItem) setPlateItem(foundItem);
+    if (foundItem) {
+      // Acak urutan opsi
+      const shuffledQuestions = foundItem.questions.map((q) => ({
+        ...q,
+        options: q.options.sort(() => Math.random() - 0.5),
+      }));
+      setPlateItem({ ...foundItem, questions: shuffledQuestions });
+    }
   };
 
   const handleDragStart = (e, id) => {
@@ -298,34 +304,44 @@ export default function PageGamess() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-16 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-hidden pb-60"
+      className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-20 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-hidden pb-60"
     >
-      <h1 className="text-5xl md:text-6xl font-extrabold text-green-800 mb-4">
-        Games <span className="text-green-600">Edukasi</span>
+      <h1 className="text-6xl md:text-7xl font-extrabold text-[#3A2E17] text-center mb-6">
+        Games 2
       </h1>
-      <p className="text-lg text-green-700 mb-8 text-center max-w-2xl">
-        Tarik buah/sayur ke piring → jawab 3 pertanyaan per item.
+      <p className="text-center text-2xl md:text-3xl font-bold text-white mb-10 bg-[#3A2E17] py-3 px-10 rounded-full shadow-lg">
+        Pilih Buah, lalu jawab kuisnya
       </p>
 
       {/* Card Game */}
-      <div className="bg-[#F0FCD7] rounded-3xl shadow-2xl border-2 border-green-200 p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 max-w-5xl w-full">
+      <div className="bg-[#F0FCD7] rounded-3xl shadow-2xl border-2 border-green-200 p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 max-w-6xl w-full">
         {/* Piring */}
         <div
-          className="relative w-56 h-56 flex items-center justify-center"
+          className="relative w-64 h-64 flex items-center justify-center"
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
         >
-          <img src="/gamesicon/piring.png" alt="Piring" className="absolute inset-0 w-full h-full object-contain" />
+          <img
+            src="/gamesicon/piring.png"
+            alt="Piring"
+            className="absolute inset-0 w-full h-full object-contain"
+          />
 
           {plateItem ? (
             <div className="flex flex-col items-center z-10">
-              <img src={plateItem.img} alt={plateItem.name} className="w-28 h-28 object-contain" />
-              <div className="mt-2 text-center text-sm font-semibold text-green-800">
-                {plateItem.name} ({currentQuestionIndex + 1}/{plateItem.questions.length})
+              <img
+                src={plateItem.img}
+                alt={plateItem.name}
+                className="w-32 h-32 object-contain"
+              />
+              <div className="mt-3 text-xl font-bold text-green-900 text-center">
+                {plateItem.name} ({currentQuestionIndex + 1}/
+                {plateItem.questions.length})
               </div>
             </div>
           ) : (
-            <p className="absolute text-gray-500 text-center px-4 text-sm font-medium z-10">
+            <p className="absolute text-gray-600 text-center px-4 text-lg font-medium z-10 flex flex-col items-center gap-2">
+              <FaUtensils className="text-3xl text-green-800" />
               Tarik buah/sayur ke sini
             </p>
           )}
@@ -334,19 +350,22 @@ export default function PageGamess() {
         {/* Soal */}
         <div className="flex-1 w-full">
           {plateItem && currentQuestion ? (
-            <div className="bg-white p-6 rounded-2xl shadow-md w-full">
-              <p className="text-gray-800 mb-4 text-lg">{currentQuestion.question}</p>
+            <div className="bg-white p-8 rounded-2xl shadow-md w-full">
+              <p className="text-gray-900 mb-6 text-2xl font-semibold">
+                {currentQuestion.question}
+              </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {currentQuestion.options.map((opt, idx) => {
                   const isSelected = selectedAnswer === opt;
                   const isCorrect = opt === currentQuestion.answer;
 
                   let btnClass =
-                    "px-4 py-3 rounded-lg border font-medium transition-all duration-200 text-md ";
+                    "px-6 py-4 rounded-xl border font-semibold transition-all duration-200 text-xl ";
 
                   if (!questionLocked) {
-                    btnClass += "bg-gray-100 border-gray-300 hover:bg-green-50 cursor-pointer";
+                    btnClass +=
+                      "bg-gray-100 border-gray-300 hover:bg-green-50 cursor-pointer";
                   } else {
                     if (isSelected) {
                       btnClass += isCorrect
@@ -372,52 +391,57 @@ export default function PageGamess() {
                 })}
               </div>
 
-              <div className="flex items-center gap-3 mt-5">
+              <div className="flex items-center gap-4 mt-6">
                 <button
                   onClick={handleClearPlate}
-                  className="px-5 py-2 bg-yellow-300 text-gray-900 font-semibold rounded-lg shadow hover:bg-yellow-400"
+                  className="px-6 py-3 bg-yellow-300 text-gray-900 font-bold rounded-lg shadow hover:bg-yellow-400 text-lg flex items-center gap-2"
                 >
-                  🔄 Ganti tanaman
+                  <FaRedo /> Ganti Tanaman
                 </button>
 
                 <button
                   onClick={handleNextQuestion}
-                  className="px-5 py-2 bg-green-500 text-white font-semibold rounded-lg shadow hover:bg-green-600"
+                  className="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow hover:bg-green-600 text-lg flex items-center gap-2"
                 >
-                  ➡️ Pertanyaan berikut
+                  <FaArrowRight /> Pertanyaan Berikut
                 </button>
               </div>
             </div>
           ) : (
-            <div className="bg-white/80 p-6 rounded-2xl shadow-md text-center text-gray-600">
-              Tarik buah/sayur dari daftar ke piring, lalu jawab pertanyaan.
+            <div className="bg-white/80 p-8 rounded-2xl shadow-md text-center text-gray-700 text-xl font-medium">
+              Tarik buah/sayur dari daftar di bawah ke piring, lalu jawab
+              pertanyaannya!
             </div>
           )}
         </div>
       </div>
 
-      {/* List buah */}
-      <div className="bg-[#F0FCD7] border-2 border-green-200 rounded-2xl shadow-lg mt-8 px-4 py-4">
-        <div className="flex gap-4 flex-wrap justify-center">
+      {/* Daftar Buah */}
+      <div className="bg-[#F0FCD7] border-2 border-green-200 rounded-2xl shadow-lg mt-10 px-6 py-6">
+        <div className="flex gap-6 flex-wrap justify-center">
           {items.map((item) => (
             <div
               key={item.id}
               draggable
               onDragStart={(e) => handleDragStart(e, item.id)}
-              className="w-20 h-20 bg-white rounded-xl shadow-md hover:scale-110 flex items-center justify-center cursor-pointer border border-green-200"
+              className="w-24 h-24 bg-white rounded-2xl shadow-md hover:scale-110 flex items-center justify-center cursor-pointer border border-green-200 transition-transform duration-200"
             >
-              <img src={item.img} alt={item.name} className="w-12 h-12 object-contain pointer-events-none" />
+              <img
+                src={item.img}
+                alt={item.name}
+                className="w-16 h-16 object-contain pointer-events-none"
+              />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Poin */}
-      <div className="bg-green-600 text-white px-6 py-3 rounded-xl shadow-md font-bold text-lg mt-8">
-        ⭐ Poin Kamu: {points}
+      {/* Skor */}
+      <div className="bg-green-700 text-white px-8 py-4 rounded-2xl shadow-md font-extrabold text-2xl mt-10 flex items-center gap-3">
+        <FaStar className="text-yellow-300" /> Poin Kamu: {points}
       </div>
 
-      {/* Rumput parallax */}
+      {/* Rumput Parallax */}
       <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">
         <img
           src="/icon/rumput2.png"

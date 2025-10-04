@@ -9,69 +9,87 @@ export default function RulesLeaderboard() {
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-16 pb-12 relative bg-[#F7FDEB]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-14 max-w-5xl w-full">
-        {/* Bagian Peraturan */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-14 max-w-6xl w-full">
+        {/* Bagian Cara Main */}
         <div
-          className={`bg-[#F4FFE2] rounded-3xl shadow-2xl border-2 border-green-200 p-12 md:p-16 transition-all duration-700 ease-out ${
+          className={`bg-[#F4FFE2] rounded-3xl shadow-lg p-8 md:p-10 transition-all duration-700 ease-out ${
             animate
               ? "opacity-100 translate-y-0 scale-100"
               : "opacity-0 translate-y-8 scale-90"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#3A2E17] mb-6 text-center tracking-wide">
-            Peraturan
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#3A2E17] mb-6 text-center">
+            Cara main
           </h2>
-          <p className="text-[#3A2E17] text-lg md:text-xl leading-relaxed text-justify">
-            Nutriverse menjawab tantangan{" "}
-            <em className="font-semibold">“Zero Hunger”</em> dengan memberikan
-            pengetahuan mengenai “Sintesis” kepada siswa-siswa untuk
-            mengembangkan berbagai jenis tanaman unggulan dengan proses tertentu
-            sehingga menghasilkan berbagai jenis tanaman dan hewan yang memiliki
-            kuantitas dan kualitas yang baik.
-          </p>
+          <ol className="list-decimal pl-5 space-y-4 text-[#3A2E17] text-lg md:text-xl leading-relaxed">
+            <li>
+              Pengguna dapat memilih produk tanaman yang tersedia untuk menanam{" "}
+              <span className="text-green-600 font-semibold">(Maksimal 4)</span>
+            </li>
+            <li>
+              Setelah dipilih, akan diberikan bibit dari tanaman tersebut. Bibit
+              tersebut{" "}
+              <span className="text-green-600 font-semibold">harus disirami</span>{" "}
+              agar menjadi sebuah pohon dan menghasilkan produk tanaman.
+            </li>
+            <li>
+              Ketika sudah menjadi produk, pengguna dapat menekan{" "}
+              <span className="text-green-600 font-semibold">tombol donasi</span>{" "}
+              untuk mendonasikan buah dan mendapatkan{" "}
+              <span className="text-green-600 font-semibold">poin</span>.
+            </li>
+          </ol>
         </div>
 
         {/* Bagian Leaderboard */}
         <div
-          className={`bg-[#F4FFE2] rounded-3xl shadow-2xl border-2 border-green-200 p-12 md:p-16 transition-all duration-700 ease-out delay-200 ${
+          className={`bg-[#F4FFE2] rounded-3xl shadow-lg p-8 md:p-10 transition-all duration-700 ease-out delay-200 ${
             animate
               ? "opacity-100 translate-y-0 scale-100"
               : "opacity-0 translate-y-8 scale-90"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#3A2E17] mb-8 text-center tracking-wide">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#3A2E17] mb-10 text-center">
             Leaderboard
           </h2>
           {/* Chart Bar */}
-          <div className="flex items-end justify-center gap-10">
-            {/* Bar 1 */}
+          <div className="flex items-end justify-center gap-12">
+            {/* Bar #1 */}
             <div className="flex flex-col items-center">
-              <div className="bg-[#3A5217] text-white font-bold flex flex-col items-center justify-center h-48 w-24 rounded-xl shadow-lg hover:scale-110 transition duration-500">
-                <span className="text-2xl">319</span>
-                <span className="text-sm">Million</span>
-                <span className="text-sm">People</span>
+              <p className="text-base md:text-lg font-medium text-[#3A2E17] mb-2 text-center">
+                SMKN 24 <br /> Jakarta
+              </p>
+              <div className="bg-[#557A1F] flex flex-col items-center justify-end h-48 w-24 rounded-md shadow-md">
+                <span className="text-white font-bold text-2xl">#1</span>
               </div>
-              <p className="mt-3 text-sm text-center">in acute hunger</p>
+              <p className="mt-2 text-green-800 font-bold text-xl md:text-2xl">
+                1000
+              </p>
             </div>
 
-            {/* Bar 2 */}
+            {/* Bar #2 */}
             <div className="flex flex-col items-center">
-              <div className="bg-[#A7E48C] flex items-center justify-center h-24 w-20 rounded-xl shadow-lg hover:scale-110 transition duration-500">
-                <span className="text-sm text-[#3A2E17] font-bold">
-                  Countries
-                </span>
+              <p className="text-base md:text-lg font-medium text-[#3A2E17] mb-2 text-center">
+                SMKN 24 <br /> Jakarta
+              </p>
+              <div className="bg-[#3A2E17] flex flex-col items-center justify-end h-36 w-24 rounded-md shadow-md">
+                <span className="text-white font-bold text-2xl">#2</span>
               </div>
-              <p className="mt-3 text-sm text-center">where these people live</p>
+              <p className="mt-2 text-green-800 font-bold text-xl md:text-2xl">
+                500
+              </p>
             </div>
 
-            {/* Bar 3 */}
+            {/* Bar #3 */}
             <div className="flex flex-col items-center">
-              <div className="bg-[#3A2E17] text-white flex flex-col items-center justify-center h-36 w-24 rounded-xl shadow-lg hover:scale-110 transition duration-500">
-                <span className="text-sm">Million</span>
-                <span className="text-sm">People</span>
+              <p className="text-base md:text-lg font-medium text-[#3A2E17] mb-2 text-center">
+                SMKN 24 <br /> Jakarta
+              </p>
+              <div className="bg-[#A7E48C] flex flex-col items-center justify-end h-24 w-24 rounded-md shadow-md">
+                <span className="text-[#3A2E17] font-bold text-2xl">#3</span>
               </div>
-              <p className="mt-3 text-sm text-center">
-                WFP aims to reach in 2025
+              <p className="mt-2 text-green-800 font-bold text-xl md:text-2xl">
+                300
               </p>
             </div>
           </div>
