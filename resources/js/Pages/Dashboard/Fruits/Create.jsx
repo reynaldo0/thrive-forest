@@ -1,6 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { useState } from "react";
+import { Upload } from "lucide-react";
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -28,33 +29,46 @@ export default function Create() {
 
     return (
         <AuthenticatedLayout>
-            <Head title="Tambah Buah" />
-            <div className="p-6 max-w-3xl mx-auto">
-                <h1 className="text-2xl font-bold mb-6">Tambah Buah</h1>
+            <Head title="Tambah Tanaman" />
+            <div className="md:p-6 mx-auto">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <h1 className="text-3xl font-bold text-secondary-200">
+                        Edit Tanaman
+                    </h1>
+                    <Link
+                        href={route("fruits.index")}
+                        className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-5 py-2 rounded-xl shadow transition"
+                    >
+                        ← Kembali
+                    </Link>
+                </div>
 
                 <form
                     onSubmit={submit}
-                    className="space-y-6 bg-white p-6 rounded-lg shadow"
+                    className="space-y-6 bg-white p-6 rounded-xl shadow-md"
                 >
                     {/* Nama */}
                     <div>
-                        <label className="block font-semibold mb-1">Nama</label>
+                        <label className="block text-gray-700 font-medium mb-1">
+                            Nama
+                        </label>
                         <input
                             type="text"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className="border p-2 w-full rounded"
-                            placeholder="Masukkan nama buah"
+                            className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-100 focus:border-primary-100"
+                            placeholder="Masukkan nama Tanaman"
                         />
                         {errors.name && (
-                            <div className="text-red-500 mt-1 text-sm">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.name}
-                            </div>
+                            </p>
                         )}
                     </div>
+
                     {/* Points */}
                     <div>
-                        <label className="block font-semibold mb-1">
+                        <label className="block text-gray-700 font-medium mb-1">
                             Points
                         </label>
                         <input
@@ -62,22 +76,22 @@ export default function Create() {
                             min="1"
                             value={data.points}
                             onChange={(e) => setData("points", e.target.value)}
-                            className="border p-2 w-full rounded"
-                            placeholder="Masukkan jumlah poin untuk buah ini"
+                            className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-100 focus:border-primary-100"
+                            placeholder="Masukkan jumlah poin untuk Tanaman ini"
                         />
                         {errors.points && (
-                            <div className="text-red-500 mt-1 text-sm">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.points}
-                            </div>
+                            </p>
                         )}
                     </div>
 
                     {/* Icon utama */}
                     <div>
-                        <label className="block font-semibold mb-2">
-                            Icon Buah
+                        <label className="block text-gray-700 font-medium mb-2">
+                            Hasil Jadi Tanaman
                         </label>
-                        <div className="border-2 border-dashed rounded-lg p-4 text-center cursor-pointer hover:bg-gray-50">
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-primary-100 hover:bg-primary-100transition">
                             <input
                                 type="file"
                                 accept="image/*"
@@ -97,32 +111,35 @@ export default function Create() {
                                     <img
                                         src={previewImg}
                                         alt="Preview"
-                                        className="mx-auto w-24 h-24 object-cover rounded"
+                                        className="mx-auto w-24 h-24 object-cover rounded-lg border"
                                     />
                                 ) : (
-                                    <span className="text-gray-500">
-                                        Klik / drag untuk upload icon
-                                    </span>
+                                    <div className="flex flex-col items-center text-gray-500">
+                                        <Upload className="w-8 h-8 mb-2" />
+                                        <span className="text-sm">
+                                            Klik / drag untuk upload icon
+                                        </span>
+                                    </div>
                                 )}
                             </label>
                         </div>
                         {errors.img && (
-                            <div className="text-red-500 mt-1 text-sm">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.img}
-                            </div>
+                            </p>
                         )}
                     </div>
 
                     {/* Stages */}
                     <div>
-                        <label className="block font-semibold mb-2">
+                        <label className="block text-gray-700 font-medium mb-2">
                             Stages (5 gambar)
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                             {data.stages.map((stage, i) => (
                                 <div
                                     key={i}
-                                    className="border-2 border-dashed rounded-lg p-4 text-center hover:bg-gray-50 cursor-pointer"
+                                    className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-primary-100 hover:bg-primary-100transition cursor-pointer"
                                 >
                                     <input
                                         type="file"
@@ -151,7 +168,7 @@ export default function Create() {
                                             <img
                                                 src={previewStages[i]}
                                                 alt={`Stage ${i + 1}`}
-                                                className="mx-auto w-16 h-16 object-cover rounded border"
+                                                className="mx-auto w-16 h-16 object-cover rounded-lg border"
                                             />
                                         ) : (
                                             <span className="text-gray-400 text-sm">
@@ -163,18 +180,25 @@ export default function Create() {
                             ))}
                         </div>
                         {errors.stages && (
-                            <div className="text-red-500 mt-1 text-sm">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.stages}
-                            </div>
+                            </p>
                         )}
                     </div>
 
+                    {/* Submit Button */}
+                    {/* Submit Button */}
                     <button
                         type="submit"
                         disabled={processing}
-                        className="px-6 py-2 bg-green-600 text-white rounded shadow hover:bg-green-700 disabled:opacity-50"
+                        className="w-full sm:w-auto px-6 py-2
+               bg-secondary-200 text-white font-medium
+               rounded-lg shadow
+               hover:bg-secondary-300
+               focus:ring-2 focus:ring-secondary-200
+               disabled:opacity-50 transition"
                     >
-                        Simpan
+                        {processing ? "Menyimpan..." : "Simpan"}
                     </button>
                 </form>
             </div>

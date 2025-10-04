@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { useState, useRef } from "react";
 import { Upload } from "lucide-react";
 
@@ -63,30 +63,46 @@ export default function Edit({ fruit }) {
 
     return (
         <AuthenticatedLayout>
-            <Head title="Edit Buah" />
-            <div className="p-6 max-w-4xl mx-auto">
-                <h1 className="text-2xl font-bold mb-6">Edit Buah</h1>
+            <Head title="Edit Tanaman" />
+            <div className="md:p-6 mx-auto">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <h1 className="text-3xl font-bold text-secondary-200">
+                        Edit Tanaman
+                    </h1>
+                    <Link
+                        href={route("fruits.index")}
+                        className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-5 py-2 rounded-xl shadow transition"
+                    >
+                        ← Kembali
+                    </Link>
+                </div>
 
+                {/* Card Form */}
                 <form
                     onSubmit={submit}
-                    className="space-y-6 bg-white p-6 rounded-xl shadow"
+                    className="space-y-6 bg-white p-6 rounded-2xl shadow-lg"
                 >
                     {/* Nama */}
                     <div>
-                        <label className="block font-medium mb-1">Nama</label>
+                        <label className="block font-medium mb-1">
+                            Nama Tanaman
+                        </label>
                         <input
                             type="text"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className="border rounded-lg p-2 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-primary-100 focus:border-primary-100 transition"
+                            placeholder="Masukkan nama Tanaman"
                         />
                         {errors.name && (
-                            <div className="text-red-600 text-sm mt-1">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.name}
-                            </div>
+                            </p>
                         )}
                     </div>
 
+                    {/* Points */}
                     <div>
                         <label className="block font-medium mb-1">Points</label>
                         <input
@@ -94,18 +110,21 @@ export default function Edit({ fruit }) {
                             min="1"
                             value={data.points}
                             onChange={(e) => setData("points", e.target.value)}
-                            className="border rounded-lg p-2 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-primary-100 focus:border-primary-100 transition"
+                            placeholder="Masukkan poin"
                         />
                         {errors.points && (
-                            <div className="text-red-600 text-sm mt-1">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.points}
-                            </div>
+                            </p>
                         )}
                     </div>
 
                     {/* Icon */}
                     <div>
-                        <label className="block font-medium mb-2">Icon</label>
+                        <label className="block font-medium mb-1">
+                            Icon Tanaman
+                        </label>
                         <DragDropArea
                             preview={previewIcon}
                             onFileSelect={(file) =>
@@ -116,10 +135,10 @@ export default function Edit({ fruit }) {
 
                     {/* Stages */}
                     <div>
-                        <label className="block font-medium mb-2">
+                        <label className="block font-medium mb-1">
                             Stages (1–5)
                         </label>
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                             {previewStages.map((stage, i) => (
                                 <DragDropArea
                                     key={i}
@@ -131,15 +150,29 @@ export default function Edit({ fruit }) {
                                 />
                             ))}
                         </div>
+                        {errors.stages && (
+                            <p className="text-red-500 mt-1 text-sm">
+                                {errors.stages}
+                            </p>
+                        )}
                     </div>
 
-                    <button
-                        type="submit"
-                        disabled={processing}
-                        className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg shadow transition"
-                    >
-                        Simpan Perubahan
-                    </button>
+                    {/* Tombol */}
+                    <div className="flex justify-end gap-3">
+                        <Link
+                            href={route("fruits.index")}
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-5 py-2 rounded-xl shadow transition"
+                        >
+                            Batal
+                        </Link>
+                        <button
+                            type="submit"
+                            disabled={processing}
+                            className="bg-secondary-200 hover:bg-secondary-200/90 text-white px-5 py-2 rounded-xl shadow-md transition disabled:opacity-50"
+                        >
+                            {processing ? "Menyimpan..." : "Simpan Perubahan"}
+                        </button>
+                    </div>
                 </form>
             </div>
         </AuthenticatedLayout>
@@ -161,8 +194,8 @@ function DragDropArea({ preview, onFileSelect, label }) {
         <div
             className={`relative border-2 border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center cursor-pointer transition ${
                 isDragging
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-300 hover:border-blue-400"
+                    ? "border-primary-100 bg-primary-100/10"
+                    : "border-gray-300 hover:border-secondary-200 hover:bg-secondary-200/5"
             }`}
             onDragOver={(e) => {
                 e.preventDefault();
@@ -176,7 +209,7 @@ function DragDropArea({ preview, onFileSelect, label }) {
                 <img
                     src={preview}
                     alt="preview"
-                    className="w-20 h-20 object-cover rounded mb-2 shadow-sm"
+                    className="w-20 h-20 object-cover rounded-lg mb-2 shadow-sm"
                 />
             ) : (
                 <div className="flex flex-col items-center text-gray-500">

@@ -14,54 +14,58 @@ export default function Index({ seminars }) {
     return (
         <AuthenticatedLayout>
             <Head title="Daftar Seminar" />
-            <div className="max-w-6xl mx-auto py-10 px-6">
-                <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-[#3B3B0E]">
+            <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
                         Daftar Seminar
                     </h1>
                     <Link
                         href={route("seminars.create")}
-                        className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl shadow-md transition"
+                        className="bg-secondary-200 hover:bg-secondary-200/90 text-white px-4 sm:px-5 py-2 rounded-lg shadow transition text-center"
                     >
                         + Tambah Seminar
                     </Link>
                 </div>
 
-                <div className="overflow-x-auto bg-white shadow-lg rounded-2xl border border-green-200">
+                {/* Table */}
+                <div className="overflow-x-auto bg-white shadow-md rounded-xl border border-gray-200">
                     <table className="min-w-full text-sm">
-                        <thead className="bg-green-100 text-left">
-                            <tr className="text-green-900 font-semibold">
-                                <th className="px-6 py-3">Judul</th>
-                                <th className="px-6 py-3">Tanggal</th>
-                                <th className="px-6 py-3">Lokasi</th>
-                                <th className="px-6 py-3">Deskripsi</th>
-                                <th className="px-6 py-3">Aksi</th>
+                        <thead className="bg-primary-100/10 text-left">
+                            <tr className="text-gray-700 font-semibold">
+                                <th className="px-4 sm:px-6 py-3">Judul</th>
+                                <th className="px-4 sm:px-6 py-3">Tanggal</th>
+                                <th className="px-4 sm:px-6 py-3">Lokasi</th>
+                                <th className="px-4 sm:px-6 py-3 hidden md:table-cell">
+                                    Deskripsi
+                                </th>
+                                <th className="px-4 sm:px-6 py-3">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             {seminars.data.map((seminar) => (
                                 <tr
                                     key={seminar.id}
-                                    className="border-t hover:bg-green-50 transition"
+                                    className="border-t hover:bg-primary-100/5 transition"
                                 >
-                                    <td className="px-6 py-3">
+                                    <td className="px-4 sm:px-6 py-3 font-medium">
                                         {seminar.title}
                                     </td>
-                                    <td className="px-6 py-3">
+                                    <td className="px-4 sm:px-6 py-3">
                                         {seminar.date}
                                     </td>
-                                    <td className="px-6 py-3">
+                                    <td className="px-4 sm:px-6 py-3">
                                         {seminar.location}
                                     </td>
-                                    <td className="px-6 py-3">
+                                    <td className="px-4 sm:px-6 py-3 hidden md:table-cell">
                                         {seminar.description}
                                     </td>
-                                    <td className="px-6 py-3 space-x-3">
+                                    <td className="px-4 sm:px-6 py-3 space-y-2 sm:space-y-0 sm:space-x-2 flex flex-col sm:flex-row">
                                         <button
                                             onClick={() =>
                                                 setSelectedSeminar(seminar)
                                             }
-                                            className="text-sm bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg shadow transition"
+                                            className="bg-primary-100 hover:bg-primary-100/90 text-white px-3 py-1.5 rounded-md shadow text-sm transition text-center"
                                         >
                                             Peserta
                                         </button>
@@ -70,7 +74,7 @@ export default function Index({ seminars }) {
                                                 "seminars.edit",
                                                 seminar.id
                                             )}
-                                            className="text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg shadow transition"
+                                            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md shadow text-sm transition text-center"
                                         >
                                             Edit
                                         </Link>
@@ -78,7 +82,7 @@ export default function Index({ seminars }) {
                                             onClick={() =>
                                                 handleDelete(seminar.id)
                                             }
-                                            className="text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg shadow transition"
+                                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md shadow text-sm transition text-center"
                                         >
                                             Hapus
                                         </button>
@@ -89,31 +93,34 @@ export default function Index({ seminars }) {
                     </table>
                 </div>
 
-                {/* Modal Registrasi */}
+                {/* Modal Peserta */}
                 {selectedSeminar && (
                     <div
-                        className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+                        id="overlay"
+                        className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
                         onClick={(e) =>
                             e.target.id === "overlay" &&
                             setSelectedSeminar(null)
                         }
-                        id="overlay"
                     >
-                        <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative">
+                        <div className="bg-white w-full max-w-2xl rounded-xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
                             <button
                                 onClick={() => setSelectedSeminar(null)}
                                 className="absolute right-4 top-4 text-gray-500 hover:text-red-500 text-2xl"
                             >
                                 &times;
                             </button>
-                            <h2 className="text-xl font-bold text-green-700 mb-4">
-                                Peserta Seminar: {selectedSeminar.title}
+                            <h2 className="text-xl font-bold text-gray-800 mb-4">
+                                Peserta Seminar:{" "}
+                                <span className="text-primary-100">
+                                    {selectedSeminar.title}
+                                </span>
                             </h2>
 
                             {selectedSeminar.registrations.length > 0 ? (
                                 <div className="overflow-x-auto">
-                                    <table className="min-w-full text-sm border">
-                                        <thead className="bg-green-100 text-green-900">
+                                    <table className="min-w-full text-sm border rounded-lg overflow-hidden">
+                                        <thead className="bg-primary-100/10 text-gray-700">
                                             <tr>
                                                 <th className="px-4 py-2 text-left">
                                                     Nama

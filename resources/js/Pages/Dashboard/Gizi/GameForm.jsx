@@ -34,43 +34,55 @@ export default function GameForm({ item }) {
     return (
         <AuthenticatedLayout>
             <Head title={item ? "Edit Item" : "Tambah Item"} />
-            <div className="p-6 max-w-lg mx-auto bg-white shadow-lg rounded-xl">
-                <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-                    {item ? "Edit Item" : "Tambah Item"}
-                </h1>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="md:p-6 mx-auto">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <h1 className="text-3xl font-bold text-[#3B3B0E]">
+                        {item ? "Edit Buah" : "Tambah Buah"}
+                    </h1>
+                    <Link
+                        href={route("gizi.index")}
+                        className="bg-gray-200 hidden md:block hover:bg-gray-300 text-gray-700 px-5 py-2 rounded-xl shadow transition"
+                    >
+                        ← Kembali
+                    </Link>
+                </div>
+
+                {/* Card Form */}
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-6 bg-white p-6 rounded-2xl shadow-lg"
+                >
                     {/* Nama Item */}
-                    <div className="flex flex-col">
-                        <label className="mb-1 font-medium text-gray-700">
-                            Nama Item
+                    <div>
+                        <label className="block font-medium mb-1">
+                            Nama Buah
                         </label>
                         <input
                             type="text"
-                            placeholder="Nama Item"
+                            placeholder="Nama Buah"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none shadow-sm"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-primary-100 focus:border-primary-100 transition"
                             required
                         />
                         {errors.name && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.name}
                             </p>
                         )}
                     </div>
 
                     {/* Upload Gambar */}
-                    <div className="flex flex-col">
-                        <label className="mb-1 font-medium text-gray-700">
-                            Gambar
-                        </label>
+                    <div>
+                        <label className="block font-medium mb-1">Gambar</label>
                         <input
                             type="file"
                             accept="image/*"
                             onChange={(e) =>
                                 setData("img_path", e.target.files[0])
                             }
-                            className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none shadow-sm"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-primary-100 focus:border-primary-100 transition"
                         />
 
                         {/* Preview gambar lama */}
@@ -91,27 +103,27 @@ export default function GameForm({ item }) {
                             />
                         )}
                         {errors.img_path && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-red-500 mt-1 text-sm">
                                 {errors.img_path}
                             </p>
                         )}
                     </div>
 
-                    {/* Buttons */}
-                    <div className="flex gap-3 justify-center mt-4">
-                        <button
-                            type="submit"
-                            disabled={processing}
-                            className="px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow hover:from-green-600 hover:to-green-700 transition-all font-semibold"
-                        >
-                            Simpan
-                        </button>
+                    {/* Tombol */}
+                    <div className="flex justify-end gap-3">
                         <Link
                             href={route("gizi.index")}
-                            className="px-6 py-2 bg-gray-400 text-white rounded-lg shadow hover:bg-gray-500 transition-all font-semibold"
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-5 py-2 rounded-xl shadow transition"
                         >
                             Batal
                         </Link>
+                        <button
+                            type="submit"
+                            disabled={processing}
+                            className="bg-secondary-200 hover:bg-secondary-200/90 text-white px-5 py-2 rounded-xl shadow-md transition disabled:opacity-50"
+                        >
+                            {processing ? "Menyimpan..." : "Simpan"}
+                        </button>
                     </div>
                 </form>
             </div>
