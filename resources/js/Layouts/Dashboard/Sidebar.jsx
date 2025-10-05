@@ -112,14 +112,16 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                     {/* Sidebar Header */}
                     <div className="flex items-center justify-between p-4 border-b border-white">
                         {!isCollapsed && (
-                            <h2 className="flex items-center gap-2 font-extrabold text-2xl tracking-wide text-white">
-                                <img
-                                    src="/icon/logo.png"
-                                    alt="Nutriverse Logo"
-                                    className="w-12 h-12 object-contain hover:scale-125 transition-transform duration-300"
-                                />
-                                Nutriverse
-                            </h2>
+                            <a href="/">
+                                <h2 className="flex items-center gap-2 font-extrabold text-2xl tracking-wide text-white">
+                                    <img
+                                        src="/icon/logo.png"
+                                        alt="Nutriverse Logo"
+                                        className="w-12 h-12 object-contain hover:scale-125 transition-transform duration-300"
+                                    />
+                                    Nutriverse
+                                </h2>
+                            </a>
                         )}
 
                         {/* Tombol Close Mobile */}
@@ -239,10 +241,10 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                             href="/logout"
                             method="post"
                             as="button"
-                            className="flex items-center space-x-3 px-3 py-3 w-full text-left rounded-xl hover:bg-red-600 transition"
+                            className="flex items-center space-x-3 px-3 py-3 w-full text-left rounded-xl bg-red-600 hover:bg-red-700 transition"
                         >
                             <LogOut size={20} />
-                            {!isCollapsed && <span>Logout</span>}
+                            {!isCollapsed && <span>Keluar</span>}
                         </Link>
                     </div>
                 </div>

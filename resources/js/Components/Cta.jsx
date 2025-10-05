@@ -12,7 +12,7 @@ const Cta = () => {
                     />
                 </div>
             </div>
-            <section className="relative pt-10 bg-[#70953F]">
+            <section className="relative pt-10 bg-[#66863E]">
                 <div className="-top-12 relative inset-0 flex justify-center items-center">
                     <div className="bg-white rounded-2xl shadow-lg w-full max-w-5xl h-auto mx-8 md:mx-24 lg:mx-20 flex flex-col sm:flex-row items-center justify-between px-6 py-4 md:py-8">
                         {/* Teks di sebelah kiri */}

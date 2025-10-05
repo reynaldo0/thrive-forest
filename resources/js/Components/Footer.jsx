@@ -16,7 +16,7 @@ export default function Footer() {
     return (
         <>
             <Cta />
-            <footer className="relative text-white bg-[#70953F]">
+            <footer className="relative text-white bg-[#66863E]">
                 {/* Konten Footer */}
                 <div className="relative z-10 container mx-auto px-6 lg:px-16 pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
                     {/* Hubungi Kami */}

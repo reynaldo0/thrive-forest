@@ -24,8 +24,8 @@ const Navbar = () => {
     ];
 
     const authMenu = [
-        { name: "Login", path: route("login") },
-        { name: "Sign In", path: route("register") },
+        { name: "Masuk", path: route("login") },
+        { name: "Buat Akun", path: route("register") },
     ];
 
     // Ambil route profile & logout sesuai role
@@ -152,11 +152,11 @@ const Navbar = () => {
                         </div>
                     ) : (
                         authMenu.map((item) =>
-                            item.name === "Login" ? (
+                            item.name === "Masuk" ? (
                                 <Link
                                     key={item.name}
                                     href={item.path}
-                                    className="px-5 py-2 rounded-full bg-secondary-200 text-white font-bold text-lg shadow-md hover:bg-primary-200 transition duration-300"
+                                    className="px-5 py-2 rounded-full bg-secondary-200 text-white font-bold text-lg shadow-md hover:bg-primary-200/90 transition duration-300"
                                 >
                                     {item.name}
                                 </Link>
@@ -279,7 +279,7 @@ const Navbar = () => {
                             onClick={() => setIsOpen(false)}
                             className="w-full text-center px-5 py-2 rounded-full border-2 border-red-500 text-red-500 hover:bg-red-50"
                         >
-                            Logout
+                            Keluar
                         </Link>
                     </div>
                 ) : (
