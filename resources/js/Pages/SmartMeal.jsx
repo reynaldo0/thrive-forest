@@ -30,7 +30,9 @@ export default function SmartMeal() {
                                     {
                                         text: `Buat rencana menu harian sehat dengan bahan: ${ingredients}, budget Rp${budget}.
 - Gunakan heading (###) untuk setiap waktu makan.
-- Gunakan tabel markdown dengan kolom: Menu, Kandungan Gizi, Estimasi Biaya. - buatkan agar lebih ringkas namun informatif dan jelas tidak bertele tele. - buat agar tidak ada catatan`,
+- Gunakan tabel markdown dengan kolom: Menu, Kandungan Gizi, Estimasi Biaya.
+- Buat ringkas, informatif, jelas, tidak bertele-tele.
+- Tidak perlu catatan tambahan.`,
                                     },
                                 ],
                             },
@@ -54,87 +56,69 @@ export default function SmartMeal() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto p-6">
-            <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">
-                🍽 Smart Meal Generator
-            </h2>
+        <section className="min-h-screen bg-[#FCFFEC] flex flex-col items-center px-6 pt-16 pb-24">
+            {/* Title */}
+            <h1 className="text-4xl md:text-5xl font-extrabold text-[#3B3B0E] text-center mb-3">
+                NutriSmart
+            </h1>
+            <p className="text-center text-base md:text-lg text-[#3B3B0E] mb-8 max-w-2xl">
+                Masukkan bahan yang tersedia dan budget harian, lalu dapatkan
+                rekomendasi menu sehat, bergizi, dan hemat biaya.
+            </p>
 
+            {/* Form Input */}
             <form
                 onSubmit={handleSubmit}
-                className="bg-white shadow-lg rounded-2xl p-6 space-y-4 border"
+                className="bg-[#EDFFCD] border border-green-200 rounded-2xl p-6 md:p-8 shadow-md w-full max-w-2xl flex flex-col gap-5"
             >
-                <div>
-                    <label className="block font-semibold mb-1">Bahan</label>
+                <div className="flex flex-col">
+                    <label className="font-semibold text-sm md:text-base mb-1">
+                        Bahan
+                    </label>
                     <input
                         type="text"
-                        className="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
                         placeholder="Contoh: beras, telur, sayur"
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
+                        className="border border-green-300 rounded-lg p-3 text-base focus:ring-2 focus:ring-green-400 outline-none"
                     />
                 </div>
 
-                <div>
-                    <label className="block font-semibold mb-1">
+                <div className="flex flex-col">
+                    <label className="font-semibold text-sm md:text-base mb-1">
                         Budget Harian (Rp)
                     </label>
                     <input
                         type="number"
-                        className="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
                         placeholder="Contoh: 20000"
                         value={budget}
                         onChange={(e) => setBudget(e.target.value)}
+                        className="border border-green-300 rounded-lg p-3 text-base focus:ring-2 focus:ring-green-400 outline-none"
                     />
                 </div>
 
                 <button
                     type="submit"
-                    className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 disabled:opacity-50"
                     disabled={loading}
+                    className="bg-[#A6E272] hover:bg-[#94D45E] active:scale-95 transition px-5 py-3 rounded-xl font-semibold text-[#224C14] text-base shadow"
                 >
                     {loading ? "Menghasilkan..." : "Generate Menu"}
                 </button>
             </form>
 
+            {/* Hasil AI */}
             {result && (
-                <div className="mt-8 bg-gray-50 p-6 rounded-2xl shadow-md border">
-                    <h3 className="text-xl font-semibold mb-4 text-gray-700">
-                        📋 Rencana Menu Harian
-                    </h3>
-                    <div className="prose max-w-none prose-blue">
-                        <ReactMarkdown
-                            remarkPlugins={[remarkGfm]}
-                            components={{
-                                img: ({ node, ...props }) => {
-                                    let src = props.src || "";
-
-                                    // Kalau bukan direct file gambar → pakai fallback
-                                    if (
-                                        !src.match(
-                                            /\.(jpeg|jpg|png|gif|webp)$/i
-                                        )
-                                    ) {
-                                        src = `https://placehold.co/600x400?text=${
-                                            props.alt || "Food"
-                                        }`;
-                                    }
-
-                                    return (
-                                        <img
-                                            {...props}
-                                            src={src}
-                                            className="rounded-lg shadow-md my-3 max-h-60 object-cover"
-                                            alt={props.alt || "Menu Image"}
-                                        />
-                                    );
-                                },
-                            }}
-                        >
+                <div className="mt-8 bg-white/90 rounded-2xl shadow-md border border-green-200 p-6 md:p-8 max-w-2xl w-full">
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#3B3B0E] mb-5 text-center">
+                        Rencana Menu Harian
+                    </h2>
+                    <div className="prose max-w-none prose-green text-base md:text-lg">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {result}
                         </ReactMarkdown>
                     </div>
                 </div>
             )}
-        </div>
+        </section>
     );
 }
