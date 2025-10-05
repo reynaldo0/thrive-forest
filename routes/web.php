@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\GamesController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\TebakGiziController;
 use Illuminate\Foundation\Application;
@@ -32,11 +33,12 @@ Route::get('/article/{artikel:slug}', [ArtikelController::class, 'publicShow'])-
 Route::get('/product', fn() => Inertia::render('Product'))->name('product');
 Route::get('/gamess', fn() => Inertia::render('Gamess'))->name('gamess');
 
-Route::get('/games', [FruitController::class, 'publicIndex'])->name('games');
+Route::get('/games', [GamesController::class, 'index'])->name('games');
 Route::get('/product', [SeminarController::class, 'publicIndex'])->name('product');
 
 Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'store'])
     ->name('seminars.register');
+
 
 /**
  * ROUTE ADMIN (role: admin)

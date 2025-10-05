@@ -10,26 +10,7 @@ use Inertia\Inertia;
 
 class FruitController extends Controller
 {
-    public function publicIndex()
-    {
-        $user = Auth::user();
 
-        $fruits = Fruit::all()->map(function ($fruit) {
-            return [
-                'id' => $fruit->id,
-                'name' => $fruit->name,
-                'points' => (int) $fruit->points,
-                'img' => $fruit->img,
-                'stages' => is_string($fruit->stages) ? json_decode($fruit->stages, true) : $fruit->stages,
-            ];
-        });
-
-        return Inertia::render('Games', [
-            'fruits' => $fruits,
-            'points' => $user ? $user->points : 0,
-            'added' => null,
-        ]);
-    }
 
     public function index()
     {
@@ -158,23 +139,10 @@ class FruitController extends Controller
             }
         });
 
-        $user->refresh();
-
-        // Ambil semua buah (atau bisa dikirim props yang dibutuhkan saja)
-        $fruits = Fruit::all()->map(function ($f) {
-            return [
-                'id'     => $f->id,
-                'name'   => $f->name,
-                'img'    => $f->img,
-                'stages' => is_string($f->stages) ? json_decode($f->stages, true) : $f->stages,
-                'points' => (int) $f->points,
-            ];
-        });
-
-        return Inertia::render('Games', [
-            'fruits' => $fruits,
-            'points' => $user->points,
+        // kembalikan ke halaman sebelumnya
+        return redirect()->back()->with([
             'added'  => $points,
+            'points' => $user->points,
         ]);
     }
 }

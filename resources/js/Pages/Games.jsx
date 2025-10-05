@@ -7,13 +7,13 @@ import Footer from "@/Components/Footer";
 import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 
-const Games = ({fruits}) => {
+const Games = ({fruits, schools}) => {
     return (
         <>
             <Head title="Games" />
             <Navbar />
             <HeroGames />
-            <RulesLeaderboard/>
+            <RulesLeaderboard schools={schools}/>
             <PageGames fruits={fruits}/>
             <Footer/>
             <Ai/>
