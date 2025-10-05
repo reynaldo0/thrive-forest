@@ -42,7 +42,14 @@ export default function Index() {
                                 <img
                                     src={
                                         item.img_path
-                                            ? `/storage/${item.img_path}`
+                                            ? item.img_path.startsWith(
+                                                  "http"
+                                              ) ||
+                                              item.img_path.startsWith(
+                                                  "/gamesicon"
+                                              )
+                                                ? item.img_path
+                                                : `/storage/${item.img_path}`
                                             : "/placeholder.png"
                                     }
                                     alt={item.name}
