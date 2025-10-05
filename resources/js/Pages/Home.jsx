@@ -11,7 +11,7 @@ import TujuanSection from "./Home/Tujuan";
 const Home = () => {
     return (
         <div className="overflow-x-hidden">
-            <Head title="Home" />
+            <Head title="Beranda" />
             <Navbar />
             <HeroHome />
             <NutiIntro/>

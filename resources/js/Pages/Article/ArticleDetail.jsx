@@ -21,8 +21,7 @@ export default function ArticleDetail({ artikel, otherArtikels }) {
 
     // Fungsi share
     const handleShare = async () => {
-        const url = window.location.href; // URL artikel saat ini
-        // Pakai Web Share API jika tersedia
+        const url = window.location.href;
         if (navigator.share) {
             try {
                 await navigator.share({
@@ -35,7 +34,6 @@ export default function ArticleDetail({ artikel, otherArtikels }) {
                 console.error("Gagal membagikan:", err);
             }
         } else {
-            // fallback: copy ke clipboard
             try {
                 await navigator.clipboard.writeText(url);
                 alert("URL artikel berhasil disalin ke clipboard!");
@@ -47,80 +45,92 @@ export default function ArticleDetail({ artikel, otherArtikels }) {
 
     return (
         <div className="bg-white relative min-h-screen">
+            {/* Background */}
             <div
                 className="absolute inset-0 bg-[url('/background/heroartikel.png')] opacity-50 bg-no-repeat bg-cover bg-top"
                 style={{ backgroundAttachment: "fixed", zIndex: 0 }}
             />
-            <div className="relative w-full h-72 md:h-96 overflow-hidden">
+
+            {/* Header Gambar */}
+            <div className="relative w-full h-80 md:h-[450px] overflow-hidden">
                 <img
                     src={getArticleImgPath(artikel.img)}
                     alt={artikel.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain md:object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20 flex items-end p-6 md:p-12">
-                    <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-xl">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 md:p-12">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-xl leading-snug">
                         {artikel.title}
                     </h1>
                 </div>
             </div>
 
-            <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
-                {/* Main Artikel */}
-                <article className="lg:col-span-2 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg p-8">
-                    <div className="flex flex-wrap items-center text-sm text-gray-600 gap-4 mb-6">
+            {/* Konten Utama */}
+            <section className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-3 gap-10">
+                {/* Artikel Utama */}
+                <article className="lg:col-span-2 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl p-10">
+                    {/* Informasi Penulis */}
+                    <div className="flex flex-wrap items-center text-base text-gray-700 gap-6 mb-8">
                         <span className="flex items-center gap-2">
-                            <User className="w-4 h-4" />{" "}
+                            <User className="w-5 h-5" />{" "}
                             {artikel.user?.name || "Penulis"}
                         </span>
                         <span className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />{" "}
+                            <Calendar className="w-5 h-5" />{" "}
                             {new Date(artikel.created_at).toLocaleDateString()}
                         </span>
                         <span className="flex items-center gap-2">
-                            <Landmark className="w-4 h-4" />{" "}
+                            <Landmark className="w-5 h-5" />{" "}
                             {artikel.tag || "Umum"}
                         </span>
                     </div>
 
-                    <div className="prose max-w-none text-gray-700 leading-relaxed">
+                    {/* Isi Artikel */}
+                    <div className="prose max-w-none text-gray-800 leading-relaxed text-lg md:text-xl">
                         {artikel.desc.split("\n").map((p, i) => (
-                            <p key={i}>{p}</p>
+                            <p key={i} className="mb-5">
+                                {p}
+                            </p>
                         ))}
                     </div>
 
-                    <div className="mt-10 flex items-center gap-4">
+                    {/* Tombol Aksi */}
+                    <div className="mt-12 flex items-center gap-4">
                         <button
                             onClick={handleShare}
-                            className="flex items-center gap-2 px-4 py-2 bg-secondary-200 text-white rounded-lg shadow hover:bg-secondary-200/90 transition"
+                            className="flex items-center gap-2 px-6 py-3 bg-[#90C444] text-white text-lg font-semibold rounded-lg shadow hover:bg-[#7EB73A] transition"
                         >
-                            <Share2 className="w-4 h-4" /> Bagikan
+                            <Share2 className="w-5 h-5" /> Bagikan
                         </button>
                         <Link
                             href={route("article")}
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg shadow hover:bg-gray-200 transition"
+                            className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-800 text-lg font-semibold rounded-lg shadow hover:bg-gray-200 transition"
                         >
-                            <ArrowLeft className="w-4 h-4" /> Kembali
+                            <ArrowLeft className="w-5 h-5" /> Kembali
                         </Link>
                     </div>
                 </article>
 
-                {/* Aside Artikel Lainnya */}
+                {/* Sidebar Artikel Lainnya */}
                 <aside className="space-y-6">
-                    <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-md p-6">
-                        <h3 className="font-semibold text-lg mb-4 text-secondary-200">
+                    <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-lg p-8">
+                        <h3 className="font-bold text-2xl mb-6 text-[#90C444]">
                             Artikel Lainnya
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-4">
                             {otherArtikels.map((a) => (
                                 <Link
                                     key={a.id}
-                                    href={route("article.show", a.id)}
-                                    className="block p-3 rounded-lg hover:bg-secondary-200 transition group"
+                                    href={route(
+                                        "article.show",
+                                        a.slug || a.id
+                                    )}
+                                    className="block p-4 rounded-xl hover:bg-[#90C444] hover:text-white transition group shadow-sm border border-gray-100"
                                 >
-                                    <p className="text-sm font-medium text-gray-800 group-hover:text-white">
+                                    <p className="text-base font-semibold text-gray-800 group-hover:text-white mb-1">
                                         {a.title}
                                     </p>
-                                    <p className="text-xs text-gray-500 group-hover:text-white">
+                                    <p className="text-sm text-gray-500 group-hover:text-white">
                                         {a.user?.name || "Penulis"} •{" "}
                                         {new Date(
                                             a.created_at

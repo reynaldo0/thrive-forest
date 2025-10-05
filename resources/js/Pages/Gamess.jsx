@@ -10,7 +10,7 @@ import { Head } from "@inertiajs/react";
 const Games = ({ items, schools }) => {
     return (
         <>
-            <Head title="Games" />
+            <Head title="Game 2" />
             <Navbar />
             <HeroGamess />
             <RulesLeaderboard schools={schools} />

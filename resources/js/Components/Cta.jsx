@@ -3,12 +3,12 @@ import { ArrowUp } from "lucide-react";
 const Cta = () => {
     return (
         <>
-            <div className="relative ">
+            <div className="relative">
                 <div className="absolute -bottom-2 w-full">
                     <img
                         src="/background/footer.png"
                         className="w-full h-full object-cover"
-                        alt=""
+                        alt="Footer Background"
                     />
                 </div>
             </div>
@@ -35,7 +35,7 @@ const Cta = () => {
 
                         {/* Tombol di sebelah kanan */}
                         <a
-                            href="#eksplore"
+                            href="/games"
                             className="bg-secondary-200 text-white font-semibold px-4 py-2 rounded-lg hover:bg-secondary-300/90 transition mt-4 sm:mt-0 sm:ml-4 flex items-center"
                             data-aos="fade-up"
                             data-aos-duration="1200"

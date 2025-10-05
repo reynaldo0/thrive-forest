@@ -12,7 +12,7 @@ import TeamNutriverse from "./About/Team";
 const About = () => {
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Tentang" />
             <Navbar />
             <HeroAbout />
             <VisiMisi/>

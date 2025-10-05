@@ -12,7 +12,7 @@ import Articles from "./Article/Artikel";
 const Article = ({ artikels }) => {
     return (
         <div className="overflow-x-hidden">
-            <Head title="Welcome" />
+            <Head title="Artikel" />
             <Navbar />
             <HeroArticle />
             <ProdukUnggul />

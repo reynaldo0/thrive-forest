@@ -71,7 +71,7 @@ const Form = () => {
                 style={{ backgroundAttachment: "fixed" }}
             />
 
-            {/* Card Container */}
+            {/* Form Container */}
             <form
                 onSubmit={handleSubmit}
                 className="relative flex flex-col-reverse xl:flex-row items-center gap-10 md:bg-white/80 md:backdrop-blur-xl md:rounded-3xl md:shadow-2xl md:px-8 md:px-16 py-12 w-full md:max-w-7xl z-10"
@@ -88,7 +88,7 @@ const Form = () => {
                     </h1>
 
                     {/* Nama */}
-                    <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm focus-within:ring-2 focus-within:ring-green-400">
+                    <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm focus-within:ring-2 focus-within:ring-[#90C444]">
                         <input
                             type="text"
                             placeholder="Nama Lengkap"
@@ -103,9 +103,9 @@ const Form = () => {
                         <p className="text-red-500 text-sm">{errors.name}</p>
                     )}
 
-                    {/* Email & Asal */}
+                    {/* Email & Alamat */}
                     <div className="flex flex-wrap gap-4">
-                        <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm flex-1 focus-within:ring-2 focus-within:ring-green-400">
+                        <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm flex-1 focus-within:ring-2 focus-within:ring-[#90C444]">
                             <input
                                 type="email"
                                 placeholder="Email Aktif"
@@ -119,7 +119,7 @@ const Form = () => {
                             <Mail className="text-gray-400 w-5 h-5" />
                         </div>
 
-                        <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm flex-1 focus-within:ring-2 focus-within:ring-green-400">
+                        <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 shadow-sm flex-1 focus-within:ring-2 focus-within:ring-[#90C444]">
                             <input
                                 type="text"
                                 placeholder="Asal Daerah"
@@ -134,12 +134,12 @@ const Form = () => {
                         </div>
                     </div>
 
-                    {/* Description */}
+                    {/* Deskripsi */}
                     <textarea
                         placeholder="Apa fitur yang ingin ditambahkan?"
                         value={data.description}
                         onChange={(e) => setData("description", e.target.value)}
-                        className="w-full rounded-2xl bg-gray-100 px-5 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-700 placeholder-gray-400 shadow-sm resize-none border-0"
+                        className="w-full rounded-2xl bg-gray-100 px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#90C444] text-gray-700 placeholder-gray-400 shadow-sm resize-none border-0"
                         rows="3"
                     />
 
@@ -182,19 +182,19 @@ const Form = () => {
                         </label>
                     </div>
 
-                    {/* Story */}
+                    {/* Cerita */}
                     <textarea
                         placeholder="Ceritakan pengalamanmu..."
                         value={data.story}
                         onChange={(e) => setData("story", e.target.value)}
-                        className="w-full rounded-2xl bg-gray-100 px-5 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-700 placeholder-gray-400 shadow-sm resize-none border-0"
+                        className="w-full rounded-2xl bg-gray-100 px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#90C444] text-gray-700 placeholder-gray-400 shadow-sm resize-none border-0"
                         rows="4"
                     />
 
                     <button
                         type="submit"
                         disabled={processing}
-                        className="w-full bg-[#90C444] text-white font-semibold shadow-md hover:bg-[#88A825] text-white font-semibold py-4 rounded-full shadow-lg hover:opacity-90 transition disabled:opacity-50"
+                        className="w-full bg-[#90C444] text-white font-semibold shadow-md hover:bg-[#7CB13B] py-4 rounded-full transition disabled:opacity-50"
                     >
                         {processing ? "Mengirim..." : "Kirim"}
                     </button>
@@ -210,27 +210,26 @@ const Form = () => {
                 </div>
             </form>
 
-            {/* Modal */}
             {modalOpen && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
                     onClick={() => setModalOpen(false)}
                 >
                     <div
-                        className="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl animate-fadeIn"
+                        className="bg-gradient-to-b from-[#E8F8D5] to-[#90C444] text-[#3F3313] rounded-3xl p-8 max-w-md w-full text-center shadow-2xl animate-fadeIn"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <CheckCircle2 className="text-green-500 w-12 h-12 mx-auto mb-4 animate-bounce" />
-                        <h2 className="text-2xl font-bold mb-2">
+                        <CheckCircle2 className="text-[#3F3313] w-12 h-12 mx-auto mb-4 animate-bounce" />
+                        <h2 className="text-2xl font-bold mb-2 text-[#3F3313]">
                             Pesan Terkirim!
                         </h2>
-                        <p className="text-gray-600 mb-6">
-                            Terima kasih sudah berbagi cerita dan ide. Tim kami
-                            akan segera meninjau.
+                        <p className="text-[#3F3313]/80 mb-6">
+                            Terima kasih sudah berbagi cerita dan ide!! Tim kami
+                            akan segera meninjau kirimanmu.
                         </p>
                         <button
                             onClick={() => setModalOpen(false)}
-                            className="bg-gradient-to-r from-green-400 to-green-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition"
+                            className="bg-[#3F3313] text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition"
                         >
                             Tutup
                         </button>
