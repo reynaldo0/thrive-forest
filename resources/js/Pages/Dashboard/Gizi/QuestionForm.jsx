@@ -34,7 +34,7 @@ export default function QuestionForm() {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("_method", question ? "patch" : "post");
+        formData.append("_method", question ? "put" : "post");
         formData.append("question", qText);
         options.forEach((opt, idx) => formData.append(`options[${idx}]`, opt));
         formData.append("answer", answer);

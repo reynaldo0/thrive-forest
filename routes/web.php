@@ -77,6 +77,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Seminars & Articles
     Route::resource('seminars', SeminarController::class);
     Route::resource('artikels', ArtikelController::class)->except(['show']);
+    Route::get('artikel/{artikel:slug}', [ArtikelController::class, 'publicShow'])->name('artikels.show');
 
     // Game Items (TebakGizi)
     Route::get('/gizi', [TebakGiziController::class, 'index'])->name('gizi.index');

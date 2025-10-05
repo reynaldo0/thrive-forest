@@ -5,9 +5,9 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 export default function Index({ artikels }) {
     const { delete: destroy } = useForm();
 
-    const handleDelete = (id) => {
+    const handleDelete = (slug) => {
         if (confirm("Yakin ingin menghapus artikel ini?")) {
-            destroy(route("artikels.destroy", id));
+            destroy(route("artikels.destroy", slug));
         }
     };
 
@@ -88,15 +88,16 @@ export default function Index({ artikels }) {
                                                 <Link
                                                     href={route(
                                                         "artikels.edit",
-                                                        artikel.id
+                                                        artikel.slug
                                                     )}
                                                     className="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-xl shadow-sm font-medium transition text-center"
                                                 >
                                                     Edit
                                                 </Link>
+
                                                 <button
                                                     onClick={() =>
-                                                        handleDelete(artikel.id)
+                                                        handleDelete(artikel.slug)
                                                     }
                                                     className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-xl shadow-sm font-medium transition"
                                                 >
