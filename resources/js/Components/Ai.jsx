@@ -1,14 +1,15 @@
 // Ai.jsx
-import SmartMeal from "@/Pages/SmartMeal";
+import React, { useState } from "react";
+import Navbar from "@/Components/Navbar";
 import { Head } from "@inertiajs/react";
-import { useState } from "react";
+import SmartMeal from "@/Pages/SmartMeal";
 
 export default function Ai() {
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
-            <Head title="AI Smart Meal" />\
+            <Head title="AI Smart Meal" />
 
             {/* Maskot Button */}
             <div
