@@ -85,7 +85,7 @@ export default function PageGamess({ items = [] }) {
         let pointsChange = 0;
 
         if (opt === currentQuestion.answer) {
-            pointsChange = 10; // benar
+            pointsChange = 5; // benar
         } else {
             pointsChange = -2; // salah
         }
@@ -134,7 +134,7 @@ export default function PageGamess({ items = [] }) {
             className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-20 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-visible pb-60"
         >
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#3A2E17] text-center mb-6">
-                Games 2
+                Permainan NutriPlate
             </h1>
             <p className="text-center text-2xl md:text-3xl font-bold text-white mb-10 bg-[#3A2E17] py-3 px-10 rounded-full shadow-lg">
                 Pilih Buah/Sayur, lalu jawab kuisnya

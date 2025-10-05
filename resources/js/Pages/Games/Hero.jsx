@@ -32,7 +32,7 @@ export default function HeroGames() {
             {/* Hero Section */}
             <div className="flex-1 flex flex-col justify-center md:pb-20 items-center px-6 text-center relative">
                 <h1 className="text-4xl md:text-7xl font-extrabold text-white leading-snug z-20 font-nunito">
-                    Tumbuhkan<br />Tanaman
+                    NUTRITREE
                 </h1>
                 <p className="mt-4 text-gray-600 max-w-2xl z-20 font-nunito font-bold pt-2 md:pt-5 text-xl md:text-4xl text-white md:pb-10">
                     Yuk bermain game tanaman yang seru!!
