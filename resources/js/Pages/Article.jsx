@@ -7,8 +7,9 @@ import BukuTerpadu from "./Article/BukuTerpadu";
 import HeroArticle from "./Article/Hero";
 import ProdukUnggul from "./Article/ProdukUnggul";
 import Video from "./Article/VideoPembelajaran";
+import Articles from "./Article/Artikel";
 
-const Article = () => {
+const Article = ({ artikels }) => {
     return (
         <div className="overflow-x-hidden">
             <Head title="Welcome" />
@@ -16,10 +17,10 @@ const Article = () => {
             <HeroArticle />
             <ProdukUnggul />
             <BukuTerpadu />
-            <ArtikelBerita />
+            <Articles artikels={artikels} />
             <Video />
-            <Footer/>
-            <Ai/>
+            <Footer />
+            <Ai />
         </div>
     );
 };

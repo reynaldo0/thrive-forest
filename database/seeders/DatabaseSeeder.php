@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SeminarSeeder::class,
             FruitSeeder::class,
             QuizSeeder::class,
+            ArtikelSeeder::class,
         ]);
 
     // User::factory()->create([

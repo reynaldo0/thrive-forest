@@ -10,10 +10,12 @@ return new class extends Migration
     {
         Schema::create('artikels', function (Blueprint $table) {
             $table->id();
-            $table->string('title');       // Judul artikel
-            $table->text('desc');          // Deskripsi
-            $table->string('img');         // Path gambar
-            $table->string('tag')->nullable(); // Tag (opsional)
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('desc');
+            $table->string('img');
+            $table->string('tag')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

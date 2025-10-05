@@ -25,7 +25,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/about', fn() => Inertia::render('About'))->name('about');
-Route::get('/article', fn() => Inertia::render('Article'))->name('article');
+
+Route::get('/article', [ArtikelController::class, 'publicIndex'])->name('article');
+Route::get('/article/{artikel:slug}', [ArtikelController::class, 'publicShow'])->name('article.show');
+
 Route::get('/product', fn() => Inertia::render('Product'))->name('product');
 Route::get('/gamess', fn() => Inertia::render('Gamess'))->name('gamess');
 

@@ -4,10 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Artikel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ArtikelController extends Controller
 {
+    public function publicIndex()
+    {
+        $artikels = Artikel::latest()->paginate(3);
+        return Inertia::render('Article', [
+            'artikels' => $artikels
+        ]);
+    }
+
+    public function publicShow(Artikel $artikel)
+    {
+        $artikel->load('user');
+
+        $otherArtikels = Artikel::where('id', '!=', $artikel->id)
+            ->with('user')
+            ->latest()
+            ->get();
+
+        return Inertia::render('Article/ArticleDetail', [
+            'artikel' => $artikel,
+            'otherArtikels' => $otherArtikels
+        ]);
+    }
     public function index()
     {
         $artikels = Artikel::latest()->paginate(10);
@@ -37,10 +60,13 @@ class ArtikelController extends Controller
             $data['img'] = $path;
         }
 
+        $data['user_id'] = Auth::id();
+
         Artikel::create($data);
 
         return redirect()->route('artikels.index')->with('success', 'Artikel berhasil ditambahkan!');
     }
+
 
     public function edit(Artikel $artikel)
     {

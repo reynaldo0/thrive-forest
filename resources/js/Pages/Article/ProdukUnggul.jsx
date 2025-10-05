@@ -2,35 +2,35 @@ import React, { useState, useEffect } from "react";
 
 export default function ProdukUnggul() {
     const products = [
-        { 
-            icon: "/produk-unggul/kultur.png", 
-            alt: "Kultur", 
-            label: "Kultur Jaringan", 
-            desc: "Kultur jaringan adalah teknik bioteknologi untuk memperbanyak tanaman dengan mengambil bagian kecil dari tanaman (sel, jaringan, atau organ) dan menumbuhkannya di lingkungan laboratorium yang steril dan terkontrol (in vitro)." 
+        {
+            icon: "/produk-unggul/kultur.png",
+            alt: "Kultur",
+            label: "Kultur Jaringan",
+            desc: "Kultur jaringan adalah teknik bioteknologi untuk memperbanyak tanaman dengan mengambil bagian kecil dari tanaman (sel, jaringan, atau organ) dan menumbuhkannya di lingkungan laboratorium yang steril dan terkontrol (in vitro)."
         },
-        { 
-            icon: "/produk-unggul/rekayasa.png", 
-            alt: "DNA", 
-            label: "Rekayasa Genetika", 
-            desc: "Rekayasa Genetika adalah proses memodifikasi DNA untuk menghasilkan sifat baru yang diinginkan, seperti ketahanan terhadap hama atau peningkatan nilai gizi. Proses ini melibatkan ekstraksi DNA, contoh nya penggunaan bakteri Agrobacterium." 
+        {
+            icon: "/produk-unggul/rekayasa.png",
+            alt: "DNA",
+            label: "Rekayasa Genetika",
+            desc: "Rekayasa Genetika adalah proses memodifikasi DNA untuk menghasilkan sifat baru yang diinginkan, seperti ketahanan terhadap hama atau peningkatan nilai gizi. Proses ini melibatkan ekstraksi DNA, contoh nya penggunaan bakteri Agrobacterium."
         },
-        { 
-            icon: "/produk-unggul/botol.png", 
-            alt: "Botol", 
-            label: "Bioteknologi", 
-            desc: "Bioteknologi adalah ilmu dan teknologi yang memanfaatkan sistem biologis, organisme hidup, atau bagian-bagiannya untuk mengembangkan atau menciptakan produk dan proses yang bermanfaat bagi manusia dan lingkungan." 
+        {
+            icon: "/produk-unggul/botol.png",
+            alt: "Botol",
+            label: "Bioteknologi",
+            desc: "Bioteknologi adalah ilmu dan teknologi yang memanfaatkan sistem biologis, organisme hidup, atau bagian-bagiannya untuk mengembangkan atau menciptakan produk dan proses yang bermanfaat bagi manusia dan lingkungan."
         },
-        { 
-            icon: "/produk-unggul/seleksi.png", 
-            alt: "Seleksi", 
-            label: "Seleksi Masal", 
-            desc: "Seleksi massa adalah metode yang bertujuan meningkatkan populasi campuran dengan memilih individu berdasarkan penampilan fenotipik, kemudian benihnya dikumpulkan dan ditanam pada generasi berikutnya untuk meningkatkan frekuensi gen." 
+        {
+            icon: "/produk-unggul/seleksi.png",
+            alt: "Seleksi",
+            label: "Seleksi Masal",
+            desc: "Seleksi massa adalah metode yang bertujuan meningkatkan populasi campuran dengan memilih individu berdasarkan penampilan fenotipik, kemudian benihnya dikumpulkan dan ditanam pada generasi berikutnya untuk meningkatkan frekuensi gen."
         },
-        { 
-            icon: "/produk-unggul/okulasi.png", 
-            alt: "Okulasi", 
-            label: "Okulasi Tanaman", 
-            desc: "Okulasi adalah teknik menggabungkan sifat unggul dari kedua bagian tanaman, seperti sistem perakaran yang kuat dari batang bawah dan kualitas buah atau bunga yang baik dari batang atas, untuk menghasilkan varietas tanaman yang lebih baik dan unggul" 
+        {
+            icon: "/produk-unggul/okulasi.png",
+            alt: "Okulasi",
+            label: "Okulasi Tanaman",
+            desc: "Okulasi adalah teknik menggabungkan sifat unggul dari kedua bagian tanaman, seperti sistem perakaran yang kuat dari batang bawah dan kualitas buah atau bunga yang baik dari batang atas, untuk menghasilkan varietas tanaman yang lebih baik dan unggul"
         },
     ];
 
@@ -63,7 +63,7 @@ export default function ProdukUnggul() {
         <section className="relative min-h-screen flex flex-col items-center justify-center w-full px-6 pt-24 pb-16 bg-[#FCFFEC] overflow-hidden">
             {/* Background */}
             <div
-                className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-no-repeat bg-cover bg-top"
+                className="absolute inset-0 bg-[url('/background/heroartikel.png')] opacity-50 bg-no-repeat bg-cover bg-top"
                 style={{ backgroundAttachment: "fixed", zIndex: 0 }}
             />
 

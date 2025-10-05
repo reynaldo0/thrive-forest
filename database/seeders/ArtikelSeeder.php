@@ -4,11 +4,23 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Artikel;
+use App\Models\User;
 
 class ArtikelSeeder extends Seeder
 {
     public function run(): void
     {
+        // Ambil beberapa user untuk dijadikan author
+        $users = User::all();
+
+        // Jika belum ada user, buat default
+        if ($users->isEmpty()) {
+            $users = collect([
+                User::factory()->create(['name' => 'Admin Nutrivers', 'email' => 'nutriverse@gmail.com']),
+                User::factory()->create(['name' => 'Admin Nutrivers', 'email' => 'admin2@gmail.com']),
+            ]);
+        }
+
         $articles = [
             [
                 'title' => 'Padi Toleran Garam',
@@ -18,7 +30,7 @@ class ArtikelSeeder extends Seeder
             ],
             [
                 'title' => 'Beras Daging',
-                'desc'  => 'beras hasil inovasi peneliti Korea Selatan yang mengandung protein hewani, yaitu sel daging sapi dan lemak ikan yang ditumbuhkan di dalam butiran beras melalui proses kultur sel di laboratorium.',
+                'desc'  => 'Beras hasil inovasi peneliti Korea Selatan yang mengandung protein hewani, yaitu sel daging sapi dan lemak ikan yang ditumbuhkan di dalam butiran beras melalui proses kultur sel di laboratorium.',
                 'img'   => '/images/article/article2.png',
                 'tag'   => 'BBC',
             ],
@@ -29,33 +41,39 @@ class ArtikelSeeder extends Seeder
                 'tag'   => 'Univ. Brawijaya',
             ],
             [
-                'title' => 'Melon transgenik',
-                'desc'  => 'Aplikasi telah di Kembangkan pada Tanaman Transgenik. Beberapa tanaman transgenik telah diaplikasikan untuk menghasilkan tiga macam sifat unggul, yaitu tahan hama, tahan herbisida, dan tidak mudah busuk.',
-                'img'   => '/images/article/article1.png',
+                'title' => 'Melon Transgenik',
+                'desc'  => 'Aplikasi telah dikembangkan pada Tanaman Transgenik. Beberapa tanaman transgenik telah diaplikasikan untuk menghasilkan tiga macam sifat unggul, yaitu tahan hama, tahan herbisida, dan tidak mudah busuk.',
+                'img'   => '/images/article/article4.png',
                 'tag'   => 'Mutiarosa',
             ],
             [
                 'title' => 'Kapas BT',
-                'desc'  => 'kapas menghasilkan toksin yang aktivitasnya hampir terbatas hanya pada hama ulat (Lepidoptera) dan  galur Bacillus thuringiensis lainnya memiliki gen yang mengkode toksin dengan aktivitas insektisida.',
-                'img'   => '/images/article/article2.png',
+                'desc'  => 'Kapas menghasilkan toksin yang aktivitasnya hampir terbatas hanya pada hama ulat (Lepidoptera) dan galur Bacillus thuringiensis lainnya memiliki gen yang mengkode toksin dengan aktivitas insektisida.',
+                'img'   => '/images/article/article5.png',
                 'tag'   => 'Utcrops',
             ],
             [
                 'title' => 'Tebu PRG NXI-4T',
-                'desc'  => 'Tebu Produk Rekayasa Genetika ( PRG ) toleran kekeringan klon NXI-4T merupakan varietas tebu baru hasil perakitan melalui proses transformasi genetika menggunakan bakteri Agrobacterium temefaciens.',
-                'img'   => '/images/article/article3.png',
+                'desc'  => 'Tebu Produk Rekayasa Genetika (PRG) toleran kekeringan klon NXI-4T merupakan varietas tebu baru hasil perakitan melalui proses transformasi genetika menggunakan bakteri Agrobacterium tumefaciens.',
+                'img'   => '/images/article/article6.png',
                 'tag'   => 'Pgpradjekan',
             ],
             [
                 'title' => 'Beras Emas',
-                'desc'  => 'Beras Emas hadir sebagai alternatif  pangan yang dikembangkan pemerintah . Rekayasa genetika sekarang memainkan peran penting dalam memodifikasi susunan genetik organisme hidup untuk memenuhi kebutuhan manusia.',
-                'img'   => '/images/article/article3.png',
+                'desc'  => 'Beras Emas hadir sebagai alternatif pangan yang dikembangkan pemerintah. Rekayasa genetika sekarang memainkan peran penting dalam memodifikasi susunan genetik organisme hidup untuk memenuhi kebutuhan manusia.',
+                'img'   => '/images/article/article7.png',
                 'tag'   => 'IPB',
             ],
         ];
 
-        foreach ($articles as $article) {
-            Artikel::create($article);
+        foreach ($articles as $index => $article) {
+            Artikel::create([
+                'user_id' => $users[$index % $users->count()]->id,
+                'title'   => $article['title'],
+                'desc'    => $article['desc'],
+                'img'     => $article['img'],
+                'tag'     => $article['tag'],
+            ]);
         }
     }
 }
