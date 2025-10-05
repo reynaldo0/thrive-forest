@@ -80,24 +80,31 @@ export default function PageGamess({ items = [] }) {
         setQuestionLocked(true);
 
         const currentQuestion = questions[currentQuestionIndex];
-        if (currentQuestion && opt === currentQuestion.answer) {
-            const earnedPoints = 10;
-            setPoints((p) => p + earnedPoints);
+        if (!currentQuestion) return;
 
-            try {
-                await fetch("/gamess/add-points", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": document
-                            .querySelector('meta[name="csrf-token"]')
-                            .getAttribute("content"),
-                    },
-                    body: JSON.stringify({ points: earnedPoints }),
-                });
-            } catch (err) {
-                console.error("Failed to update points:", err);
-            }
+        let pointsChange = 0;
+
+        if (opt === currentQuestion.answer) {
+            pointsChange = 10; // benar
+        } else {
+            pointsChange = -2; // salah
+        }
+
+        setPoints((p) => p + pointsChange);
+
+        try {
+            await fetch("/gamess/add-points", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute("content"),
+                },
+                body: JSON.stringify({ points: pointsChange }),
+            });
+        } catch (err) {
+            console.error("Failed to update points:", err);
         }
     };
 

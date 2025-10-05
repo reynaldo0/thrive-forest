@@ -52,8 +52,8 @@ export default function AuthenticatedLayout({ children }) {
                 <Toaster position="top-right" reverseOrder={false} />
 
                 {/* Breadcrumb */}
-                <div className="px-8 py-3 bg-white/70 backdrop-blur-sm border-b border-green-200 shadow-sm flex items-center gap-2 text-sm text-gray-600 z-20 relative">
-                    <span className="text-green-600 font-semibold">Home</span>
+                <div className="px-8 py-3 bg-white/70 backdrop-blur-sm border-b border-green-200 shadow-sm flex items-center gap-2 text-sm text-primary-100 z-20 relative">
+                    <span className="text-primary-100 font-semibold">Home</span>
                     {segments.map((seg, idx) => {
                         const path = "/" + segments.slice(0, idx + 1).join("/");
                         const isLast = idx === segments.length - 1;
@@ -67,7 +67,7 @@ export default function AuthenticatedLayout({ children }) {
                                 ) : (
                                     <a
                                         href={path}
-                                        className="text-green-600 hover:underline capitalize"
+                                        className="text-primary-100 hover:underline capitalize"
                                     >
                                         {seg.replace("-", " ")}
                                     </a>
@@ -77,7 +77,6 @@ export default function AuthenticatedLayout({ children }) {
                     })}
                 </div>
 
-                {/* Kontainer utama dengan background & overlay */}
                 {/* Kontainer utama dengan background & overlay */}
                 <div className="relative flex-1">
                     {/* Background image */}

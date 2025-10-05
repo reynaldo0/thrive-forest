@@ -38,22 +38,13 @@ const Navbar = ({ setSidebarOpen }) => {
                     <Menu size={24} className="text-primary-100" />
                 </button>
 
-                <h1 className="text-2xl font-extrabold text-primary-100">
+                <h1 className="text-2xl font-extrabold text-primary-100/80">
                     Dashboard
                 </h1>
             </div>
 
             {/* Right: Actions */}
             <div className="flex items-center space-x-4">
-                {/* Notifications */}
-                <button
-                    className="relative p-2 rounded-full bg-white/10
-                               hover:bg-primary-100 transition-colors duration-200"
-                    aria-label="Notifications"
-                >
-                    <Bell size={22} className="text-primary-100" />
-                    <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
 
                 {/* Profile */}
                 <div className="relative" ref={dropdownRef}>

@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\GamesController;
 use App\Http\Controllers\SchoolController;
@@ -52,8 +53,8 @@ Route::get('/smart-meal', function () {
  * ROUTE ADMIN (role: admin)
  */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-
-    Route::get('/overview', fn() => Inertia::render('Dashboard/Overview'))->name('dashboard');
+    Route::get('/overview', [DashboardController::class, 'overview'])
+        ->name('dashboard');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

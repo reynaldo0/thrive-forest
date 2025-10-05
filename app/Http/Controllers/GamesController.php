@@ -38,7 +38,7 @@ class GamesController extends Controller
     public function addPoints(Request $request)
     {
         $request->validate([
-            'points' => 'required|integer|min:0',
+            'points' => 'required|integer', // bisa positif atau negatif
         ]);
 
         $user = Auth::user();
@@ -46,24 +46,23 @@ class GamesController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $pointsToAdd = (int) $request->points;
+        $pointsChange = (int) $request->points;
 
-        DB::transaction(function () use ($user, $pointsToAdd) {
-            // Tambahkan ke user
-            $user->increment('points', $pointsToAdd);
+        DB::transaction(function () use ($user, $pointsChange) {
+            // Tambahkan atau kurangi poin user
+            $user->increment('points', $pointsChange);
 
-            // Jika user tergabung dengan sekolah, tambahkan juga ke sekolah
+            // Jika user tergabung dengan sekolah, tambahkan atau kurangi poin sekolah juga
             if ($user->school_id) {
-                $user->school()->increment('points', $pointsToAdd);
+                $user->school()->increment('points', $pointsChange);
             }
         });
 
         return response()->json([
-            'message' => 'Points added successfully',
+            'message' => 'Points updated successfully',
             'points' => $user->points,
         ]);
     }
-
 
     public function gizi()
     {
