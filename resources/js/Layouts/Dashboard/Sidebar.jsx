@@ -15,6 +15,7 @@ import {
     Apple,
     User2,
     PresentationIcon,
+    FileText,
 } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "@inertiajs/react";
@@ -31,31 +32,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
             href: "/admin/overview",
         },
         {
-            label: "Manajemen Tanaman",
-            icon: <TreePine size={20} />,
-            children: [
-                { label: "Lihat Tanaman", href: "/admin/fruits" },
-                { label: "Buat Tanaman", href: "/admin/fruits/create" },
-            ],
-        },
-        {
-            label: "Manajemen Seminar",
-            icon: <Presentation size={20} />,
-            children: [
-                { label: "Daftar Seminar", href: "/admin/seminars" },
-                { label: "Tambah Seminar", href: "/admin/seminars/create" },
-            ],
-        },
-        {
-            label: "Manajemen Artikel",
-            icon: <User2 size={20} />,
-            children: [
-                { label: "Daftar Artikel", href: "/admin/artikels" }, //masih belum bisa
-                { label: "Tambah Artikel", href: "/admin/artikels/create" },
-            ],
-        },
-        {
-            label: "Kolaborasi Tanaman",
+            label: "Kolaborasi Sekolah",
             icon: <Users size={20} />,
             children: [
                 { label: "Buat Kode Sekolah", href: "/admin/schools" },
@@ -64,18 +41,43 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
             ],
         },
         {
-            label: "Gizi",
+            label: "Permainan Tanaman",
+            icon: <TreePine size={20} />,
+            children: [
+                { label: "Lihat Tanaman", href: "/admin/fruits" },
+                { label: "Buat Tanaman", href: "/admin/fruits/create" },
+            ],
+        },
+        {
+            label: "Permainan Gizi",
             icon: <Apple size={20} />,
             children: [
                 { label: "Tebak Gizi Item", href: "/admin/gizi" },
                 { label: "Tambah Item", href: "/admin/gizi/create" },
             ],
         },
+        {
+            label: "Kelola Seminar",
+            icon: <Presentation size={20} />,
+            children: [
+                { label: "Daftar Seminar", href: "/admin/seminars" },
+                { label: "Tambah Seminar", href: "/admin/seminars/create" },
+            ],
+        },
+        {
+            label: "Kelola Artikel",
+            icon: <FileText size={20} />,
+            children: [
+                { label: "Daftar Artikel", href: "/admin/artikels" }, //masih belum bisa
+                { label: "Tambah Artikel", href: "/admin/artikels/create" },
+            ],
+        },
+
         { label: "Pesan", icon: <Mail size={20} />, href: "/admin/mails" },
         {
-            label: "Settings",
+            label: "Kelola Pengguna",
             icon: <Settings size={20} />,
-            href: "/admin/settings",
+            href: "/admin/users",
         },
     ];
 
@@ -152,7 +154,6 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                     <ChevronLeft size={22} />
                                 )}
                             </button>
-
                         </div>
                     </div>
 
