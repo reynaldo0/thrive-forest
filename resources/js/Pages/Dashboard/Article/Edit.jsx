@@ -11,13 +11,18 @@ export default function Edit({ artikel }) {
         _method: "PUT",
     });
 
-    const [preview, setPreview] = useState(
-        artikel.img ? `/storage/${artikel.img}` : null
-    );
+    // Fungsi bantu untuk mendapatkan URL gambar
+    const getImageUrl = (img) => {
+        if (!img) return null;
+        if (img.startsWith("http") || img.startsWith("/gamesicon")) return img;
+        return `/storage/${img}`;
+    };
+
+    const [preview, setPreview] = useState(getImageUrl(artikel.img));
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("artikels.update", artikel.id));
+        post(route("artikels.update", artikel.slug));
     };
 
     return (

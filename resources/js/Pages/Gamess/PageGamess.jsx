@@ -9,8 +9,7 @@ export default function PageGamess({ items = [] }) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [questionLocked, setQuestionLocked] = useState(false);
-    const [points, setPoints] = useState(backendPoints); // mulai dari backend
-    const [offsetX, setOffsetX] = useState(0);
+    const [points, setPoints] = useState(backendPoints);
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -33,7 +32,6 @@ export default function PageGamess({ items = [] }) {
 
             const animate = () => {
                 currentX += (targetX - currentX) * 0.15;
-                setOffsetX(currentX);
                 if (Math.abs(targetX - currentX) > 0.5) {
                     animationFrameId = requestAnimationFrame(animate);
                 }
@@ -41,6 +39,7 @@ export default function PageGamess({ items = [] }) {
 
             cancelAnimationFrame(animationFrameId);
             animationFrameId = requestAnimationFrame(animate);
+            setOffsetX(currentX);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -50,6 +49,7 @@ export default function PageGamess({ items = [] }) {
         };
     }, []);
 
+    // Drag & Drop
     const handleDragStart = (e, id) => {
         e.dataTransfer.effectAllowed = "move";
         e.dataTransfer.setData("text/plain", id);
@@ -78,7 +78,6 @@ export default function PageGamess({ items = [] }) {
             const earnedPoints = 10;
             setPoints((p) => p + earnedPoints);
 
-            // Kirim ke server agar tersimpan
             try {
                 await fetch("/gamess/add-points", {
                     method: "POST",
@@ -98,17 +97,12 @@ export default function PageGamess({ items = [] }) {
 
     const handleNextQuestion = () => {
         if (!plateItem) return;
-        const total = plateItem.questions.length;
-        if (currentQuestionIndex < total - 1) {
+        if (currentQuestionIndex < plateItem.questions.length - 1) {
             setCurrentQuestionIndex((i) => i + 1);
             setSelectedAnswer(null);
             setQuestionLocked(false);
         } else {
-            // selesai semua soal
-            setPlateItem(null);
-            setCurrentQuestionIndex(0);
-            setSelectedAnswer(null);
-            setQuestionLocked(false);
+            handleClearPlate();
         }
     };
 
@@ -183,7 +177,6 @@ export default function PageGamess({ items = [] }) {
 
                                     let btnClass =
                                         "px-6 py-4 rounded-xl border font-semibold transition-all duration-200 text-xl ";
-
                                     if (!questionLocked) {
                                         btnClass +=
                                             "bg-gray-100 border-gray-300 hover:bg-green-50 cursor-pointer";
@@ -219,7 +212,6 @@ export default function PageGamess({ items = [] }) {
                                 >
                                     <FaRedo /> Ganti Tanaman
                                 </button>
-
                                 <button
                                     onClick={handleNextQuestion}
                                     className="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow hover:bg-green-600 text-lg flex items-center gap-2"
@@ -240,20 +232,35 @@ export default function PageGamess({ items = [] }) {
             {/* Daftar Buah/Sayur */}
             <div className="bg-[#F0FCD7] border-2 border-green-200 rounded-2xl shadow-lg mt-10 px-6 py-6 w-full">
                 <div className="flex gap-6 flex-wrap justify-center">
-                    {items.map((item) => (
-                        <div
-                            key={item.id}
-                            draggable
-                            onDragStart={(e) => handleDragStart(e, item.id)}
-                            className="w-24 h-24 bg-white rounded-2xl shadow-md hover:scale-110 flex items-center justify-center cursor-pointer border border-green-200 transition-transform duration-200"
-                        >
-                            <img
-                                src={item.img}
-                                alt={item.name}
-                                className="w-16 h-16 object-contain pointer-events-none"
-                            />
-                        </div>
-                    ))}
+                    {items.map((item) => {
+                        const shuffledQuestions = item.questions.map((q) => ({
+                            ...q,
+                            options: q.options.sort(() => Math.random() - 0.5),
+                        }));
+
+                        const selectItem = () => {
+                            setPlateItem({
+                                ...item,
+                                questions: shuffledQuestions,
+                            });
+                        };
+
+                        return (
+                            <div
+                                key={item.id}
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, item.id)}
+                                onClick={selectItem} // klik juga memilih item
+                                className="w-24 h-24 bg-white rounded-2xl shadow-md hover:scale-110 flex items-center justify-center cursor-pointer border border-green-200 transition-transform duration-200"
+                            >
+                                <img
+                                    src={item.img}
+                                    alt={item.name}
+                                    className="w-16 h-16 object-contain pointer-events-none"
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 

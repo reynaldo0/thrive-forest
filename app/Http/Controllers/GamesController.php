@@ -68,10 +68,16 @@ class GamesController extends Controller
     public function gizi()
     {
         $items = ItemGame::with('questions')->get()->map(function ($item) {
+            $img = $item->img_path
+                ? (str_starts_with($item->img_path, '/gamesicon')
+                    ? $item->img_path
+                    : asset('storage/' . $item->img_path))
+                : '/placeholder.png';
+
             return [
                 'id' => $item->id,
                 'name' => $item->name,
-                'img' => $item->img_path ? asset('storage/' . $item->img_path) : null,
+                'img' => $img,
                 'questions' => $item->questions->map(function ($q) {
                     return [
                         'question' => $q->question,
