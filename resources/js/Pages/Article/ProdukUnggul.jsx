@@ -6,31 +6,31 @@ export default function ProdukUnggul() {
             icon: "/produk-unggul/kultur.png",
             alt: "Kultur",
             label: "Kultur Jaringan",
-            desc: "Kultur jaringan adalah teknik bioteknologi untuk memperbanyak tanaman dengan mengambil bagian kecil dari tanaman (sel, jaringan, atau organ) dan menumbuhkannya di lingkungan laboratorium yang steril dan terkontrol (in vitro)."
+            desc: "Kultur jaringan adalah teknik bioteknologi untuk memperbanyak tanaman dengan mengambil bagian kecil dari tanaman (sel, jaringan, atau organ) dan menumbuhkannya di lingkungan laboratorium yang steril dan terkontrol (in vitro).",
         },
         {
             icon: "/produk-unggul/rekayasa.png",
             alt: "DNA",
             label: "Rekayasa Genetika",
-            desc: "Rekayasa Genetika adalah proses memodifikasi DNA untuk menghasilkan sifat baru yang diinginkan, seperti ketahanan terhadap hama atau peningkatan nilai gizi. Proses ini melibatkan ekstraksi DNA, contoh nya penggunaan bakteri Agrobacterium."
+            desc: "Rekayasa Genetika adalah proses memodifikasi DNA untuk menghasilkan sifat baru yang diinginkan, seperti ketahanan terhadap hama atau peningkatan nilai gizi. Proses ini melibatkan ekstraksi DNA, contoh nya penggunaan bakteri Agrobacterium.",
         },
         {
             icon: "/produk-unggul/botol.png",
             alt: "Botol",
             label: "Bioteknologi",
-            desc: "Bioteknologi adalah ilmu dan teknologi yang memanfaatkan sistem biologis, organisme hidup, atau bagian-bagiannya untuk mengembangkan atau menciptakan produk dan proses yang bermanfaat bagi manusia dan lingkungan."
+            desc: "Bioteknologi adalah ilmu dan teknologi yang memanfaatkan sistem biologis, organisme hidup, atau bagian-bagiannya untuk mengembangkan atau menciptakan produk dan proses yang bermanfaat bagi manusia dan lingkungan.",
         },
         {
             icon: "/produk-unggul/seleksi.png",
             alt: "Seleksi",
             label: "Seleksi Masal",
-            desc: "Seleksi massa adalah metode yang bertujuan meningkatkan populasi campuran dengan memilih individu berdasarkan penampilan fenotipik, kemudian benihnya dikumpulkan dan ditanam pada generasi berikutnya untuk meningkatkan frekuensi gen."
+            desc: "Seleksi massa adalah metode yang bertujuan meningkatkan populasi campuran dengan memilih individu berdasarkan penampilan fenotipik, kemudian benihnya dikumpulkan dan ditanam pada generasi berikutnya untuk meningkatkan frekuensi gen.",
         },
         {
             icon: "/produk-unggul/okulasi.png",
             alt: "Okulasi",
             label: "Okulasi Tanaman",
-            desc: "Okulasi adalah teknik menggabungkan sifat unggul dari kedua bagian tanaman, seperti sistem perakaran yang kuat dari batang bawah dan kualitas buah atau bunga yang baik dari batang atas, untuk menghasilkan varietas tanaman yang lebih baik dan unggul"
+            desc: "Okulasi adalah teknik menggabungkan sifat unggul dari kedua bagian tanaman, seperti sistem perakaran yang kuat dari batang bawah dan kualitas buah atau bunga yang baik dari batang atas, untuk menghasilkan varietas tanaman yang lebih baik dan unggul.",
         },
     ];
 
@@ -46,16 +46,16 @@ export default function ProdukUnggul() {
     const handleNext = () => {
         if (currentIndex < products.length - 1) {
             setCurrentIndex(currentIndex + 1);
-            setShowDetail(false);      // otomatis tutup konten detail
-            setSelectedProduct(null);  // reset produk yang dipilih
+            setShowDetail(false);
+            setSelectedProduct(null);
         }
     };
 
     const handlePrev = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
-            setShowDetail(false);      // otomatis tutup konten detail
-            setSelectedProduct(null);  // reset produk yang dipilih
+            setShowDetail(false);
+            setSelectedProduct(null);
         }
     };
 
@@ -87,7 +87,7 @@ export default function ProdukUnggul() {
                                 }`}
                                 onClick={() => {
                                     setCurrentIndex(i);
-                                    setShowDetail(false);      // tutup detail saat klik indikator
+                                    setShowDetail(false);
                                     setSelectedProduct(null);
                                 }}
                             ></div>
@@ -99,18 +99,29 @@ export default function ProdukUnggul() {
                 <div className="relative w-full max-w-5xl overflow-hidden">
                     <div
                         className="flex transition-transform duration-700 ease-out"
-                        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                        style={{
+                            transform: `translateX(-${currentIndex * 100}%)`,
+                        }}
                     >
                         {products.map((p, i) => (
-                            <div key={i} className="w-full flex justify-center items-center flex-shrink-0">
+                            <div
+                                key={i}
+                                className="w-full flex justify-center items-center flex-shrink-0"
+                            >
                                 <div
                                     className={`flex flex-col items-center transition-all duration-700 ease-out ${
-                                        animate ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
+                                        animate
+                                            ? "opacity-100 translate-y-0"
+                                            : "opacity-0 -translate-y-8"
                                     }`}
                                 >
                                     {/* Lingkaran Icon */}
-                                    <div className="w-56 h-56 rounded-full bg-white shadow-2xl border-2 border-[#E0EBD2] flex items-center justify-center hover:scale-110 transition-transform duration-500">
-                                        <img src={p.icon} alt={p.alt} className="w-24 h-24" />
+                                    <div className="w-56 h-56 rounded-full bg-white shadow-2xl border-2 border-[#E0EBD2] flex items-center justify-center hover:scale-110 transition-transform duration-500 overflow-hidden">
+                                        <img
+                                            src={p.icon}
+                                            alt={p.alt}
+                                            className="max-w-[80%] max-h-[80%] object-contain"
+                                        />
                                     </div>
 
                                     {/* Label */}
@@ -139,8 +150,19 @@ export default function ProdukUnggul() {
                         disabled={currentIndex === 0}
                         className="absolute top-1/2 left-1 transform -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full border-2 border-[#88A825] bg-white text-[#3B3B0E] shadow-lg z-20 disabled:opacity-40 hover:bg-[#88A825] hover:text-white hover:shadow-xl transition"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2.5}
+                            stroke="currentColor"
+                            className="w-8 h-8"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15.75 19.5L8.25 12l7.5-7.5"
+                            />
                         </svg>
                     </button>
                     <button
@@ -148,8 +170,19 @@ export default function ProdukUnggul() {
                         disabled={currentIndex === products.length - 1}
                         className="absolute top-1/2 right-1 transform -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full border-2 border-[#88A825] bg-white text-[#3B3B0E] shadow-lg z-20 disabled:opacity-40 hover:bg-[#88A825] hover:text-white hover:shadow-xl transition"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2.5}
+                            stroke="currentColor"
+                            className="w-8 h-8"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                            />
                         </svg>
                     </button>
                 </div>
@@ -158,7 +191,9 @@ export default function ProdukUnggul() {
                 {showDetail && selectedProduct && (
                     <div className="mt-12 max-w-4xl w-full bg-[#F6FFE5] rounded-3xl shadow-xl p-10 flex flex-col md:flex-row items-center gap-8">
                         <div className="flex-1 text-left">
-                            <h3 className="text-3xl font-bold text-[#3B3B0E] mb-4">{selectedProduct.label}</h3>
+                            <h3 className="text-3xl font-bold text-[#3B3B0E] mb-4">
+                                {selectedProduct.label}
+                            </h3>
                             <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                 {selectedProduct.desc}
                             </p>
@@ -170,7 +205,11 @@ export default function ProdukUnggul() {
                             </button>
                         </div>
                         <div className="flex-shrink-0">
-                            <img src={selectedProduct.icon} alt={selectedProduct.alt} className="w-32 h-32 md:w-40 md:h-40" />
+                            <img
+                                src={selectedProduct.icon}
+                                alt={selectedProduct.alt}
+                                className="max-w-[150px] md:max-w-[180px] object-contain"
+                            />
                         </div>
                     </div>
                 )}

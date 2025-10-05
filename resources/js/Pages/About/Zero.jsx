@@ -57,9 +57,11 @@ export default function ZeroHunger() {
       {/* Judul */}
       <div className="relative text-center mb-12 z-10">
         <div className="flex justify-center items-center gap-3 mb-4">
-          <div className="bg-[#f5d77f] w-12 h-12 flex items-center justify-center rounded">
-            <span className="text-[#3B3B0E] font-bold text-xl md:text-2xl">2</span>
-          </div>
+          <img
+            src="/icon/zerohunger.png"
+            alt="SDG 2 Icon"
+            className="w-12 h-12 md:w-16 md:h-16 object-contain"
+          />
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#3B3B0E]">
             Zero Hunger
           </h2>
