@@ -165,7 +165,7 @@ export default function PageGames({ fruits }) {
         >
             {/* Judul & Subjudul di luar card */}
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#3A2E17] text-center mb-6">
-                Games 1
+                Permainan NutriTree
             </h1><br></br>
             <p className="text-center text-2xl md:text-3xl font-bold text-white mb-10 bg-[#3A2E17] py-3 px-10 rounded-full shadow-lg">
                 Pilih Buah yang ingin kamu tanam
@@ -291,21 +291,6 @@ export default function PageGames({ fruits }) {
                     </p>
                 </div>
             </div>
-
-            {/* <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">
-                <img
-                    src="/icon/rumput2.png"
-                    alt="rumput kiri"
-                    className="absolute bottom-0 left-0 w-1/3 object-contain"
-                    style={{ transform: `translateX(-${offsetX}px)` }}
-                />
-                <img
-                    src="/icon/rumput1.png"
-                    alt="rumput kanan"
-                    className="absolute bottom-0 right-0 w-1/3 object-contain"
-                    style={{ transform: `translateX(${offsetX}px)` }}
-                />
-            </div> */}
         </section>
     );
 }

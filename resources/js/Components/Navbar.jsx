@@ -15,10 +15,10 @@ const Navbar = () => {
         { name: "Artikel", path: route("article") },
         { name: "Komunitas", path: route("product") },
         {
-            name: "Games",
+            name: "Permainan",
             children: [
-                { name: "Game 1", path: route("games") },
-                { name: "Game 2", path: route("gamess") },
+                { name: "NutriTree", path: route("games") },
+                { name: "NutriPlate", path: route("gamess") },
             ],
         },
     ];
