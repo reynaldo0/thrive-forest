@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\GamesController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SmartMealController;
@@ -31,11 +32,14 @@ Route::get('/about', fn() => Inertia::render('About'))->name('about');
 Route::get('/article', [ArtikelController::class, 'publicIndex'])->name('article');
 Route::get('/article/{artikel:slug}', [ArtikelController::class, 'publicShow'])->name('article.show');
 
-Route::get('/product', fn() => Inertia::render('Product'))->name('product');
+Route::post('/forum', [ForumController::class, 'store'])->name('forum.store');
+Route::post('/forum/{post}/comment', [ForumController::class, 'comment'])->name('forum.comment');
+
 Route::get('/gamess', [GamesController::class, 'gizi'])->name('gamess');
 
 Route::get('/games', [GamesController::class, 'index'])->name('games');
 Route::get('/product', [SeminarController::class, 'publicIndex'])->name('product');
+
 
 Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'store'])
     ->name('seminars.register');
@@ -66,7 +70,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     // Schools CRUD + join/leave
     Route::get('/schools', [SchoolController::class, 'index'])->name(
-        'schools.index');
+        'schools.index'
+    );
     Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store');
     Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
     Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');

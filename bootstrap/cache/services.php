@@ -37,6 +37,7 @@
     33 => 'Phiki\\Adapters\\Laravel\\PhikiServiceProvider',
     34 => 'Tighten\\Ziggy\\ZiggyServiceProvider',
     35 => 'App\\Providers\\AppServiceProvider',
+    36 => 'App\\Providers\\BroadcastServiceProvider',
   ),
   'eager' => 
   array (
@@ -60,6 +61,7 @@
     17 => 'Phiki\\Adapters\\Laravel\\PhikiServiceProvider',
     18 => 'Tighten\\Ziggy\\ZiggyServiceProvider',
     19 => 'App\\Providers\\AppServiceProvider',
+    20 => 'App\\Providers\\BroadcastServiceProvider',
   ),
   'deferred' => 
   array (

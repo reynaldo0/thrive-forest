@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,9 +18,12 @@ class SeminarController extends Controller
             'location' => $s->location,
             'description' => $s->description,
         ]);
+        
+        $posts = Post::with(['user', 'comments.user'])->latest()->get();
 
         return Inertia::render('Product', [
             'seminars' => $seminars,
+            'posts' => $posts,
         ]);
     }
 

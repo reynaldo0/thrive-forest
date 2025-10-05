@@ -9,7 +9,7 @@ import Ai from "@/Components/Ai";
 import { Head } from "@inertiajs/react";
 import KomuIntro from "./Product/Komunitas";
 
-const Product = ({seminars}) => {
+const Product = ({seminars, posts}) => {
     return (
         <div className="overflow-x-hidden">
             <Head title="Komunitas" />
@@ -17,7 +17,7 @@ const Product = ({seminars}) => {
             <HeroKomunitas />
             <KomuIntro/>
             <Seminar seminars={seminars}/>
-            <ForumKomunitas/>
+            <ForumKomunitas posts={posts}/>
             <Footer/>
             <Ai/>
         </div>
