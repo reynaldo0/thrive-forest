@@ -61,7 +61,7 @@ export default function ForumKomunitas({ posts: initialPosts }) {
                 Forum Komunitas
             </h2>
 
-            <div className="max-w-5xl w-full space-y-6 z-50">
+            <div className="max-w-5xl w-full space-y-6 z-10">
                 {/* Form Posting */}
                 <form
                     onSubmit={handleSubmit}

@@ -1,8 +1,10 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
-import { useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Stars, useGLTF } from "@react-three/drei";
+import { Suspense, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 
-function EarthSphere() {
+function EarthModel({ url }) {
+    const { scene } = useGLTF(url);
     const earthRef = useRef();
 
     // Rotasi otomatis
@@ -13,28 +15,27 @@ function EarthSphere() {
     });
 
     return (
-        <mesh ref={earthRef}>
-            <sphereGeometry args={[2, 64, 64]} />
-            <meshStandardMaterial color="royalblue" />
-        </mesh>
+        <primitive
+            ref={earthRef}
+            object={scene}
+            scale={12}
+            position={[0, 0, 0]}
+        />
     );
 }
 
 export default function Earth() {
     return (
-        <div className="w-full h-96 bg-black rounded-xl shadow-lg">
+        <div className="w-full h-96 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg">
             <Canvas camera={{ position: [0, 0, 5] }}>
-                {/* Cahaya */}
                 <ambientLight intensity={0.3} />
                 <directionalLight position={[5, 5, 5]} intensity={1} />
 
-                {/* Objek Bumi */}
-                <EarthSphere />
+                <Suspense fallback={null}>
+                    <EarthModel url="/models/earth.glb" />
+                </Suspense>
 
-                {/* Bintang-bintang */}
                 <Stars radius={300} depth={60} count={20000} factor={7} fade />
-
-                {/* Kontrol */}
                 <OrbitControls enableZoom={true} />
             </Canvas>
         </div>
