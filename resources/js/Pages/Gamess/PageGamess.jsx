@@ -124,7 +124,7 @@ export default function PageGamess({ items = [] }) {
     return (
         <section
             ref={sectionRef}
-            className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-20 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-visible"
+            className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-20 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-visible pb-60"
         >
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#3A2E17] text-center mb-6">
                 Games 2
