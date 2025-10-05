@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fruit;
+use App\Models\ItemGame;
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class GamesController extends Controller
@@ -29,6 +31,63 @@ class GamesController extends Controller
             'fruits' => $fruits,
             'points' => $user ? $user->points : 0,
             'added' => null,
+            'schools' => $schools,
+        ]);
+    }
+
+    public function addPoints(Request $request)
+    {
+        $request->validate([
+            'points' => 'required|integer|min:0',
+        ]);
+
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $pointsToAdd = (int) $request->points;
+
+        DB::transaction(function () use ($user, $pointsToAdd) {
+            // Tambahkan ke user
+            $user->increment('points', $pointsToAdd);
+
+            // Jika user tergabung dengan sekolah, tambahkan juga ke sekolah
+            if ($user->school_id) {
+                $user->school()->increment('points', $pointsToAdd);
+            }
+        });
+
+        return response()->json([
+            'message' => 'Points added successfully',
+            'points' => $user->points,
+        ]);
+    }
+
+
+    public function gizi()
+    {
+        $items = ItemGame::with('questions')->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'img' => $item->img_path ? asset('storage/' . $item->img_path) : null,
+                'questions' => $item->questions->map(function ($q) {
+                    return [
+                        'question' => $q->question,
+                        'options' => $q->options,
+                        'answer' => $q->answer,
+                    ];
+                }),
+            ];
+        });
+
+        $userPoints = Auth::user() ? Auth::user()->points : 0;
+        $schools = School::orderBy('points', 'desc')->get();
+
+        return Inertia::render('Gamess', [
+            'items' => $items,
+            'points' => $userPoints,
             'schools' => $schools,
         ]);
     }

@@ -31,14 +31,13 @@ Route::get('/article', [ArtikelController::class, 'publicIndex'])->name('article
 Route::get('/article/{artikel:slug}', [ArtikelController::class, 'publicShow'])->name('article.show');
 
 Route::get('/product', fn() => Inertia::render('Product'))->name('product');
-Route::get('/gamess', fn() => Inertia::render('Gamess'))->name('gamess');
+Route::get('/gamess', [GamesController::class, 'gizi'])->name('gamess');
 
 Route::get('/games', [GamesController::class, 'index'])->name('games');
 Route::get('/product', [SeminarController::class, 'publicIndex'])->name('product');
 
 Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'store'])
     ->name('seminars.register');
-
 
 /**
  * ROUTE ADMIN (role: admin)
@@ -111,6 +110,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // join/leave sekolah di profile
     Route::post('/profile/join-school', [SchoolController::class, 'joinSchool'])->name('profile.join-school');
     Route::post('/profile/leave-school', [SchoolController::class, 'leaveSchool'])->name('profile.leave-school');
+
+    Route::post('/gamess/add-points', [GamesController::class, 'addPoints'])->name('gamess.addPoints');
 });
 
 
