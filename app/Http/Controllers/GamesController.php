@@ -15,7 +15,7 @@ class GamesController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $schools = School::orderBy('points', 'desc')->get();
+        $schools = School::withCount('users')->orderBy('points', 'desc')->get();
 
         $fruits = Fruit::all()->map(function ($fruit) {
             return [
@@ -88,7 +88,7 @@ class GamesController extends Controller
         });
 
         $userPoints = Auth::user() ? Auth::user()->points : 0;
-        $schools = School::orderBy('points', 'desc')->get();
+        $schools = School::withCount('users')->orderBy('points', 'desc')->get();
 
         return Inertia::render('Gamess', [
             'items' => $items,

@@ -67,6 +67,9 @@ export default function Index({ schools }) {
                                         Nama Sekolah
                                     </th>
                                     <th className="px-6 py-3 text-left text-sm font-bold text-secondary-200 uppercase">
+                                        Siswa
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-sm font-bold text-secondary-200 uppercase">
                                         Poin
                                     </th>
                                     <th className="px-6 py-3 text-center text-sm font-bold text-secondary-200 uppercase">
@@ -125,6 +128,9 @@ export default function Index({ schools }) {
                                             ) : (
                                                 school.name
                                             )}
+                                        </td>
+                                        <td className="px-6 py-4 text-secondary-200 font-semibold">
+                                            {school.users_count} Siswa
                                         </td>
                                         <td className="px-6 py-4 text-secondary-200 font-semibold">
                                             {school.points} poin

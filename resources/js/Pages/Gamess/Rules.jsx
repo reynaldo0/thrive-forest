@@ -1,7 +1,7 @@
 import { Trophy } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-export default function RulesLeaderboard({schools}) {
+export default function RulesLeaderboard({ schools }) {
     const [animate, setAnimate] = useState(false);
 
     useEffect(() => {
@@ -81,6 +81,9 @@ export default function RulesLeaderboard({schools}) {
                                         Nama Sekolah
                                     </th>
                                     <th className="px-6 py-3 text-left text-sm font-bold text-secondary-200 uppercase tracking-wider">
+                                        Siswa
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-sm font-bold text-secondary-200 uppercase tracking-wider">
                                         Poin
                                     </th>
                                     <th className="px-6 py-3 text-left text-sm font-bold text-secondary-200 uppercase tracking-wider">
@@ -99,6 +102,9 @@ export default function RulesLeaderboard({schools}) {
                                         </td>
                                         <td className="px-6 py-4 text-secondary-200">
                                             {school.name}
+                                        </td>
+                                        <td className="px-6 py-4 text-secondary-200">
+                                            {school.users_count}
                                         </td>
                                         <td className="px-6 py-4 text-secondary-200 font-semibold">
                                             {school.points} poin

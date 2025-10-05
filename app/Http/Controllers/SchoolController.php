@@ -13,7 +13,7 @@ class SchoolController extends Controller
 {
     public function index()
     {
-        $schools = School::orderBy('points', 'desc')->get();
+        $schools = School::withCount('users')->orderBy('points', 'desc')->get();
 
         return Inertia::render('Dashboard/School/Index', [
             'schools' => $schools,
@@ -135,7 +135,7 @@ class SchoolController extends Controller
      */
     public function leaderboard()
     {
-        $schools = School::orderBy('points', 'desc')->get();
+        $schools = School::withCount('users')->orderBy('points', 'desc')->get();
 
         return Inertia::render('Dashboard/School/Leaderboard', [
             'schools' => $schools,
