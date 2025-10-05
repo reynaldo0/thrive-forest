@@ -6,19 +6,29 @@ export default function PageGamess({ items = [] }) {
     const { points: backendPoints = 0 } = usePage().props;
 
     const [plateItem, setPlateItem] = useState(null);
+    const [questions, setQuestions] = useState([]); // <- versi pertanyaan yang sudah diacak
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [questionLocked, setQuestionLocked] = useState(false);
     const [points, setPoints] = useState(backendPoints);
     const sectionRef = useRef(null);
+    const [offsetX, setOffsetX] = useState(0);
 
+    // Reset state saat item baru dipilih
     useEffect(() => {
-        setCurrentQuestionIndex(0);
-        setSelectedAnswer(null);
-        setQuestionLocked(false);
+        if (plateItem) {
+            const shuffledQuestions = plateItem.questions.map((q) => ({
+                ...q,
+                options: [...q.options].sort(() => Math.random() - 0.5),
+            }));
+            setQuestions(shuffledQuestions);
+            setCurrentQuestionIndex(0);
+            setSelectedAnswer(null);
+            setQuestionLocked(false);
+        }
     }, [plateItem]);
 
-    // Parallax rumput bawah
+    // Parallax rumput bawah (tidak diubah)
     useEffect(() => {
         let animationFrameId;
         let currentX = 0;
@@ -60,11 +70,7 @@ export default function PageGamess({ items = [] }) {
         const itemId = e.dataTransfer.getData("text/plain");
         const foundItem = items.find((i) => i.id.toString() === itemId);
         if (foundItem) {
-            const shuffledQuestions = foundItem.questions.map((q) => ({
-                ...q,
-                options: q.options.sort(() => Math.random() - 0.5),
-            }));
-            setPlateItem({ ...foundItem, questions: shuffledQuestions });
+            setPlateItem(foundItem);
         }
     };
 
@@ -73,7 +79,7 @@ export default function PageGamess({ items = [] }) {
         setSelectedAnswer(opt);
         setQuestionLocked(true);
 
-        const currentQuestion = plateItem?.questions?.[currentQuestionIndex];
+        const currentQuestion = questions[currentQuestionIndex];
         if (currentQuestion && opt === currentQuestion.answer) {
             const earnedPoints = 10;
             setPoints((p) => p + earnedPoints);
@@ -96,8 +102,7 @@ export default function PageGamess({ items = [] }) {
     };
 
     const handleNextQuestion = () => {
-        if (!plateItem) return;
-        if (currentQuestionIndex < plateItem.questions.length - 1) {
+        if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex((i) => i + 1);
             setSelectedAnswer(null);
             setQuestionLocked(false);
@@ -108,13 +113,13 @@ export default function PageGamess({ items = [] }) {
 
     const handleClearPlate = () => {
         setPlateItem(null);
+        setQuestions([]);
         setCurrentQuestionIndex(0);
         setSelectedAnswer(null);
         setQuestionLocked(false);
     };
 
-    const currentQuestion =
-        plateItem?.questions?.[currentQuestionIndex] ?? null;
+    const currentQuestion = questions[currentQuestionIndex] ?? null;
 
     return (
         <section
@@ -150,7 +155,7 @@ export default function PageGamess({ items = [] }) {
                             />
                             <div className="mt-3 text-xl font-bold text-green-900 text-center">
                                 {plateItem.name} ({currentQuestionIndex + 1}/
-                                {plateItem.questions.length})
+                                {questions.length})
                             </div>
                         </div>
                     ) : (
@@ -233,16 +238,8 @@ export default function PageGamess({ items = [] }) {
             <div className="bg-[#F0FCD7] border-2 border-green-200 rounded-2xl shadow-lg mt-10 px-6 py-6 w-full">
                 <div className="flex gap-6 flex-wrap justify-center">
                     {items.map((item) => {
-                        const shuffledQuestions = item.questions.map((q) => ({
-                            ...q,
-                            options: q.options.sort(() => Math.random() - 0.5),
-                        }));
-
                         const selectItem = () => {
-                            setPlateItem({
-                                ...item,
-                                questions: shuffledQuestions,
-                            });
+                            setPlateItem(item);
                         };
 
                         return (

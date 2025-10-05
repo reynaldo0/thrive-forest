@@ -1,7 +1,7 @@
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
 
-const pictures = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const pictures = ["1","2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 export const pageAtom = atom(0);
 export const pages = [
