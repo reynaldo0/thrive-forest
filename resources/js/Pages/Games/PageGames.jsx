@@ -292,8 +292,7 @@ export default function PageGames({ fruits }) {
                 </div>
             </div>
 
-            {/* Rumput Parallax */}
-            <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">
+            {/* <div className="absolute bottom-0 left-0 w-full overflow-visible pointer-events-none">
                 <img
                     src="/icon/rumput2.png"
                     alt="rumput kiri"
@@ -306,7 +305,7 @@ export default function PageGames({ fruits }) {
                     className="absolute bottom-0 right-0 w-1/3 object-contain"
                     style={{ transform: `translateX(${offsetX}px)` }}
                 />
-            </div>
+            </div> */}
         </section>
     );
 }

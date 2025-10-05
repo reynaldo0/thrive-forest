@@ -11,35 +11,39 @@ export default function TeamNutriverse() {
   const teamData = [
     {
       id: 1,
-      name: "Reynaldo",
+      name: "Reynaldo Yusellino",
       role: "Backend Developer",
-      img: "/team/team2.png",
+      img: "/team/reynaldo.jpg",
       socials: {
-        github: "https://github.com/reynaldo0", // 🔗 ganti dengan link GitHub asli
+        github: "https://github.com/reynaldo0",
         instagram: "https://www.instagram.com/rynldysllino",
         linkedin: "https://www.linkedin.com/in/reynaldo-yusellino",
       },
     },
     {
       id: 2,
-      name: "Aditya",
+      name: "Bekhyun Aditya",
       role: "UI/UX Designer",
-      img: "/team/bob.jpg",
+      img: "/team/adit.jpg",
       socials: {
         github: "https://github.com/Hzinterpol",
-        instagram: "https://www.instagram.com/bekhyunaditya_?igsh=OGVqYXJpcDJjZzdt",
-        linkedin: "https://www.linkedin.com/in/bekhyun-aditya-45786930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        instagram:
+          "https://www.instagram.com/bekhyunaditya_?igsh=OGVqYXJpcDJjZzdt",
+        linkedin:
+          "https://www.linkedin.com/in/bekhyun-aditya-45786930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       },
     },
     {
       id: 3,
-      name: "Zhafirah",
+      name: "Zhafirah Naswa N",
       role: "Frontend Developer",
-      img: "/team/team1.png",
+      img: "/team/zhafirah.jpg",
       socials: {
         github: "https://github.com/naswaaaa29",
-        instagram: "https://www.instagram.com/pirnswa?igsh=MW94a3hwYnQ1a2VxdQ==",
-        linkedin: "https://www.linkedin.com/in/zhafirah-naswa-naufariza-045771353/",
+        instagram:
+          "https://www.instagram.com/pirnswa?igsh=MW94a3hwYnQ1a2VxdQ==",
+        linkedin:
+          "https://www.linkedin.com/in/zhafirah-naswa-naufariza-045771353/",
       },
     },
   ];
@@ -70,7 +74,7 @@ export default function TeamNutriverse() {
         {teamData.map((member, i) => (
           <div
             key={member.id}
-            className="relative group bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-green-200 p-10 flex flex-col items-center transform transition-all duration-700 ease-out hover:scale-105 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
+            className="relative group bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl border border-green-200 p-10 flex flex-col items-center transform transition-all duration-700 ease-out hover:scale-105 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
             style={{
               animation: animateCards ? `fadeInUp 0.8s ease forwards` : "none",
               animationDelay: `${i * 0.3}s`,
@@ -78,14 +82,22 @@ export default function TeamNutriverse() {
             }}
           >
             {/* Foto */}
-            <div className="relative mb-6 w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-green-300 transition-all duration-500">
+            <div className="relative mb-6 w-40 h-44 md:w-48 md:h-52 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-green-300 transition-all duration-500 mt-2 bg-white flex items-center justify-center">
               <img
                 src={member.img}
                 alt={member.name}
-                className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+                className={`w-full h-full transition-transform duration-500 transform ${
+                  member.id === 1
+                    ? "object-contain group-hover:scale-[1.05]" // Reynaldonya tetap object-contain & hover zoom
+                    : "object-cover object-top group-hover:scale-[1.05]"
+                }`}
+                style={{
+                  imageRendering: "auto",
+                }}
+                loading="lazy"
               />
               {/* Overlay Glow */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
             </div>
 
             {/* Nama & Role */}

@@ -48,31 +48,31 @@ export default function Footer() {
                             {[
                                 {
                                     icon: <FaTwitter />,
-                                    href: "https://twitter.com/youraccount",
+                                    href: "https://twitter.com/",
                                 },
                                 {
                                     icon: <FaFacebookF />,
-                                    href: "https://facebook.com/yourpage",
+                                    href: "https://facebook.com/",
                                 },
                                 {
                                     icon: <FaInstagram />,
-                                    href: "https://instagram.com/youraccount",
+                                    href: "https://instagram.com/",
                                 },
                                 {
                                     icon: <FaLinkedinIn />,
-                                    href: "https://linkedin.com/in/yourprofile",
+                                    href: "https://linkedin.com/",
                                 },
                                 {
                                     icon: <FaPinterestP />,
-                                    href: "https://pinterest.com/yourpage",
+                                    href: "https://pinterest.com/",
                                 },
                                 {
                                     icon: <FaYoutube />,
-                                    href: "https://youtube.com/@yourchannel",
+                                    href: "https://youtube.com/",
                                 },
                                 {
                                     icon: <FaTiktok />,
-                                    href: "https://tiktok.com/@youraccount",
+                                    href: "https://tiktok.com/",
                                 },
                             ].map((s, i) => (
                                 <a
