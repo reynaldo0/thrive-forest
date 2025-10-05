@@ -8,6 +8,7 @@ use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\GamesController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\SmartMealController;
 use App\Http\Controllers\TebakGiziController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,10 @@ Route::get('/product', [SeminarController::class, 'publicIndex'])->name('product
 
 Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'store'])
     ->name('seminars.register');
+
+Route::get('/smart-meal', function () {
+    return Inertia::render('SmartMeal');
+})->name('smartmeal.index');
 
 /**
  * ROUTE ADMIN (role: admin)
