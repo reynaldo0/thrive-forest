@@ -2,6 +2,43 @@
 
 All notable changes of the PHPUnit 12.3 release series are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## [12.3.15] - 2025-09-28
+
+### Fixed
+
+* [#6368](https://github.com/sebastianbergmann/phpunit/issues/6368): `failOnPhpunitWarning="false"` has no effect
+
+## [12.3.14] - 2025-09-24
+
+* No changes; `phpunit.phar` rebuilt with updated dependencies
+
+## [12.3.13] - 2025-09-23
+
+* No changes; `phpunit.phar` rebuilt with updated dependencies
+
+## [12.3.12] - 2025-09-21
+
+* No changes; `phpunit.phar` rebuilt with updated dependencies
+
+## [12.3.11] - 2025-09-14
+
+### Changed
+
+* [#6366](https://github.com/sebastianbergmann/phpunit/issues/6366): Exclude `__sleep()` and `__wakeup()` from test double code generation on PHP >= 8.5
+
+## [12.3.10] - 2025-09-11
+
+### Changed
+
+* [#6353](https://github.com/sebastianbergmann/phpunit/pull/6353): Disable performance optimization for tests requiring Xdebug
+* [#6357](https://github.com/sebastianbergmann/phpunit/pull/6357): Also collect `E_DEPRECATED` issues when building the test suite
+
+## [12.3.9] - 2025-09-11
+
+### Changed
+
+* Do not use `__sleep()` method (which will be deprecated in PHP 8.5)
+
 ## [12.3.8] - 2025-09-03
 
 ### Fixed
@@ -97,6 +134,13 @@ All notable changes of the PHPUnit 12.3 release series are documented in this fi
 * [#6229](https://github.com/sebastianbergmann/phpunit/issues/6229): `Configuration::excludeTestSuite()`, use `Configuration::excludeTestSuites()` instead
 * [#6246](https://github.com/sebastianbergmann/phpunit/issues/6246): Using `#[CoversNothing]` on a test method
 
+[12.3.15]: https://github.com/sebastianbergmann/phpunit/compare/12.3.14...12.3.15
+[12.3.14]: https://github.com/sebastianbergmann/phpunit/compare/12.3.13...12.3.14
+[12.3.13]: https://github.com/sebastianbergmann/phpunit/compare/12.3.12...12.3.13
+[12.3.12]: https://github.com/sebastianbergmann/phpunit/compare/12.3.11...12.3.12
+[12.3.11]: https://github.com/sebastianbergmann/phpunit/compare/12.3.10...12.3.11
+[12.3.10]: https://github.com/sebastianbergmann/phpunit/compare/12.3.9...12.3.10
+[12.3.9]: https://github.com/sebastianbergmann/phpunit/compare/12.3.8...12.3.9
 [12.3.8]: https://github.com/sebastianbergmann/phpunit/compare/12.3.7...12.3.8
 [12.3.7]: https://github.com/sebastianbergmann/phpunit/compare/12.3.6...12.3.7
 [12.3.6]: https://github.com/sebastianbergmann/phpunit/compare/12.3.5...12.3.6

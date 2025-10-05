@@ -13,7 +13,7 @@ export default function TeamNutriverse() {
       id: 1,
       name: "Reynaldo Yusellino",
       role: "Backend Developer",
-      img: "/team/team2.png",
+      img: "/team/reynaldo.jpg",
       socials: {
         github: "https://github.com/reynaldo0",
         instagram: "https://www.instagram.com/rynldysllino",
@@ -82,15 +82,17 @@ export default function TeamNutriverse() {
             }}
           >
             {/* Foto */}
-            <div className="relative mb-6 w-40 h-44 md:w-48 md:h-52 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-green-300 transition-all duration-500 mt-2 bg-white">
+            <div className="relative mb-6 w-40 h-44 md:w-48 md:h-52 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-green-300 transition-all duration-500 mt-2 bg-white flex items-center justify-center">
               <img
                 src={member.img}
                 alt={member.name}
-                className="w-full h-full object-cover object-top transform transition-transform duration-500 group-hover:scale-[1.05]"
+                className={`w-full h-full transition-transform duration-500 transform ${
+                  member.id === 1
+                    ? "object-contain group-hover:scale-[1.05]" // Reynaldonya tetap object-contain & hover zoom
+                    : "object-cover object-top group-hover:scale-[1.05]"
+                }`}
                 style={{
-                  objectPosition: "center 20%",
-                  imageRendering: "auto", // mencegah pixel blur
-                  filter: "none", // hilangkan efek soft blur
+                  imageRendering: "auto",
                 }}
                 loading="lazy"
               />
