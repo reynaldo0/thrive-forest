@@ -14,33 +14,48 @@ import {
 } from "recharts";
 
 export default function ZeroHunger() {
-  const [progress, setProgress] = useState({ households: 0, children: 0 });
+  const [progress, setProgress] = useState({
+    kerawanan: 0,
+    undernourishment: 0,
+    fies: 0,
+  });
+
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    // Animasikan progres statistik
     setTimeout(() => {
-      setProgress({ households: 20, children: 30 });
-    }, 500);
+      setProgress({
+        kerawanan: 21.5,
+        undernourishment: 8.53,
+        fies: 4.5,
+      });
+    }, 800);
   }, []);
 
-  // Data untuk chart
-  const hungerData = [
-    { name: "Million People", value: 319 },
-    { name: "Countries", value: 67 },
-    { name: "Affected Children", value: 98 },
+  // Data produksi pangan berdasarkan artikel Badan Pangan Nasional
+  const stockData = [
+    { name: "Beras", value: 8398 },
+    { name: "Jagung Pakan", value: 3665 },
+    { name: "Gula", value: 1478 },
+    { name: "Daging Ayam", value: 283 },
+    { name: "Telur Ayam", value: 177 },
+    { name: "Daging Sapi & Kerbau", value: 68 },
   ];
 
-  const famineData = [
-    { name: "Households", value: progress.households },
-    { name: "Children", value: progress.children },
+  // Data indikator ketahanan pangan
+  const foodSecurityData = [
+    { name: "Kerawanan Pangan Akut (%)", value: progress.kerawanan },
+    { name: "Prevalensi Undernourishment (%)", value: progress.undernourishment },
+    { name: "Prevalensi FIES (Sedang/Berat) (%)", value: progress.fies },
   ];
 
-  const COLORS = ["#16a34a", "#65a30d", "#166534"];
+  const COLORS = ["#16a34a", "#65a30d", "#166534", "#3f6212", "#84cc16", "#a3e635"];
 
   return (
     <section
       ref={sectionRef}
-      className="w-full py-16 px-6 font-sans relative overflow-hidden bg-gradient-to-b from-[#fafbe9] via-[#ffe7b3] to-[#f5c16c]"
+      className="w-full py-20 px-6 font-sans relative overflow-hidden bg-gradient-to-b from-[#fafbe9] via-[#ffe7b3] to-[#f5c16c]"
     >
       {/* Background tangan */}
       <div
@@ -50,7 +65,7 @@ export default function ZeroHunger() {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "bottom center",
           backgroundSize: "cover",
-          height: "450px",
+          height: "480px",
         }}
       />
 
@@ -66,55 +81,76 @@ export default function ZeroHunger() {
             Zero Hunger
           </h2>
         </div>
-        <p className="max-w-3xl mx-auto text-gray-700 text-lg md:text-xl lg:text-2xl leading-relaxed">
-          Tujuan Pembangunan berkelanjutan (SDGs) kedua dari PBB yang bertujuan untuk{" "}
-          <span style={{ color: "#DDA73A" }}>mengakhiri kelaparan global</span> pada tahun 2030,{" "}
-          <span style={{ color: "#DDA73A" }}>mencapai ketahanan pangan</span>,{" "}
-          <span style={{ color: "#DDA73A" }}>memperbaiki gizi</span>, dan{" "}
-          <span style={{ color: "#DDA73A" }}>pertanian yang berkelanjutan</span>.
+        <p className="max-w-4xl mx-auto text-gray-700 text-lg md:text-xl lg:text-2xl leading-relaxed">
+          Pemerintah Indonesia melalui{" "}
+          <span className="text-[#DDA73A] font-semibold">Badan Pangan Nasional (NFA)</span> terus
+          memperkuat ketahanan pangan nasional dalam rangka mewujudkan{" "}
+          <span className="text-[#DDA73A] font-semibold">Zero Hunger</span> pada tahun 2030. Data
+          terbaru menunjukkan tren positif dalam penyediaan pangan pokok dan penurunan prevalensi
+          kerawanan pangan di Indonesia.
         </p>
       </div>
 
-      {/* Stat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto relative z-10">
-        {/* Hunger stat */}
+      {/* Grid utama */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-7xl mx-auto relative z-10">
+        {/* Produksi dan stok pangan nasional */}
         <div className="bg-white rounded-3xl shadow-lg p-8 relative">
-          <h3 className="bg-[#3B3B0E] text-white px-6 py-3 rounded-t-xl absolute -top-7 left-1/2 -translate-x-1/2 font-semibold text-lg md:text-xl lg:text-2xl">
-            Statistik Kelaparan
+          <h3 className="bg-[#3B3B0E] text-white px-6 py-3 rounded-t-xl absolute -top-7 left-1/2 -translate-x-1/2 font-semibold text-xl md:text-2xl">
+            Proyeksi Stok Pangan Pokok Nasional 2024
           </h3>
 
-          <div className="grid grid-cols-3 text-center gap-4 mt-8">
-            <div>
-              <p className="text-4xl md:text-5xl font-extrabold text-green-700">{hungerData[0].value}</p>
-              <p className="text-sm md:text-base mt-1 text-gray-600">{hungerData[0].name}</p>
-            </div>
-            <div>
-              <p className="text-3xl md:text-4xl font-bold text-green-600">{hungerData[1].value}</p>
-              <p className="text-sm md:text-base mt-1 text-gray-600">{hungerData[1].name}</p>
-            </div>
-            <div>
-              <p className="text-3xl md:text-4xl font-bold text-green-800">{hungerData[2].value}</p>
-              <p className="text-sm md:text-base mt-1 text-gray-600">{hungerData[2].name}</p>
-            </div>
+          <div className="mt-10 w-full h-72 md:h-96">
+            <ResponsiveContainer>
+              <BarChart
+                data={stockData}
+                margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" tick={{ fontSize: 14 }} />
+                <YAxis
+                  tick={{ fontSize: 14 }}
+                  label={{
+                    value: "Juta Ton",
+                    angle: -90,
+                    position: "insideLeft",
+                    fontSize: 14,
+                  }}
+                />
+                <Tooltip wrapperStyle={{ fontSize: "14px" }} />
+                <Legend wrapperStyle={{ fontSize: "14px" }} />
+                <Bar dataKey="value" fill="#65a30d" barSize={40}>
+                  {stockData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
           </div>
+          <p className="mt-4 text-sm text-gray-600 text-center italic">
+            Sumber: Badan Pangan Nasional, 2024 – Stok akhir pangan pokok strategis Indonesia.
+          </p>
+        </div>
 
-          {/* Pie Chart */}
-          <div className="mt-10 w-full h-64 md:h-80 lg:h-96">
+        {/* Indikator ketahanan pangan */}
+        <div className="bg-white rounded-3xl shadow-lg p-8 relative">
+          <h3 className="bg-[#3B3B0E] text-white px-6 py-3 rounded-t-xl absolute -top-7 left-1/2 -translate-x-1/2 font-semibold text-xl md:text-2xl">
+            Indikator Ketahanan & Kerawanan Pangan 2023
+          </h3>
+
+          <div className="mt-10 w-full h-72 md:h-96">
             <ResponsiveContainer>
               <PieChart>
                 <Pie
-                  data={hungerData}
+                  data={foodSecurityData}
                   cx="50%"
                   cy="50%"
-                  outerRadius={90}
+                  outerRadius={100}
                   dataKey="value"
-                  label={{ fontSize: 14, fill: "#3B3B0E" }}
+                  label={({ name, value }) => `${name}: ${value}%`}
+                  labelLine={true}
                 >
-                  {hungerData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
+                  {foodSecurityData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip wrapperStyle={{ fontSize: "14px" }} />
@@ -122,34 +158,32 @@ export default function ZeroHunger() {
               </PieChart>
             </ResponsiveContainer>
           </div>
+          <p className="mt-4 text-sm text-gray-600 text-center italic">
+            Sumber: NFA & FAO, 2023 – Penurunan prevalensi kerawanan pangan di Indonesia.
+          </p>
         </div>
+      </div>
 
-        {/* Definition of famine */}
-        <div className="bg-white rounded-3xl shadow-lg p-8 relative">
-          <h3 className="bg-[#3B3B0E] text-white px-6 py-3 rounded-t-xl absolute -top-7 left-1/2 -translate-x-1/2 font-semibold text-lg md:text-xl lg:text-2xl">
-            Definisi Kelaparan
-          </h3>
+      {/* Penjelasan & Link Artikel */}
+      <div className="max-w-5xl mx-auto mt-14 text-center z-10 relative">
+        <p className="text-gray-800 text-lg leading-relaxed">
+          Pada tahun 2023, Indonesia berhasil menurunkan{" "}
+          <strong>Prevalence of Undernourishment (PoU)</strong> menjadi{" "}
+          <span className="text-[#166534] font-semibold">8,53%</span> dan{" "}
+          <strong>Prevalence of Food Insecurity (FIES)</strong> menjadi{" "}
+          <span className="text-[#166534] font-semibold">4,5%</span>, turun hampir setengahnya dari
+          tahun 2017 yang masih 8,66%. Selain itu, daerah dengan status{" "}
+          <strong>rawan pangan</strong> juga menurun dari 74 menjadi 62 kabupaten/kota.
+        </p>
 
-          <div className="mt-10 w-full h-64 md:h-80 lg:h-96">
-            <ResponsiveContainer>
-              <BarChart
-                data={famineData}
-                layout="vertical"
-                margin={{ top: 10, right: 30, left: 30, bottom: 10 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 14 }} />
-                <YAxis type="category" dataKey="name" tick={{ fontSize: 14 }} />
-                <Tooltip wrapperStyle={{ fontSize: "14px" }} />
-                <Legend wrapperStyle={{ fontSize: "14px" }} />
-                <Bar dataKey="value" fill="#16a34a" barSize={30}>
-                  <Cell fill="#16a34a" />
-                  <Cell fill="#166534" />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+        <a
+          href="https://badanpangan.go.id/blog/post/dukung-atasi-zero-hunger-badan-pangan-nasional-perkuat-ketersediaan-pangan-pokok-strategis"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-8 px-8 py-4 bg-[#88A825] text-white font-semibold rounded-full shadow-md hover:bg-[#6e881f] transition-all duration-300"
+        >
+          Baca Artikel Lengkap di Situs Resmi NFA →
+        </a>
       </div>
     </section>
   );

@@ -67,7 +67,10 @@ export default function Tujuan() {
                         </span>
                     </h2>
                     <p className="text-gray-700 md:text-2xl text-justify text-center md:px-10 leading-relaxed">
-                        Nutriverse menjawab tantangan{" "}
+                        <span className="text-[#AF3E3E] font-semibold">
+                            1 dari 9 orang di dunia masih kekurangan gizi.
+                        </span>{" "}
+                        Oleh karena itu, Nutriverse hadir untuk menjawab tantangan{" "}
                         <span className="text-[#90C444] font-semibold">
                             "Zero Hunger"
                         </span>{" "}
