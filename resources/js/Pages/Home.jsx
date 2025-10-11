@@ -4,8 +4,8 @@ import Navbar from "@/Components/Navbar";
 import { Head } from "@inertiajs/react";
 import FiturWebsite from "./Home/Fitur";
 import HeroHome from "./Home/Hero";
-import Form from "./Home/Form";
 import NutiIntro from "./Home/Nuti";
+import Form from "./Home/Form";
 import TujuanSection from "./Home/Tujuan";
 
 const Home = () => {

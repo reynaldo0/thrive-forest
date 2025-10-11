@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Sprout } from "lucide-react"; 
 
 export default function ProdukUnggul() {
     const products = [
@@ -325,9 +326,10 @@ export default function ProdukUnggul() {
                                 <p className="text-lg text-gray-700 mb-3">
                                     {simulationResult.desc}
                                 </p>
-                                <p className="text-[#507A1C] font-semibold text-xl">
-                                    🌾 {simulationResult.impact}
-                                </p>
+                                <div className="flex items-center gap-3 text-[#507A1C] font-semibold text-xl">
+                                    <Sprout className="w-6 h-6 text-[#88A825]" />
+                                    <span>{simulationResult.impact}</span>
+                                </div>
                             </div>
                         )}
 
@@ -345,7 +347,7 @@ export default function ProdukUnggul() {
                             Kembali ke Produk
                         </button>
                     </div>
-                )}
+                )}  
             </div>
         </section>
     );

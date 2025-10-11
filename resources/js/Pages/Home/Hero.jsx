@@ -8,8 +8,18 @@ export default function HeroHome() {
         const handleScroll = () => setOffsetY(window.scrollY);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-    const sunTranslate = offsetY * 0.5;
+            }, []);
+            const sunTranslate = offsetY * 0.5;
+            const handleClick = () => {
+            setClicked(true);
+            // ✅ Scroll halus ke bagian NutiIntro
+            const nutiSection = document.getElementById("nuti-section");
+            if (nutiSection) {
+                setTimeout(() => {
+                    nutiSection.scrollIntoView({ behavior: "smooth" });
+                }, 300);
+            }
+        };
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#90C444] to-[#FCFFEC]">
@@ -36,10 +46,10 @@ export default function HeroHome() {
                     NUTRIVERS
                 </h1>
                 <p className="mt-4 text-gray-600 max-w-2xl z-20 font-nunito font-bold pt-2 md:pt-5 text-xl md:text-4xl text-white md:pb-10">
-                    TIngkatkan literasi kamu dengan pemanfaatan tumbuhan
+                    Tingkatkan literasi kamu dengan pemanfaatan tumbuhan
                 </p>
                 <button
-                    onClick={() => setClicked(true)}
+                    onClick={handleClick}
                     className={`mt-6 px-8 md:px-14 py-4 md:py-6 rounded-full shadow-md transition z-20 text-2xl md:text-4xl font-nunito font-extrabold 
                         ${
                             clicked

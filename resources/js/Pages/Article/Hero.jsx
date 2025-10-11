@@ -35,7 +35,7 @@ export default function HeroArticle() {
                     ARTIKEL
                 </h1>
                 <p className="mt-4 text-gray-600 max-w-2xl z-20 font-nunito font-bold pt-2 md:pt-5 text-xl md:text-4xl text-white md:pb-10">
-                    TIngkatkan literasi kamu dengan pemanfaatan tumbuhan
+                    Tingkatkan literasi kamu dengan pemanfaatan tumbuhan
                 </p>
 
                 {/* Ilustrasi utama */}

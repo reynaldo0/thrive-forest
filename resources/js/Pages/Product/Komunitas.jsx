@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
-import { Link } from "@inertiajs/react";
 
 export default function KomuIntro() {
     const [animateText, setAnimateText] = useState(false);
     const [animateImage, setAnimateImage] = useState(false);
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         setTimeout(() => setAnimateText(true), 200);
         setTimeout(() => setAnimateImage(true), 600);
     }, []);
+
+    // ✅ Fungsi scroll halus ke bagian forum komunitas
+    const handleScrollToForum = () => {
+        setClicked(true);
+        const forumSection = document.getElementById("forum-komunitas");
+        if (forumSection) {
+            setTimeout(() => {
+                forumSection.scrollIntoView({ behavior: "smooth" });
+            }, 300);
+        }
+    };
 
     return (
         <>
@@ -17,11 +28,11 @@ export default function KomuIntro() {
                 <div className="absolute inset-0 pointer-events-none">
                     {/* Gambar background */}
                     <div
-                        className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center blur-sm"
+                        className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center blur-sm pointer-events-none"
                         style={{ backgroundAttachment: "fixed" }}
                     />
                     {/* Overlay putih transparan */}
-                    <div className="absolute inset-0 bg-white/20 backdrop-blur-sm" />
+                    <div className="absolute inset-0 bg-white/20 backdrop-blur-sm pointer-events-none" />
                 </div>
 
                 {/* Judul */}
@@ -83,12 +94,17 @@ export default function KomuIntro() {
                 </div>
 
                 {/* Tombol menuju forum */}
-                <a
-                    href="#forum-komunitas"
-                    className="mt-10 bg-[#A6E272] text-[#224C14] font-semibold py-4 px-10 md:py-5 md:px-16 text-xl md:text-2xl rounded-full hover:bg-[#94D45E] transition relative z-10"
+                <button
+                    onClick={handleScrollToForum}
+                    className={`mt-10 py-4 px-10 md:py-5 md:px-16 text-xl md:text-2xl rounded-full font-semibold transition relative z-10
+                        ${
+                            clicked
+                                ? "bg-[#90C444] text-white scale-95"
+                                : "bg-[#A6E272] text-[#224C14] hover:bg-[#94D45E]"
+                        }`}
                 >
                     Menuju Komunitas
-                </a>
+                </button>
 
                 {/* Style Animasi Custom */}
                 <style jsx>{`
