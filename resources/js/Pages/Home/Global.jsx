@@ -44,7 +44,39 @@ export default function GlobalHunger() {
     }, 800);
   }, []);
 
-  const COLORS = ["#166534", "#84cc16", "#a3e635", "#65a30d", "#3f6212", "#bef264"];
+  const COLORS = ["#166534", "#84cc16", "#a3e635", "#65a30d", "#3f6212", "#bef264", "#d9f99d"];
+
+  // Ambil value terakhir untuk Tren GHI Indonesia
+  const latestGHI = progress.ghiTrend.length > 0 ? progress.ghiTrend[progress.ghiTrend.length - 1].value : 0;
+
+  // Ambil value Indonesia dari data ASEAN
+  const indonesiaGHI =
+    progress.ghiASEAN.length > 0
+      ? progress.ghiASEAN.find((c) => c.country === "Indonesia")?.value
+      : 0;
+
+  // Custom legend untuk PieChart
+  const renderCustomLegend = (props) => {
+    const { payload } = props;
+    return (
+      <ul className="flex flex-wrap justify-center gap-4 mt-4">
+        {payload.map((entry, index) => (
+          <li key={`item-${index}`} className="flex items-center gap-2 text-sm md:text-base">
+            <span
+              style={{
+                display: "inline-block",
+                width: 14,
+                height: 14,
+                backgroundColor: entry.color,
+              }}
+              className="rounded-sm"
+            />
+            {entry.payload.country}: {entry.payload.value}
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   return (
     <section
@@ -75,7 +107,7 @@ export default function GlobalHunger() {
             <span className="text-[#DDA73A] font-semibold">Global Hunger Index (GHI) 2022</span>,
             Indonesia menempati peringkat{" "}
             <span className="font-bold text-[#166534]">77 dari 121 negara</span> dengan skor{" "}
-            <span className="text-[#DDA73A] font-semibold">17,9</span>, menunjukkan tingkat kelaparan{" "}
+            <span className="text-[#DDA73A] font-semibold">{indonesiaGHI}</span>, menunjukkan tingkat kelaparan{" "}
             <span className="italic">“moderate”</span>. Meskipun ada kemajuan signifikan, langkah
             menuju{" "}
             <span className="text-[#DDA73A] font-semibold">Zero Hunger (SDG 2)</span> masih
@@ -158,7 +190,7 @@ export default function GlobalHunger() {
                     ))}
                   </Pie>
                   <Tooltip contentStyle={{ fontSize: "14px" }} />
-                  <Legend wrapperStyle={{ fontSize: "14px" }} />
+                  <Legend content={renderCustomLegend} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -178,7 +210,7 @@ export default function GlobalHunger() {
         >
           <p className="text-gray-800 text-lg leading-relaxed">
             Dengan skor{" "}
-            <span className="text-[#166534] font-semibold">17,9</span>, Indonesia berada di level{" "}
+            <span className="text-[#166534] font-semibold">{latestGHI}</span>, Indonesia berada di level{" "}
             <strong>kelaparan sedang</strong>, namun menunjukkan peningkatan yang nyata dibandingkan
             dua dekade terakhir. Tantangan seperti <strong>stunting</strong> dan{" "}
             <strong>kekurangan gizi</strong> masih perlu diatasi untuk mewujudkan{" "}
