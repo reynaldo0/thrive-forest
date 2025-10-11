@@ -39,6 +39,7 @@ export default function ProdukUnggul() {
     const [showDetail, setShowDetail] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
+    // --- SIMULASI BARU ---
     const [showSimulation, setShowSimulation] = useState(false);
     const [selectedMethod, setSelectedMethod] = useState("");
     const [simulationResult, setSimulationResult] = useState(null);
@@ -107,6 +108,7 @@ export default function ProdukUnggul() {
 
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center w-full px-6 pt-24 pb-16 bg-[#FCFFEC] overflow-hidden">
+            {/* Background */}
             <div
                 className="absolute inset-0 bg-[url('/background/heroartikel.png')] opacity-50 bg-no-repeat bg-cover bg-top"
                 style={{ backgroundAttachment: "fixed", zIndex: 0 }}
@@ -117,6 +119,7 @@ export default function ProdukUnggul() {
                     Produk Unggul
                 </h2>
 
+                {/* Garis indikator */}
                 <div className="relative flex items-center justify-center w-full max-w-3xl mb-12">
                     <div className="absolute w-full h-1 bg-[#3B3B0E] rounded"></div>
                     <div className="flex w-full justify-between relative z-10 px-4">
@@ -138,6 +141,7 @@ export default function ProdukUnggul() {
                     </div>
                 </div>
 
+                {/* Carousel Produk */}
                 <div className="relative w-full max-w-5xl overflow-hidden">
                     <div
                         className="flex transition-transform duration-700 ease-out"
@@ -184,6 +188,7 @@ export default function ProdukUnggul() {
                         ))}
                     </div>
 
+                    {/* Tombol Navigasi */}
                     <button
                         onClick={handlePrev}
                         disabled={currentIndex === 0}
@@ -226,6 +231,7 @@ export default function ProdukUnggul() {
                     </button>
                 </div>
 
+                {/* Konten Detail */}
                 {showDetail && selectedProduct && (
                     <div className="mt-12 max-w-4xl w-full bg-[#F6FFE5] rounded-3xl shadow-xl p-10 flex flex-col md:flex-row items-center gap-8">
                         <div className="flex-1 text-left">
@@ -263,6 +269,7 @@ export default function ProdukUnggul() {
                     </div>
                 )}
 
+                {/* --- SIMULASI PANEL --- */}
                 {showSimulation && (
                     <div className="mt-16 w-full max-w-3xl bg-[#F5FFE8] rounded-3xl shadow-xl p-10 text-center border border-[#BFE3A2]">
                         <h3 className="text-3xl font-bold text-[#3B3B0E] mb-6">
@@ -273,6 +280,7 @@ export default function ProdukUnggul() {
                             kontribusinya terhadap ketahanan pangan global.
                         </p>
 
+                        {/* Pilihan Metode */}
                         <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-center mb-8">
                             {Object.keys(simulationData).map((method) => (
                                 <button
@@ -289,6 +297,7 @@ export default function ProdukUnggul() {
                             ))}
                         </div>
 
+                        {/* Tombol Mulai */}
                         <button
                             onClick={startSimulation}
                             disabled={!selectedMethod}
@@ -297,6 +306,7 @@ export default function ProdukUnggul() {
                             Mulai Simulasi
                         </button>
 
+                        {/* Progress */}
                         {progress > 0 && (
                             <div className="w-full bg-gray-200 rounded-full h-6 mt-8">
                                 <div
@@ -306,6 +316,7 @@ export default function ProdukUnggul() {
                             </div>
                         )}
 
+                        {/* Hasil Simulasi */}
                         {simulationResult && (
                             <div className="mt-10 bg-white p-6 rounded-2xl shadow-inner text-left">
                                 <h4 className="text-2xl font-bold text-[#3B3B0E] mb-3">
@@ -315,14 +326,16 @@ export default function ProdukUnggul() {
                                     {simulationResult.desc}
                                 </p>
                                 <p className="text-[#507A1C] font-semibold text-xl">
-                                    {simulationResult.impact}
+                                    🌾 {simulationResult.impact}
                                 </p>
                             </div>
                         )}
 
+                        {/* Tombol Kembali */}
                         <button
                             onClick={() => {
                                 setShowSimulation(false);
+                                setShowDetail(true);
                                 setSelectedMethod("");
                                 setSimulationResult(null);
                                 setProgress(0);
