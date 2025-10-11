@@ -2,6 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+    ShoppingCart,
+    Sprout,
+    Zap,
+    Flower2,
+    Package,
+    Leaf,
+    CirclePlus,
+    Flame,
+    Gift,
+    Star,
+} from "lucide-react";
 
 export default function PageGames({
     fruits,
@@ -32,8 +44,8 @@ export default function PageGames({
         })
     );
 
-    const [buttonDisabled, setButtonDisabled] = useState({}); // track tombol disable sementara
-    const ENERGY_REGEN_INTERVAL = 3 * 60 * 60 * 1000; // 3 jam
+    const [buttonDisabled, setButtonDisabled] = useState({});
+    const ENERGY_REGEN_INTERVAL = 3 * 60 * 60 * 1000; 
     const MAX_ENERGY = maxEnergy;
 
     const growthStages = [
@@ -43,7 +55,6 @@ export default function PageGames({
         "Siap Panen: Umbi matang, kaya beta-karoten, vitamin (A, C, K, B6), serat & mineral.",
     ];
 
-    // --- Load dan regenerasi energi ---
     useEffect(() => {
         const now = Date.now();
         const lastEnergy = localStorage.getItem("lastEnergyTime")
@@ -70,22 +81,26 @@ export default function PageGames({
         }, 60 * 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [MAX_ENERGY]);
 
     const updateEnergyUsage = () => {
         const now = Date.now();
         localStorage.setItem("lastEnergyTime", now.toString());
     };
 
-    // --- SHOP handler ---
     const buyItem = async (item) => {
         try {
             const { data } = await axios.post("/shop/buy", { item });
             toast.success(data.message || "Berhasil membeli!");
-            setTotalPoints(data.points);
-            setCurrentEnergy(data.energy);
+            if (typeof data.points !== "undefined") setTotalPoints(data.points);
+            if (typeof data.energy !== "undefined") setCurrentEnergy(data.energy);
 
-            if (item === "fertilizer") setHasFertilizer(true);
+            if (item === "fertilizer") {
+                setHasFertilizer(true);
+            }
+            if (item === "boots_pupuk" || item === "fertilizer_boost") {
+                setHasFertilizer(true);
+            }
             if (item === "pot") {
                 setPlots((prev) => [
                     ...prev,
@@ -100,7 +115,6 @@ export default function PageGames({
         }
     };
 
-    // --- fungsi tanam ---
     const plantFruit = async (fruit) => {
         const emptyIndex = plots.findIndex((p) => !p.fruit);
         if (emptyIndex === -1) {
@@ -153,7 +167,7 @@ export default function PageGames({
                 fruit: data.plant.fruit,
             };
             setPlots(newPlots);
-            setCurrentEnergy((prev) => prev - 1);
+            setCurrentEnergy((prev) => Math.max(0, prev - 1));
             updateEnergyUsage();
 
             const stageIndex = data.plant.stage;
@@ -168,7 +182,6 @@ export default function PageGames({
         }
     };
 
-    // --- fungsi panen ---
     const harvestFruit = async (index) => {
         if (currentEnergy <= 0) {
             toast.warning("Energi habis! Tunggu 3 jam untuk penuh ⚡");
@@ -182,7 +195,7 @@ export default function PageGames({
                 ...prev,
                 [`harvest${index}`]: false,
             }));
-        }, 1000); // 1 detik delay
+        }, 1000); 
 
         const plant = plots[index];
         if (!plant?.id || plant.stage !== 4) return;
@@ -191,30 +204,26 @@ export default function PageGames({
             const { data } = await axios.post("/plants/harvest", {
                 plant_id: plant.id,
             });
-            setTotalPoints(data.points);
+            if (typeof data.points !== "undefined") setTotalPoints(data.points);
             setLastHarvest({
                 name: data.fruit.name,
                 points: data.fruit.points,
             });
-            setInventory(data.inventory);
+            if (data.inventory) setInventory(data.inventory);
 
             const newPlots = [...plots];
             newPlots[index] = { fruit: null, stage: 0 };
             setPlots(newPlots);
-            setCurrentEnergy((prev) => prev - 1);
+            setCurrentEnergy((prev) => Math.max(0, prev - 1));
             updateEnergyUsage();
 
-            toast.success(
-                `Panen ${data.fruit.name}! +${data.fruit.points} poin`
-            );
+            toast.success(`Panen ${data.fruit.name}! +${data.fruit.points} poin`);
         } catch (err) {
             toast.error(err.response?.data?.error || "Gagal panen");
         }
     };
 
-    // --- fungsi donasi dengan reward & animasi ---
     const [donation, setDonation] = useState(() => {
-        // Ambil dari localStorage jika ada, default 0
         return parseInt(localStorage.getItem("donation") || "0");
     });
     const donateFruit = async () => {
@@ -226,13 +235,14 @@ export default function PageGames({
         try {
             const { data } = await axios.post("/donate");
 
-            setInventory(data.inventory);
+            if (data.inventory) setInventory(data.inventory);
             setDonation((prev) => {
                 const newDonation = prev + 1;
-                localStorage.setItem("donation", newDonation); // simpan di localStorage
+                localStorage.setItem("donation", newDonation); 
                 return newDonation;
             });
-            setGlobalDonation(data.totalDonated);
+            if (typeof data.totalDonated !== "undefined")
+                setGlobalDonation(data.totalDonated);
 
             toast.success(data.success || "Buahmu berhasil didonasikan! 🎉");
         } catch (err) {
@@ -240,7 +250,6 @@ export default function PageGames({
         }
     };
 
-    // --- render gambar tahap tanaman ---
     const renderStageImage = (plot) => {
         if (!plot.fruit)
             return (
@@ -250,7 +259,10 @@ export default function PageGames({
                     className="w-16 h-16"
                 />
             );
-        const stageIndex = Math.min(plot.stage, plot.fruit.stages.length - 1);
+        const stageIndex = Math.min(
+            Math.max(plot.stage, 0),
+            plot.fruit.stages.length - 1
+        );
         const stageImg = plot.fruit.stages[stageIndex];
         return (
             <img
@@ -276,7 +288,6 @@ export default function PageGames({
             </p>
 
             <div className="bg-[#F1FFE2] md:mb-32 rounded-3xl shadow-2xl border-2 border-green-200 p-6 sm:p-10 md:p-16 flex flex-col gap-6 sm:gap-10 max-w-6xl w-full z-10">
-                {/* Pilih Buah */}
                 <div className="flex justify-center gap-4 sm:gap-8 flex-wrap mb-6 sm:mb-10">
                     {fruits.map((fruit) => (
                         <button
@@ -293,11 +304,8 @@ export default function PageGames({
                     ))}
                 </div>
 
-                {/* Lahan dan Inventori */}
                 <div className="flex flex-col md:flex-row gap-6 md:gap-8 w-full">
-                    {/* Inventori + Shop */}
                     <div className="p-4 sm:p-8 rounded-2xl shadow-md flex-1 bg-white/60 backdrop-blur-md border border-white/20">
-                        {/* Inventori */}
                         <p className="font-bold text-xl sm:text-2xl text-[#3A2E17] mb-3 sm:mb-4">
                             Inventori kamu
                         </p>
@@ -338,7 +346,6 @@ export default function PageGames({
                             Donasikan
                         </button>
 
-                        {/* Shop */}
                         <div className="mt-4 sm:mt-6">
                             <p className="font-bold text-lg sm:text-xl text-[#3A2E17] mb-2">
                                 🛒 Toko
@@ -346,32 +353,85 @@ export default function PageGames({
                             <div className="grid grid-cols-2 gap-2 sm:gap-3">
                                 <button
                                     onClick={() => buyItem("fertilizer")}
-                                    className="bg-yellow-200 px-2 py-1 rounded hover:bg-yellow-300 text-sm sm:text-base"
+                                    className="bg-yellow-200 px-2 py-1 rounded hover:bg-yellow-300 text-sm sm:text-base shadow-sm border border-yellow-300"
                                 >
-                                    Beli Fertilizer (50 poin)
+                                    Beli Pupuk Biasa (50 poin)
                                 </button>
                                 <button
-                                    onClick={() => buyItem("boots_pupuk")}
-                                    className="bg-orange-200 px-2 py-1 rounded hover:bg-orange-300 text-sm sm:text-base"
+                                    onClick={() =>
+                                        buyItem("boots_pupuk") 
+                                    }
+                                    className="bg-orange-200 px-2 py-1 rounded hover:bg-orange-300 text-sm sm:text-base shadow-sm border border-orange-300"
                                 >
-                                    Beli Fertilizer Boost (75 poin)
+                                    Beli Pupuk Super (75 poin)
                                 </button>
                                 <button
                                     onClick={() => buyItem("pot")}
-                                    className="bg-green-200 px-2 py-1 rounded hover:bg-green-300 text-sm sm:text-base"
+                                    className="bg-green-200 px-2 py-1 rounded hover:bg-green-300 text-sm sm:text-base shadow-sm border border-green-300"
                                 >
-                                    Beli Pot (100 poin)
+                                    Beli Pot Tambahan (100 poin)
                                 </button>
                                 <button
                                     onClick={() => buyItem("energy")}
-                                    className="bg-blue-200 px-2 py-1 rounded hover:bg-blue-300 text-sm sm:text-base"
+                                    className="bg-blue-200 px-2 py-1 rounded hover:bg-blue-300 text-sm sm:text-base shadow-sm border border-blue-300"
                                 >
                                     Beli Energi +5 (20 poin)
                                 </button>
                             </div>
-                        </div>
 
-                        {/* Total Poin + Energy */}
+                        <div className="mt-4 sm:mt-6 bg-[#F9FFE8] border border-green-200 rounded-2xl shadow-inner p-4 sm:p-6 text-[#3A2E17]">
+                            <p className="font-bold text-lg sm:text-xl mb-3 text-center">
+                                Keterangan Item Toko
+                            </p>
+                            <ul className="space-y-3 text-sm sm:text-base leading-relaxed">
+                                <li className="flex items-start gap-3">
+                                    <Sprout className="text-green-700 w-5 h-5 mt-1" />
+                                    <div>
+                                        <div className="font-semibold">
+                                            Beli Pupuk Biasa
+                                        </div>
+                                        <div className="text-sm text-gray-700">
+                                            Memberikan tambahan<b>+2 tahapan pertumbuhan tanaman.</b>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Flame className="text-orange-700 w-5 h-5 mt-1" />
+                                    <div>
+                                        <div className="font-semibold">
+                                            Beli Pupuk Super
+                                        </div>
+                                        <div className="text-sm text-gray-700">
+                                            Memberikan tambahan <b>+3 tahapan pertumbuhan tanaman.</b>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Flower2 className="text-green-600 w-5 h-5 mt-1" />
+                                    <div>
+                                        <div className="font-semibold">
+                                            Beli Pot Tambahan
+                                        </div>
+                                        <div className="text-sm text-gray-700">
+                                            Menambah kapasitas lahan tanam sebanyak<b>+2 petak.</b>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Zap className="text-blue-600 w-5 h-5 mt-1" />
+                                    <div>
+                                        <div className="font-semibold">
+                                            Beli Energi
+                                        </div>
+                                        <div className="text-sm text-gray-700">
+                                            Menambah <b>+5 poin Energi</b> setiap pembelian.
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                         <div className="bg-yellow-100 mt-4 sm:mt-6 rounded-2xl shadow-md flex flex-col items-center px-4 sm:px-8 py-3 sm:py-6">
                             <p className="font-bold text-lg sm:text-xl text-[#3A2E17]">
                                 Total Poin Kamu
@@ -398,7 +458,6 @@ export default function PageGames({
                         </div>
                     </div>
 
-                    {/* Lahan */}
                     <div className="p-4 sm:p-8 rounded-2xl shadow-md flex-1 bg-white/60 backdrop-blur-md border border-white/20">
                         <p className="font-bold text-xl sm:text-2xl text-[#3A2E17] mb-4">
                             Lahan Tanam
@@ -448,7 +507,6 @@ export default function PageGames({
                     </div>
                 </div>
 
-                {/* Donasi & Poin */}
                 <div className="bg-white rounded-2xl shadow-md flex flex-col sm:flex-row items-center justify-between px-6 sm:px-8 py-4 w-full mt-4 sm:mt-6 gap-2 sm:gap-0">
                     <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
                         <p className="font-bold text-lg sm:text-xl text-[#3A2E17]">
