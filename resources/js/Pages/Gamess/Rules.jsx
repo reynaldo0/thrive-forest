@@ -10,7 +10,11 @@ export default function RulesLeaderboard({ schools }) {
 
     return (
         <section className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-16 pb-12 relative bg-[#F7FDEB]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-14 max-w-6xl w-full">
+            <div
+                className="absolute inset-0 bg-[url('/background/herohome.png')] bg-cover bg-center opacity-50"
+                style={{ backgroundAttachment: "fixed" }}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-14 max-w-6xl w-full z-10">
                 {/* Bagian Cara Main */}
                 <div
                     className={`bg-[#F4FFE2] rounded-3xl shadow-lg p-8 md:p-10 transition-all duration-700 ease-out ${

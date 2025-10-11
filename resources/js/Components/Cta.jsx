@@ -4,7 +4,7 @@ const Cta = () => {
     return (
         <>
             <div className="relative">
-                <div className="absolute -bottom-2 w-full">
+                <div className="absolute md:-bottom-2 w-full">
                     <img
                         src="/background/footer.png"
                         className="w-full h-full object-cover"

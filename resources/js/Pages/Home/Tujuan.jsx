@@ -48,7 +48,7 @@ export default function Tujuan() {
             <section className="w-full min-h-[120vh] bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] flex flex-col md:flex-row items-center justify-center gap-12 py-16 relative overflow-visible px-4 md:px-16">
                 <div className="absolute inset-0">
                     <div
-                        className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center blur-sm"
+                        className="absolute inset-0 bg-[url('/background/herohome.png')] bg-cover bg-center blur-sm"
                         style={{ backgroundAttachment: "fixed" }}
                     />
                     <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
@@ -96,7 +96,7 @@ export default function Tujuan() {
                         </span>{" "}
                         melalui proses tertentu. Dengan cara ini, Nutriverse
                         berkontribusi pada peningkatan kuantitas dan kualitas
-                        hasil pertanian serta pengurangan kelaparan, sekaligus 
+                        hasil pertanian serta pengurangan kelaparan, sekaligus
                         memperkuat ketahanan pangan nasional.
                     </p>
                 </div>

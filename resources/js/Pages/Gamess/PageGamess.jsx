@@ -133,6 +133,10 @@ export default function PageGamess({ items = [] }) {
             ref={sectionRef}
             className="min-h-screen flex flex-col items-center justify-center w-full px-6 pt-20 pb-32 relative bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] overflow-visible pb-60"
         >
+            <div
+                className="absolute inset-0 blur bg-[url('/background/herohome.png')] bg-cover bg-center opacity-50"
+                style={{ backgroundAttachment: "fixed" }}
+            />
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#3A2E17] text-center mb-6">
                 Permainan NutriPlate
             </h1>
@@ -141,10 +145,10 @@ export default function PageGamess({ items = [] }) {
             </p>
 
             {/* Card Game */}
-            <div className="bg-[#F0FCD7] rounded-3xl shadow-2xl border-2 border-green-200 p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 max-w-6xl w-full">
+            <div className="bg-[#F0FCD7] rounded-3xl shadow-2xl border-2 border-green-200 p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 max-w-6xl w-full z-10">
                 {/* Piring */}
                 <div
-                    className="relative w-64 h-64 flex items-center justify-center"
+                    className="relative w-64 h-64 flex items-center justify-center z-10"
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={handleDrop}
                 >
@@ -174,7 +178,7 @@ export default function PageGamess({ items = [] }) {
                 </div>
 
                 {/* Soal */}
-                <div className="flex-1 w-full">
+                <div className="flex-1 w-full z-10">
                     {plateItem && currentQuestion ? (
                         <div className="bg-white p-8 rounded-2xl shadow-md w-full">
                             <p className="text-gray-900 mb-6 text-2xl font-semibold">
@@ -242,7 +246,7 @@ export default function PageGamess({ items = [] }) {
             </div>
 
             {/* Daftar Buah/Sayur */}
-            <div className="bg-[#F0FCD7] border-2 border-green-200 rounded-2xl shadow-lg mt-10 px-6 py-6 w-full">
+            <div className="bg-[#F0FCD7] border-2 border-green-200 rounded-2xl shadow-lg mt-10 px-6 py-6 w-full z-10">
                 <div className="flex gap-6 flex-wrap justify-center">
                     {items.map((item) => {
                         const selectItem = () => {

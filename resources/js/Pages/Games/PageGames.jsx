@@ -264,6 +264,10 @@ export default function PageGames({
     return (
         <section className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-[#FCFFEC] via-[#C4E196] to-[#90C444] px-4 sm:px-6 py-10 md:py-16 relative overflow-hidden">
             <ToastContainer position="bottom-left" autoClose={2000} />
+            <div
+                className="absolute blur inset-0 bg-[url('/background/herohome.png')] bg-cover bg-center opacity-50"
+                style={{ backgroundAttachment: "fixed" }}
+            />
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#3A2E17] text-center mb-6">
                 Permainan NutriTree
             </h1>
@@ -271,7 +275,7 @@ export default function PageGames({
                 Pilih Buah yang ingin kamu tanam
             </p>
 
-            <div className="bg-[#F1FFE2] rounded-3xl shadow-2xl border-2 border-green-200 p-6 sm:p-10 md:p-16 flex flex-col gap-6 sm:gap-10 max-w-6xl w-full">
+            <div className="bg-[#F1FFE2] md:mb-32 rounded-3xl shadow-2xl border-2 border-green-200 p-6 sm:p-10 md:p-16 flex flex-col gap-6 sm:gap-10 max-w-6xl w-full z-10">
                 {/* Pilih Buah */}
                 <div className="flex justify-center gap-4 sm:gap-8 flex-wrap mb-6 sm:mb-10">
                     {fruits.map((fruit) => (

@@ -53,7 +53,7 @@ export default function Seminar({ seminars }) {
             {/* Background */}
             <div className="absolute inset-0">
                 <div
-                    className="absolute inset-0 bg-[url('/background/heroartikel.png')] bg-cover bg-center blur-sm"
+                    className="absolute inset-0 bg-[url('/background/herokomunitas.png')] bg-cover bg-center blur-sm"
                     style={{ backgroundAttachment: "fixed" }}
                 />
                 <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
