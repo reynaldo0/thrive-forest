@@ -5143,6 +5143,7 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         'ParaTest\\Options' => __DIR__ . '/..' . '/brianium/paratest/src/Options.php',
         'ParaTest\\ParaTestCommand' => __DIR__ . '/..' . '/brianium/paratest/src/ParaTestCommand.php',
         'ParaTest\\RunnerInterface' => __DIR__ . '/..' . '/brianium/paratest/src/RunnerInterface.php',
+        'ParaTest\\TestDox\\TestDoxResultsMerger' => __DIR__ . '/..' . '/brianium/paratest/src/TestDox/TestDoxResultsMerger.php',
         'ParaTest\\Util\\PhpstormHelper' => __DIR__ . '/..' . '/brianium/paratest/src/Util/PhpstormHelper.php',
         'ParaTest\\WrapperRunner\\ApplicationForWrapperWorker' => __DIR__ . '/..' . '/brianium/paratest/src/WrapperRunner/ApplicationForWrapperWorker.php',
         'ParaTest\\WrapperRunner\\ProgressPrinterOutput' => __DIR__ . '/..' . '/brianium/paratest/src/WrapperRunner/ProgressPrinterOutput.php',

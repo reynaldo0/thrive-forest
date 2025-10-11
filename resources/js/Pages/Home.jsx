@@ -5,6 +5,7 @@ import { Head } from "@inertiajs/react";
 import FiturWebsite from "./Home/Fitur";
 import HeroHome from "./Home/Hero";
 import NutiIntro from "./Home/Nuti";
+import GlobalHunger from "./Home/Global";
 import Form from "./Home/Form";
 import TujuanSection from "./Home/Tujuan";
 
@@ -15,6 +16,7 @@ const Home = () => {
             <Navbar />
             <HeroHome />
             <NutiIntro/>
+            <GlobalHunger/>
             <TujuanSection/>
             <FiturWebsite/>
             <Form/>

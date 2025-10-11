@@ -67,28 +67,37 @@ export default function Tujuan() {
                         </span>
                     </h2>
                     <p className="text-gray-700 md:text-2xl text-justify text-center md:px-10 leading-relaxed">
+                        Mengingat Indonesia masih berada pada tingkat kelaparan{" "}
                         <span className="text-[#AF3E3E] font-semibold">
-                            1 dari 9 orang di dunia masih kekurangan gizi.
+                            "Sedang"
                         </span>{" "}
-                        Oleh karena itu, Nutriverse hadir untuk menjawab tantangan{" "}
+                        dengan skor{" "}
+                        <span className="text-[#AF3E3E] font-semibold">
+                            17,9
+                        </span>{" "}
+                        berdasarkan Global Hunger Index (GHI) 2022.{""}
+                        {" "}
+                        Maka, Nutriverse hadir untuk mendukung pencapaian tujuan{" "}
+                        {""}
                         <span className="text-[#90C444] font-semibold">
                             "Zero Hunger"
-                        </span>{" "}
-                        dengan memberikan pengetahuan mengenai{" "}
+                        </span>.{" "}
+                        Platform ini memberikan pengetahuan mengenai{" "}
                         <span className="text-[#90C444] font-semibold">
-                            "Sintetis"
+                            bioteknologi sintetis
                         </span>{" "}
-                        kepada siswa-siswa untuk{" "}
+                        kepada siswa, sehingga mereka dapat{" "}
                         <span className="text-[#90C444] font-semibold">
                             mengembangkan
                         </span>{" "}
-                        berbagai jenis tanaman{" "}
+                        berbagai jenis{" "}
                         <span className="text-[#90C444] font-semibold">
-                            unggulan
+                            tanaman unggulan
                         </span>{" "}
-                        dengan proses tertentu sehingga menghasilkan berbagai
-                        jenis tanaman dan hewan yang memiliki kuantitas dan
-                        kualitas yang unggulan.
+                        melalui proses tertentu. Dengan cara ini, Nutriverse
+                        berkontribusi pada peningkatan kuantitas dan kualitas
+                        hasil pertanian serta pengurangan kelaparan, sekaligus 
+                        memperkuat ketahanan pangan nasional.
                     </p>
                 </div>
             </section>

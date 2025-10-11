@@ -4512,6 +4512,7 @@ return array(
     'ParaTest\\Options' => $vendorDir . '/brianium/paratest/src/Options.php',
     'ParaTest\\ParaTestCommand' => $vendorDir . '/brianium/paratest/src/ParaTestCommand.php',
     'ParaTest\\RunnerInterface' => $vendorDir . '/brianium/paratest/src/RunnerInterface.php',
+    'ParaTest\\TestDox\\TestDoxResultsMerger' => $vendorDir . '/brianium/paratest/src/TestDox/TestDoxResultsMerger.php',
     'ParaTest\\Util\\PhpstormHelper' => $vendorDir . '/brianium/paratest/src/Util/PhpstormHelper.php',
     'ParaTest\\WrapperRunner\\ApplicationForWrapperWorker' => $vendorDir . '/brianium/paratest/src/WrapperRunner/ApplicationForWrapperWorker.php',
     'ParaTest\\WrapperRunner\\ProgressPrinterOutput' => $vendorDir . '/brianium/paratest/src/WrapperRunner/ProgressPrinterOutput.php',
