@@ -6,7 +6,7 @@ export default function PageGamess({ items = [] }) {
     const { points: backendPoints = 0 } = usePage().props;
 
     const [plateItem, setPlateItem] = useState(null);
-    const [questions, setQuestions] = useState([]); // <- versi pertanyaan yang sudah diacak
+    const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [questionLocked, setQuestionLocked] = useState(false);
@@ -14,7 +14,17 @@ export default function PageGamess({ items = [] }) {
     const sectionRef = useRef(null);
     const [offsetX, setOffsetX] = useState(0);
 
-    // Reset state saat item baru dipilih
+    // 🔊 Refs untuk sound effect
+    const correctSoundRef = useRef(null);
+    const wrongSoundRef = useRef(null);
+
+    useEffect(() => {
+        // Preload audio
+        correctSoundRef.current = new Audio("/sounds/benar.mp3");
+        wrongSoundRef.current = new Audio("/sounds/salah.mp3");
+    }, []);
+
+    // Reset saat item baru dipilih
     useEffect(() => {
         if (plateItem) {
             const shuffledQuestions = plateItem.questions.map((q) => ({
@@ -28,7 +38,7 @@ export default function PageGamess({ items = [] }) {
         }
     }, [plateItem]);
 
-    // Parallax rumput bawah (tidak diubah)
+    // Parallax rumput bawah
     useEffect(() => {
         let animationFrameId;
         let currentX = 0;
@@ -85,9 +95,15 @@ export default function PageGamess({ items = [] }) {
         let pointsChange = 0;
 
         if (opt === currentQuestion.answer) {
-            pointsChange = 5; // benar
+            pointsChange = 5;
+            // 🔊 Mainkan suara benar
+            correctSoundRef.current.currentTime = 0;
+            correctSoundRef.current.play();
         } else {
-            pointsChange = -2; // salah
+            pointsChange = -2;
+            // 🔊 Mainkan suara salah
+            wrongSoundRef.current.currentTime = 0;
+            wrongSoundRef.current.play();
         }
 
         setPoints((p) => p + pointsChange);
@@ -258,7 +274,7 @@ export default function PageGamess({ items = [] }) {
                                 key={item.id}
                                 draggable
                                 onDragStart={(e) => handleDragStart(e, item.id)}
-                                onClick={selectItem} // klik juga memilih item
+                                onClick={selectItem}
                                 className="w-24 h-24 bg-white rounded-2xl shadow-md hover:scale-110 flex items-center justify-center cursor-pointer border border-green-200 transition-transform duration-200"
                             >
                                 <img
