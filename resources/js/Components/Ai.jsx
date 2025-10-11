@@ -22,7 +22,6 @@ export default function Ai() {
 
     return (
         <>
-            <Head title="AI Smart Meal" />
 
             {/* Floating Maskot + Popup */}
             <div className="fixed bottom-4 right-4 z-50">

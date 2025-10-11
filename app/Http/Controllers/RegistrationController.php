@@ -18,6 +18,6 @@ class RegistrationController extends Controller
 
         Registration::create($request->all());
 
-        return response()->json(['success' => true, 'message' => 'Pendaftaran berhasil!']);
+        return back()->with(['success' => true, 'message' => 'Pendaftaran berhasil!']);
     }
 }

@@ -4,23 +4,24 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Save, X } from "lucide-react";
 
 export default function Index({ users }) {
-    const { data, setData, post, put } = useForm({ name: "", email: "" });
+    const { data, setData, post, put } = useForm({
+        name: "",
+        email: "",
+        role: "user",
+    });
     const [editingId, setEditingId] = useState(null);
 
-    // Tambah user
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("users.store"));
     };
 
-    // Update user
     const handleUpdate = (e, userId) => {
         e.preventDefault();
         put(route("users.update", userId));
         setEditingId(null);
     };
 
-    // Delete user
     const handleDelete = (userId) => {
         if (confirm("Apakah kamu yakin ingin menghapus user ini?")) {
             router.delete(route("users.destroy", userId));
@@ -30,7 +31,6 @@ export default function Index({ users }) {
     return (
         <AuthenticatedLayout>
             <Head title="Users" />
-
             <div className="p-4 md:p-8 space-y-8">
                 {/* Form Tambah User */}
                 <h1 className="text-3xl font-bold text-[#3B3B0E]">
@@ -52,6 +52,15 @@ export default function Index({ users }) {
                             onChange={(e) => setData("email", e.target.value)}
                             className="w-full px-4 py-2 rounded-xl border border-primary-100 shadow-sm focus:ring-2 focus:ring-primary-100 focus:outline-none transition"
                         />
+                        <select
+                            value={data.role}
+                            onChange={(e) => setData("role", e.target.value)}
+                            className="w-full px-4 py-2 rounded-xl border border-primary-100 shadow-sm focus:ring-2 focus:ring-primary-100 focus:outline-none transition"
+                        >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+
                         <button
                             type="submit"
                             className="w-full bg-secondary-200 hover:bg-secondary-200/90 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition transform"
@@ -79,6 +88,9 @@ export default function Index({ users }) {
                                     <th className="px-6 py-3 text-left text-sm font-bold text-secondary-200 uppercase">
                                         Email
                                     </th>
+                                    <th className="px-6 py-3 text-left text-sm font-bold text-secondary-200 uppercase">
+                                        Role
+                                    </th>
                                     <th className="px-6 py-3 text-center text-sm font-bold text-secondary-200 uppercase">
                                         Aksi
                                     </th>
@@ -90,54 +102,85 @@ export default function Index({ users }) {
                                         key={user.id}
                                         className="hover:bg-green-50 transition transform hover:scale-[1.01]"
                                     >
-                                        <td className="px-6 py-4 text-secondary-200 font-bold">
+                                        <td className="px-6 py-4 font-bold">
                                             {i + 1}
                                         </td>
-                                        <td className="px-6 py-4 text-secondary-200">
+                                        <td className="px-6 py-4">
                                             {editingId === user.id ? (
-                                                <form
-                                                    onSubmit={(e) =>
-                                                        handleUpdate(e, user.id)
+                                                <input
+                                                    type="text"
+                                                    value={data.name}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "name",
+                                                            e.target.value
+                                                        )
                                                     }
-                                                    className="flex gap-2"
+                                                    className="px-2 py-1 border rounded-lg"
+                                                />
+                                            ) : (
+                                                user.name
+                                            )}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {user.email}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {editingId === user.id ? (
+                                                <select
+                                                    value={data.role}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "role",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    className="px-2 py-1 border rounded-lg"
                                                 >
-                                                    <input
-                                                        type="text"
-                                                        value={data.name}
-                                                        onChange={(e) =>
-                                                            setData(
-                                                                "name",
-                                                                e.target.value
+                                                    <option value="user">
+                                                        User
+                                                    </option>
+                                                    <option value="admin">
+                                                        Admin
+                                                    </option>
+                                                    <option value="teacher">
+                                                        Guru
+                                                    </option>
+                                                    <option value="student">
+                                                        Siswa
+                                                    </option>
+                                                </select>
+                                            ) : (
+                                                <span className="capitalize font-semibold text-secondary-200">
+                                                    {user.role}
+                                                </span>
+                                            )}
+                                        </td>
+                                        <td className="px-6 py-4 text-center space-x-2">
+                                            {editingId === user.id ? (
+                                                <>
+                                                    <button
+                                                        onClick={(e) =>
+                                                            handleUpdate(
+                                                                e,
+                                                                user.id
                                                             )
                                                         }
-                                                        className="px-2 py-1 border rounded-lg"
-                                                    />
-                                                    <button
-                                                        type="submit"
-                                                        className="bg-blue-600 text-white px-3 py-1 rounded-lg flex items-center gap-1 hover:bg-blue-700 transition"
+                                                        className="bg-blue-600 text-white px-3 py-1 rounded-lg"
                                                     >
                                                         <Save size={16} />{" "}
                                                         Simpan
                                                     </button>
                                                     <button
-                                                        type="button"
                                                         onClick={() =>
                                                             setEditingId(null)
                                                         }
-                                                        className="bg-gray-400 text-white px-3 py-1 rounded-lg flex items-center gap-1 hover:bg-gray-500 transition"
+                                                        className="bg-gray-400 text-white px-3 py-1 rounded-lg"
                                                     >
                                                         <X size={16} /> Batal
                                                     </button>
-                                                </form>
+                                                </>
                                             ) : (
-                                                user.name
-                                            )}
-                                        </td>
-                                        <td className="px-6 py-4 text-secondary-200 font-semibold">
-                                            {user.email}
-                                        </td>
-                                        <td className="px-6 py-4 text-center space-x-2">
-                                            {editingId !== user.id && (
                                                 <>
                                                     <button
                                                         onClick={() => {
@@ -151,6 +194,10 @@ export default function Index({ users }) {
                                                             setData(
                                                                 "email",
                                                                 user.email
+                                                            );
+                                                            setData(
+                                                                "role",
+                                                                user.role
                                                             );
                                                         }}
                                                         className="bg-yellow-400 text-white px-3 py-1 rounded-lg"
@@ -189,9 +236,12 @@ export default function Index({ users }) {
                                     {user.name}
                                 </span>
                                 <span className="text-gray-500 font-semibold">
-                                    {user.email}
+                                    {user.role}
                                 </span>
                             </div>
+                            <span className="text-gray-600 text-sm block">
+                                {user.email}
+                            </span>
 
                             {editingId === user.id ? (
                                 <form
@@ -214,6 +264,19 @@ export default function Index({ users }) {
                                         }
                                         className="px-2 py-1 border rounded-lg w-full"
                                     />
+                                    <select
+                                        value={data.role}
+                                        onChange={(e) =>
+                                            setData("role", e.target.value)
+                                        }
+                                        className="px-2 py-1 border rounded-lg w-full"
+                                    >
+                                        <option value="user">User</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="teacher">Guru</option>
+                                        <option value="student">Siswa</option>
+                                    </select>
+
                                     <div className="flex gap-2 justify-end">
                                         <button
                                             type="submit"
@@ -237,6 +300,7 @@ export default function Index({ users }) {
                                             setEditingId(user.id);
                                             setData("name", user.name);
                                             setData("email", user.email);
+                                            setData("role", user.role);
                                         }}
                                         className="bg-yellow-400 text-white px-3 py-1 rounded-lg w-full text-center"
                                     >

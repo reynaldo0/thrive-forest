@@ -54,6 +54,17 @@ export default function RulesLeaderboard({ schools }) {
                             </span>
                             .
                         </li>
+                        <li>
+                            Ketika sudah menjadi produk, pengguna dapat menekan{" "}
+                            <span className="text-green-600 font-semibold">
+                                tombol donasi
+                            </span>{" "}
+                            untuk mendonasikan buah dan mendapatkan{" "}
+                            <span className="text-green-600 font-semibold">
+                                poin
+                            </span>
+                            .
+                        </li>
                     </ol>
                 </div>
 

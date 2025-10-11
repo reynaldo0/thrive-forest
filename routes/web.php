@@ -42,7 +42,7 @@ Route::post('/forum/{post}/comment', [ForumController::class, 'comment'])->name(
 Route::get('/gamess', [GamesController::class, 'gizi'])->name('gamess');
 
 Route::get('/games', [GamesController::class, 'index'])->name('games');
-Route::get('/product', [SeminarController::class, 'publicIndex'])->name('product');
+Route::get('/komunitas', [SeminarController::class, 'publicIndex'])->name('product');
 
 
 Route::post('/seminars/{seminar}/register', [RegistrationController::class, 'store'])

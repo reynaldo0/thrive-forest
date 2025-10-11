@@ -22,6 +22,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'role' => 'required|string|max:50',
         ]);
 
         User::create($validated);
@@ -29,18 +30,12 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User berhasil dibuat.');
     }
 
-    public function edit(User $user)
-    {
-        return Inertia::render('Users/Edit', [
-            'user' => $user,
-        ]);
-    }
-
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'role' => 'required|string|max:50',
         ]);
 
         $user->update($validated);

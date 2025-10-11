@@ -156,7 +156,7 @@ const Navbar = () => {
                                 <Link
                                     key={item.name}
                                     href={item.path}
-                                    className="px-5 py-2 rounded-full bg-secondary-200 text-white font-bold text-lg shadow-md hover:bg-primary-200/90 transition duration-300"
+                                    className="px-5 py-2 rounded-full bg-secondary-200 text-white font-bold text-lg shadow-md hover:bg-secondary-200/90 transition duration-300"
                                 >
                                     {item.name}
                                 </Link>
@@ -164,7 +164,7 @@ const Navbar = () => {
                                 <Link
                                     key={item.name}
                                     href={item.path}
-                                    className="px-5 py-2 rounded-full border-2 border-primary-200 text-primary-200 font-bold text-lg hover:bg-primary-200 hover:text-white transition duration-300"
+                                    className="px-5 py-2 rounded-full border-2 border-secondary-200 text-secondary-200 font-bold text-lg hover:bg-secondary-200 hover:text-white transition duration-300"
                                 >
                                     {item.name}
                                 </Link>

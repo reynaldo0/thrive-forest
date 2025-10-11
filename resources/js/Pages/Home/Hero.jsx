@@ -50,11 +50,11 @@ export default function HeroHome() {
                 </p>
                 <button
                     onClick={handleClick}
-                    className={`mt-6 px-8 md:px-14 py-4 md:py-6 rounded-full shadow-md transition z-20 text-2xl md:text-4xl font-nunito font-extrabold 
+                    className={`mt-6 px-8 md:px-14 py-4 md:py-6 rounded-full shadow-md transition z-20 text-2xl md:text-4xl font-nunito font-extrabold
                         ${
                             clicked
                                 ? "bg-[#90C444] text-white"
-                                : "bg-[#EDFFCD] text-[#3F3313] hover:bg-[#90C444] hover:text-white"
+                                : "bg-[#EDFFCD] text-[#3F3313] hover:bg-secondary-200 hover:text-white"
                         }
                     `}
                 >

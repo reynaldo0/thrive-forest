@@ -20,19 +20,29 @@ export default function SmartMeal() {
                 }`,
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         contents: [
                             {
                                 parts: [
                                     {
-                                        text: `Buat rencana menu harian sehat dengan bahan: ${ingredients}, budget Rp${budget}.
-- Gunakan heading (###) untuk setiap waktu makan.
-- Gunakan tabel markdown dengan kolom: Menu, Kandungan Gizi, Estimasi Biaya.
-- Buat ringkas, informatif, jelas, tidak bertele-tele.
-- Tidak perlu catatan tambahan.`,
+                                        text: `
+Kamu adalah asisten gizi sekolah bernama **NutriSmart**.
+
+Tugasmu: buatkan rencana menu harian sehat dan hemat untuk siswa dengan bahan: ${ingredients}.
+Budget harian: Rp${budget}.
+
+### Petunjuk penting:
+- Buat 3 bagian: **Sarapan**, **Makan Siang**, **Makan Malam**.
+- Setiap bagian tampilkan dalam bentuk tabel markdown:
+  | Menu | Kandungan Gizi Utama | Estimasi Biaya | Manfaat Singkat |
+  |------|------------------------|----------------|----------------|
+- Gunakan bahan yang disebutkan.
+- Biaya total tidak melebihi budget.
+- Tambahkan di akhir: "**💡 Tips Sehat Hari Ini**" (1 kalimat edukatif untuk siswa).
+- Gunakan bahasa sederhana, ramah, dan edukatif.
+- Tidak perlu catatan tambahan lain.
+                                        `,
                                     },
                                 ],
                             },
@@ -45,11 +55,12 @@ export default function SmartMeal() {
             const text =
                 data?.candidates?.[0]?.content?.parts?.[0]?.text ||
                 "Tidak ada respon dari AI";
-
             setResult(text);
         } catch (err) {
             console.error("Error:", err);
-            setResult("❌ Gagal memanggil AI");
+            setResult(
+                "❌ Gagal memanggil AI. Pastikan koneksi dan API key benar."
+            );
         } finally {
             setLoading(false);
         }
@@ -62,8 +73,8 @@ export default function SmartMeal() {
                 NutriSmart
             </h1>
             <p className="text-center text-base md:text-lg text-[#3B3B0E] mb-8 max-w-2xl">
-                Masukkan bahan yang tersedia dan budget harian, lalu dapatkan
-                rekomendasi menu sehat, bergizi, dan hemat biaya.
+                Bantu siswa merencanakan menu sehat, hemat, dan bergizi setiap
+                hari. Cukup masukkan bahan yang tersedia dan budget harianmu!
             </p>
 
             {/* Form Input */}
@@ -73,11 +84,11 @@ export default function SmartMeal() {
             >
                 <div className="flex flex-col">
                     <label className="font-semibold text-sm md:text-base mb-1">
-                        Bahan
+                        Bahan yang Tersedia
                     </label>
                     <input
                         type="text"
-                        placeholder="Contoh: beras, telur, sayur"
+                        placeholder="Contoh: nasi, telur, bayam, tahu"
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                         className="border border-green-300 rounded-lg p-3 text-base focus:ring-2 focus:ring-green-400 outline-none"
@@ -90,7 +101,7 @@ export default function SmartMeal() {
                     </label>
                     <input
                         type="number"
-                        placeholder="Contoh: 20000"
+                        placeholder="Contoh: 15000"
                         value={budget}
                         onChange={(e) => setBudget(e.target.value)}
                         className="border border-green-300 rounded-lg p-3 text-base focus:ring-2 focus:ring-green-400 outline-none"
@@ -102,7 +113,7 @@ export default function SmartMeal() {
                     disabled={loading}
                     className="bg-[#A6E272] hover:bg-[#94D45E] active:scale-95 transition px-5 py-3 rounded-xl font-semibold text-[#224C14] text-base shadow"
                 >
-                    {loading ? "Menghasilkan..." : "Generate Menu"}
+                    {loading ? "Menghasilkan..." : "Buatkan Menu Sehat"}
                 </button>
             </form>
 
@@ -110,7 +121,7 @@ export default function SmartMeal() {
             {result && (
                 <div className="mt-8 bg-white/90 rounded-2xl shadow-md border border-green-200 p-6 md:p-8 max-w-2xl w-full">
                     <h2 className="text-2xl md:text-3xl font-bold text-[#3B3B0E] mb-5 text-center">
-                        Rencana Menu Harian
+                        📋 Rencana Menu Harianmu
                     </h2>
                     <div className="prose max-w-none prose-green text-base md:text-lg">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
