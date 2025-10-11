@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Fruit;
 
@@ -10,19 +11,55 @@ class FruitSeeder extends Seeder
 {
     public function run(): void
     {
-        // Pastikan folder tujuan ada
-        Storage::makeDirectory('public/fruits/stages');
+        $sourceDir = public_path('gameicon');
+        $targetDir = storage_path('app/public/fruits/stages'); // 👈 gunakan path fisik langsung
 
+        echo "🔍 Mengecek folder sumber: {$sourceDir}\n";
+
+        // 1️⃣ Pastikan folder sumber ada
+        if (!File::isDirectory($sourceDir)) {
+            echo "❌ Folder sumber {$sourceDir} tidak ditemukan.\n";
+            return;
+        }
+
+        // 2️⃣ Pastikan folder tujuan ada (dibuat secara fisik)
+        if (!File::isDirectory($targetDir)) {
+            File::makeDirectory($targetDir, 0755, true);
+            echo "📁 Folder tujuan '{$targetDir}' dibuat.\n";
+        } else {
+            echo "📁 Folder tujuan '{$targetDir}' sudah ada.\n";
+        }
+
+        // 3️⃣ Ambil semua file PNG di folder sumber
+        $files = File::files($sourceDir);
+
+        if (empty($files)) {
+            echo "⚠️ Tidak ada file di folder {$sourceDir}\n";
+        }
+
+        foreach ($files as $file) {
+            $filename = $file->getFilename();
+            $targetPath = $targetDir . '/' . $filename;
+
+            if (!File::exists($targetPath)) {
+                File::copy($file->getPathname(), $targetPath);
+                echo "✅ Menyalin {$filename} ke {$targetPath}\n";
+            } else {
+                echo "ℹ️ File {$filename} sudah ada, dilewati.\n";
+            }
+        }
+
+        // 4️⃣ Buah-buahan (contoh data)
         $fruits = [
             [
                 'name' => 'Jeruk',
                 'img' => 'gameicon/jeruk.png',
                 'stages' => [
-                    'gameicon/tanah1.png',
-                    'gameicon/bibit_jeruk.png',
-                    'gameicon/tunas_jeruk.png',
-                    'gameicon/pohon_jeruk.png',
-                    'gameicon/pohonbesar_jeruk.png',
+                    'tanah1.png',
+                    'bibit_jeruk.png',
+                    'tunas_jeruk.png',
+                    'pohon_jeruk.png',
+                    'pohonbesar_jeruk.png',
                 ],
                 'points' => 100,
             ],
@@ -30,44 +67,31 @@ class FruitSeeder extends Seeder
                 'name' => 'Wortel',
                 'img' => 'gameicon/wortel.png',
                 'stages' => [
-                    'gameicon/tanah1.png',
-                    'gameicon/bibit_wortel.png',
-                    'gameicon/tunas_wortel.png',
-                    'gameicon/pohon_wortel.png',
-                    'gameicon/pohonbesar_wortel.png',
+                    'tanah1.png',
+                    'bibit_wortel.png',
+                    'tunas_wortel.png',
+                    'pohon_wortel.png',
+                    'pohonbesar_wortel.png',
                 ],
                 'points' => 100,
             ],
         ];
 
+        // 5️⃣ Simpan ke database
         foreach ($fruits as $fruitData) {
-            $newStages = [];
-
-            foreach ($fruitData['stages'] as $path) {
-                $filename = basename($path);
-                $targetPath = 'public/fruits/stages/' . $filename;
-
-                // cek dulu kalau belum ada, baru salin
-                if (!Storage::exists($targetPath)) {
-                    $sourcePath = public_path($path);
-
-                    if (file_exists($sourcePath)) {
-                        Storage::put($targetPath, file_get_contents($sourcePath));
-                    }
-                }
-
-                // Simpan path publik baru
-                $newStages[] = 'storage/fruits/stages/' . $filename;
-            }
+            $stages = array_map(fn($f) => 'storage/fruits/stages/' . $f, $fruitData['stages']);
 
             Fruit::updateOrCreate(
                 ['name' => $fruitData['name']],
                 [
                     'img' => $fruitData['img'],
-                    'stages' => ($newStages),
+                    'stages' => $stages,
                     'points' => $fruitData['points'],
                 ]
             );
         }
+
+        echo "🎉 Seeder selesai dijalankan.\n";
+        echo "🔗 Jangan lupa jalankan: php artisan storage:link\n";
     }
 }
