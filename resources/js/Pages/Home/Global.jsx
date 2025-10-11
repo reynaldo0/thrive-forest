@@ -45,17 +45,13 @@ export default function GlobalHunger() {
   }, []);
 
   const COLORS = ["#166534", "#84cc16", "#a3e635", "#65a30d", "#3f6212", "#bef264", "#d9f99d"];
-
-  // Ambil value terakhir untuk Tren GHI Indonesia
   const latestGHI = progress.ghiTrend.length > 0 ? progress.ghiTrend[progress.ghiTrend.length - 1].value : 0;
 
-  // Ambil value Indonesia dari data ASEAN
   const indonesiaGHI =
     progress.ghiASEAN.length > 0
       ? progress.ghiASEAN.find((c) => c.country === "Indonesia")?.value
       : 0;
 
-  // Custom legend untuk PieChart
   const renderCustomLegend = (props) => {
     const { payload } = props;
     return (
@@ -83,15 +79,12 @@ export default function GlobalHunger() {
       ref={sectionRef}
       className="w-full min-h-screen relative py-24 px-6 font-sans overflow-hidden bg-[#FCFFEC] pb-11"
     >
-      {/* === BACKGROUND === */}
       <div
         className="absolute inset-0 bg-[url('/background/herohome.png')] bg-cover bg-center opacity-50"
         style={{ backgroundAttachment: "fixed" }}
       />
 
-      {/* === KONTEN UTAMA === */}
       <div className="relative z-10">
-        {/* === HEADING === */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -115,9 +108,7 @@ export default function GlobalHunger() {
           </p>
         </motion.div>
 
-        {/* === CHART GRID === */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
-          {/* === TREN GHI === */}
           <motion.div
             whileHover={{ scale: 1.03 }}
             initial={{ opacity: 0, y: 40 }}
@@ -160,7 +151,6 @@ export default function GlobalHunger() {
             </p>
           </motion.div>
 
-          {/* === PERBANDINGAN ASEAN === */}
           <motion.div
             whileHover={{ scale: 1.03 }}
             initial={{ opacity: 0, y: 40 }}
@@ -201,7 +191,6 @@ export default function GlobalHunger() {
           </motion.div>
         </div>
 
-        {/* === RINGKASAN === */}
         <motion.div
           className="max-w-4xl mx-auto mt-16 text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -217,14 +206,6 @@ export default function GlobalHunger() {
             <span className="text-[#DDA73A] font-semibold">Zero Hunger 2030</span>.
           </p>
 
-          <a
-            href="https://www.cnbcindonesia.com/research/20230127075927-128-408649/kudu-berbenah-tingkat-kelaparan-ri-masih-urutan-77-dunia"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-10 px-10 py-4 bg-[#88A825] text-white font-semibold rounded-full shadow-md hover:bg-[#6e881f] transition-all duration-300 hover:shadow-lg"
-          >
-            Baca Artikel Lengkap CNBC Indonesia →
-          </a>
         </motion.div>
       </div>
     </section>

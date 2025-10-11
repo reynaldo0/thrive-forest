@@ -59,7 +59,7 @@ export default function ZeroHunger() {
     >
       {/* Background tangan */}
       <div
-        className="absolute bottom-0 left-0 w-full z-0"
+        className="absolute bottom-0 left-0 w-full z-0 brightness-90 saturate-125 contrast-110"
         style={{
           backgroundImage: `url(/background/bg-tangan.png)`,
           backgroundRepeat: "no-repeat",
@@ -68,6 +68,7 @@ export default function ZeroHunger() {
           height: "480px",
         }}
       />
+      <div className="absolute bottom-0 left-0 w-full h-[480px] bg-gradient-to-t from-[#fafbe9]/30 via-[#fafbe9]/35 to-transparent backdrop-blur-[2px] z-[1]" />
 
       {/* Judul */}
       <div className="relative text-center mb-12 z-10">
@@ -175,15 +176,6 @@ export default function ZeroHunger() {
           tahun 2017 yang masih 8,66%. Selain itu, daerah dengan status{" "}
           <strong>rawan pangan</strong> juga menurun dari 74 menjadi 62 kabupaten/kota.
         </p>
-
-        <a
-          href="https://badanpangan.go.id/blog/post/dukung-atasi-zero-hunger-badan-pangan-nasional-perkuat-ketersediaan-pangan-pokok-strategis"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-8 px-8 py-4 bg-[#88A825] text-white font-semibold rounded-full shadow-md hover:bg-[#6e881f] transition-all duration-300"
-        >
-          Baca Artikel Lengkap di Situs Resmi NFA →
-        </a>
       </div>
     </section>
   );

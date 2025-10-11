@@ -180,6 +180,22 @@ export default function Footer() {
                         >
                             BBC
                         </a>
+                        <a
+                            href="https://www.cnbcindonesia.com/research/20230127075927-128-408649/kudu-berbenah-tingkat-kelaparan-ri-masih-urutan-77-dunia"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-yellow-200 transition"
+                        >
+                            CNBC Indonesia
+                        </a>
+                        <a
+                            href="https://badanpangan.go.id/blog/post/dukung-atasi-zero-hunger-badan-pangan-nasional-perkuat-ketersediaan-pangan-pokok-strategis"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-yellow-200 transition"
+                        >
+                            BPN
+                        </a>
                     </div>
 
                     {/* Credit */}
