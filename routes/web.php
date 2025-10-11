@@ -9,7 +9,9 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\GamesController;
+use App\Http\Controllers\PlantController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SmartMealController;
 use App\Http\Controllers\TebakGiziController;
 use App\Http\Controllers\UserController;
@@ -58,7 +60,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         ->name('dashboard');
 
     Route::resource('users', UserController::class);
-    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -120,7 +122,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('user.profile.destroy');
 
-    Route::post('/harvest', [FruitController::class, 'harvest'])->name('harvest');
+    Route::get('/plants', [PlantController::class, 'index'])->name('plants.index');
+
+    // Tanam buah
+    Route::post('/plants/plant', [PlantController::class, 'store'])->name('plants.plant');
+
+    // Siram tanaman
+    Route::post('/plants/{plant}/water', [PlantController::class, 'water'])->name('plants.water');
+
+    // Panen tanaman
+    Route::post('/plants/harvest', [PlantController::class, 'harvest'])->name('plants.harvest');
+
+    // Cabut tanaman
+    Route::delete('/plants/{plant}', [PlantController::class, 'destroy'])->name('plants.destroy');
+
+    // Donasi (opsional)
+    Route::post('/donate', [PlantController::class, 'donate'])->name('plants.donate');
+
+
+    Route::post('/shop/buy', [ShopController::class, 'buy'])->name('shop.buy');
+    Route::post('/plants/{plant}/use-boots', [PlantController::class, 'useBoots'])->name('plants.useBoots');
 
     // join/leave sekolah di profile
     Route::post('/profile/join-school', [SchoolController::class, 'joinSchool'])->name('profile.join-school');

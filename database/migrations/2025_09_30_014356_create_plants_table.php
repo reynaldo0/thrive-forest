@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('type')->default('bibit');
+            $table->foreignId('fruit_id')->constrained()->onDelete('cascade');
             $table->integer('grow_time')->default(60); // detik
             $table->timestamp('planted_at');
             $table->boolean('harvested')->default(false);
+            $table->integer('boost_time')->default(0);
+            $table->unsignedTinyInteger('stage')->default(0);
             $table->timestamps();
         });
     }

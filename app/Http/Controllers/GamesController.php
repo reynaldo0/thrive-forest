@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fruit;
 use App\Models\ItemGame;
 use App\Models\School;
+use App\Models\Plant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,22 +24,43 @@ class GamesController extends Controller
                 'name' => $fruit->name,
                 'points' => (int) $fruit->points,
                 'img' => $fruit->img,
-                'stages' => is_string($fruit->stages) ? json_decode($fruit->stages, true) : $fruit->stages,
+                'stages' => $fruit->stages,
             ];
         });
 
         return Inertia::render('Games', [
             'fruits' => $fruits,
+            'plants' => $user
+                ? $user->plants()
+                ->where('harvested', false) // 🔥 ini penting
+                ->with('fruit')
+                ->get()
+                ->map(function ($plant) {
+                    return [
+                        'id'         => $plant->id,
+                        'fruit_id'   => $plant->fruit_id,
+                        'harvested'  => $plant->harvested,
+                        'planted_at' => $plant->planted_at?->toDateTimeString(),
+                        'grow_time'  => $plant->grow_time,
+                        'stage'      => $plant->stage,
+                        'fruit'      => $plant->fruit,
+                    ];
+                })
+                : [],
+            'schools'    => $schools ?? [],
+            'potCapacity' => $user ? $user->pot_capacity : 4,
             'points' => $user ? $user->points : 0,
-            'added' => null,
-            'schools' => $schools,
+            'energy' => $user ? $user->energy : 10,
+            'maxEnergy' => 10,
+            'fertilizer' => false,
+            'inventory' => $user ? $user->inventories()->with('fruit')->get() : [],
         ]);
     }
 
     public function addPoints(Request $request)
     {
         $request->validate([
-            'points' => 'required|integer', // bisa positif atau negatif
+            'points' => 'required|integer',
         ]);
 
         $user = Auth::user();
@@ -49,10 +71,8 @@ class GamesController extends Controller
         $pointsChange = (int) $request->points;
 
         DB::transaction(function () use ($user, $pointsChange) {
-            // Tambahkan atau kurangi poin user
             $user->increment('points', $pointsChange);
 
-            // Jika user tergabung dengan sekolah, tambahkan atau kurangi poin sekolah juga
             if ($user->school_id) {
                 $user->school()->increment('points', $pointsChange);
             }

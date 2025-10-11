@@ -10,8 +10,6 @@ use Inertia\Inertia;
 
 class FruitController extends Controller
 {
-
-
     public function index()
     {
         $fruits = Fruit::all();
@@ -35,15 +33,13 @@ class FruitController extends Controller
             'stages.*' => 'required|file|image|max:2048',
         ]);
 
-        $imgPath = $request->file('img')->store('fruits', 'public');
+        $imgPath = $request->file('img')->store('fruits/icons', 'public');
 
         $stages = [];
         if ($request->hasFile('stages')) {
             foreach ($request->file('stages') as $stage) {
-                if ($stage) {
-                    $path = $stage->store('fruits/stages', 'public');
-                    $stages[] = '/storage/' . $path;
-                }
+                $path = $stage->store('fruits/stages', 'public');
+                $stages[] = '/storage/' . $path;
             }
         }
 
@@ -51,16 +47,19 @@ class FruitController extends Controller
             'name' => $request->name,
             'points' => $request->points,
             'img' => '/storage/' . $imgPath,
-            'stages' => json_encode($stages),
+            'stages' => $stages,
         ]);
 
         return redirect()->route('fruits.index')->with('success', 'Buah berhasil ditambahkan!');
     }
 
-
-
     public function edit(Fruit $fruit)
     {
+        // pastikan stages dikembalikan dalam bentuk array agar front-end bisa tampilkan preview
+        $fruit->stages = is_array($fruit->stages)
+            ? $fruit->stages
+            : json_decode($fruit->stages, true);
+
         return Inertia::render('Dashboard/Fruits/Edit', [
             'fruit' => $fruit,
         ]);
@@ -75,40 +74,43 @@ class FruitController extends Controller
             'stages.*' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
         ]);
 
-        // update nama
+        // pastikan data lama tetap ada
+        $oldStages = is_array($fruit->stages)
+            ? $fruit->stages
+            : json_decode($fruit->stages, true);
+
+        if (!is_array($oldStages)) {
+            $oldStages = [];
+        }
+
+        // update nama dan poin
         $fruit->name = $request->name;
         $fruit->points = $request->points;
 
-        // update icon jika ada file baru
+        // update gambar utama jika ada file baru
         if ($request->hasFile('img')) {
             $imgPath = $request->file('img')->store('fruits/icons', 'public');
             $fruit->img = '/storage/' . $imgPath;
         }
 
-        // pastikan stages lama dalam bentuk array
-        $oldStages = $fruit->stages;
-        if (is_string($oldStages)) {
-            $oldStages = json_decode($oldStages, true) ?? [];
-        } elseif (!is_array($oldStages)) {
-            $oldStages = [];
-        }
+        // siapkan array stages baru
+        $updatedStages = $oldStages;
 
-        // update stages per index
-        $newStages = [];
+        // periksa tiap stage (0–4)
         for ($i = 0; $i < 5; $i++) {
             if ($request->hasFile("stages.$i")) {
                 $path = $request->file("stages.$i")->store('fruits/stages', 'public');
-                $newStages[$i] = '/storage/' . $path;
-            } else {
-                $newStages[$i] = $oldStages[$i] ?? null; // pakai lama jika tidak ada perubahan
+                $updatedStages[$i] = '/storage/' . $path; // timpa hanya yang diubah
+            } elseif (!isset($updatedStages[$i])) {
+                $updatedStages[$i] = $oldStages[$i] ?? null;
             }
         }
 
-        $fruit->stages = json_encode($newStages, JSON_UNESCAPED_SLASHES);
-
+        // pastikan array-nya rapi dan urut
+        $fruit->stages = array_values($updatedStages);
         $fruit->save();
 
-        return redirect()->route('fruits.index')->with('success', 'Data buah berhasil diupdate');
+        return redirect()->route('fruits.index')->with('success', 'Data buah berhasil diperbarui tanpa menghapus gambar stage lama.');
     }
 
     public function destroy(Fruit $fruit)
@@ -120,7 +122,7 @@ class FruitController extends Controller
     public function harvest(Request $request)
     {
         $request->validate([
-            'fruit_id' => 'required|exists:fruits,id',
+            'plant_id' => 'required|exists:plants,id',
         ]);
 
         $user = Auth::user();
@@ -128,21 +130,33 @@ class FruitController extends Controller
             return redirect()->route('login');
         }
 
-        $fruit = Fruit::findOrFail($request->fruit_id);
+        $plant = $user->plants()->with('fruit')->findOrFail($request->plant_id);
+
+        if (!$plant->isReadyToHarvest()) {
+            return back()->with('error', 'Tanaman belum siap dipanen!');
+        }
+
+        $fruit = $plant->fruit;
+        if (!$fruit) {
+            return back()->with('error', 'Buah tidak ditemukan.');
+        }
+
         $points = (int) $fruit->points;
 
-        DB::transaction(function () use ($user, $points) {
+        DB::transaction(function () use ($user, $plant, $points) {
             $user->increment('points', $points);
 
             if ($user->school_id) {
                 $user->school()->increment('points', $points);
             }
+
+            $plant->harvested = true;
+            $plant->save();
         });
 
-        // kembalikan ke halaman sebelumnya
         return redirect()->back()->with([
-            'added'  => $points,
-            'points' => $user->points,
+            'success' => "Panen berhasil! Kamu dapat $points poin.",
+            'points'  => $user->points,
         ]);
     }
 }

@@ -220,8 +220,8 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Whoops\\' => 
         array (
@@ -393,8 +393,8 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -474,8 +474,8 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces',
-            1 => __DIR__ . '/..' . '/league/uri',
+            0 => __DIR__ . '/..' . '/league/uri',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -650,15 +650,19 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         'App\\Http\\Controllers\\Auth\\RegisteredUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisteredUserController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\ForumController' => __DIR__ . '/../..' . '/app/Http/Controllers/ForumController.php',
         'App\\Http\\Controllers\\FruitController' => __DIR__ . '/../..' . '/app/Http/Controllers/FruitController.php',
         'App\\Http\\Controllers\\GamesController' => __DIR__ . '/../..' . '/app/Http/Controllers/GamesController.php',
         'App\\Http\\Controllers\\MailController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailController.php',
+        'App\\Http\\Controllers\\PlantController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlantController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\RegistrationController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegistrationController.php',
         'App\\Http\\Controllers\\SchoolController' => __DIR__ . '/../..' . '/app/Http/Controllers/SchoolController.php',
         'App\\Http\\Controllers\\SeminarController' => __DIR__ . '/../..' . '/app/Http/Controllers/SeminarController.php',
+        'App\\Http\\Controllers\\ShopController' => __DIR__ . '/../..' . '/app/Http/Controllers/ShopController.php',
         'App\\Http\\Controllers\\TebakGiziController' => __DIR__ . '/../..' . '/app/Http/Controllers/TebakGiziController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Middleware\\HandleInertiaRequests' => __DIR__ . '/../..' . '/app/Http/Middleware/HandleInertiaRequests.php',
         'App\\Http\\Middleware\\RoleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/RoleMiddleware.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
@@ -666,6 +670,7 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         'App\\Models\\Artikel' => __DIR__ . '/../..' . '/app/Models/Artikel.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
         'App\\Models\\Fruit' => __DIR__ . '/../..' . '/app/Models/Fruit.php',
+        'App\\Models\\Inventory' => __DIR__ . '/../..' . '/app/Models/Inventory.php',
         'App\\Models\\ItemGame' => __DIR__ . '/../..' . '/app/Models/ItemGame.php',
         'App\\Models\\Mail' => __DIR__ . '/../..' . '/app/Models/Mail.php',
         'App\\Models\\Plant' => __DIR__ . '/../..' . '/app/Models/Plant.php',
@@ -800,8 +805,11 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         'Database\\Seeders\\ArtikelSeeder' => __DIR__ . '/../..' . '/database/seeders/ArtikelSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\FruitSeeder' => __DIR__ . '/../..' . '/database/seeders/FruitSeeder.php',
+        'Database\\Seeders\\PlantSeeder' => __DIR__ . '/../..' . '/database/seeders/PlantSeeder.php',
         'Database\\Seeders\\QuizSeeder' => __DIR__ . '/../..' . '/database/seeders/QuizSeeder.php',
+        'Database\\Seeders\\SchoolSeeder' => __DIR__ . '/../..' . '/database/seeders/SchoolSeeder.php',
         'Database\\Seeders\\SeminarSeeder' => __DIR__ . '/../..' . '/database/seeders/SeminarSeeder.php',
+        'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -5135,7 +5143,6 @@ class ComposerStaticInit4cae3ec4fc0cb62de46b848a88842069
         'ParaTest\\Options' => __DIR__ . '/..' . '/brianium/paratest/src/Options.php',
         'ParaTest\\ParaTestCommand' => __DIR__ . '/..' . '/brianium/paratest/src/ParaTestCommand.php',
         'ParaTest\\RunnerInterface' => __DIR__ . '/..' . '/brianium/paratest/src/RunnerInterface.php',
-        'ParaTest\\TestDox\\TestDoxResultsMerger' => __DIR__ . '/..' . '/brianium/paratest/src/TestDox/TestDoxResultsMerger.php',
         'ParaTest\\Util\\PhpstormHelper' => __DIR__ . '/..' . '/brianium/paratest/src/Util/PhpstormHelper.php',
         'ParaTest\\WrapperRunner\\ApplicationForWrapperWorker' => __DIR__ . '/..' . '/brianium/paratest/src/WrapperRunner/ApplicationForWrapperWorker.php',
         'ParaTest\\WrapperRunner\\ProgressPrinterOutput' => __DIR__ . '/..' . '/brianium/paratest/src/WrapperRunner/ProgressPrinterOutput.php',

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ArtikelSeeder::class,
             SchoolSeeder::class,
             UserSeeder::class,
+            PlantSeeder::class,
         ]);
 
     // User::factory()->create([

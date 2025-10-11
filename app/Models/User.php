@@ -23,7 +23,22 @@ class User extends Authenticatable
         'school_id',
         'avatar',
         'role',
+        'points',
+        'energy',
+        'max_energy',
+        'last_energy_reset',
+        'pot_capacity',
+        'fertilizer',
+        'fertilizer_boost',
+        'boots_pupuk',
+        'temporary_fertilizer', 
     ];
+
+    protected $casts = [
+        'fertilizer' => 'boolean',
+        'last_energy_reset' => 'datetime',
+    ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -54,9 +69,20 @@ class User extends Authenticatable
     }
 
     // Relasi ke tanaman (game)
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|Plant[]
+     */
     public function plants()
     {
         return $this->hasMany(Plant::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|Inventory[]
+     */
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
     }
 
     // Relasi ke poin histori
@@ -83,5 +109,14 @@ class User extends Authenticatable
     public function isUser(): bool
     {
         return $this->role === 'user';
+    }
+
+    public function resetEnergyIfNeeded()
+    {
+        if (!$this->last_energy_reset || $this->last_energy_reset->isToday() === false) {
+            $this->energy = $this->max_energy;
+            $this->last_energy_reset = now();
+            $this->save();
+        }
     }
 }

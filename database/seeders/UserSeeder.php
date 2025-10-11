@@ -50,11 +50,18 @@ class UserSeeder extends Seeder
                 'role' => 'user',
                 'password' => Hash::make('password'),
                 'school_id' => $schoolId,
+                // kolom tambahan
+                'points' => rand(0, 100),   // kasih poin random biar beda-beda
+                'energy' => 10,
+                'max_energy' => 10,
+                'last_energy_reset' => now(),
+                'pot_capacity' => 4,
+                'fertilizer' => false,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
 
-        $this->command->info('10 user berhasil di-seeder dengan school_id yang sesuai.');
+        $this->command->info('10 user berhasil di-seeder dengan school_id & kolom energy/pot_capacity.');
     }
 }

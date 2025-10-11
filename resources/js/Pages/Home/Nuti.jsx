@@ -78,7 +78,7 @@ export default function NutiIntro() {
         </div>
 
         {/* Style Animasi Custom */}
-        <style jsx>{`
+        <style>{`
           @keyframes float {
             0% {
               transform: translateY(0px);
